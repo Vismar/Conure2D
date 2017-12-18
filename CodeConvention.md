@@ -1,13 +1,13 @@
 # Code convention
 
-General rules:
+**General rules:**
 * Indents are 4 spaces. No tabs should be used anywhere.
 * Each line must be at most 120 characters long.
 * Comments within the code can be // or /*.
 * For documentation puproses comments should be in Qt Doxygen style.
 * File names should be PascalCase.hpp for header files and PascalCase.cpp for source files.
 
-Macros:
+**Macros:**
 * Use ALL_CAPS separated by underscore:
   ```cpp
   #define I_AM_MACRO 0x0
@@ -17,7 +17,7 @@ Macros:
   #define I_AM_COOL_MACRO (0x1 << 3)
   ```
   
-Type names:
+**Type names:**
 * Structs, enumerations and clases should be in PascalCase
   ```cpp
   struct SomeStruct
@@ -34,7 +34,7 @@ Type names:
   };
   ```
 
-Member names:
+**Member names:**
 * Any public member should be in camelCase
   ```cpp
   class ClassName
@@ -54,7 +54,7 @@ Member names:
   };
   ```
 
-Function names:
+**Function names:**
 * Public functions should be in PascalCase
   ```cpp
   void FunctionName();
@@ -68,10 +68,10 @@ Function names:
   };
   ```
 
-Braces:
+**Braces:**
 * Any opening or closing brace should come at the start of the next line
 
-Local variables:
+**Local variables:**
 * Local variables should be only in camelCase
   ```cpp
   void FunctionName()
@@ -80,7 +80,7 @@ Local variables:
   }
   ```
 
-Multiple lines:
+**Multiple lines:**
 * Statements that span multiple lines, break after the logical operator 
   and align each line with the start of the first line
   ```cpp
@@ -107,5 +107,5 @@ Multiple lines:
                'q');
   ```
 
-else statement:
+**else statement:**
 * else and else if comes on the next line
