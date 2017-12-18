@@ -1,4 +1,4 @@
-#Code convention
+# Code convention
 
 General rules:
 * Indents are 4 spaces. No tabs should be used anywhere.
