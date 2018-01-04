@@ -1,0 +1,204 @@
+#include "DirectInput.hpp"
+#include "Managers/InputDeviceManager.hpp"
+#include "Managers/InputMapManager.hpp"
+#include "Devices/KeyboardDevice.hpp"
+#include "Devices/MouseDevice.hpp"
+#include "Devices/JoystickDevice.hpp"
+
+using namespace Input;
+
+extern InputDeviceManager DeviceManager;
+extern InputMapManager MapManager;
+
+#define KEYBOARD             DeviceManager.GetKeyboardDevice()
+#define MOUSE                DeviceManager.GetMouseDevice()
+#define JOYSTICK(joystickId) DeviceManager.GetJoystickDevice(joystickId)
+
+/*****************************************/
+/*               Keyboard                */
+/*****************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsKeyPressed(const KeyboardKey key)
+{
+    return (KEYBOARD.KeyState(key) == KeyState::Pressed);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsKeyHeldDown(const KeyboardKey key)
+{
+    return (KEYBOARD.KeyState(key) == KeyState::HeldDown);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsKeyReleased(const KeyboardKey key)
+{
+    return (KEYBOARD.KeyState(key) == KeyState::Released);
+}
+
+/*****************************************/
+/*                 Mouse                 */
+/*****************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsMouseButtonPressed(const MouseButton button)
+{
+    return (MOUSE.ButtonState(button) == KeyState::Pressed);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsMouseButtonHeldDown(const MouseButton button)
+{
+    return (MOUSE.ButtonState(button) == KeyState::HeldDown);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsMouseButtonReleased(const MouseButton button)
+{
+    return (MOUSE.ButtonState(button) == KeyState::Released);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float DirectInput::GetMouseVerticalWheelDiff()
+{
+    return MOUSE.VerticalWheelDiff();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float DirectInput::GetMouseHorizontalWheelDiff()
+{
+    return MOUSE.HorizontalWheelDiff();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int DirectInput::GetMousePositionX()
+{
+    return MOUSE.PositionX();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int DirectInput::GetMousePositionY()
+{
+    return MOUSE.PositionY();
+}
+
+/*****************************************/
+/*               Joystick                */
+/*****************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsJoystickButtonPressed(const int joystickId, const JoystickButton button)
+{
+    return (JOYSTICK(joystickId).ButtonState(button) == KeyState::Pressed);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsJoystickButtonHeldDown(const int joystickId, const JoystickButton button)
+{
+    return (JOYSTICK(joystickId).ButtonState(button) == KeyState::HeldDown);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsJoystickButtonReleased(const int joystickId, const JoystickButton button)
+{
+    return (JOYSTICK(joystickId).ButtonState(button) == KeyState::Released);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float DirectInput::GetJoystickAxisPosition(const int joystickId, const JoystickAxis axis)
+{
+    return JOYSTICK(joystickId).JoystickAxisPosition(axis);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsJoystickConnected(const int joystickId)
+{
+    return JOYSTICK(joystickId).IsConnected();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+std::string DirectInput::GetJoystickName(const int joystickId)
+{
+    return JOYSTICK(joystickId).Name();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+unsigned int DirectInput::GetJoystickVendorId(const int joystickId)
+{
+    return JOYSTICK(joystickId).VendorId();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+unsigned int DirectInput::GetJoystickProductId(const int joystickId)
+{
+    return JOYSTICK(joystickId).ProductId();
+}
+
+/*****************************************/
+/*                 Maps                  */
+/*****************************************/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DirectInput::MapAction(const std::string& actionName, const KeyState state, const KeyboardKey key)
+{
+    MapManager.MapAction(actionName, state, key);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DirectInput::MapAction(const std::string& actionName, const KeyState state, const MouseButton mouseButton)
+{
+    MapManager.MapAction(actionName, state, mouseButton);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DirectInput::MapAction(const std::string& actionName, const KeyState state, const int joystickId, const JoystickButton joystickButton)
+{
+    MapManager.MapAction(actionName, state, joystickId, joystickButton);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DirectInput::MapAxis(const std::string& axisName, const int joystickId, const JoystickAxis axis)
+{
+    MapManager.MapAxis(axisName, joystickId, axis);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DirectInput::MapAxis(const std::string& axisName, const std::string& negativeAction, const std::string& positiveAction)
+{
+    MapManager.MapAxis(axisName, negativeAction, positiveAction);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool DirectInput::IsActionActive(const std::string& actionName)
+{
+    return MapManager.IsActionActive(actionName);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float DirectInput::GetAxisPosition(const std::string& axisName)
+{
+    return MapManager.GetAxisPosition(axisName);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

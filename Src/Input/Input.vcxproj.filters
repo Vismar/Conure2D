@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Devices\JoystickDevice.cpp">
+      <Filter>Devices\Joystick</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\MouseDevice.cpp">
+      <Filter>Devices\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\KeyboardDevice.cpp">
+      <Filter>Devices\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\InputDeviceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\InputMapManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\KeyStateHandler.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectInput.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Utilities\MappedInput\InputAction.cpp">
+      <Filter>Utilities\MappedInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\MappedInput\InputAxis.cpp">
+      <Filter>Utilities\MappedInput</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Devices\JoystickDevice.hpp">
+      <Filter>Devices\Joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\MouseDevice.hpp">
+      <Filter>Devices\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\KeyboardDevice.hpp">
+      <Filter>Devices\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\InputDeviceManager.hpp">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\InputMapManager.hpp">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\KeyStateHandler.hpp">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\InputUtilities.hpp">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectInput.hpp" />
+    <ClInclude Include="InputHandler.hpp" />
+    <ClInclude Include="Utilities\Keys\JoystickAxises.hpp">
+      <Filter>Utilities\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Keys\JoystickButtons.hpp">
+      <Filter>Utilities\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Keys\KeyboardKeys.hpp">
+      <Filter>Utilities\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Keys\MouseButtons.hpp">
+      <Filter>Utilities\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\MappedInput\InputAction.hpp">
+      <Filter>Utilities\MappedInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\MappedInput\InputAxis.hpp">
+      <Filter>Utilities\MappedInput</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="InputAction">
+      <UniqueIdentifier>{a8f4a7de-0093-4efa-bbe3-a18cb35e1784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices">
+      <UniqueIdentifier>{990f82a6-ea4c-4906-a3e6-5d6621ddc5cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\Joystick">
+      <UniqueIdentifier>{17b36fad-b0ad-4f84-95b1-9b13fb8ad163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\Mouse">
+      <UniqueIdentifier>{4bf13131-2f45-495b-ad85-6b6a9be3bca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\Keyboard">
+      <UniqueIdentifier>{febdc4df-f493-4e06-aaf7-edd50ff77485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{794ae679-36da-40c0-8819-d001a958c9cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{5eebb77d-2f22-421f-af1e-8307245c1112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Keys">
+      <UniqueIdentifier>{e099dcd0-8c46-4844-b77f-8416c5155257}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\MappedInput">
+      <UniqueIdentifier>{912a8fb6-09c1-4a56-975c-0b2828480b6a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
