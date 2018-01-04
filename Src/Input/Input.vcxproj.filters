@@ -72,9 +72,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="InputAction">
-      <UniqueIdentifier>{a8f4a7de-0093-4efa-bbe3-a18cb35e1784}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Devices">
       <UniqueIdentifier>{990f82a6-ea4c-4906-a3e6-5d6621ddc5cf}</UniqueIdentifier>
     </Filter>
