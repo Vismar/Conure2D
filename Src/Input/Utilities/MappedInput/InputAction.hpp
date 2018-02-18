@@ -114,8 +114,8 @@ namespace Input
         InputAction();
 
         /*!
-         * \brief Constructor to create input actin with required state and action button.
-         * \param state - requried state to activate inputa action.
+         * \brief Constructor to create input action with required state and action button.
+         * \param state - required state to activate input action.
          * \param joystickId - joystick id that will be used if input action is using joystick button. 
          *                     Can be set to anything if action button is not joystick button.
          * \param actionButton - actual button that will be checked to activate input action.
@@ -135,7 +135,7 @@ namespace Input
 
         /*!
          * \brief Sets required key state to specified one.
-         * \param state - key state that will be set as requried.
+         * \param state - key state that will be set as required.
          */
         void SetRequiresState(const KeyState& state);
 
@@ -166,7 +166,7 @@ namespace Input
          */
         bool _IsButtonReleased() const;
 
-        /*! Requried state of button. */
+        /*! Required state of button. */
         KeyState _requiredState;
         /*! Button that will be checked to activate input action. */
         ActionButton _button;

@@ -29,7 +29,7 @@ namespace  Input
         InputMapManager();
 
         /*!
-         * \brief Default destructor that deletes mapf of input actions and input axises.
+         * \brief Default destructor that deletes maps of input actions and input axises.
          */
         ~InputMapManager();
 

@@ -28,14 +28,14 @@ namespace Input
         static bool IsKeyPressed(const KeyboardKey key);
 
         /*!
-         * \brief Checks if specified key was held down dureing the current frame.
+         * \brief Checks if specified key was held down during the current frame.
          * \param key - specific key to check.
          * \return True if key was held down during the current frame. Otherwise - false.
          */
 
         static bool IsKeyHeldDown(const KeyboardKey key);
         /*!
-         * \brief Checks if specified key was released dureing the current frame.
+         * \brief Checks if specified key was released during the current frame.
          * \param key - specific key to check.
          * \return True if key was released during the current frame. Otherwise - false.
          */

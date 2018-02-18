@@ -91,9 +91,9 @@ namespace Input
         /*!
          * \brief Updates state of buttons that was not touched during the normal update.
          * 
-         * Joystick device stores additional array of buttons that was updated during the update fase.
+         * Joystick device stores additional array of buttons that was updated during the update phase.
          * So, when this function is called, it will updates all buttons that was not updated and resets that additional array.
-         * This function should be executed only after all events was handled during the update fase.
+         * This function should be executed only after all events was handled during the update phase.
          */
         void UpdateNotTouchedButtons();
 

@@ -47,9 +47,9 @@ namespace Input
         /*!
          * \brief Updates state of keys that was not touched during the normal update.
          * 
-         * Keyboard device stores additional array of keys that was updated during the update fase.
+         * Keyboard device stores additional array of keys that was updated during the update phase.
          * So, when this function is called, it will updates all keys that was not updated and resets that additional array.
-         * This function should be executed only after all events was handled during the update fase.
+         * This function should be executed only after all events was handled during the update phase.
          */
         void UpdateNotTouchedKeys();
 

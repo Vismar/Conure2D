@@ -43,7 +43,7 @@ namespace Input
         /*!
          * \brief Relational operator to compare one InputAxis to another.
          * \param other - InputAxis on the right side of the operator.
-         * \return True of axis types of variables are equal and required params are too. Otherwise - false.
+         * \return True of axis types of variables are equal and required parameters are too. Otherwise - false.
          */
         bool operator==(const InputAxis& other) const;
 

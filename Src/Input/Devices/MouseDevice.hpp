@@ -70,9 +70,9 @@ namespace Input
         /*!
          * \brief Updates state of buttons that was not touched during the normal update.
          * 
-         * Mouse device stores additional array of buttons that was updated during the update fase.
+         * Mouse device stores additional array of buttons that was updated during the update phase.
          * So, when this function is called, it will updates all buttons that was not updated and resets that additional array.
-         * This function should be executed only after all events was handled during the update fase.
+         * This function should be executed only after all events was handled during the update phase.
          */
         void UpdateNotTouchedButtons();
 
