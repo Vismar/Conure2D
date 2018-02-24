@@ -27,7 +27,7 @@ namespace Renderer
         /*!
          * \brief Destructor that closes window and deletes it.
          */
-        ~Window();
+        virtual ~Window();
    
         /*!
          * \brief Applies specified settings to window before next frame.
