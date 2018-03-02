@@ -4,15 +4,24 @@
     <Filter Include="Base">
       <UniqueIdentifier>{665a9415-d0fc-4a40-bb13-a03a8af68e2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{b4723710-f19f-4cdf-a065-7a98a5fa867a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\BaseComponent.hpp">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Components\TransformComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BaseComponent.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TransformComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
