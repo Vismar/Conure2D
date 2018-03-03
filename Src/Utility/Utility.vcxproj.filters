@@ -4,15 +4,32 @@
     <Filter Include="Math">
       <UniqueIdentifier>{8671e138-4294-4c34-a294-1f42e84d9dbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{79158e67-b52c-477f-a463-c079ef254354}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\AtomicVector2.hpp">
       <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers\AnyCallableHandler.hpp">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers\AnyCallable.hpp">
+      <Filter>Containers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\AtomicVector2.inl">
       <Filter>Math</Filter>
     </None>
+    <None Include="Containers\AnyCallable.inl">
+      <Filter>Containers</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Containers\AnyCallableHandler.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
