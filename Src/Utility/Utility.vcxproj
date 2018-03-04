@@ -155,14 +155,19 @@
   <ItemGroup>
     <ClInclude Include="Containers\AnyCallable.hpp" />
     <ClInclude Include="Containers\AnyCallableHandler.hpp" />
+    <ClInclude Include="EventSystem\Dispatcher.hpp" />
+    <ClInclude Include="EventSystem\DispatcherInterface.hpp" />
+    <ClInclude Include="EventSystem\SimplestDispatcher.hpp" />
     <ClInclude Include="Math\AtomicVector2.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Containers\AnyCallable.inl" />
+    <None Include="EventSystem\Dispatcher.inl" />
     <None Include="Math\AtomicVector2.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Containers\AnyCallableHandler.cpp" />
+    <ClCompile Include="EventSystem\SimplestDispatcher.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

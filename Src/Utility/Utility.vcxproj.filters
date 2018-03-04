@@ -7,6 +7,9 @@
     <Filter Include="Containers">
       <UniqueIdentifier>{79158e67-b52c-477f-a463-c079ef254354}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EventSystem">
+      <UniqueIdentifier>{c4b1a0ce-0dd7-43a8-996b-6ebd7225f608}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\AtomicVector2.hpp">
@@ -18,6 +21,15 @@
     <ClInclude Include="Containers\AnyCallable.hpp">
       <Filter>Containers</Filter>
     </ClInclude>
+    <ClInclude Include="EventSystem\DispatcherInterface.hpp">
+      <Filter>EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\Dispatcher.hpp">
+      <Filter>EventSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\SimplestDispatcher.hpp">
+      <Filter>EventSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\AtomicVector2.inl">
@@ -26,10 +38,16 @@
     <None Include="Containers\AnyCallable.inl">
       <Filter>Containers</Filter>
     </None>
+    <None Include="EventSystem\Dispatcher.inl">
+      <Filter>EventSystem</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Containers\AnyCallableHandler.cpp">
       <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem\SimplestDispatcher.cpp">
+      <Filter>EventSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

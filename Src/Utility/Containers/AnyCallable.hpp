@@ -47,7 +47,9 @@ namespace Utility
 
         /*!
          * \brief Function call operator.
-         * \param args - arguments that will be used in call of stored function. 
+         * \param args - arguments that will be used in call of stored function.
+         * 
+         * Should be used in try-catch section, because any_cast will throw exception if it failed.
          */
         template <class ... Args>
         Ret operator()(Args&& ... args);
