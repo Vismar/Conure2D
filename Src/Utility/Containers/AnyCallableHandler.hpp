@@ -6,13 +6,13 @@ namespace Utility
     /*!
      * \brief Special handler that was created to make possible to compare AnyCallable instances.
      * 
-     * Works in a tricky way. It have 2 variables: \n
-     *   1) First handler - plain size_t variable. \n
-     *   2) Second handler - pointer to type info. \n
+     * Works in a tricky way. It have 2 variables: 
+     *   - First handler - plain size_t variable. 
+     *   - Second handler - pointer to type info. \n
      *   
-     * Both are used differently for two cases: \n
-     *   1) AnyCallable that contains a pointer to a function. \n
-     *   2) AnyCallable that contains a pointer to a class method. \n
+     * Both are used differently for two cases: 
+     *   - AnyCallable that contains a pointer to a function. 
+     *   - AnyCallable that contains a pointer to a class method. \n
      *   
      * Check variable descriptions to know more.
      */
@@ -55,4 +55,6 @@ namespace Utility
         template <class Ret>
         friend class AnyCallable;
     };
+
+    static const AnyCallableHandler EmptyAnyCallableHandler;
 }

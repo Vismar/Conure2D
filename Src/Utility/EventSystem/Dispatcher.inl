@@ -14,7 +14,7 @@ const AnyCallableHandler& Dispatcher<Ret>::AddCallable(Ret(*function)(Args...))
         return _callables.back().GetHandler();
     }
 
-    return _defaultAnyCallableHandler;
+    return EmptyAnyCallableHandler;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ const AnyCallableHandler& Dispatcher<Ret>::AddCallable(UserClass* userClass, Ret
         return _callables.back().GetHandler();
     }
 
-    return _defaultAnyCallableHandler;
+    return EmptyAnyCallableHandler;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

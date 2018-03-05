@@ -6,7 +6,7 @@
 namespace Utility
 {
     /*!
-     * Container that handles array of AnyCallable and provides next functionality: \n
+     * Container that handles array of AnyCallable and provides next functionality: 
      *   - Add/Remove callables
      *   - Invoke them at once (to do so you should implement Invoke() method by yourself in the way you want).
      */
@@ -17,7 +17,7 @@ namespace Utility
         /*!
          * \brief Adds callable to the array and returns handle of added callable.
          * \param function - a pointer to a function that will be stored.
-         * \return Handler of callable if it was stored. Otherwise - empty handler will be returned.
+         * \return Handler of callable if it was stored. Otherwise - empty handler.
          */
         template <class ... Args>
         const AnyCallableHandler& AddCallable(Ret(*function)(Args...));
@@ -26,7 +26,7 @@ namespace Utility
          * \brief Adds callable to the array and returns handle of added callable.
          * \param userClass - a pointer to a class whose function will be stored.
          * \param function - a pointer to a function that will be stored.
-         * \return Handler of callable if it was stored. Otherwise - empty handler will be returned.
+         * \return Handler of callable if it was stored. Otherwise - empty handler.
          */
         template <class UserClass, class ... Args>
         const AnyCallableHandler& AddCallable(UserClass* userClass, Ret(UserClass::*function)(Args...));
@@ -54,9 +54,6 @@ namespace Utility
          * \return True of specified callable was not added. Otherwise - false.
          */
         bool _NotAdded(const AnyCallable<Ret>& newCallable) const;
-
-        /*! Default handler that handles nothing. */
-        AnyCallableHandler _defaultAnyCallableHandler;
     };
 
 #include "Dispatcher.inl"
