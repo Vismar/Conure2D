@@ -1,6 +1,7 @@
 #pragma once
 #include "Base/BaseComponent.hpp"
-#include "Math/AtomicVector2.hpp"
+#include "Utility/EventSystem/EventManager.hpp"
+#include "Utility/Math/AtomicVector2.hpp"
 
 namespace Core
 {
@@ -11,7 +12,7 @@ namespace Core
      * Transform is used to describe position and orientation of an object in a game space.
      * Every piece of data stored as atomic, so all changes to it is thread-safe.
      */
-    class TransformComponent : public BaseComponent
+    class TransformComponent : public BaseComponent, public Utility::EventManager
     {
     public:
         TransformComponent(const TransformComponent& other) = delete;
@@ -107,7 +108,23 @@ namespace Core
          */
         void Scale(const Utility::AtomicVector2F& factor);
         
+    protected:
+        /*!
+         * \brief Creates necessary events.
+         */
+        void Initialize() final;
+        /*!
+         * \brief Empty function.
+         */
+        void Update() final;
+        /*!
+         * \brief Invokes events if necessary.
+         */
+        void LateUpdate() final;
+
     private:
+        /*! Simple flag to identify if transform was updated and we should invoke "OnTransformUpdate" event. */
+        std::atomic<bool> _transformUpdated;
         /*! Transform origin. */
         Utility::AtomicVector2F _origin;
         /*! Transform position. */

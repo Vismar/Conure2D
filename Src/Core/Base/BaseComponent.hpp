@@ -1,6 +1,7 @@
 #pragma once
 #include <typeinfo>
 #include <atomic>
+#include <memory>
 
 namespace Core
 {
@@ -12,7 +13,7 @@ namespace Core
      * This component contains basic functions that are required by all components 
      * and provides functionality to compare them by its type so only 1 component of 1 type can be attached to SceneObject.
      */
-    class BaseComponent
+    class BaseComponent : public std::enable_shared_from_this<BaseComponent>
     {
     public:
         BaseComponent(const BaseComponent& other) = delete;
@@ -55,20 +56,26 @@ namespace Core
          * \param turnOn - flag that defines if component should be turned on or off.
          */
         void TurnOn(const bool turnOn = true);
-
+                
+    protected:
         /*!
          * \brief Initializes component.
-         * 
+         *
          * This is a virtual method with base implementation that is must be called after creating a component.
          * But it will be called by SceneObject upon creation.
          */
         virtual void Initialize();
-        
+
         /*!
-         * \brief Update function that is called in every game loop.
+         * \brief Function that is called in every game loop.
          */
         virtual void Update() = 0;
-        
+
+        /*!
+         * \brief Function that is called in every game loop when all "Update" functions were already called.
+         */
+        virtual void LateUpdate() = 0;
+
     private:
         //shared_ptr<SceneObject> _sceneObject;
         /*! Flag that identifies if component is turned on or not. */

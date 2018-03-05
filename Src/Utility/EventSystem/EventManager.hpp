@@ -33,7 +33,7 @@ namespace Utility
         /*!
          * \brief Destructor that deletes all stored dispatchers.
          */
-        ~EventManager();
+        virtual ~EventManager();
 
         /*!
          * \brief Binds function to specified event.
