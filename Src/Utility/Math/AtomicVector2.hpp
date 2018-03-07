@@ -5,6 +5,7 @@ namespace Utility
 {
     /*!
      * \brief Simple 2d vector with atomic parameters.
+     * \tparam T - type of used data.
      * 
      * Because of nature of atomic data type this 2d vector was created.
      * Atomic type cannot be directly copied or applied to typical math operations (i.e. T == float || T == double),
@@ -45,6 +46,7 @@ namespace Utility
 
         /*! 
          * \brief Copy constructor.
+         * \tparam U - different type of used data.
          * \param other - const reference to other atomic vector with a different template type.
          * 
          * A different type of atomic vector as a parameter.
@@ -54,6 +56,7 @@ namespace Utility
 
         /*!
          * \brief Move constructor. 
+         * \tparam U - different type of used data.
          * \param other - double reference to other atomic vector value with a different template type.
          * 
          * A different type of atomic vector as a parameter.
@@ -81,6 +84,7 @@ namespace Utility
 
         /*! 
          * \brief Copy assignment operator.
+         * \tparam U - different type of used data.
          * \param other - const reference to other atomic vector with a different template type.
          * \return Reference to atomic vector after assignment.
          * 
@@ -91,6 +95,7 @@ namespace Utility
 
         /*!
          * \brief Move assignment operator. 
+         * \tparam U - different type of used data.
          * \param other - double reference to other atomic vector value with a different template type.
          * \return Reference to atomic vector after assignment.
          * 
@@ -199,6 +204,7 @@ namespace Utility
 
     /*!
      * \brief Subtraction operator.
+     * \tparam T - type of used data.
      * \param right - const reference to other atomic vector with the same template type.
      * \return New atomic vector with same but negative values as result of math operation.
      */
@@ -207,7 +213,7 @@ namespace Utility
 
     /*!
      * \brief Multiplication operator.
-     * 
+     * \tparam T - type of used data.
      * \param scalar - scalar value with the same template type.
      * \param right - const reference to other atomic vector with the same template type.
      * \return New atomic vector as result of math operation.

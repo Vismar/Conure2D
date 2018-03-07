@@ -42,7 +42,7 @@ template <class Ret>
 template <class ... Args>
 Ret AnyCallable<Ret>::operator()(Args&& ... args)
 {
-    return std::any_cast<std::function<Ret(Args...)> > (_function)(std::forward<Args>(args)...);
+    return std::any_cast<std::function<Ret(Args...)>> (_function)(std::forward<Args>(args)...);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

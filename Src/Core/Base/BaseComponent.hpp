@@ -1,11 +1,11 @@
 #pragma once
-#include <typeinfo>
+#include <typeindex>
 #include <atomic>
 #include <memory>
 
 namespace Core
 {
-    //class SceneObject;
+    class SceneObject;
 
     /*!
      * \brief Base for all components that can be attached to SceneObject.
@@ -35,15 +35,21 @@ namespace Core
         
         /*!
          * \brief Comparison of two base components by their type info.
+         * \return True if both components are the same type. Otherwise - false.
          */
         bool operator==(const BaseComponent& other) const;
 
         /*!
          * \brief Comparison of component type info as left value and specified type info as right value.
+         * \return True if component and type info are the same type. Otherwise - false.
          */
-        bool operator==(const std::type_info& typeInfo) const;
+        bool operator==(const std::type_index& typeIndex) const;
 
-        //shared_ptr<SceneObject> GetSceneObject() const;
+        /*!
+         * \brief Return weak pointer to the scene object that contain this component.
+         * \return Weak pointer to the scene object.
+         */
+        std::weak_ptr<SceneObject> GetSceneObject() const;
 
         /*!
          * \brief Check if component is turned on.
@@ -51,13 +57,13 @@ namespace Core
          */
         bool IsTurnedOn() const;
 
+    protected:
         /*!
          * \brief Turns component on/off.
          * \param turnOn - flag that defines if component should be turned on or off.
          */
         void TurnOn(const bool turnOn = true);
-                
-    protected:
+
         /*!
          * \brief Initializes component.
          *
@@ -77,7 +83,8 @@ namespace Core
         virtual void LateUpdate() = 0;
 
     private:
-        //shared_ptr<SceneObject> _sceneObject;
+        /*! Weak pointer to the scene object that store this component. */
+        std::weak_ptr<SceneObject> _sceneObject;
         /*! Flag that identifies if component is turned on or not. */
         std::atomic<bool> _turnedOn;
         /*! 
@@ -85,16 +92,18 @@ namespace Core
          * 
          * This variable is used in to identify identical components by its type.
          */
-        std::type_info* _typeInfo;
+        std::type_index _typeIndex;
 
-        friend bool operator==(const std::type_info& typeInfo, const BaseComponent& component);
+        friend bool operator==(const std::type_index& typeIndex, const BaseComponent& component);
+        friend class SceneObject;
     };
 
     /*!
      * \brief Comparison of specified type info as left value and component type info as right value.
+     * \return True if type info and component are the same type. Otherwise - false.
      */
-    inline bool operator==(const std::type_info& typeInfo, const BaseComponent& component)
+    inline bool operator==(const std::type_index& typeIndex, const BaseComponent& component)
     {
-        return (typeInfo == *component._typeInfo);
+        return (typeIndex == component._typeIndex);
     }
 }

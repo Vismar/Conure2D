@@ -15,6 +15,9 @@
     <ClInclude Include="Components\TransformComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Base\SceneObject.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BaseComponent.cpp">
@@ -23,5 +26,13 @@
     <ClCompile Include="Components\TransformComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Base\SceneObject.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Base\SceneObject.inl">
+      <Filter>Base</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Base/BaseComponent.hpp"
+#include "Core/Base/BaseComponent.hpp"
 #include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/Math/AtomicVector2.hpp"
 
@@ -12,7 +12,7 @@ namespace Core
      * Transform is used to describe position and orientation of an object in a game space.
      * Every piece of data stored as atomic, so all changes to it is thread-safe.
      */
-    class TransformComponent : public BaseComponent, public Utility::EventManager
+    class TransformComponent final : public BaseComponent, public Utility::EventManager
     {
     public:
         TransformComponent(const TransformComponent& other) = delete;

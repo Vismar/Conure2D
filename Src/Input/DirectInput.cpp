@@ -8,7 +8,7 @@
 using namespace Input;
 
 extern InputDeviceManager DeviceManager;
-extern InputMapManager MapManager;
+InputMapManager MapManager;
 
 #define KEYBOARD             DeviceManager.GetKeyboardDevice()
 #define MOUSE                DeviceManager.GetMouseDevice()

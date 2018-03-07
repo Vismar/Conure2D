@@ -7,6 +7,7 @@ namespace Utility
 {
     /*!
      * \brief Container that provides the ability to store any kind of function despite its signature and then call it.
+     * \tparam Ret - returning type of a stored function.
      * 
      * Heavy template oriented class that stores gotten function in std::any and then cast it back to make a function call.
      * Can store simple function or class method. Both can be with any parameters, 
@@ -25,6 +26,7 @@ namespace Utility
 
         /*!
          * \brief Constructor that creates AnyCallable from pointer to a function.
+         * \tparam Args - list of arguments.
          * \param function - a pointer to a function.
          */
         template <class ... Args>
@@ -32,6 +34,8 @@ namespace Utility
 
         /*!
          * \brief Constructor that creates AnyCallable from pointer to a class method.
+         * \tparam UserClass - class type.
+         * \tparam Args - list of arguments.
          * \param userClass - a pointer to a class whose function can be called by operator().
          * \param function - a pointer to a function which can be called by operator().
          */
@@ -47,6 +51,7 @@ namespace Utility
 
         /*!
          * \brief Function call operator.
+         * \tparam Args - list of arguments.
          * \param args - arguments that will be used in call of stored function.
          * 
          * Should be used in try-catch section, because any_cast will throw exception if it failed.
@@ -63,13 +68,16 @@ namespace Utility
     private:
         /*!
          * \brief Sets data in handler from given function.
+         * \tparam Args - list of arguments.
          * \param function - a pointer to function that will be stored.
          */
         template <class ... Args>
         void _SetHandler(Ret(*function)(Args...));
         
-        /*
+        /*!
          * \brief Sets data in handler from given class and its function.
+         * \tparam UserClass - class type.
+         * \tparam Args - list of arguments.
          * \param userClass - a pointer to a class whose function can be called by operator().
          * \param function - a pointer to a function which can be called by operator().
          */

@@ -4,29 +4,29 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BaseComponent::BaseComponent() : _turnedOn(true), _typeInfo(nullptr)
+BaseComponent::BaseComponent() : _turnedOn(true), _typeIndex(typeid(BaseComponent))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool BaseComponent::operator==(const BaseComponent& other) const
 {
-    return (*other._typeInfo == *_typeInfo);
+    return (other._typeIndex == _typeIndex);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool BaseComponent::operator==(const std::type_info& typeInfo) const
+bool BaseComponent::operator==(const std::type_index& typeIndex) const
 {
-    return (typeInfo == *_typeInfo);
+    return (typeIndex == _typeIndex);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*shared_ptr<SceneObject> BaseComponent::GetSceneObject() const
+std::weak_ptr<SceneObject> BaseComponent::GetSceneObject() const
 {
-    
-}*/
+    return _sceneObject;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,10 +46,10 @@ void BaseComponent::TurnOn(const bool turnOn)
 
 void BaseComponent::Initialize()
 {
-    if (_typeInfo == nullptr)
+    if (_typeIndex == typeid(BaseComponent))
     {
         // There is no other way to store type of an object
-        _typeInfo = const_cast<std::type_info*>(&typeid(*this));
+        _typeIndex = typeid(*this);
     }
 }
 

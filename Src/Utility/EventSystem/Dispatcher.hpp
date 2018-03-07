@@ -6,6 +6,8 @@
 namespace Utility
 {
     /*!
+     * \tparam Ret - returning type of stored functions.
+     * 
      * Container that handles array of AnyCallable and provides next functionality: 
      *   - Add/Remove callables
      *   - Invoke them at once (to do so you should implement Invoke() method by yourself in the way you want).
@@ -16,6 +18,7 @@ namespace Utility
     public:
         /*!
          * \brief Adds callable to the array and returns handle of added callable.
+         * \tparam Args - list of arguments.
          * \param function - a pointer to a function that will be stored.
          * \return Handler of callable if it was stored. Otherwise - empty handler.
          */
@@ -24,6 +27,8 @@ namespace Utility
 
         /*!
          * \brief Adds callable to the array and returns handle of added callable.
+         * \tparam UserClass - class type.
+         * \tparam Args - list of arguments.
          * \param userClass - a pointer to a class whose function will be stored.
          * \param function - a pointer to a function that will be stored.
          * \return Handler of callable if it was stored. Otherwise - empty handler.

@@ -37,6 +37,8 @@ namespace Utility
 
         /*!
          * \brief Binds function to specified event.
+         * \tparam Ret - returning type of a function.
+         * \tparam Args - list of arguments.
          * \param eventName - name of the event to which function will be bounded.
          * \param function - a pointer to a function that will be bounded.
          * \return Handler of callable if it was bounded. Otherwise - empty handler.
@@ -47,6 +49,9 @@ namespace Utility
 
         /*!
          * \brief Binds class method to specified event.
+         * \tparam Ret - returning type of a function.
+         * \tparam UserClass - class type.
+         * \tparam Args - list of arguments.
          * \param eventName - name of the event to which function will be bounded.
          * \param userClass - a pointer to a class whose function will be bounded.
          * \param function - a pointer to a function that will be bounded.

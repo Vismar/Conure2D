@@ -1,12 +1,10 @@
 #include "InputHandler.hpp"
 #include "Managers/InputDeviceManager.hpp"
-#include "Managers/InputMapManager.hpp"
 #include "SFML/Window/Event.hpp"
 
 using namespace Input;
 
 InputDeviceManager DeviceManager;
-InputMapManager MapManager;
 
 /*****************************************/
 /*             DeviceManager             */
