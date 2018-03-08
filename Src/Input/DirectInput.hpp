@@ -3,7 +3,7 @@
 #include "Utilities/Keys/KeyboardKeys.hpp"
 #include "Utilities/Keys/MouseButtons.hpp"
 #include "Utilities/Keys/JoystickButtons.hpp"
-#include "Utilities/Keys/JoystickAxises.hpp"
+#include "Utilities/Keys/JoystickAxes.hpp"
 
 namespace Input
 {
@@ -11,7 +11,7 @@ namespace Input
      * \brief Static class that helps to directly check user input.
      * 
      * That class helps to check direct input from keyboard, mouse, and joystick.
-     * Moreover, user can check the state of actions and axises mapped to a certain name through InputUtility.
+     * Moreover, a user can check the state of actions and axes that were mapped to a certain name.
      */
     class DirectInput
     {

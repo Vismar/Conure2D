@@ -52,9 +52,6 @@
     </ClInclude>
     <ClInclude Include="DirectInput.hpp" />
     <ClInclude Include="InputHandler.hpp" />
-    <ClInclude Include="Utilities\Keys\JoystickAxises.hpp">
-      <Filter>Utilities\Keys</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities\Keys\JoystickButtons.hpp">
       <Filter>Utilities\Keys</Filter>
     </ClInclude>
@@ -69,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="Utilities\MappedInput\InputAxis.hpp">
       <Filter>Utilities\MappedInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Keys\JoystickAxes.hpp">
+      <Filter>Utilities\Keys</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

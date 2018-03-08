@@ -115,7 +115,7 @@ namespace Input
         /*! Additional array to know what buttons was updated. */
         bool* _touchedButtons;
         /*! Axis states. */
-        std::atomic<float>* _axises;
+        std::atomic<float>* _axes;
         /*! Inner joystick id which is required to identify itself. */
         unsigned int _joystickId;
         /*! Flag that defines if current joystick is connected. */

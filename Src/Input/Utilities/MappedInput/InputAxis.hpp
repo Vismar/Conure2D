@@ -1,5 +1,5 @@
 #pragma once
-#include "Utilities/Keys/JoystickAxises.hpp"
+#include "Utilities/Keys/JoystickAxes.hpp"
 #include <string>
 
 namespace Input

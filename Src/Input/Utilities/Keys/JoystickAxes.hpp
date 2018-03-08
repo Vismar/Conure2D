@@ -4,7 +4,7 @@
 namespace Input
 {
     /*!
-     * \brief Special redefinition of joystick axises from SFML to determine them as enum class.
+     * \brief Special redefinition of joystick axes from SFML to determine them as enum class.
      */
     enum class JoystickAxis
     {
@@ -18,7 +18,7 @@ namespace Input
         PovY   /*!< The PovY axis. */
     };
     
-    /*! Names for joystick axises. */
+    /*! Names for joystick axes. */
     static std::string JoystickAxisName[] =
     {
         "X",

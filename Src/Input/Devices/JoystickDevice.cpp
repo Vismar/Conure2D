@@ -1,7 +1,7 @@
 #include "JoystickDevice.hpp"
 #include "Utilities/KeyStateHandler.hpp"
 #include "Utilities/Keys/JoystickButtons.hpp"
-#include "Utilities/Keys/JoystickAxises.hpp"
+#include "Utilities/Keys/JoystickAxes.hpp"
 #include "SFML/Window/Joystick.hpp"
 #include "SFML/Window/Event.hpp"
 
@@ -12,7 +12,7 @@ using namespace Input;
 JoystickDevice::JoystickDevice() 
     : _buttons(new KeyStateHandler[sf::Joystick::ButtonCount]())
     , _touchedButtons(new bool[sf::Joystick::ButtonCount]())
-    , _axises(new std::atomic<float>[sf::Joystick::AxisCount]())
+    , _axes(new std::atomic<float>[sf::Joystick::AxisCount]())
     , _joystickId(-1)
     , _isConnected(false)
 { }
@@ -23,7 +23,7 @@ JoystickDevice::~JoystickDevice()
 {
     delete[] _buttons;
     delete[] _touchedButtons;
-    delete[] _axises;
+    delete[] _axes;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ KeyState JoystickDevice::ButtonState(const JoystickButton button) const
 
 float JoystickDevice::JoystickAxisPosition(const JoystickAxis axis) const
 {
-    return _axises[static_cast<int>(axis)];
+    return _axes[static_cast<int>(axis)];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +141,7 @@ void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event)
 void JoystickDevice::_HandleJoystickMoveEvent(const sf::Event& event)
 {
     _isConnected = true;
-    _axises[event.joystickMove.axis] = event.joystickMove.position / 100.0f;
+    _axes[event.joystickMove.axis] = event.joystickMove.position / 100.0f;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

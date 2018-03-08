@@ -174,7 +174,7 @@
     <ClInclude Include="Managers\InputMapManager.hpp" />
     <ClInclude Include="Utilities\InputUtilities.hpp" />
     <ClInclude Include="Utilities\KeyStateHandler.hpp" />
-    <ClInclude Include="Utilities\Keys\JoystickAxises.hpp" />
+    <ClInclude Include="Utilities\Keys\JoystickAxes.hpp" />
     <ClInclude Include="Utilities\Keys\JoystickButtons.hpp" />
     <ClInclude Include="Utilities\Keys\KeyboardKeys.hpp" />
     <ClInclude Include="Utilities\Keys\MouseButtons.hpp" />

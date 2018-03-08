@@ -13,7 +13,7 @@ namespace  Input
     class InputAxis;
 
     /*!
-     * \brief Manager that handles creating/updating/deleting of mapped input actions and axises.
+     * \brief Manager that handles creating/updating/deleting of mapped input actions and axes.
      */
     class InputMapManager
     {
@@ -24,12 +24,12 @@ namespace  Input
         InputMapManager& operator=(InputMapManager&&) = delete;
 
         /*!
-         * \brief Default constructor that initializes maps of input actions and input axises.
+         * \brief Default constructor that initializes maps of input actions and input axes.
          */
         InputMapManager();
 
         /*!
-         * \brief Default destructor that deletes maps of input actions and input axises.
+         * \brief Default destructor that deletes maps of input actions and input axes.
          */
         ~InputMapManager();
 
@@ -101,7 +101,7 @@ namespace  Input
     private:
         /*! Map of named actions that stores array of input actions. */
         std::unordered_map<std::string, InputAction>* _inputActionMap;
-        /*! Map of named axises that stores array of input axises. */
+        /*! Map of named axes that stores array of input axes. */
         std::unordered_map<std::string, InputAxis>* _inputAxisMap;
     };
 }
