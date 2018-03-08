@@ -18,6 +18,9 @@
     <ClInclude Include="Base\SceneObject.hpp">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Components\RenderableComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BaseComponent.cpp">
@@ -28,6 +31,9 @@
     </ClCompile>
     <ClCompile Include="Base\SceneObject.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RenderableComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

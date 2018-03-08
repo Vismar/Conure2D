@@ -155,11 +155,13 @@
   <ItemGroup>
     <ClInclude Include="Base\BaseComponent.hpp" />
     <ClInclude Include="Base\SceneObject.hpp" />
+    <ClInclude Include="Components\RenderableComponent.hpp" />
     <ClInclude Include="Components\TransformComponent.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\BaseComponent.cpp" />
     <ClCompile Include="Base\SceneObject.cpp" />
+    <ClCompile Include="Components\RenderableComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

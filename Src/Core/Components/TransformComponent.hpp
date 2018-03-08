@@ -15,16 +15,34 @@ namespace Core
     class TransformComponent final : public BaseComponent, public Utility::EventManager
     {
     public:
+        TransformComponent() = delete;
         TransformComponent(const TransformComponent& other) = delete;
         TransformComponent(TransformComponent&& other) = delete;
         TransformComponent& operator=(const TransformComponent& other) = delete;
         TransformComponent& operator=(TransformComponent&& other) = delete;
+        ~TransformComponent() = default;
 
         /*! Default constructor. */
-        TransformComponent();
+        explicit TransformComponent(const std::shared_ptr<SceneObject>& sceneObject);
 
-        /*! Default destructor. */
-        ~TransformComponent() = default;
+        /*!
+         * \brief Returns transform origin.
+         * \return Const reference to a float atomic vector that contains transform origin.
+         */
+        const Utility::AtomicVector2F& GetOrigin() const;
+
+        /*!
+         * \brief Sets transform origin to specified values.
+         * \param newOriginX - X value of new transform origin.
+         * \param newOriginY - Y value of new transform origin.
+         */
+        void SetOrigin(const float newOriginX, const float newOriginY);
+
+        /*!
+         * \brief Sets transform origin to specified value.
+         * \param newOrigin - const reference to a new transform origin.
+         */
+        void SetOrigin(const Utility::AtomicVector2F& newOrigin);
 
         /*!
          * \brief Returns transform position.

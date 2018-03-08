@@ -28,7 +28,9 @@ bool SceneObject::AddComponent()
     // If component with required type is not added to the map - add it
     if (_componentMap.find(componentTypeIndex) == _componentMap.end())
     {
-        _componentMap.emplace(componentTypeIndex, std::make_shared<Component>());
+        _componentMap.emplace(componentTypeIndex, std::make_shared<Component>(this->shared_from_this()));
+        _componentMap[componentTypeIndex]->BaseComponent::Initialize();
+        _componentMap[componentTypeIndex]->Initialize();
         added = true;
     }
 

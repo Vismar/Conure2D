@@ -10,10 +10,7 @@ std::atomic_uint64_t SceneObject::_globalIdCounter = 0;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 SceneObject::SceneObject() : _objectId(++_globalIdCounter), _name("SceneObject")
-{
-    // Every scene object ALWAYS must have transform component
-    AddComponent<TransformComponent>();
-}
+{ }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,7 +42,7 @@ void SceneObject::SetName(std::string&& newName)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<TransformComponent> SceneObject::GetTransform() const
+std::weak_ptr<TransformComponent> SceneObject::GetTransformComponent() const
 {
     // Every scene object ALWAYS have transform component
     return std::dynamic_pointer_cast<TransformComponent>(_componentMap.at(std::type_index(typeid(TransformComponent))));
@@ -109,6 +106,14 @@ void SceneObject::RemoveChild(const uint64_t childId)
 const std::vector<std::shared_ptr<SceneObject>>& SceneObject::GetChildrenList() const
 {
     return _children;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void SceneObject::Initialize()
+{
+    // Every scene object ALWAYS must have transform component 
+    AddComponent<TransformComponent>();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

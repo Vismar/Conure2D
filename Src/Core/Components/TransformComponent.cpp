@@ -5,8 +5,35 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-TransformComponent::TransformComponent() : _transformUpdated(true), _rotation(0.0f)
+TransformComponent::TransformComponent(const std::shared_ptr<SceneObject>& sceneObject) 
+    : BaseComponent(sceneObject)
+    ,_transformUpdated(true)
+    , _rotation(0.0f)
 { }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const Utility::AtomicVector2F& TransformComponent::GetOrigin() const
+{
+    return _origin;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void TransformComponent::SetOrigin(const float newOriginX, const float newOriginY)
+{
+    _origin.x = newOriginX;
+    _origin.y = newOriginY;
+
+    _transformUpdated = true;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void TransformComponent::SetOrigin(const Utility::AtomicVector2<float>& newOrigin)
+{
+    SetOrigin(newOrigin.x, newOrigin.y);
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -111,7 +138,7 @@ void TransformComponent::Scale(const Utility::AtomicVector2F& factor)
 
 void TransformComponent::Initialize()
 {
-    AddEvent("OnTransformUpdated", new Utility::SimplestDispatcher());
+    AddEvent("TransformUpdated", new Utility::SimplestDispatcher());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,7 +153,7 @@ void TransformComponent::LateUpdate()
     if (_transformUpdated)
     {
         _transformUpdated = false;
-        InvokeEvent("OnTransformUpdated");
+        InvokeEvent("TransformUpdated");
     }
 }
 

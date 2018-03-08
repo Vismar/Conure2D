@@ -56,7 +56,7 @@ namespace Core
          * \brief Returns transform component of the object.
          * \return Weak pointer to the transform component of the object.
          */
-        std::weak_ptr<TransformComponent> GetTransform() const;
+        std::weak_ptr<TransformComponent> GetTransformComponent() const;
 
         /*!
          * \brief Returns component of the object.
@@ -115,6 +115,13 @@ namespace Core
          */
         template <class Component>
         void RemoveComponent();
+
+        /*!
+         * \brief Initializes scene object.
+         *
+         * - Adds TransformComponent.
+         */
+        void Initialize();
 
         /*!
          * \brief Updates object components and all children.

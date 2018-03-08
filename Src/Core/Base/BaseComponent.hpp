@@ -16,22 +16,20 @@ namespace Core
     class BaseComponent : public std::enable_shared_from_this<BaseComponent>
     {
     public:
+        BaseComponent() = delete;
         BaseComponent(const BaseComponent& other) = delete;
         BaseComponent(BaseComponent&& other) = delete;
         BaseComponent& operator=(const BaseComponent& other) = delete;
         BaseComponent& operator=(BaseComponent&& other) = delete;
+        virtual ~BaseComponent() = default;
 
         /*! 
          * \brief Default constructor.
+         * \param sceneObject - shared pointer to the object which contains this component.
          * 
          * After creating a component, we MUST initialize it with Initialize() method of base class. 
          */
-        BaseComponent();
-        
-        /*!
-         * \brief Default destructor.
-         */
-        virtual ~BaseComponent() = default;
+        explicit BaseComponent(const std::shared_ptr<SceneObject>& sceneObject);
         
         /*!
          * \brief Comparison of two base components by their type info.
@@ -96,6 +94,7 @@ namespace Core
 
         friend bool operator==(const std::type_index& typeIndex, const BaseComponent& component);
         friend class SceneObject;
+        friend class RenderableComponent;
     };
 
     /*!
