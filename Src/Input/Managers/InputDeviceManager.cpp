@@ -9,23 +9,14 @@ using namespace Input;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputDeviceManager::InputDeviceManager()
-    :_keyboard(new KeyboardDevice())
-    , _mouse(new MouseDevice())
-    , _joysticks(new JoystickDevice[sf::Joystick::Count]())
-{    
+    : _keyboard(std::make_shared<KeyboardDevice>())
+    , _mouse(std::make_shared<MouseDevice>())
+{   
     for (auto i = 0; i < sf::Joystick::Count; ++i)
     {
-        _joysticks[i].SetJoystickId(i);
+        _joysticks.emplace_back(std::make_shared<JoystickDevice>());
+        _joysticks.back()->SetJoystickId(i);
     }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-InputDeviceManager::~InputDeviceManager()
-{
-    delete _keyboard;
-    delete _mouse;
-    delete[] _joysticks;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,17 +36,17 @@ void InputDeviceManager::HandleInputEvent(const sf::Event event)
         _mouse->HandleMouseEvent(event);
         break;
     case sf::Event::EventType::JoystickConnected:
-        _joysticks[event.joystickConnect.joystickId].SetJoystickConnectionState(true);
+        _joysticks[event.joystickConnect.joystickId]->SetJoystickConnectionState(true);
         break;
     case sf::Event::EventType::JoystickDisconnected:
-        _joysticks[event.joystickConnect.joystickId].SetJoystickConnectionState(false);
+        _joysticks[event.joystickConnect.joystickId]->SetJoystickConnectionState(false);
         break;
     case sf::Event::EventType::JoystickButtonPressed:
     case sf::Event::EventType::JoystickButtonReleased:
-        _joysticks[event.joystickButton.joystickId].HandleJoystickEvents(event);
+        _joysticks[event.joystickButton.joystickId]->HandleJoystickEvents(event);
         break;
     case sf::Event::EventType::JoystickMoved:
-        _joysticks[event.joystickMove.joystickId].HandleJoystickEvents(event);
+        _joysticks[event.joystickMove.joystickId]->HandleJoystickEvents(event);
         break;
     default:
         // Unexpected event
@@ -72,28 +63,28 @@ void InputDeviceManager::FinishUpdate()
     _mouse->UpdateWheels();
     for (auto i = 0; i < sf::Joystick::Count; ++i)
     {
-        _joysticks[i].UpdateNotTouchedButtons();
+        _joysticks[i]->UpdateNotTouchedButtons();
     }
     sf::Joystick::update();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const KeyboardDevice& InputDeviceManager::GetKeyboardDevice() const
+const std::shared_ptr<KeyboardDevice>& InputDeviceManager::GetKeyboardDevice() const
 {
-    return *_keyboard;
+    return _keyboard;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const MouseDevice& InputDeviceManager::GetMouseDevice() const
+const std::shared_ptr<MouseDevice>& InputDeviceManager::GetMouseDevice() const
 {
-    return *_mouse;
+    return _mouse;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const JoystickDevice& InputDeviceManager::GetJoystickDevice(const int joystickId) const
+const std::shared_ptr<JoystickDevice>& InputDeviceManager::GetJoystickDevice(const int joystickId) const
 {
     return _joysticks[joystickId];
 }

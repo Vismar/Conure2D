@@ -21,21 +21,21 @@ InputMapManager MapManager;
 
 bool DirectInput::IsKeyPressed(const KeyboardKey key)
 {
-    return (KEYBOARD.KeyState(key) == KeyState::Pressed);
+    return (KEYBOARD->KeyState(key) == KeyState::Pressed);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool DirectInput::IsKeyHeldDown(const KeyboardKey key)
 {
-    return (KEYBOARD.KeyState(key) == KeyState::HeldDown);
+    return (KEYBOARD->KeyState(key) == KeyState::HeldDown);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool DirectInput::IsKeyReleased(const KeyboardKey key)
 {
-    return (KEYBOARD.KeyState(key) == KeyState::Released);
+    return (KEYBOARD->KeyState(key) == KeyState::Released);
 }
 
 /*****************************************/
@@ -45,49 +45,49 @@ bool DirectInput::IsKeyReleased(const KeyboardKey key)
 
 bool DirectInput::IsMouseButtonPressed(const MouseButton button)
 {
-    return (MOUSE.ButtonState(button) == KeyState::Pressed);
+    return (MOUSE->ButtonState(button) == KeyState::Pressed);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool DirectInput::IsMouseButtonHeldDown(const MouseButton button)
 {
-    return (MOUSE.ButtonState(button) == KeyState::HeldDown);
+    return (MOUSE->ButtonState(button) == KeyState::HeldDown);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool DirectInput::IsMouseButtonReleased(const MouseButton button)
 {
-    return (MOUSE.ButtonState(button) == KeyState::Released);
+    return (MOUSE->ButtonState(button) == KeyState::Released);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 float DirectInput::GetMouseVerticalWheelDiff()
 {
-    return MOUSE.VerticalWheelDiff();
+    return MOUSE->VerticalWheelDiff();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 float DirectInput::GetMouseHorizontalWheelDiff()
 {
-    return MOUSE.HorizontalWheelDiff();
+    return MOUSE->HorizontalWheelDiff();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int DirectInput::GetMousePositionX()
 {
-    return MOUSE.PositionX();
+    return MOUSE->PositionX();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int DirectInput::GetMousePositionY()
 {
-    return MOUSE.PositionY();
+    return MOUSE->PositionY();
 }
 
 /*****************************************/
@@ -97,56 +97,56 @@ int DirectInput::GetMousePositionY()
 
 bool DirectInput::IsJoystickButtonPressed(const int joystickId, const JoystickButton button)
 {
-    return (JOYSTICK(joystickId).ButtonState(button) == KeyState::Pressed);
+    return (JOYSTICK(joystickId)->ButtonState(button) == KeyState::Pressed);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool DirectInput::IsJoystickButtonHeldDown(const int joystickId, const JoystickButton button)
 {
-    return (JOYSTICK(joystickId).ButtonState(button) == KeyState::HeldDown);
+    return (JOYSTICK(joystickId)->ButtonState(button) == KeyState::HeldDown);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool DirectInput::IsJoystickButtonReleased(const int joystickId, const JoystickButton button)
 {
-    return (JOYSTICK(joystickId).ButtonState(button) == KeyState::Released);
+    return (JOYSTICK(joystickId)->ButtonState(button) == KeyState::Released);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 float DirectInput::GetJoystickAxisPosition(const int joystickId, const JoystickAxis axis)
 {
-    return JOYSTICK(joystickId).JoystickAxisPosition(axis);
+    return JOYSTICK(joystickId)->JoystickAxisPosition(axis);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool DirectInput::IsJoystickConnected(const int joystickId)
 {
-    return JOYSTICK(joystickId).IsConnected();
+    return JOYSTICK(joystickId)->IsConnected();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 std::string DirectInput::GetJoystickName(const int joystickId)
 {
-    return JOYSTICK(joystickId).Name();
+    return JOYSTICK(joystickId)->Name();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 unsigned int DirectInput::GetJoystickVendorId(const int joystickId)
 {
-    return JOYSTICK(joystickId).VendorId();
+    return JOYSTICK(joystickId)->VendorId();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 unsigned int DirectInput::GetJoystickProductId(const int joystickId)
 {
-    return JOYSTICK(joystickId).ProductId();
+    return JOYSTICK(joystickId)->ProductId();
 }
 
 /*****************************************/

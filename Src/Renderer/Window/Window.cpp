@@ -19,7 +19,6 @@ Window::Window(WindowSettings settings)
                                          _settings.GetContextSettings()))
 {
     _renderWindow->setKeyRepeatEnabled(false);
-    _renderWindow->setJoystickThreshold(10.0f);
     _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
     _renderWindow->setFramerateLimit(_settings.frameLimit);
     _renderWindow->setMouseCursorVisible(_settings.cursorIsVisible);
@@ -127,7 +126,6 @@ void Window::_ApplySettings()
 
     // Set some default parameters
     _renderWindow->setKeyRepeatEnabled(false);
-    _renderWindow->setJoystickThreshold(10.0f);
 
     // Set icon for window
     _renderWindow->setIcon(_icon->getSize().x, _icon->getSize().y, _icon->getPixelsPtr());
