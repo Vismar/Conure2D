@@ -55,11 +55,11 @@
   ```
 
 **Function names:**
-* Public functions should be in PascalCase
+* Public and protected functions should be in PascalCase
   ```cpp
   void FunctionName();
   ```
-* Protected and private functions should be in _PascalCase with underscore in the front
+* Private functions should be in _PascalCase with underscore in the front
   ```cpp
   class ClassName
   {

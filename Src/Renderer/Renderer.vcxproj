@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Components\SpriteRenderComponent.cpp" />
     <ClCompile Include="Window\Window.cpp" />
     <ClCompile Include="Window\WindowSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\SpriteRenderComponent.hpp" />
     <ClInclude Include="Window\Window.hpp" />
     <ClInclude Include="Window\WindowSettings.hpp" />
   </ItemGroup>

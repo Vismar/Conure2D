@@ -7,8 +7,9 @@ using namespace Core;
 
 TransformComponent::TransformComponent(const std::shared_ptr<SceneObject>& sceneObject) 
     : BaseComponent(sceneObject)
-    ,_transformUpdated(true)
+    , _transformUpdated(true)
     , _rotation(0.0f)
+    , _scale(1.0f, 1.0f)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -2,6 +2,7 @@
 #include "Core/Base/BaseComponent.hpp"
 #include "SFML/Graphics/Drawable.hpp"
 #include <SFML/Graphics/VertexArray.hpp>
+#include "Utility/EventSystem/EventManager.hpp"
 
 namespace Core
 {
@@ -15,7 +16,7 @@ namespace Core
      * - Inherited components will have the same characteristics in comparison, 
      *   so scene object will not be able to store more than one renderable component.
      */
-    class RenderableComponent : public BaseComponent, public sf::Drawable
+    class RenderableComponent : public BaseComponent, public Utility::EventManager, public sf::Drawable
     {
     public:
         RenderableComponent() = delete;
@@ -93,6 +94,12 @@ namespace Core
          */
         void SetTexture(const std::shared_ptr<sf::Texture>& texture);
 
+        /*!
+         * \brief Returns texture that is used by this component.
+         * \return Weak pointer to the texture that is used in render process.
+         */
+        std::weak_ptr<sf::Texture> GetTexture() const;
+
     protected:
         /*!
          * \brief Initializes component.
@@ -101,12 +108,14 @@ namespace Core
          * the same characteristics in comparison, 
          * so scene object will not be able to store more than one renderable component.
          */
-        void Initialize() final;
+        void Initialize() override;
 
         /*! Weak pointer to transform component of a scene object that contains this component. */
         std::weak_ptr<TransformComponent> _transformComponent;
         /*! Array of vertices. */
         sf::VertexArray _vertices;
+        /*! Weak pointer to the texture that will be used in render. */
+        std::weak_ptr<sf::Texture> _texture;
 
     private:
         /*!
@@ -115,7 +124,9 @@ namespace Core
         void _OnTransformComponentUpdated();
 
         /*!
-         * Utility function to update stored transform. Called only when transform needs to be updated.
+         * \brief Utility function to update stored transform.
+         * 
+         * Called only when transform needs to be updated.
          */
         void _UpdateTransform();
         
@@ -132,7 +143,5 @@ namespace Core
         std::atomic<bool> _transformNeedUpdate;
         /*! Transform that will be used in render. */
         sf::Transform _transform;
-        /*! Weak pointer to the texture that will be used in render. */
-        std::weak_ptr<sf::Texture> _texture;
     };
 }

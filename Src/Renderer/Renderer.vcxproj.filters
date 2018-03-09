@@ -4,6 +4,9 @@
     <Filter Include="Window">
       <UniqueIdentifier>{eaef54b7-e484-4895-a3ac-d93a3e3e3203}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{b3681323-1114-466b-8fbd-b095c385a657}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window\Window.cpp">
@@ -12,6 +15,9 @@
     <ClCompile Include="Window\WindowSettings.cpp">
       <Filter>Window</Filter>
     </ClCompile>
+    <ClCompile Include="Components\SpriteRenderComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window\Window.hpp">
@@ -19,6 +25,9 @@
     </ClInclude>
     <ClInclude Include="Window\WindowSettings.hpp">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteRenderComponent.hpp">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

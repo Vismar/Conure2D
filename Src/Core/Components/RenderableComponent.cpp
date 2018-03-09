@@ -2,6 +2,7 @@
 #include "Core/Components/TransformComponent.hpp"
 #include "Core/Base/SceneObject.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
+#include "Utility/EventSystem/SimplestDispatcher.hpp"
 
 using namespace Core;
 
@@ -76,6 +77,15 @@ bool RenderableComponent::IsVisible() const
 void RenderableComponent::SetTexture(const std::shared_ptr<sf::Texture>& texture)
 {
     _texture = texture;
+
+    InvokeEvent("TextureUpdated");
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+std::weak_ptr<sf::Texture> RenderableComponent::GetTexture() const
+{
+    return _texture;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,6 +93,8 @@ void RenderableComponent::SetTexture(const std::shared_ptr<sf::Texture>& texture
 void RenderableComponent::Initialize()
 {
     _typeIndex = typeid(RenderableComponent);
+
+    AddEvent("TextureUpdated", new Utility::SimplestDispatcher());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
