@@ -1,5 +1,5 @@
 #include "TransformComponent.hpp"
-#include "Utility/EventSystem/SimplestDispatcher.hpp"
+#include "Utility/EventSystem/Dispatcher.hpp"
 
 using namespace Core;
 
@@ -139,7 +139,7 @@ void TransformComponent::Scale(const Utility::AtomicVector2F& factor)
 
 void TransformComponent::Initialize()
 {
-    AddEvent("TransformUpdated", new Utility::SimplestDispatcher());
+    AddEvent("TransformUpdated", new Utility::Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

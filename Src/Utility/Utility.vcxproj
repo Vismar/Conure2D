@@ -158,7 +158,6 @@
     <ClInclude Include="EventSystem\Dispatcher.hpp" />
     <ClInclude Include="EventSystem\DispatcherInterface.hpp" />
     <ClInclude Include="EventSystem\EventManager.hpp" />
-    <ClInclude Include="EventSystem\SimplestDispatcher.hpp" />
     <ClInclude Include="Math\AtomicVector2.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,7 +169,6 @@
   <ItemGroup>
     <ClCompile Include="Containers\AnyCallableHandler.cpp" />
     <ClCompile Include="EventSystem\EventManager.cpp" />
-    <ClCompile Include="EventSystem\SimplestDispatcher.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

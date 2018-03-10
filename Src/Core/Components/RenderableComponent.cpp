@@ -2,7 +2,7 @@
 #include "Core/Components/TransformComponent.hpp"
 #include "Core/Base/SceneObject.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
-#include "Utility/EventSystem/SimplestDispatcher.hpp"
+#include "Utility/EventSystem/Dispatcher.hpp"
 
 using namespace Core;
 
@@ -94,7 +94,7 @@ void RenderableComponent::Initialize()
 {
     _typeIndex = typeid(RenderableComponent);
 
-    AddEvent("TextureUpdated", new Utility::SimplestDispatcher());
+    AddEvent("TextureUpdated", new Utility::Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

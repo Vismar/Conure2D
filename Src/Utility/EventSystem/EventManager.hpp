@@ -92,6 +92,18 @@ namespace Utility
          */
         void InvokeEvent(const std::string& eventName);
 
+        /*!
+         * \brief Invokes all bounded callables to specified event.
+         * \tparam Ret - returning type of stored functions.
+         * \tparam Args - list of arguments.
+         * \param eventName -  name of the event that will be invoked.
+         * \param args - arguments that will be used in call of stored functions.
+         * 
+         * Tries to cast stored dispatcher to a specified type and invoke it with specified arguments.
+         */
+        template <class Ret, class ... Args>
+        void InvokeEvent(const std::string& eventName, Args&& ... args);
+
     private:
         /*! Map of named events and it dispatchers. */
         std::unordered_map<std::string, DispatcherInterface*> _events;

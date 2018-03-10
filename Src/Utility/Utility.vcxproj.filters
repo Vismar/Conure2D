@@ -27,9 +27,6 @@
     <ClInclude Include="EventSystem\Dispatcher.hpp">
       <Filter>EventSystem</Filter>
     </ClInclude>
-    <ClInclude Include="EventSystem\SimplestDispatcher.hpp">
-      <Filter>EventSystem</Filter>
-    </ClInclude>
     <ClInclude Include="EventSystem\EventManager.hpp">
       <Filter>EventSystem</Filter>
     </ClInclude>
@@ -51,9 +48,6 @@
   <ItemGroup>
     <ClCompile Include="Containers\AnyCallableHandler.cpp">
       <Filter>Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="EventSystem\SimplestDispatcher.cpp">
-      <Filter>EventSystem</Filter>
     </ClCompile>
     <ClCompile Include="EventSystem\EventManager.cpp">
       <Filter>EventSystem</Filter>

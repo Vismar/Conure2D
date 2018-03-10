@@ -38,6 +38,27 @@ namespace Utility
         const AnyCallableHandler& AddCallable(UserClass* userClass, Ret(UserClass::*function)(Args...));
 
         /*!
+         * \brief Invokes every stored callable in the dispatcher with specified parameters.
+         * \tparam Args - list of arguments.
+         * \param args - arguments that will be used in call of stored functions.
+         *
+         * Tries to call every stored function with specified parameters.
+         * If call of the function was failed because of the bad_any_cast,
+         * function will be removed from the array.
+         */
+        template <class ... Args>
+        void Invoke(Args&& ... args);
+
+        /*!
+         * \brief Invokes every stored callable in the dispatcher.
+         *
+         * Tries to call every stored function without any parameter.
+         * If call of the function was failed because of the bad_any_cast,
+         * function will be removed from the array.
+         */
+        void Invoke() override;
+
+        /*!
          * \brief Simply removes callable from the list of callables.
          * \param callableHandler - handler of callable that should be removed.
          */

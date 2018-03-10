@@ -37,6 +37,49 @@ const AnyCallableHandler& Dispatcher<Ret>::AddCallable(UserClass* userClass, Ret
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>
+template <class ... Args>
+void Dispatcher<Ret>::Invoke(Args&&... args)
+{
+    for (auto iter = _callables.begin(); iter != _callables.end(); )
+    {
+        try
+        {
+            (*iter)(std::forward<Args>(args)...);
+            ++iter;
+        }
+        catch (const std::bad_any_cast& exception)
+        {
+            // TODO: Handle error when log system will be introduced
+            (void)exception.what();
+            iter = _callables.erase(iter);
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class Ret>
+void Dispatcher<Ret>::Invoke()
+{
+    for (auto iter = _callables.begin(); iter != _callables.end(); )
+    {
+        try
+        {
+            (*iter)();
+            ++iter;
+        }
+        catch (const std::bad_any_cast& exception)
+        {
+            // TODO: Handle error when log system will be introduced
+            (void)exception.what();
+            iter = _callables.erase(iter);
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class Ret>
 void Dispatcher<Ret>::RemoveCallable(const AnyCallableHandler& callableHandler)
 {
     for (auto iter = _callables.begin(); iter != _callables.end(); ++iter)
