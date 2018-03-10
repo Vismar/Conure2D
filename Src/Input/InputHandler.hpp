@@ -5,7 +5,7 @@ namespace sf { class Event; }
 namespace Input
 {
     /*!
-     * \brief *C*lass that helps to update input devices via SFML events and create/update/delete named actions and axes.
+     * \brief Class that helps to update input devices via SFML events and create/update/delete named actions and axes.
      */
     class InputHandler
     {

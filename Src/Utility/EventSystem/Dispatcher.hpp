@@ -6,6 +6,7 @@
 namespace Utility
 {
     /*!
+     * \brief Container that stores AnyCallables.
      * \tparam Ret - returning type of stored functions.
      * 
      * Container that handles array of AnyCallable and provides next functionality: 

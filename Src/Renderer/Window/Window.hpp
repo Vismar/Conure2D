@@ -7,7 +7,7 @@ namespace sf { class RenderWindow; class Drawable; class Image; }
 namespace Renderer
 {
     /*!
-     * Window for rendering that contains all basic video settings and handles user input.
+     * \brief Window for rendering that contains all basic video settings and handles user input.
      */
     class Window
     {

@@ -5,6 +5,8 @@
 namespace Utility
 {
     /*!
+     * \brief Manager that provides functionality to create/delete named events and invoke them.
+     * 
      * Class that provides functionality to do next things: 
      *   - Create/Delete named events with special dispatcher that can handle any possible function.
      *   - These events can be invoked whenever you want.

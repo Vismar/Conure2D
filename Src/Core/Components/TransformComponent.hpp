@@ -22,7 +22,7 @@ namespace Core
         TransformComponent& operator=(TransformComponent&& other) = delete;
         ~TransformComponent() = default;
 
-        /*! Default constructor. */
+        /*! \brief Default constructor. */
         explicit TransformComponent(const std::shared_ptr<SceneObject>& sceneObject);
 
         /*!

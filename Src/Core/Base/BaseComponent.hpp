@@ -85,11 +85,7 @@ namespace Core
         std::weak_ptr<SceneObject> _sceneObject;
         /*! Flag that identifies if component is turned on or not. */
         std::atomic<bool> _turnedOn;
-        /*! 
-         * \brief Type id of component. 
-         * 
-         * This variable is used in to identify identical components by its type.
-         */
+        /*! Type id of component. This variable is used in to identify identical components by its type. */
         std::type_index _typeIndex;
 
         friend bool operator==(const std::type_index& typeIndex, const BaseComponent& component);

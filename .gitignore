@@ -2,6 +2,7 @@
 SFML/
 Bin/
 \.vs/
+Docs/html/
 
 # File types to ignore
 *.db

@@ -4,6 +4,8 @@
 namespace Utility
 {
     /*!
+     * \brief Interface for a Dispatcher.
+     *
      * Interface that provides almost all required methods that should be in any dispatcher, 
      * exclude AddCallable(), because these functions are template based, so it cannot be 
      * placed here and made as virtual.
@@ -19,7 +21,9 @@ namespace Utility
         DispatcherInterface& operator=(DispatcherInterface&& other) = default;
 
         /*!
-         * Invokes every stored callable in the dispatcher. Should be implemented by the inherited class.
+         * \brief Invokes every stored callable in the dispatcher.
+         * 
+         * Should be implemented by the inherited class.
          */
         virtual void Invoke() = 0;
 
