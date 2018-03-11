@@ -2,9 +2,8 @@
 #include "Input/Utilities/KeyStateHandler.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-using namespace Input;
 
-namespace UnitTests
+namespace Input
 {		
     TEST_CLASS(KeyStateHandlerTests)
     {

@@ -9,5 +9,8 @@
     <ClCompile Include="Input\KeyStateHandlerTests.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="Input\KeyboardDeviceTests.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
