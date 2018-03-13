@@ -8,14 +8,14 @@ namespace Input
     TEST_CLASS(KeyStateHandlerTests)
     {
     public:		
-        TEST_METHOD(KeyStateHandlerDefaultValue)
+        TEST_METHOD(DefaultValue)
         {
             KeyStateHandler keyStateHandler;
 
             Assert::IsTrue(keyStateHandler.State() == KeyState::NotTouched);
         }
 
-        TEST_METHOD(KeyStateHandlerUpdateState)
+        TEST_METHOD(UpdateState)
         {
             KeyStateHandler keyStateHandler;
 		    

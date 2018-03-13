@@ -77,7 +77,7 @@ namespace Input
         void UpdateNotTouchedButtons();
 
         /*!
-         * \brief Simply resets mouse wheel scroll value.
+         * \brief Simply resets mouse wheel scroll value if necessary.
          */
         void UpdateWheels();
 
@@ -104,8 +104,12 @@ namespace Input
         KeyStateHandler* _buttons;
         /*! Additional array to know what buttons was updated. */
         bool* _touchedButtons;
+        /*! Flag that defines if vertical wheel was updated during the update phase. */
+        bool _verticalWheelUpdated;
         /*! Value of vertical wheel scroll. */
         std::atomic<float> _verticalWheelDiff;
+        /*! Flag that defines if horizontal wheel was updated during the update phase. */
+        bool _horizontalWheelUpdated;
         /*! Value of horizontal wheel scroll. */
         std::atomic<float> _horizontalWheelDiff;
         /*! Current x coordinate of the mouse cursor relative to the top left corner of the window. */

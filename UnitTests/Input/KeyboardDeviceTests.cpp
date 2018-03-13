@@ -11,13 +11,13 @@ namespace Input
     TEST_CLASS(KeyboardDeviceTests)
     {
     public:
-        TEST_METHOD(KeyboardDeviceKeyEvents)
+        TEST_METHOD(KeyEvents)
         {
             KeyboardDevice keyboard;
+            sf::Event event;
             
             ///////////////////////////////////////
             // Pressing W key
-            sf::Event event;
             event.type = sf::Event::EventType::KeyPressed;
             event.key.code = sf::Keyboard::W;
             // Handle event

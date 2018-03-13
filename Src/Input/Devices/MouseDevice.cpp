@@ -11,7 +11,9 @@ using namespace Input;
 MouseDevice::MouseDevice()
     : _buttons(new KeyStateHandler[sf::Mouse::ButtonCount]())
     , _touchedButtons(new bool[sf::Mouse::ButtonCount]())
-    ,_verticalWheelDiff(0.0f)
+    , _verticalWheelUpdated(false)
+    , _verticalWheelDiff(0.0f)
+    , _horizontalWheelUpdated(false)
     , _horizontalWheelDiff(0.0f)
     , _posX(0)
     , _posY(0)
@@ -103,8 +105,27 @@ void MouseDevice::UpdateNotTouchedButtons()
 
 void MouseDevice::UpdateWheels()
 {
-    _verticalWheelDiff = 0.0f;
-    _horizontalWheelDiff = 0.0f;
+    // Update vertical wheel
+    if (_verticalWheelUpdated)
+    {
+        _verticalWheelUpdated = false;
+    }
+    // If wheel was not updated during the update phase, reset wheel difference value
+    else
+    {
+        _verticalWheelDiff = 0.0f;
+    }
+
+    //Update horizontal wheel
+    if (_horizontalWheelUpdated)
+    {
+        _horizontalWheelUpdated = false;
+    }
+    // If wheel was not updated during the update phase, reset wheel difference value
+    else
+    {
+        _horizontalWheelDiff = 0.0f;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,10 +152,12 @@ void MouseDevice::_HandleMouseWheelEvent(const sf::Event& event)
     if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::VerticalWheel)
     {
         _verticalWheelDiff = event.mouseWheelScroll.delta;
+        _verticalWheelUpdated = true;
     }
     else
     {
         _horizontalWheelDiff = event.mouseWheelScroll.delta;
+        _horizontalWheelUpdated = true;
     }
 }
 

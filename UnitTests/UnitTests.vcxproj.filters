@@ -12,5 +12,8 @@
     <ClCompile Include="Input\KeyboardDeviceTests.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="Input\MouseDeviceTests.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
