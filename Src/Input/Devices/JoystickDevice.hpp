@@ -120,5 +120,7 @@ namespace Input
         unsigned int _joystickId;
         /*! Flag that defines if current joystick is connected. */
         std::atomic<bool> _isConnected;
+
+        friend class JoystickDeviceTests;
     };
 }

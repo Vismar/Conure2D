@@ -48,7 +48,7 @@ namespace Input
             // Releasing W and S keys
             event.type = sf::Event::EventType::KeyReleased;
             event.key.code = sf::Keyboard::W;
-            // Handle event
+            // Handle events
             keyboard.HandleKeyboardEvent(event);
             event.key.code = sf::Keyboard::S;
             keyboard.HandleKeyboardEvent(event);

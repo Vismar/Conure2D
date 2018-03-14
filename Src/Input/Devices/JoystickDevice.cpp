@@ -126,13 +126,13 @@ void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event)
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::JoystickButtonPressed)
     {
-        _buttons[event.mouseButton.button].UpdateState(KeyState::Pressed);
-        _touchedButtons[event.mouseButton.button] = true;
+        _buttons[event.joystickButton.button].UpdateState(KeyState::Pressed);
+        _touchedButtons[event.joystickButton.button] = true;
     }
     else if (event.type == sf::Event::EventType::JoystickButtonReleased)
     {
-        _buttons[event.mouseButton.button].UpdateState(KeyState::Released);
-        _touchedButtons[event.mouseButton.button] = true;
+        _buttons[event.joystickButton.button].UpdateState(KeyState::Released);
+        _touchedButtons[event.joystickButton.button] = true;
     }
 }
 
