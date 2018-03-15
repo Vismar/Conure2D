@@ -129,7 +129,7 @@ bool InputAction::IsActive() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void InputAction::SetRequiresState(const KeyState& state)
+void InputAction::SetRequiredState(const KeyState& state)
 {
     _requiredState = state;
 }

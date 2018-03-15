@@ -137,7 +137,7 @@ namespace Input
          * \brief Sets required key state to specified one.
          * \param state - key state that will be set as required.
          */
-        void SetRequiresState(const KeyState& state);
+        void SetRequiredState(const KeyState& state);
 
         /*!
          * \brief Sets required button to check activation of input action.

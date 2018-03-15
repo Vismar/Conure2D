@@ -9,9 +9,7 @@ using namespace Input;
 InputMapManager::InputMapManager()
     : _inputActionMap(new std::unordered_map<std::string, InputAction>)
     , _inputAxisMap(new std::unordered_map<std::string, InputAxis>)
-{
-    
-}
+{ }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,7 +23,7 @@ InputMapManager::~InputMapManager()
 
 void InputMapManager::MapAction(const std::string& actionName, const KeyState state, const KeyboardKey key)
 {
-    (*_inputActionMap)[actionName].SetRequiresState(state);
+    (*_inputActionMap)[actionName].SetRequiredState(state);
     (*_inputActionMap)[actionName].SetRequriedButton(-1, ActionButton(key));
 }
 
@@ -33,7 +31,7 @@ void InputMapManager::MapAction(const std::string& actionName, const KeyState st
 
 void InputMapManager::MapAction(const std::string& actionName, const KeyState state, const MouseButton mouseButton)
 {
-    (*_inputActionMap)[actionName].SetRequiresState(state);
+    (*_inputActionMap)[actionName].SetRequiredState(state);
     (*_inputActionMap)[actionName].SetRequriedButton(-1, ActionButton(mouseButton));
 }
 
@@ -41,7 +39,7 @@ void InputMapManager::MapAction(const std::string& actionName, const KeyState st
 
 void InputMapManager::MapAction(const std::string& actionName, const KeyState state, const int joystickId, const JoystickButton joystickButton)
 {
-    (*_inputActionMap)[actionName].SetRequiresState(state);
+    (*_inputActionMap)[actionName].SetRequiredState(state);
     (*_inputActionMap)[actionName].SetRequriedButton(joystickId, ActionButton(joystickButton));
 }
 
