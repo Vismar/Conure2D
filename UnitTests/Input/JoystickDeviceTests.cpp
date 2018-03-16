@@ -9,6 +9,11 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Input
 {
+    // These test cases covers basic functionality of JoystickDeviceTests class.
+    // SetMethods - check set methods
+    // ButtonEvents - checks button events (pressed/held/released)
+    // AxisEvent - checks axis events
+
     TEST_CLASS(JoystickDeviceTests)
     {
     public:

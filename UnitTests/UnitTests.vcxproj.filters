@@ -4,19 +4,22 @@
     <Filter Include="Input">
       <UniqueIdentifier>{221d2dcc-2657-45d0-b524-99d8bec04391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input\Devices">
+      <UniqueIdentifier>{76c9e8ad-2756-4fa1-aa34-088cbbc59006}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Input\KeyStateHandlerTests.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="Input\JoystickDeviceTests.cpp">
+      <Filter>Input\Devices</Filter>
+    </ClCompile>
     <ClCompile Include="Input\KeyboardDeviceTests.cpp">
-      <Filter>Input</Filter>
+      <Filter>Input\Devices</Filter>
     </ClCompile>
     <ClCompile Include="Input\MouseDeviceTests.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Input\JoystickDeviceTests.cpp">
-      <Filter>Input</Filter>
+      <Filter>Input\Devices</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

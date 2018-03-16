@@ -8,6 +8,11 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Input
 {
+    // These test cases covers basic functionality of MouseDeviceTests class.
+    // ButtonEvents - checks button events (pressed/held/released)
+    // WheelEvents - checks wheel events
+    // PositionEvents - checks move events
+
     TEST_CLASS(MouseDeviceTests)
     {
     public:

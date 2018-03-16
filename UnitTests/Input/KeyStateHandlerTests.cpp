@@ -4,7 +4,11 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Input
-{		
+{
+    // These test cases covers basic functionality of KeyStateHandler class.
+    // DefaultValue - checks default state
+    // UpdateState - checks the change of state that depends on the previous and current states
+
     TEST_CLASS(KeyStateHandlerTests)
     {
     public:		

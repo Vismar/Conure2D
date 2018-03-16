@@ -8,6 +8,9 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Input
 {
+    // These test cases covers basic functionality of KeyboardDeviceTests class.
+    // KeyEvents - checks key events (pressed/held/released)
+
     TEST_CLASS(KeyboardDeviceTests)
     {
     public:
