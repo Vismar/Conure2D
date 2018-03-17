@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Input\InputDeviceManagerTests.cpp" />
     <ClCompile Include="Input\JoystickDeviceTests.cpp" />
     <ClCompile Include="Input\KeyboardDeviceTests.cpp" />
     <ClCompile Include="Input\KeyStateHandlerTests.cpp" />

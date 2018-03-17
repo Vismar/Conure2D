@@ -122,5 +122,6 @@ namespace Input
         std::atomic<bool> _isConnected;
 
         friend class JoystickDeviceTests;
+        friend class InputDeviceManagerTests;
     };
 }

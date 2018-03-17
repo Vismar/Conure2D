@@ -43,6 +43,7 @@ namespace Input
             event.joystickButton.button = static_cast<int>(JoystickButton::Button0);
             // Handle event
             joystick.HandleJoystickEvents(event);
+            Assert::IsTrue(joystick.IsConnected());
             joystick.UpdateNotTouchedButtons();
             // Check buttons
             Assert::IsTrue(joystick.ButtonState(JoystickButton::Button0) == KeyState::Pressed);
@@ -98,6 +99,7 @@ namespace Input
             event.joystickMove.position = 50.0f;
             // Handle event
             joystick.HandleJoystickEvents(event);
+            Assert::IsTrue(joystick.IsConnected());
             // Check axis
             Assert::IsTrue(joystick.JoystickAxisPosition(JoystickAxis::X) == 50.0f / 100.0f);
         }
