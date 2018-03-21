@@ -106,7 +106,7 @@ void RenderableComponent::_OnTransformComponentUpdated()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void RenderableComponent::_UpdateTransform()
+void RenderableComponent::_UpdateTransform() const
 {
     if (_transformNeedUpdate)
     {
@@ -137,6 +137,8 @@ void RenderableComponent::_UpdateTransform()
 
 void RenderableComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    _UpdateTransform();
+
     states.transform *= _transform;
     if (const auto texture = _texture.lock())
     {

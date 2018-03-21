@@ -103,14 +103,14 @@ void SceneObject::RemoveChild(const uint64_t childId)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const std::vector<std::shared_ptr<SceneObject>>& SceneObject::GetChildrenList() const
+std::vector<std::shared_ptr<SceneObject>>& SceneObject::GetChildrenList()
 {
     return _children;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void SceneObject::Initialize()
+void SceneObject::_Initialize()
 {
     // Every scene object ALWAYS must have transform component 
     AddComponent<TransformComponent>();
@@ -118,7 +118,7 @@ void SceneObject::Initialize()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void SceneObject::Update()
+void SceneObject::_Update()
 {
     // Update the components
     for (auto component : _componentMap)
@@ -133,13 +133,13 @@ void SceneObject::Update()
     // Update the children
     for (auto& child : _children)
     {
-        child->Update();
+        child->_Update();
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void SceneObject::LateUpdate()
+void SceneObject::_LateUpdate()
 {
     // Late update the components
     for (auto component : _componentMap)
@@ -154,7 +154,7 @@ void SceneObject::LateUpdate()
     // Late update of the children
     for (auto& child : _children)
     {
-        child->LateUpdate();
+        child->_LateUpdate();
     }
 }
 

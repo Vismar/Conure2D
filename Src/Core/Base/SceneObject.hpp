@@ -5,21 +5,23 @@
 namespace Core
 {
     /*!
-     * \brief Base class for all scene objects.
+     * \brief Core scene object.
      * 
      * - Stores components as a map. 
      * - Guarantees that transform component always exist. 
      * - Stores pointers to all child objects in an array.
-     * - Stores a pointer to it parent (may be nullptr if object do not actually has a parent). 
+     * - Stores a pointer to it parent (may be nullptr if object do not actually has a parent).
+     * 
+     * Scene object - core and bones to which user supposed to add components that will make an object something unique.
      */
-    class SceneObject : public std::enable_shared_from_this<SceneObject>
+    class SceneObject final : public std::enable_shared_from_this<SceneObject>
     {
     public:
         SceneObject(const SceneObject& other) = delete;
         SceneObject(SceneObject&& other) = delete;
         SceneObject& operator=(const SceneObject& other) = delete;
         SceneObject& operator=(SceneObject&& other) = delete;
-        virtual ~SceneObject() = default;
+        ~SceneObject() = default;
 
         /*!
          * \brief Default constructor.
@@ -95,11 +97,10 @@ namespace Core
 
         /*!
          * \brief Returns list of children.
-         * \return Const reference to the array of children.
+         * \return Reference to the array of children.
          */
-        const std::vector<std::shared_ptr<SceneObject>>& GetChildrenList() const;
+        std::vector<std::shared_ptr<SceneObject>>& GetChildrenList();
 
-    protected:
         /*!
          * \brief Adds requested component to the object.
          * \tparam Component - Type of component that will be added.
@@ -116,12 +117,13 @@ namespace Core
         template <class Component>
         void RemoveComponent();
 
+    private:
         /*!
          * \brief Initializes scene object.
          *
          * - Adds TransformComponent.
          */
-        void Initialize();
+        void _Initialize();
 
         /*!
          * \brief Updates object components and all children.
@@ -129,7 +131,7 @@ namespace Core
          * "Update()" function will be called for every component that was added to the object.
          * Then the same function will be called for every child in the children list.
          */
-        void Update();
+        void _Update();
 
         /*!
          * \brief LateUpdates object components and all children.
@@ -138,9 +140,8 @@ namespace Core
          * Then the same function will be called for every child in the children list. \n
          * P.S. LateUpdate() called only after "Update()" of all objects in the scene.
          */
-        void LateUpdate();
+        void _LateUpdate();
 
-    private:
         /*! Simple alias that was created just for a shorter name. */
         using ChildConstIterator = std::vector<std::shared_ptr<SceneObject>>::const_iterator;
         

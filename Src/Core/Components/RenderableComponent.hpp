@@ -128,7 +128,7 @@ namespace Core
          * 
          * Called only when transform needs to be updated.
          */
-        void _UpdateTransform();
+        void _UpdateTransform() const;
         
         /*!
          * \brief Draws object to the specified render target.
@@ -140,8 +140,8 @@ namespace Core
         /*! Number of the layer. The higher the layer - later object should be rendered. */
         std::atomic<int8_t> _layerNumber;
         /*! Simple atomic flag of the need of the update of the transform. */
-        std::atomic<bool> _transformNeedUpdate;
+        mutable std::atomic<bool> _transformNeedUpdate;
         /*! Transform that will be used in render. */
-        sf::Transform _transform;
+        mutable sf::Transform _transform;
     };
 }
