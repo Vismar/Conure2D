@@ -66,20 +66,17 @@ bool Window::IsOpen() const
 
 void Window::PollEvents() const
 {
-    if (_renderWindow->hasFocus())
-    {
-        sf::Event event{};
+    sf::Event event{};
 
-        while (_renderWindow->pollEvent(event))
+    while (_renderWindow->pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
         {
-            if (event.type == sf::Event::Closed)
-            {
-                _renderWindow->close();
-            }
-            else
-            {
-                Input::InputHandler::HandleInputEvent(event);
-            }
+            _renderWindow->close();
+        }
+        else
+        {
+            Input::InputHandler::HandleInputEvent(event);
         }
     }
 
