@@ -113,22 +113,7 @@ void RenderableComponent::_UpdateTransform() const
         _transformNeedUpdate = false;
         if (const auto transform = _transformComponent.lock())
         {
-            const float scaleX(transform->GetScale().x), scaleY(transform->GetScale().y);
-            const float originX(transform->GetOrigin().x), originY(transform->GetOrigin().y);
-
-            const float angle = -transform->GetRotation() * 3.141592654f / 180.0f;
-            const float cos = std::cos(angle);
-            const float sin = std::sin(angle);
-            const float sxc = scaleX * cos;
-            const float syc = scaleY * cos;
-            const float sxs = scaleX * sin;
-            const float sys = scaleY * sin;
-            const float tx = -originX * sxc - originY * sys + transform->GetPosition().x;
-            const float ty = -originX * sxs - originY * syc + transform->GetPosition().y;
-
-            _transform = sf::Transform(sxc,  sys,  tx,
-                                       -sxs, syc,  ty,
-                                       0.0f, 0.0f, 1.0f);
+            _transform = transform->GetTransform();
         }
     }
 }
@@ -140,6 +125,7 @@ void RenderableComponent::draw(sf::RenderTarget& target, sf::RenderStates states
     _UpdateTransform();
 
     states.transform *= _transform;
+
     if (const auto texture = _texture.lock())
     {
         states.texture = texture.get();

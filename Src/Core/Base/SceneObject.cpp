@@ -59,34 +59,50 @@ std::weak_ptr<SceneObject> SceneObject::GetParent() const
 
 void SceneObject::SetParent(const std::shared_ptr<SceneObject>& newParent)
 {
-    // We MUST add the object as a child to a new parent because if we didn't do it,
-    // the counter of shared_ptr will become 0 and object will be deleted
-    (void) newParent->AddChild(this->shared_from_this());
-
-    // If the object has a parent, we should remove an object from the list of children of a parent
-    if (auto parent = _parent.lock())
+    if (auto transform = GetTransformComponent().lock())
     {
-        parent->RemoveChild(_objectId);
+        // If we assigning new parent to an object, we should do next things:
+        // - Add the object as a child to a new parent.
+        // - Remove the object from parent list of children if the object previously has a parent.
+        // - Update local transformations of the object relative to a new parent.
+        if (newParent != nullptr)
+        {
+            // Add child to a new parent
+            (void)newParent->_AddChild(this->shared_from_this());
+
+            // If the object has a parent, we should remove it from the list of children of a parent
+            if (auto parent = _parent.lock())
+            {
+                parent->RemoveChild(_objectId);
+            }
+
+            // Obtain new local transformations relative to the parent and assign them to the object
+            if (const auto parentTransform = newParent->GetTransformComponent().lock())
+            {
+                const auto transformations = transform->GetTransformationsRelativeTo(parentTransform);
+                transform->SetTransformations(transformations);
+            }
+        }
+        // If we detaching the object from a parent, we should update local transformations to a global transformations
+        else
+        {
+            // We should gather all transformations BEFORE assigning it 
+            // because if we will assign a new value to any of transformations
+            // and then tries to obtain next transformation value, 
+            // it already will be recalculated based on recently assigned value.
+            const auto& globalPosition = transform->GetGlobalPosition();
+            const auto& globalRotation = transform->GetGlobalRotation();
+            const auto& globalScale = transform->GetGlobalScale();
+
+            // So at first, we obtain global transformations and only after it we assign it one by one.
+            transform->SetPosition(globalPosition);
+            transform->SetRotation(globalRotation);
+            transform->SetScale(globalScale);
+        }
+
+        // Set a new parent
+        _parent = newParent;
     }
-
-    // Set a new parent
-    _parent = newParent;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-bool SceneObject::AddChild(std::shared_ptr<SceneObject>&& newChild)
-{
-    bool added(false);
-
-    // If the object doesn't have specified object as a child, we should add it to the list
-    if (_FindChild(newChild->GetId()) == _children.end())
-    {
-        _children.emplace_back(newChild);
-        added = true;
-    }
-
-    return added;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,6 +122,22 @@ void SceneObject::RemoveChild(const uint64_t childId)
 std::vector<std::shared_ptr<SceneObject>>& SceneObject::GetChildrenList()
 {
     return _children;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool SceneObject::_AddChild(const std::shared_ptr<SceneObject>& newChild)
+{
+    bool added(false);
+
+    // If the object doesn't have specified object as a child, we should add it to the list
+    if (_FindChild(newChild->GetId()) == _children.end())
+    {
+        _children.push_back(newChild);
+        added = true;
+    }
+
+    return added;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

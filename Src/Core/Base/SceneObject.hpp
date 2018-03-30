@@ -81,14 +81,7 @@ namespace Core
          * \param newParent - shared pointer to the new parent object.
          */
         void SetParent(const std::shared_ptr<SceneObject>& newParent);
-
-        /*!
-         * \brief Add specified object to the children list.
-         * \param newChild - shared pointer to the object that will added to the children list.
-         * \return True if an object was added. If such object was already in the list, false will be returned.
-         */
-        bool AddChild(std::shared_ptr<SceneObject>&& newChild);
-
+        
         /*!
          * \brief Removes child from the children list by specified id.
          * \param childId - id of a child that should be removed from the children list.
@@ -118,6 +111,13 @@ namespace Core
         void RemoveComponent();
 
     private:
+        /*!
+         * \brief Add specified object to the children list.
+         * \param newChild - shared pointer to the object that will added to the children list.
+         * \return True if an object was added. If such object was already in the list, false will be returned.
+         */
+        bool _AddChild(const std::shared_ptr<SceneObject>& newChild);
+
         /*!
          * \brief Initializes scene object.
          *
