@@ -15,6 +15,8 @@ bool SceneObject::AddComponent()
         _componentMap[componentTypeIndex]->BaseComponent::Initialize();
         _componentMap[componentTypeIndex]->Initialize();
         added = true;
+
+        InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _componentMap[componentTypeIndex]);
     }
 
     return added;

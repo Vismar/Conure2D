@@ -44,6 +44,8 @@ namespace Utility
          * \param eventName - name of the event to which function will be bounded.
          * \param function - a pointer to a function that will be bounded.
          * \return Handler of callable if it was bounded. Otherwise - empty handler.
+         * 
+         * Callable should NOT be const.
          */
         template <class Ret, class ... Args>
         const AnyCallableHandler& BindToEvent(const std::string& eventName, 
@@ -58,6 +60,8 @@ namespace Utility
          * \param userClass - a pointer to a class whose function will be bounded.
          * \param function - a pointer to a function that will be bounded.
          * \return Handler of callable if it was bounded. Otherwise - empty handler.
+         * 
+         * Callable should NOT be const.
          */
         template <class Ret, class UserClass, class ... Args>
         const AnyCallableHandler& BindToEvent(const std::string& eventName, 

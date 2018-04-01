@@ -65,6 +65,16 @@ namespace Core
          */
         void _Loop();
 
+        /*!
+         * \brief Callback that is used to add new renderable components to the renderable array 
+         *        when a new component has been added to any scene object.
+         * \param newComponent - weak pointer to the newly added component.
+         * 
+         * Callback that is bonded to every scene object and called when any of them has added a new component. 
+         * Checks if the new component is a renderable component and then adds it to the array.
+         */
+        void _OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent);
+
         /*! Simple flag that defines if scene is activated or not. Used to know if scene should be rendered. */
         bool _activated;
         /*! Array of renderable components that should be used by render system. */

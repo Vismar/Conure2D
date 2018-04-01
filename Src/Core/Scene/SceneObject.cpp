@@ -146,6 +146,8 @@ void SceneObject::_Initialize()
 {
     // Every scene object ALWAYS must have transform component 
     AddComponent<TransformComponent>();
+
+    AddEvent("ComponentAdded", new Utility::Dispatcher<void>);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

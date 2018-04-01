@@ -14,6 +14,7 @@ BaseScene::BaseScene() : _activated(false)
 std::weak_ptr<SceneObject> BaseScene::CreateObject()
 {
     _sceneObjects.emplace_back(std::make_shared<SceneObject>())->_Initialize();
+    _sceneObjects.back()->BindToEvent("ComponentAdded", this, &BaseScene::_OnNewComponentAdded);
 
     return _sceneObjects.back();
 }
@@ -67,6 +68,25 @@ void BaseScene::_Loop()
     for (auto& sceneObject : _sceneObjects)
     {
         sceneObject->_LateUpdate();
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
+{
+    if (const auto component = newComponent.lock())
+    {
+        // Check if new component is renderable and then add it to the array
+        if ((*component) == std::type_index(typeid(RenderableComponent)))
+        {
+            std::lock_guard<std::mutex> lock(_renderableArrayMutex);
+
+            if (const auto renderableComponent = std::dynamic_pointer_cast<RenderableComponent>(component))
+            {
+                _renderableComponentsToAdd.push_back(renderableComponent);
+            }
+        }
     }
 }
 
