@@ -157,19 +157,21 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Base\BaseComponent.hpp" />
-    <ClInclude Include="Base\SceneObject.hpp" />
+    <ClInclude Include="Components\BaseComponent.hpp" />
     <ClInclude Include="Components\RenderableComponent.hpp" />
     <ClInclude Include="Components\TransformComponent.hpp" />
+    <ClInclude Include="Scene\BaseScene.hpp" />
+    <ClInclude Include="Scene\SceneObject.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\BaseComponent.cpp" />
-    <ClCompile Include="Base\SceneObject.cpp" />
+    <ClCompile Include="Components\BaseComponent.cpp" />
     <ClCompile Include="Components\RenderableComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
+    <ClCompile Include="Scene\BaseScene.cpp" />
+    <ClCompile Include="Scene\SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Base\SceneObject.inl" />
+    <None Include="Scene\SceneObject.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

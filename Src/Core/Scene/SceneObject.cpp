@@ -161,12 +161,6 @@ void SceneObject::_Update()
             component.second->Update();
         }
     }
-
-    // Update the children
-    for (auto& child : _children)
-    {
-        child->_Update();
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,12 +175,6 @@ void SceneObject::_LateUpdate()
         {
             component.second->LateUpdate();
         }
-    }
-
-    // Late update of the children
-    for (auto& child : _children)
-    {
-        child->_LateUpdate();
     }
 }
 

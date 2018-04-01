@@ -14,8 +14,7 @@ InputDeviceManager::InputDeviceManager()
 {   
     for (auto i = 0; i < sf::Joystick::Count; ++i)
     {
-        _joysticks.emplace_back(std::make_shared<JoystickDevice>());
-        _joysticks.back()->SetJoystickId(i);
+        _joysticks.emplace_back(std::make_shared<JoystickDevice>())->SetJoystickId(i);
     }
 }
 

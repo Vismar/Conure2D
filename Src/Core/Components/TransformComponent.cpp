@@ -1,6 +1,6 @@
 #include "TransformComponent.hpp"
 #include "Utility/EventSystem/Dispatcher.hpp"
-#include "Core/Base/SceneObject.hpp"
+#include "Core/Scene/SceneObject.hpp"
 
 using namespace Core;
 

@@ -1,6 +1,6 @@
 #include "RenderableComponent.hpp"
 #include "Core/Components/TransformComponent.hpp"
-#include "Core/Base/SceneObject.hpp"
+#include "Core/Scene/SceneObject.hpp"
 #include "SFML/Graphics/RenderTarget.hpp"
 #include "Utility/EventSystem/Dispatcher.hpp"
 

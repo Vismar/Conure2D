@@ -3,23 +3,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Component>
-std::weak_ptr<Component> SceneObject::GetComponent() const
-{
-    std::weak_ptr<Component> returningPointer;
-
-    // Search for the component
-    const auto component = _componentMap.find(std::type_index(typeid(Component)));
-    // If we found a component, cast to required type and return
-    if (component != _componentMap.end())
-    {
-        returningPointer = std::dynamic_pointer_cast<Component>(component->second);
-    }
-
-    return returningPointer;
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class Component>
 bool SceneObject::AddComponent()
 {
     bool added(false);
@@ -35,6 +18,24 @@ bool SceneObject::AddComponent()
     }
 
     return added;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class Component>
+std::weak_ptr<Component> SceneObject::GetComponent() const
+{
+    std::weak_ptr<Component> returningPointer;
+
+    // Search for the component
+    const auto component = _componentMap.find(std::type_index(typeid(Component)));
+    // If we found a component, cast to required type and return
+    if (component != _componentMap.end())
+    {
+        returningPointer = std::dynamic_pointer_cast<Component>(component->second);
+    }
+
+    return returningPointer;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

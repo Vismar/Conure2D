@@ -1,44 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Base">
-      <UniqueIdentifier>{665a9415-d0fc-4a40-bb13-a03a8af68e2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components">
       <UniqueIdentifier>{b4723710-f19f-4cdf-a065-7a98a5fa867a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{665a9415-d0fc-4a40-bb13-a03a8af68e2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\BaseComponent.hpp">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Components\TransformComponent.hpp">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\SceneObject.hpp">
-      <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Components\RenderableComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Components\BaseComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneObject.hpp">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\BaseScene.hpp">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\BaseComponent.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="Components\TransformComponent.cpp">
       <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\SceneObject.cpp">
-      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Components\RenderableComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\BaseComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneObject.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\BaseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Base\SceneObject.inl">
-      <Filter>Base</Filter>
+    <None Include="Scene\SceneObject.inl">
+      <Filter>Scene</Filter>
     </None>
   </ItemGroup>
 </Project>

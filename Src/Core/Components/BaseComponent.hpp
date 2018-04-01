@@ -8,7 +8,7 @@ namespace Core
     class SceneObject;
 
     /*!
-     * \brief Base for all components that can be attached to SceneObject.
+     * \brief Base class for all components that can be attached to SceneObject.
      * 
      * This component contains basic functions that are required by all components 
      * and provides functionality to compare them by its type so only 1 component of 1 type can be attached to SceneObject.

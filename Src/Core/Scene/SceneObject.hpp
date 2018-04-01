@@ -61,6 +61,15 @@ namespace Core
         std::weak_ptr<TransformComponent> GetTransformComponent() const;
 
         /*!
+         * \brief Adds requested component to the object.
+         * \tparam Component - Type of component that will be added.
+         * \return True if component was added.
+         *         If such component was already added to the component map, false value will be returned.
+         */
+        template <class Component>
+        bool AddComponent();
+
+        /*!
          * \brief Returns component of the object.
          * \tparam Component - Type of component that was requested.
          * \return Weak pointer to the specified component of the object. 
@@ -68,6 +77,13 @@ namespace Core
          */
         template <class Component>
         std::weak_ptr<Component> GetComponent() const;
+
+        /*!
+         * \brief Removes requested component from the object.
+         * \tparam Component - Type of component that will be removed.
+         */
+        template <class Component>
+        void RemoveComponent();
 
         /*!
          * \brief Returns parent of the object.
@@ -94,22 +110,6 @@ namespace Core
          */
         std::vector<std::shared_ptr<SceneObject>>& GetChildrenList();
 
-        /*!
-         * \brief Adds requested component to the object.
-         * \tparam Component - Type of component that will be added.
-         * \return True if component was added. 
-         *         If such component was already added to the component map, false value will be returned.
-         */
-        template <class Component>
-        bool AddComponent();
-
-        /*!
-         * \brief Removes requested component from the object.
-         * \tparam Component - Type of component that will be removed.
-         */
-        template <class Component>
-        void RemoveComponent();
-
     private:
         /*!
          * \brief Add specified object to the children list.
@@ -126,18 +126,18 @@ namespace Core
         void _Initialize();
 
         /*!
-         * \brief Updates object components and all children.
+         * \brief Updates object components// and all children.
          * 
          * "Update()" function will be called for every component that was added to the object.
-         * Then the same function will be called for every child in the children list.
+         * //Then the same function will be called for every child in the children list.
          */
         void _Update();
 
         /*!
-         * \brief LateUpdates object components and all children.
+         * \brief LateUpdates object components// and all children.
          *
          * "LateUpdate()" function will be called for every component that was added to the object.
-         * Then the same function will be called for every child in the children list. \n
+         * //Then the same function will be called for every child in the children list. \n
          * P.S. LateUpdate() called only after "Update()" of all objects in the scene.
          */
         void _LateUpdate();
@@ -165,6 +165,8 @@ namespace Core
         std::vector<std::shared_ptr<SceneObject>> _children;
         /*! Global static counter that is used to generate unique ids for scene objects upon it creation. */
         static std::atomic_uint64_t _globalIdCounter;
+
+        friend class BaseScene;
     };
 
 #include "SceneObject.inl"
