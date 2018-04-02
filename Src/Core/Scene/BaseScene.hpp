@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "SceneObject.hpp"
+#include "Core/Scene/SceneObject.hpp"
 #include "Core/Components/RenderableComponent.hpp"
 #include <mutex>
 
@@ -41,6 +41,12 @@ namespace Core
          */
         void Activate(const bool activate);
 
+        /*!
+         * \brief Returns flag value that indicates the state of the scene..
+         * \return True if scene was activated previously.
+         */
+        bool Activated() const;
+
     protected:
         /*! Array of shared pointers to scene objects. */
         std::vector<std::shared_ptr<SceneObject>> _sceneObjects;
@@ -63,7 +69,7 @@ namespace Core
          * 1) Calls Update() for every scene object. \n
          * 2) Calls LateUpdate() for every scene object.
          */
-        void _Loop();
+        void _Update();
 
         /*!
          * \brief Callback that is used to add new renderable components to the renderable array 

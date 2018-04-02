@@ -24,6 +24,9 @@
     <ClInclude Include="Scene\BaseScene.hpp">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\SceneMap.hpp">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\TransformComponent.cpp">
@@ -39,6 +42,9 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene\BaseScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneMap.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>

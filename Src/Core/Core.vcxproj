@@ -161,6 +161,7 @@
     <ClInclude Include="Components\RenderableComponent.hpp" />
     <ClInclude Include="Components\TransformComponent.hpp" />
     <ClInclude Include="Scene\BaseScene.hpp" />
+    <ClInclude Include="Scene\SceneMap.hpp" />
     <ClInclude Include="Scene\SceneObject.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <ClCompile Include="Components\RenderableComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
+    <ClCompile Include="Scene\SceneMap.cpp" />
     <ClCompile Include="Scene\SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
