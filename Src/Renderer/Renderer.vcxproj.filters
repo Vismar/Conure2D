@@ -18,6 +18,7 @@
     <ClCompile Include="Components\SpriteRenderComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="RenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window\Window.hpp">
@@ -29,5 +30,6 @@
     <ClInclude Include="Components\SpriteRenderComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="RenderSystem.hpp" />
   </ItemGroup>
 </Project>

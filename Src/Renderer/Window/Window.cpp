@@ -10,7 +10,7 @@ using namespace Renderer;
 
 Window::Window(WindowSettings settings)
     : _applyNewSettings(false)
-    ,_settings(std::move(settings))
+    , _settings(std::move(settings))
     , _applyNewIcon(false)
     , _icon(new sf::Image())
     , _renderWindow(new sf::RenderWindow(_settings.GetVideoMode(), 

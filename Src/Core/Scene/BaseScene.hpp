@@ -1,14 +1,11 @@
 #pragma once
-#include <memory>
 #include "Core/Scene/SceneObject.hpp"
 #include "Core/Components/RenderableComponent.hpp"
+#include <memory>
 #include <mutex>
 
 namespace Core
 {
-    /*! Simple alias to shorten the name of the type. */
-    using RenderableArray = std::vector<std::weak_ptr<RenderableComponent>>;
-
     /*!
      * \brief Base class for all scenes.
      * 
@@ -60,7 +57,7 @@ namespace Core
          * Then adds new renderable components that was added during the render phase.
          * Returns shared pointer to updated array of weak pointers to renderable components of the scene.
          */
-        std::shared_ptr<RenderableArray> _GetRenderableComponents() const;
+        std::shared_ptr<RenderableSet> _GetRenderableComponents() const;
 
         /*!
          * \brief Updates all scene objects one by one.
@@ -81,10 +78,17 @@ namespace Core
          */
         void _OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent);
 
+        /*!
+         * \brief Callback that is used to update renderable components in the set when they change their layer.
+         * \param renderabelComponent - weak pointer to the renderable component that should be updated.
+         * \param layer - new layer value. Not used.
+         */
+        void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, const int8_t layer);
+
         /*! Simple flag that defines if scene is activated or not. Used to know if scene should be rendered. */
-        bool _activated;
-        /*! Array of renderable components that should be used by render system. */
-        std::shared_ptr<RenderableArray> _renderableComponents;
+        std::atomic<bool> _activated;
+        /*! Set of renderable components that should be used by render system. */
+        mutable std::shared_ptr<RenderableSet> _renderableComponents;
         /*! Array of renderable components that will be added to main array that goes to a render system. */
         mutable RenderableArray _renderableComponentsToAdd;
         /*! Mutex that used to update renderable arrays. */

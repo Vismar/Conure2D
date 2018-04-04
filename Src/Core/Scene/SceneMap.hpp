@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/Scene/RenderableSceneMapInterface.hpp"
 #include "Core/Scene/BaseScene.hpp"
 
 namespace Core
@@ -6,7 +7,7 @@ namespace Core
     /*!
      * \brief Scene map contains all scenes and provides functionality to work with them.
      */
-    class SceneMap
+    class SceneMap : public RenderableSceneMapInterface
     {
     public:
         SceneMap(const SceneMap& other) = delete;
@@ -65,7 +66,7 @@ namespace Core
          * First item in the list should be rendered earlier than others.
          * And the last item in the list should be rendered later than others.
          */
-        const std::list<std::string>& GetRenderOrder() const;
+        const std::list<std::string>& GetRenderOrder() const final;
 
         /*!
          * \brief Grabs renderable components from the specified scene.
@@ -75,7 +76,7 @@ namespace Core
          * Array of renderable components was not sorted or filtered in any way,
          * so render system should do required operations before rendering if it is necessary.
          */
-        std::shared_ptr<RenderableArray> GetRenderableComponentsFromScene(const std::string& sceneName) const;
+        std::shared_ptr<RenderableSet> GetRenderableComponentsFromScene(const std::string& sceneName) const final;
 
     private:
         /*!

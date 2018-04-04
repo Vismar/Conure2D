@@ -7,6 +7,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{665a9415-d0fc-4a40-bb13-a03a8af68e2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Utility">
+      <UniqueIdentifier>{77382cb0-38ac-4bf2-b2a5-454fa58d7a27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\TransformComponent.hpp">
@@ -27,6 +30,12 @@
     <ClInclude Include="Scene\SceneMap.hpp">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\RenderableSceneMapInterface.hpp">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Utility\RenderablesCompare.hpp">
+      <Filter>Components\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\TransformComponent.cpp">
@@ -46,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Scene\SceneMap.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Utility\RenderablesCompare.cpp">
+      <Filter>Components\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

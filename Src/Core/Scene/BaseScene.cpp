@@ -4,10 +4,8 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BaseScene::BaseScene() : _activated(false)
-{
-    _renderableComponents = std::make_shared<RenderableArray>();
-}
+BaseScene::BaseScene() : _activated(false), _renderableComponents(std::make_shared<RenderableSet>())
+{ }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,9 +33,9 @@ bool BaseScene::Activated() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::shared_ptr<RenderableArray> BaseScene::_GetRenderableComponents() const
+std::shared_ptr<RenderableSet> BaseScene::_GetRenderableComponents() const
 {
-    // Remove "dead" pointers
+    // Remove "dead" pointers 
     for (auto iter = _renderableComponents->begin(); iter != _renderableComponents->end(); )
     {
         if ((*iter).lock())
@@ -46,15 +44,22 @@ std::shared_ptr<RenderableArray> BaseScene::_GetRenderableComponents() const
         }
         else
         {
-            iter = (*_renderableComponents).erase(iter);
+            iter = _renderableComponents->erase(iter);
         }
     }
-
+    
     // Add new pointers to the list
     std::lock_guard<std::mutex> lock(_renderableArrayMutex);
     for (auto& renderableComponent : _renderableComponentsToAdd)
     {
-        _renderableComponents->push_back(renderableComponent);
+        const auto result = _renderableComponents->insert(renderableComponent);
+
+        // If such component already in the set, replace it with a new one
+        if (!result.second)
+        {
+            _renderableComponents->erase(result.first);
+            _renderableComponents->insert(renderableComponent);
+        }
     }
 
     // Clear to prevent copying
@@ -92,9 +97,18 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
             if (const auto renderableComponent = std::dynamic_pointer_cast<RenderableComponent>(component))
             {
                 _renderableComponentsToAdd.push_back(renderableComponent);
+                renderableComponent->BindToEvent("LayerUpdated", this, &BaseScene::_OnRenderableComponentLayerChanged);
             }
         }
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void BaseScene::_OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, const int8_t layer)
+{
+    std::lock_guard<std::mutex> lock(_renderableArrayMutex);
+    _renderableComponentsToAdd.push_back(renderabelComponent);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

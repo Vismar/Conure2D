@@ -27,7 +27,26 @@ RenderableComponent::RenderableComponent(const std::shared_ptr<SceneObject>& sce
 
 bool RenderableComponent::operator<(const RenderableComponent& right) const
 {
-    return (_layerNumber < right._layerNumber);
+    bool less(true);
+
+    // If layer numbers are the same, then we can just compare ids of scene objects that owns this components
+    if (_layerNumber == right._layerNumber)
+    {
+        if (const auto leftObject = _sceneObject.lock())
+        {
+            if (const auto rightObject = right._sceneObject.lock())
+            {
+                less = leftObject->GetId() < rightObject->GetId();
+            }
+        }
+    }
+    // If layer numbers are different, then just compare them
+    else
+    {
+        less = _layerNumber < right._layerNumber;
+    }
+
+    return less;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +81,13 @@ int8_t RenderableComponent::GetLayerNumber() const
 
 void RenderableComponent::SetLayerNumber(const int8_t newLayerNumber)
 {
-    _layerNumber = newLayerNumber;
+    if (_layerNumber != newLayerNumber)
+    {
+        _layerNumber = newLayerNumber;
+
+        const auto thisComponent = std::dynamic_pointer_cast<RenderableComponent>(this->shared_from_this());
+        InvokeEvent<void, std::weak_ptr<RenderableComponent>, const int8_t>("LayerUpdated", thisComponent, _layerNumber.load());
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,6 +120,7 @@ void RenderableComponent::Initialize()
     _typeIndex = typeid(RenderableComponent);
 
     AddEvent("TextureUpdated", new Utility::Dispatcher<void>());
+    AddEvent("LayerUpdated", new Utility::Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -129,7 +129,6 @@ namespace Core
          * \brief Updates object components// and all children.
          * 
          * "Update()" function will be called for every component that was added to the object.
-         * //Then the same function will be called for every child in the children list.
          */
         void _Update();
 
@@ -137,7 +136,6 @@ namespace Core
          * \brief LateUpdates object components// and all children.
          *
          * "LateUpdate()" function will be called for every component that was added to the object.
-         * //Then the same function will be called for every child in the children list. \n
          * P.S. LateUpdate() called only after "Update()" of all objects in the scene.
          */
         void _LateUpdate();

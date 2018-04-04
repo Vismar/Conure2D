@@ -91,9 +91,9 @@ const std::list<std::string>& SceneMap::GetRenderOrder() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::shared_ptr<RenderableArray> SceneMap::GetRenderableComponentsFromScene(const std::string& sceneName) const
+std::shared_ptr<RenderableSet> SceneMap::GetRenderableComponentsFromScene(const std::string& sceneName) const
 {
-    std::shared_ptr<RenderableArray> renderableComponents;
+    std::shared_ptr<RenderableSet> renderableComponents;
 
     // If specified scene exist and it is active, return array of renderable components
     const auto scene = _scenes.find(sceneName);

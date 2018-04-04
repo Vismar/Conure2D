@@ -160,7 +160,9 @@
     <ClInclude Include="Components\BaseComponent.hpp" />
     <ClInclude Include="Components\RenderableComponent.hpp" />
     <ClInclude Include="Components\TransformComponent.hpp" />
+    <ClInclude Include="Components\Utility\RenderablesCompare.hpp" />
     <ClInclude Include="Scene\BaseScene.hpp" />
+    <ClInclude Include="Scene\RenderableSceneMapInterface.hpp" />
     <ClInclude Include="Scene\SceneMap.hpp" />
     <ClInclude Include="Scene\SceneObject.hpp" />
   </ItemGroup>
@@ -168,6 +170,7 @@
     <ClCompile Include="Components\BaseComponent.cpp" />
     <ClCompile Include="Components\RenderableComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
+    <ClCompile Include="Components\Utility\RenderablesCompare.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="Scene\SceneMap.cpp" />
     <ClCompile Include="Scene\SceneObject.cpp" />

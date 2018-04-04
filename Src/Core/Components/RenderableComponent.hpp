@@ -1,8 +1,10 @@
 #pragma once
 #include "Core/Components/BaseComponent.hpp"
-#include "SFML/Graphics/Drawable.hpp"
-#include <SFML/Graphics/VertexArray.hpp>
 #include "Utility/EventSystem/EventManager.hpp"
+#include "Utility/RenderablesCompare.hpp"
+#include "SFML/Graphics/Drawable.hpp"
+#include "SFML/Graphics/VertexArray.hpp"
+#include <set>
 
 namespace Core
 {
@@ -144,4 +146,9 @@ namespace Core
         /*! Transform that will be used in render. */
         mutable sf::Transform _transform;
     };
+
+    /*! Simple alias to shorten the name of the vector of weak pointers to renderable components. */
+    using RenderableArray = std::vector<std::weak_ptr<RenderableComponent>>;
+    /*! Simple alias to shorten the name of the set of weak pointers to renderable components. */
+    using RenderableSet = std::set<std::weak_ptr<RenderableComponent>, RenderablesCompare>;
 }
