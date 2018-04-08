@@ -35,4 +35,4 @@
   - **Components**
     - **SpriteRenderComponent** - simple renderable component that provides functionality to render basic sprites.
 
-[0.0.1]: https://github.com/Vismar/Conure2D/releases/tag/v0.0.1
+[0.0.1]: https://github.com/Vismar/Conure2D/releases/tag/v0.0.1-alpha

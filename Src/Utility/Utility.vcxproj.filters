@@ -30,6 +30,7 @@
     <ClInclude Include="EventSystem\EventManager.hpp">
       <Filter>EventSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Time.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\AtomicVector2.inl">
@@ -52,5 +53,6 @@
     <ClCompile Include="EventSystem\EventManager.cpp">
       <Filter>EventSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
 </Project>
