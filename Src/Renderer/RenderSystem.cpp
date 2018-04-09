@@ -1,24 +1,22 @@
 #include "RenderSystem.hpp"
-#include <thread>
 
 using namespace Renderer;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-RenderSystem::RenderSystem() : _working(false), _window(WindowSettings())
+RenderSystem::RenderSystem() : _working(false), _noErrors(true), _window(WindowSettings())
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void RenderSystem::Start(const std::shared_ptr<Core::RenderableSceneMapInterface>& sceneMap)
+void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap)
 {
     if (!_working)
     {
         _working = true;
-        _sceneMap = sceneMap;
 
         // If render was started, window is open and scene map is not nullptr, render
-        while (_working && _window.IsOpen() && _sceneMap)
+        while (_working && _window.IsOpen())
         {
             // Poll events
             _window.PollEvents();
@@ -27,12 +25,12 @@ void RenderSystem::Start(const std::shared_ptr<Core::RenderableSceneMapInterface
             _window.BeginDraw();
 
             // Grab scene order
-            const auto& sceneOrder = _sceneMap->GetRenderOrder();
+            const auto& sceneOrder = sceneMap.GetRenderOrder();
             // Go through every mentioned scene
             for (auto& sceneName : sceneOrder)
             {
                 // Try to get set of renderable components from certain scene
-                if (const auto renderableSet = _sceneMap->GetRenderableComponentsFromScene(sceneName))
+                if (const auto renderableSet = sceneMap.GetRenderableComponentsFromScene(sceneName))
                 {
                     // Go through every renderable component in the obtained set
                     for (auto& renderableComponent : (*renderableSet))
@@ -53,6 +51,7 @@ void RenderSystem::Start(const std::shared_ptr<Core::RenderableSceneMapInterface
         }
 
         _working = false;
+        _noErrors = false;
     }
 }
 
@@ -65,9 +64,9 @@ void RenderSystem::Stop()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool RenderSystem::Working() const
+bool RenderSystem::NoErrors() const
 {
-    return _working;
+    return _noErrors;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

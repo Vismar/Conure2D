@@ -36,6 +36,9 @@
     <ClInclude Include="Components\Utility\RenderablesCompare.hpp">
       <Filter>Components\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\SceneMapSystemInterface.hpp">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\TransformComponent.cpp">

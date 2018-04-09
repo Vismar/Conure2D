@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -18,9 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EngineInterface.hpp" />
+    <ClInclude Include="Main\EngineApp.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EngineInterface.cpp" />
+    <ClCompile Include="Main\EngineApp.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CA24838E-DA21-4D5E-BA8F-2AC687D9FB21}</ProjectGuid>
-    <RootNamespace>Core</RootNamespace>
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{F4984C9F-5B19-4E2C-A0C8-76FD75251DDC}</ProjectGuid>
+    <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,30 +79,30 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Bin\Lib\</OutDir>
-    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Core\</IntDir>
+    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Engine\</IntDir>
     <TargetName>$(ProjectName)-d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\Lib\</OutDir>
-    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Core\</IntDir>
+    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Engine\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\Lib\</OutDir>
-    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Core\</IntDir>
+    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Engine\</IntDir>
     <TargetName>$(ProjectName)-d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\Lib\</OutDir>
-    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Core\</IntDir>
+    <IntDir>$(SolutionDir)Bin\Temp\$(Configuration)\Engine\</IntDir>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Engine;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Core;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MinimalRebuild>false</MinimalRebuild>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -101,14 +110,14 @@
       <Path>$(SolutionDir)Bin\Temp\$(IntDir)$(MSBuildProjectName).log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Engine;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Core;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MinimalRebuild>false</MinimalRebuild>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -123,8 +132,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Engine;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Core;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -143,8 +153,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Engine;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Src;$(SolutionDir)Src\Core;$(SolutionDir)SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -156,29 +167,6 @@
       <Path>$(SolutionDir)Bin\Temp\$(IntDir)$(MSBuildProjectName).log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Components\BaseComponent.hpp" />
-    <ClInclude Include="Components\RenderableComponent.hpp" />
-    <ClInclude Include="Components\TransformComponent.hpp" />
-    <ClInclude Include="Components\Utility\RenderablesCompare.hpp" />
-    <ClInclude Include="Scene\BaseScene.hpp" />
-    <ClInclude Include="Scene\RenderableSceneMapInterface.hpp" />
-    <ClInclude Include="Scene\SceneMap.hpp" />
-    <ClInclude Include="Scene\SceneMapSystemInterface.hpp" />
-    <ClInclude Include="Scene\SceneObject.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Components\BaseComponent.cpp" />
-    <ClCompile Include="Components\RenderableComponent.cpp" />
-    <ClCompile Include="Components\TransformComponent.cpp" />
-    <ClCompile Include="Components\Utility\RenderablesCompare.cpp" />
-    <ClCompile Include="Scene\BaseScene.cpp" />
-    <ClCompile Include="Scene\SceneMap.cpp" />
-    <ClCompile Include="Scene\SceneObject.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scene\SceneObject.inl" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

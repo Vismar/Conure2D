@@ -31,5 +31,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="RenderSystem.hpp" />
+    <ClInclude Include="RenderSystemInterface.hpp" />
   </ItemGroup>
 </Project>

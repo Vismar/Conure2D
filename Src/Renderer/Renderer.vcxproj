@@ -27,6 +27,7 @@
   <ItemGroup>
     <ClInclude Include="Components\SpriteRenderComponent.hpp" />
     <ClInclude Include="RenderSystem.hpp" />
+    <ClInclude Include="RenderSystemInterface.hpp" />
     <ClInclude Include="Window\Window.hpp" />
     <ClInclude Include="Window\WindowSettings.hpp" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Scene/RenderableSceneMapInterface.hpp"
+#include "Core/Scene/SceneMapSystemInterface.hpp"
 #include "Core/Scene/BaseScene.hpp"
 
 namespace Core
@@ -7,7 +8,7 @@ namespace Core
     /*!
      * \brief Scene map contains all scenes and provides functionality to work with them.
      */
-    class SceneMap : public RenderableSceneMapInterface
+    class SceneMap : public RenderableSceneMapInterface, public SceneMapSystemInterface
     {
     public:
         SceneMap(const SceneMap& other) = delete;
