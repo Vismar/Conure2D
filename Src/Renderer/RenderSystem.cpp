@@ -9,11 +9,12 @@ RenderSystem::RenderSystem() : _working(false), _noErrors(true), _window(WindowS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap)
+void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap, Utility::TimeSpan& renderLoopTimeSpan)
 {
     if (!_working)
     {
         _working = true;
+        renderLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
 
         // If render was started, window is open and scene map is not nullptr, render
         while (_working && _window.IsOpen())
@@ -48,6 +49,9 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap)
             }
 
             _window.EndDraw();
+
+            // Update time span
+            renderLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
         }
 
         _working = false;

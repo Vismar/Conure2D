@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer/RenderSystem.hpp"
 #include "Core/Scene/SceneMap.hpp"
+#include "Utility/Time/TimeSpan.hpp"
 
 namespace Engine
 {
@@ -52,16 +53,32 @@ namespace Engine
          */
         Core::SceneMap& GetSceneMap() const;
 
+        /*!
+         * \brief Grabs render loop time span.
+         * \return Const reference to the time span of the render loop.
+         */
+        const Utility::TimeSpan& GetRenderLoopTimeSpan() const;
+
+        /*!
+         * \brief Grabs logic loop time span.
+         * \return Const reference to the time span of the logic loop.
+         */
+        const Utility::TimeSpan& GetLogicLoopTimeSpan() const;
+
     private:
         /*!
          * \brief Logic loop that runs in separate thread.
          */
         void _LogicLoop();
 
+        /*! Time span of the render loop. */
+        Utility::TimeSpan _renderLoopTimeSpan;
         /*! Unique pointer to the render system. */
         std::unique_ptr<Renderer::RenderSystem> _renderSystem;
         /*! Atomic flag for logic thread. */
         std::atomic<bool> _logicThreadIsWorking;
+        /*! Time span of the logic loop. */
+        Utility::TimeSpan _logicLoopTimeSpan;
         /*! Unique pointer to the scene map system. */
         std::unique_ptr<Core::SceneMap> _sceneMap;
     };

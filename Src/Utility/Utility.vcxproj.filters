@@ -36,6 +36,9 @@
     <ClInclude Include="Time\Time.hpp">
       <Filter>Time</Filter>
     </ClInclude>
+    <ClInclude Include="Time\TimeSpan.hpp">
+      <Filter>Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\AtomicVector2.inl">
@@ -59,6 +62,9 @@
       <Filter>EventSystem</Filter>
     </ClCompile>
     <ClCompile Include="Time\Time.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\TimeSpan.cpp">
       <Filter>Time</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,22 +1,45 @@
 #pragma once
 #include <cstdint>
+#include <atomic>
 
 namespace Utility
 {
     /*!
      * \brief Container that stores time as nanoseconds.
      * 
-     * Container can convert stored time value to any 
+     * Thread safe container can convert stored time value to any 
      * time precision (hours/minutes/second/millisecond/microseconds/nanoseconds).
      */
     class Time
     {
     public:
         ~Time() = default;
-        Time(const Time& other) = default;
-        Time(Time&& other) = default;
-        Time& operator=(const Time& other) = default;
-        Time& operator=(Time&& other) = default;
+
+        /*!
+         * \brief Copy constructor.
+         * \param other - other time container.
+         */
+        Time(const Time& other);
+
+        /*!
+         * \brief Move constructor
+         * \param other - other time container.
+         */
+        Time(Time&& other) noexcept;
+
+        /*!
+         * \brief Copy assignment operator.
+         * \param other - other time container.
+         * \return Reference to the time container.
+         */
+        Time& operator=(const Time& other);
+
+        /*!
+         * \brief Move assignment operator.
+         * \param other - other time container.
+         * \return Reference to the time container.
+         */
+        Time& operator=(Time&& other) noexcept;
 
         /*!
          * \brief Constructs Time from specified parameters.
@@ -78,7 +101,7 @@ namespace Utility
 
     private:
         /*! Time value that stored as nanoseconds. */
-        uint64_t _timeValue;
+        std::atomic<uint64_t> _timeValue;
     };
     
     /*!

@@ -27,7 +27,7 @@ void EngineApp::Run()
     logicThread.detach();
 
     // Start render system
-    _renderSystem->Start(*_sceneMap);
+    _renderSystem->Start(*_sceneMap, _renderLoopTimeSpan);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,17 +54,35 @@ Core::SceneMap& EngineApp::GetSceneMap() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const Utility::TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
+{
+    return _renderLoopTimeSpan;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const Utility::TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
+{
+    return _logicLoopTimeSpan;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void EngineApp::_LogicLoop()
 {
     // Launch logic loop only if it was not started yet
     if (!_logicThreadIsWorking)
     {
         _logicThreadIsWorking = true;
+        _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
 
         // If render system works properly, update scenes
         while (_renderSystem->NoErrors())
         {
+            // Update scenes
             _sceneMap->UpdateScenes();
+            // Update time span
+            _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
         }
 
         // Mark that logic thread finished its work
