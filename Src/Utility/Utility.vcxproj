@@ -163,7 +163,7 @@
     <ClInclude Include="EventSystem\DispatcherInterface.hpp" />
     <ClInclude Include="EventSystem\EventManager.hpp" />
     <ClInclude Include="Math\AtomicVector2.hpp" />
-    <ClInclude Include="Time.hpp" />
+    <ClInclude Include="Time\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Containers\AnyCallable.inl" />
@@ -174,7 +174,7 @@
   <ItemGroup>
     <ClCompile Include="Containers\AnyCallableHandler.cpp" />
     <ClCompile Include="EventSystem\EventManager.cpp" />
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Time\Time.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

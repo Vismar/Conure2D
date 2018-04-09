@@ -10,6 +10,9 @@
     <Filter Include="EventSystem">
       <UniqueIdentifier>{c4b1a0ce-0dd7-43a8-996b-6ebd7225f608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{9eb95695-c8b4-4869-a605-2d557a544fca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\AtomicVector2.hpp">
@@ -30,7 +33,9 @@
     <ClInclude Include="EventSystem\EventManager.hpp">
       <Filter>EventSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Time.hpp" />
+    <ClInclude Include="Time\Time.hpp">
+      <Filter>Time</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\AtomicVector2.inl">
@@ -53,6 +58,8 @@
     <ClCompile Include="EventSystem\EventManager.cpp">
       <Filter>EventSystem</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Time\Time.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
