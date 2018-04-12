@@ -157,8 +157,11 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Containers\AnyCallable.hpp" />
-    <ClInclude Include="Containers\AnyCallableHandler.hpp" />
+    <ClInclude Include="Containers\AnyCallable\AnyCallable.hpp" />
+    <ClInclude Include="Containers\AnyCallable\AnyCallableHandler.hpp" />
+    <ClInclude Include="Containers\RingBuffer\RingBuffer.hpp" />
+    <ClInclude Include="Containers\RingBuffer\RingBufferIterator.hpp" />
+    <ClInclude Include="Containers\RingBuffer\RingBufferReverseIterator.hpp" />
     <ClInclude Include="EventSystem\Dispatcher.hpp" />
     <ClInclude Include="EventSystem\DispatcherInterface.hpp" />
     <ClInclude Include="EventSystem\EventManager.hpp" />
@@ -167,13 +170,16 @@
     <ClInclude Include="Time\TimeSpan.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Containers\AnyCallable.inl" />
+    <None Include="Containers\AnyCallable\AnyCallable.inl" />
+    <None Include="Containers\RingBuffer\RingBuffer.inl" />
+    <None Include="Containers\RingBuffer\RingBufferIterator.inl" />
+    <None Include="Containers\RingBuffer\RingBufferReverseIterator.inl" />
     <None Include="EventSystem\Dispatcher.inl" />
     <None Include="EventSystem\EventManager.inl" />
     <None Include="Math\AtomicVector2.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Containers\AnyCallableHandler.cpp" />
+    <ClCompile Include="Containers\AnyCallable\AnyCallableHandler.cpp" />
     <ClCompile Include="EventSystem\EventManager.cpp" />
     <ClCompile Include="Time\Time.cpp" />
     <ClCompile Include="Time\TimeSpan.cpp" />

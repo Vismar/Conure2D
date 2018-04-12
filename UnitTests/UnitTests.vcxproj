@@ -24,6 +24,7 @@
     <ClCompile Include="Input\KeyboardDeviceTests.cpp" />
     <ClCompile Include="Input\KeyStateHandlerTests.cpp" />
     <ClCompile Include="Input\MouseDeviceTests.cpp" />
+    <ClCompile Include="Utility\Containers\RingBufferTests.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

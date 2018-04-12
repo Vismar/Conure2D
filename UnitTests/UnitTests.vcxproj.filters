@@ -10,6 +10,12 @@
     <Filter Include="Input\Managers">
       <UniqueIdentifier>{73935766-c8b6-4602-844e-6fedcd08c7f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{a70f62db-23e4-4e28-bf77-c313b147cd27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility\Containers">
+      <UniqueIdentifier>{e471b640-a82b-4776-a8bf-b5feb0deaa68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Input\KeyStateHandlerTests.cpp">
@@ -26,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="Input\InputDeviceManagerTests.cpp">
       <Filter>Input\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\Containers\RingBufferTests.cpp">
+      <Filter>Utility\Containers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
