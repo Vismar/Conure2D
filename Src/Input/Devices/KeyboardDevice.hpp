@@ -1,62 +1,45 @@
 #pragma once
-
-namespace sf { class Event; }
+#include "Input/Utilities/Buttons/KeyboardButtons.hpp"
+#include "Input/Utilities/ButtonStateHandler.hpp"
+#include "SFML/Window/Event.hpp"
+#include <vector>
 
 namespace Input
 {
-    enum class KeyState;
-    enum class KeyboardKey;
-    class KeyStateHandler;
-
     /*!
      * \brief Device which handles all keyboard actions.
      */
     class KeyboardDevice
     {
     public:
-        KeyboardDevice(const KeyboardDevice&) = delete;
-        KeyboardDevice(KeyboardDevice&&) = delete;
-        KeyboardDevice& operator=(const KeyboardDevice&) = delete;
-        KeyboardDevice& operator=(KeyboardDevice&&) = delete;
+        KeyboardDevice(const KeyboardDevice& other) = delete;
+        KeyboardDevice(KeyboardDevice&& other) = delete;
+        KeyboardDevice& operator=(const KeyboardDevice& other) = delete;
+        KeyboardDevice& operator=(KeyboardDevice&& other) = delete;
+        ~KeyboardDevice() = default;
 
         /*!
-         * \brief Default constructor that initializes inner arrays of keys.
+         * \brief Default constructor that initializes inner arrays of buttons.
          */
         KeyboardDevice();
 
         /*!
-         * \brief Default destructor that frees initialized inner arrays of keys.
+         * \brief Returns state of specified keyboard button.
+         * \param button - keyboard button which should be checked.
+         * \param timeSpan - time span in which button should be checked.
+         * \return ButtonState which defines in what state specified button is.
          */
-        ~KeyboardDevice();
-
-        /*!
-         * \brief Returns state of specified keyboard key.
-         * \param key - specified keyboard key to return its state.
-         * \return KeyState which defines in what state specified key is.
-         */
-        KeyState KeyState(KeyboardKey key) const;
+        ButtonState GetButtonState(KeyboardButton button, const Utility::TimeSpan& timeSpan) const;
 
         /*!
          * \brief Handles keyboard events.
          * \param event - keyboard event to handle.
-         * 
-         * Checks event type and updates state of specified key.
+         * \param time - new time that will be used by button.
          */
-        void HandleKeyboardEvent(const sf::Event& event);
-
-        /*!
-         * \brief Updates state of keys that was not touched during the normal update.
-         * 
-         * Keyboard device stores additional array of keys that was updated during the update phase.
-         * So, when this function is called, it will updates all keys that was not updated and resets that additional array.
-         * This function should be executed only after all events was handled during the update phase.
-         */
-        void UpdateNotTouchedKeys();
+        void HandleKeyboardEvent(const sf::Event& event, const Utility::Time& time);
 
     private:
-        /*! Key states. */
-        KeyStateHandler* _keys;
-        /*! Additional array to know what keys was updated. */
-        bool* _touchedKeys;
+        /*! Buttons states. */
+        std::vector<ButtonStateHandler> _buttons;
     };
 }

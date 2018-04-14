@@ -1,5 +1,6 @@
 #include "InputAction.hpp"
-#include "DirectInput.hpp"
+#include "Input/Utilities/ButtonStateHandler.hpp"
+#include "Input/InputSystemInterface.hpp"
 
 using namespace Input;
 
@@ -8,7 +9,7 @@ using namespace Input;
 /*****************************************/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ButtonUnion::ButtonUnion(const KeyboardKey keyValue) : key(keyValue) { }
+ButtonUnion::ButtonUnion(const KeyboardButton keyboardButtonValue) : keyboardButton(keyboardButtonValue) { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +22,7 @@ ButtonUnion::ButtonUnion(const JoystickButton joystickButtonValue) : joystickBut
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool ButtonUnion::operator==(const ButtonUnion& other) const
 {
-    return key == other.key;
+    return keyboardButton == other.keyboardButton;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +32,7 @@ bool ButtonUnion::operator==(const ButtonUnion& other) const
 /*****************************************/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ActionButton::ActionButton(const KeyboardKey key) : type(InputType::Keyboard), buttonUnion(key) { }
+ActionButton::ActionButton(const KeyboardButton keyboardButton) : type(InputType::Keyboard), buttonUnion(keyboardButton) { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,10 +51,10 @@ bool ActionButton::operator==(const ActionButton& other) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ActionButton::SetButton(const KeyboardKey key)
+void ActionButton::SetButton(const KeyboardButton keyboardButton)
 {
     type = InputType::Keyboard;
-    buttonUnion.key = key;
+    buttonUnion.keyboardButton = keyboardButton;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,14 +81,14 @@ void ActionButton::SetButton(const JoystickButton joystickButton)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputAction::InputAction()
-    : _requiredState(KeyState::Pressed)
-    , _button(KeyboardKey::Escape)
+    : _requiredState(ButtonState::Pressed)
+    , _button(KeyboardButton::Escape)
     , _joystickId(-1)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-InputAction::InputAction(const KeyState& state, const int joystickId, const ActionButton& actionButton)
+InputAction::InputAction(const ButtonState state, const int joystickId, const ActionButton& actionButton)
     : _requiredState(state)
     , _button(actionButton)
     , _joystickId(joystickId)
@@ -104,20 +105,20 @@ bool InputAction::operator==(const InputAction& other) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool InputAction::IsActive() const
+bool InputAction::IsActive(const InputSystemInterface& inputSystem) const
 {
     bool isActive(false);
 
     switch (_requiredState)
     {
-    case KeyState::Pressed:
-        isActive = _IsButtonPressed();
+    case ButtonState::Pressed:
+        isActive = _IsButtonPressed(inputSystem);
         break;
-    case KeyState::HeldDown:
-        isActive = _IsButtonHeldDown();
+    case ButtonState::HeldDown:
+        isActive = _IsButtonHeldDown(inputSystem);
         break;
-    case KeyState::Released:
-        isActive = _IsButtonReleased();
+    case ButtonState::Released:
+        isActive = _IsButtonReleased(inputSystem);
         break;
     default:
         // Unexpected state
@@ -129,7 +130,7 @@ bool InputAction::IsActive() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void InputAction::SetRequiredState(const KeyState& state)
+void InputAction::SetRequiredState(const ButtonState state)
 {
     _requiredState = state;
 }
@@ -144,20 +145,20 @@ void InputAction::SetRequriedButton(const int joystickId, const ActionButton& ac
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool InputAction::_IsButtonPressed() const
+bool InputAction::_IsButtonPressed(const InputSystemInterface& inputSystem) const
 {
     bool isPressed(false);
 
     switch (_button.type)
     {
     case InputType::Keyboard:
-        isPressed = DirectInput::IsKeyPressed(_button.buttonUnion.key);
+        isPressed = inputSystem.ButtonPressed(_button.buttonUnion.keyboardButton);
         break;
     case InputType::Mouse:
-        isPressed = DirectInput::IsMouseButtonPressed(_button.buttonUnion.mouseButton);
+        isPressed = inputSystem.ButtonPressed(_button.buttonUnion.mouseButton);
         break;
     case InputType::Joystick:
-        isPressed = DirectInput::IsJoystickButtonPressed(_joystickId, _button.buttonUnion.joystickButton);
+        isPressed = inputSystem.ButtonPressed(_joystickId, _button.buttonUnion.joystickButton);
         break;
     }
 
@@ -166,20 +167,20 @@ bool InputAction::_IsButtonPressed() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool InputAction::_IsButtonHeldDown() const
+bool InputAction::_IsButtonHeldDown(const InputSystemInterface& inputSystem) const
 {
     bool isHelDown(false);
 
     switch (_button.type)
     {
     case InputType::Keyboard:
-        isHelDown = DirectInput::IsKeyHeldDown(_button.buttonUnion.key);
+        isHelDown = inputSystem.ButtonHeldDown(_button.buttonUnion.keyboardButton);
         break;
     case InputType::Mouse:
-        isHelDown = DirectInput::IsMouseButtonHeldDown(_button.buttonUnion.mouseButton);
+        isHelDown = inputSystem.ButtonHeldDown(_button.buttonUnion.mouseButton);
         break;
     case InputType::Joystick:
-        isHelDown = DirectInput::IsJoystickButtonHeldDown(_joystickId, _button.buttonUnion.joystickButton);
+        isHelDown = inputSystem.ButtonHeldDown(_joystickId, _button.buttonUnion.joystickButton);
         break;
     }
 
@@ -188,20 +189,20 @@ bool InputAction::_IsButtonHeldDown() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool InputAction::_IsButtonReleased() const
+bool InputAction::_IsButtonReleased(const InputSystemInterface& inputSystem) const
 {
     bool isReleased(false);
 
     switch (_button.type)
     {
     case InputType::Keyboard:
-        isReleased = DirectInput::IsKeyReleased(_button.buttonUnion.key);
+        isReleased = inputSystem.ButtonReleased(_button.buttonUnion.keyboardButton);
         break;
     case InputType::Mouse:
-        isReleased = DirectInput::IsMouseButtonReleased(_button.buttonUnion.mouseButton);
+        isReleased = inputSystem.ButtonReleased(_button.buttonUnion.mouseButton);
         break;
     case InputType::Joystick:
-        isReleased = DirectInput::IsJoystickButtonReleased(_joystickId, _button.buttonUnion.joystickButton);
+        isReleased = inputSystem.ButtonReleased(_joystickId, _button.buttonUnion.joystickButton);
         break;
     }
 

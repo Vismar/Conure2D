@@ -18,15 +18,15 @@ namespace Input
     /*!
      * \brief Thread-safe handler which helps to update and check button state.
      */
-    class ButtonStatehandler
+    class ButtonStateHandler
     {
     public:
-        ButtonStatehandler(const ButtonStatehandler& other) = delete;
-        ButtonStatehandler(ButtonStatehandler&& other) = delete;
-        ButtonStatehandler& operator=(const ButtonStatehandler& other) = delete;
-        ButtonStatehandler& operator=(ButtonStatehandler&& other) = delete;
-        ButtonStatehandler() = default;
-        ~ButtonStatehandler() = default;
+        ButtonStateHandler& operator=(const ButtonStateHandler& other) = delete;
+        ButtonStateHandler& operator=(ButtonStateHandler&& other) = delete;
+        ButtonStateHandler() = default;
+        ButtonStateHandler(const ButtonStateHandler& other) = default;
+        ButtonStateHandler(ButtonStateHandler&& other) = default;
+        ~ButtonStateHandler() = default;
 
         /*!
          * \brief Updates specified state time of a button.

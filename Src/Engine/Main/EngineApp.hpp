@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer/RenderSystem.hpp"
 #include "Core/Scene/SceneMap.hpp"
+#include "Input/InputSystem.hpp"
 #include "Utility/Time/TimeSpan.hpp"
 
 namespace Engine
@@ -54,6 +55,12 @@ namespace Engine
         Core::SceneMap& GetSceneMap() const;
 
         /*!
+         * \brief Returns input system.
+         * \return Reference to the input system.
+         */
+        Input::InputSystem& GetInputSystem() const;
+
+        /*!
          * \brief Grabs render loop time span.
          * \return Const reference to the time span of the render loop.
          */
@@ -81,5 +88,7 @@ namespace Engine
         Utility::TimeSpan _logicLoopTimeSpan;
         /*! Unique pointer to the scene map system. */
         std::unique_ptr<Core::SceneMap> _sceneMap;
+        /*! Unique pointer to the input system.*/
+        std::unique_ptr<Input::InputSystem> _inputSystem;
     };
 }

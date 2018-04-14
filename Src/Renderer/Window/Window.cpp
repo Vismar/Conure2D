@@ -1,5 +1,4 @@
 #include "Window.hpp"
-#include "Input/InputHandler.hpp"
 #include "SFML/Window/Event.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include <utility>
@@ -64,7 +63,7 @@ bool Window::IsOpen() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Window::PollEvents() const
+void Window::PollEvents(Input::InputSystemHandlerInterface& inputSystem, const Utility::Time& time) const
 {
     sf::Event event{};
 
@@ -76,11 +75,9 @@ void Window::PollEvents() const
         }
         else
         {
-            Input::InputHandler::HandleInputEvent(event);
+            inputSystem.HandleInputEvent(event, time);
         }
     }
-
-    Input::InputHandler::FinishHandle();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

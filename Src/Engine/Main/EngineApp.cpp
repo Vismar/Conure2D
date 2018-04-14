@@ -8,6 +8,7 @@ EngineApp::EngineApp()
     : _renderSystem(std::make_unique<Renderer::RenderSystem>())
     , _logicThreadIsWorking(false)
     , _sceneMap(std::make_unique<Core::SceneMap>())
+    , _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +28,7 @@ void EngineApp::Run()
     logicThread.detach();
 
     // Start render system
-    _renderSystem->Start(*_sceneMap, _renderLoopTimeSpan);
+    _renderSystem->Start(*_sceneMap, *_inputSystem, _renderLoopTimeSpan);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +55,13 @@ Core::SceneMap& EngineApp::GetSceneMap() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+Input::InputSystem& EngineApp::GetInputSystem() const
+{
+    return *_inputSystem;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const Utility::TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
 {
     return _renderLoopTimeSpan;
@@ -75,12 +83,19 @@ void EngineApp::_LogicLoop()
     {
         _logicThreadIsWorking = true;
         _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
+        _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
 
         // If render system works properly, update scenes
         while (_renderSystem->NoErrors())
         {
             // Update scenes
             _sceneMap->UpdateScenes();
+
+            // Make sure that logic loop runs only <= 125 times per second.
+            // If it will run faster, then a user input might be missed during some loops.
+            // It will lead to possible bugs.
+            while ((Utility::Time::CurrentTime() - _logicLoopTimeSpan.End()).ToMilliseconds() < 8) {}
+
             // Update time span
             _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
         }

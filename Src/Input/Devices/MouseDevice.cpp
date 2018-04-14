@@ -1,51 +1,52 @@
 #include "MouseDevice.hpp"
-#include "Utilities/KeyStateHandler.hpp"
-#include "Utilities/Keys/MouseButtons.hpp"
 #include "SFML/Window/Mouse.hpp"
-#include "SFML/Window/Event.hpp"
 
 using namespace Input;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 MouseDevice::MouseDevice()
-    : _buttons(new KeyStateHandler[sf::Mouse::ButtonCount]())
-    , _touchedButtons(new bool[sf::Mouse::ButtonCount]())
-    , _verticalWheelUpdated(false)
-    , _verticalWheelDiff(0.0f)
-    , _horizontalWheelUpdated(false)
+    : _verticalWheelDiff(0.0f)
     , _horizontalWheelDiff(0.0f)
     , _posX(0)
     , _posY(0)
-{ }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-MouseDevice::~MouseDevice()
 {
-    delete[] _buttons;
-    delete[] _touchedButtons;
+    _buttons.resize(sf::Mouse::ButtonCount);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-KeyState MouseDevice::ButtonState(MouseButton button) const
+ButtonState MouseDevice::GetButtonState(MouseButton button, const Utility::TimeSpan& timeSpan) const
 {
-    return _buttons[static_cast<int>(button)].State();
+    return _buttons[static_cast<int>(button)].GetState(timeSpan);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float MouseDevice::VerticalWheelDiff() const
+float MouseDevice::VerticalWheelDiff(const Utility::TimeSpan& timeSpan) const
 {
-    return _verticalWheelDiff;
+    float wheelDiff(0.0f);
+
+    if ((timeSpan.Start() <= _verticalWheelMovedTime) && (_verticalWheelMovedTime <= timeSpan.End()))
+    {
+        wheelDiff = _verticalWheelDiff;
+    }
+
+    return wheelDiff;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float MouseDevice::HorizontalWheelDiff() const
+float MouseDevice::HorizontalWheelDiff(const Utility::TimeSpan& timeSpan) const
 {
-    return _horizontalWheelDiff;
+    float wheelDiff(0.0f);
+
+    if ((timeSpan.Start() <= _horizontalWheelMovedTime) && (_horizontalWheelMovedTime <= timeSpan.End()))
+    {
+        wheelDiff = _horizontalWheelDiff;
+    }
+
+    return wheelDiff;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,16 +65,16 @@ int MouseDevice::PositionY() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void MouseDevice::HandleMouseEvent(const sf::Event& event)
+void MouseDevice::HandleMouseEvent(const sf::Event& event, const Utility::Time& time)
 {
     switch (event.type)
     {
     case sf::Event::EventType::MouseButtonPressed:
     case sf::Event::EventType::MouseButtonReleased:
-        _HandleMouseButtonEvent(event);
+        _HandleMouseButtonEvent(event, time);
         break;
     case sf::Event::EventType::MouseWheelScrolled:
-        _HandleMouseWheelEvent(event);
+        _HandleMouseWheelEvent(event, time);
         break;
     case sf::Event::EventType::MouseMoved:
         _HandleMouseMoveEvent(event);
@@ -86,78 +87,32 @@ void MouseDevice::HandleMouseEvent(const sf::Event& event)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void MouseDevice::UpdateNotTouchedButtons()
-{
-    for (auto i = 0; i < sf::Mouse::ButtonCount; ++i)
-    {
-        if (_touchedButtons[i])
-        {
-            _touchedButtons[i] = false;
-        }
-        else
-        {
-            _buttons[i].UpdateState(KeyState::NotTouched);
-        }
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void MouseDevice::UpdateWheels()
-{
-    // Update vertical wheel
-    if (_verticalWheelUpdated)
-    {
-        _verticalWheelUpdated = false;
-    }
-    // If wheel was not updated during the update phase, reset wheel difference value
-    else
-    {
-        _verticalWheelDiff = 0.0f;
-    }
-
-    //Update horizontal wheel
-    if (_horizontalWheelUpdated)
-    {
-        _horizontalWheelUpdated = false;
-    }
-    // If wheel was not updated during the update phase, reset wheel difference value
-    else
-    {
-        _horizontalWheelDiff = 0.0f;
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void MouseDevice::_HandleMouseButtonEvent(const sf::Event& event)
+void MouseDevice::_HandleMouseButtonEvent(const sf::Event& event, const Utility::Time& time)
 {
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::MouseButtonPressed)
     {
-        _buttons[event.mouseButton.button].UpdateState(KeyState::Pressed);
-        _touchedButtons[event.mouseButton.button] = true;
+        _buttons[event.mouseButton.button].UpdateState(ButtonState::Pressed, time);
     }
     else if (event.type == sf::Event::EventType::MouseButtonReleased)
     {
-        _buttons[event.mouseButton.button].UpdateState(KeyState::Released);
-        _touchedButtons[event.mouseButton.button] = true;
+        _buttons[event.mouseButton.button].UpdateState(ButtonState::Released, time);
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void MouseDevice::_HandleMouseWheelEvent(const sf::Event& event)
+void MouseDevice::_HandleMouseWheelEvent(const sf::Event& event, const Utility::Time& time)
 {
     if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::VerticalWheel)
     {
         _verticalWheelDiff = event.mouseWheelScroll.delta;
-        _verticalWheelUpdated = true;
+        _verticalWheelMovedTime = time;
     }
     else
     {
         _horizontalWheelDiff = event.mouseWheelScroll.delta;
-        _horizontalWheelUpdated = true;
+        _horizontalWheelMovedTime = time;
     }
 }
 

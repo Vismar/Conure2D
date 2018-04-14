@@ -9,18 +9,21 @@ RenderSystem::RenderSystem() : _working(false), _noErrors(true), _window(WindowS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap, Utility::TimeSpan& renderLoopTimeSpan)
+void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
+                         Input::InputSystemHandlerInterface& inputSystem,
+                         Utility::TimeSpan& renderLoopTimeSpan)
 {
     if (!_working)
     {
         _working = true;
+        renderLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
         renderLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
 
         // If render was started, window is open and scene map is not nullptr, render
         while (_working && _window.IsOpen())
         {
             // Poll events
-            _window.PollEvents();
+            _window.PollEvents(inputSystem, renderLoopTimeSpan.Start());
 
             // Render
             _window.BeginDraw();

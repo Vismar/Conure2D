@@ -19,11 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Input\InputDeviceManagerTests.cpp" />
-    <ClCompile Include="Input\JoystickDeviceTests.cpp" />
-    <ClCompile Include="Input\KeyboardDeviceTests.cpp" />
-    <ClCompile Include="Input\KeyStateHandlerTests.cpp" />
-    <ClCompile Include="Input\MouseDeviceTests.cpp" />
     <ClCompile Include="Utility\Containers\RingBufferTests.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

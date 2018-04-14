@@ -1,9 +1,11 @@
 #pragma once
-#include "Utilities/Keys/JoystickAxes.hpp"
+#include "Input/Utilities/Buttons/JoystickAxes.hpp"
 #include <string>
 
 namespace Input
 {
+    class InputSystemInterface;
+
     /*!
      * \brief Axis type that is used in AxisUnion.
      */
@@ -49,9 +51,10 @@ namespace Input
 
         /*!
          * \brief Returns axis position.
+         * \param inputSystem - reference to the input system from which axis will be checked.
          * \return Current axis position.
          */
-        float GetPosition() const;
+        float GetPosition(const InputSystemInterface& inputSystem) const;
 
         /*!
          * \brief Sets actual axis to check.

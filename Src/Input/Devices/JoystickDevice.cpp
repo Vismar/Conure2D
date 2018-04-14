@@ -1,28 +1,32 @@
 #include "JoystickDevice.hpp"
-#include "Utilities/KeyStateHandler.hpp"
-#include "Utilities/Keys/JoystickButtons.hpp"
-#include "Utilities/Keys/JoystickAxes.hpp"
 #include "SFML/Window/Joystick.hpp"
-#include "SFML/Window/Event.hpp"
 
 using namespace Input;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 JoystickDevice::JoystickDevice() 
-    : _buttons(new KeyStateHandler[sf::Joystick::ButtonCount]())
-    , _touchedButtons(new bool[sf::Joystick::ButtonCount]())
-    , _axes(new std::atomic<float>[sf::Joystick::AxisCount]())
+    : _axes(new std::atomic<float>[sf::Joystick::AxisCount]())
     , _joystickId(-1)
     , _isConnected(false)
-{ }
+{
+    _buttons.resize(sf::Joystick::ButtonCount);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+JoystickDevice::JoystickDevice(const JoystickDevice& other)
+    : _axes(new std::atomic<float>[sf::Joystick::AxisCount]())
+    , _joystickId(-1)
+    , _isConnected(false)
+{
+    _buttons.resize(sf::Joystick::ButtonCount);
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 JoystickDevice::~JoystickDevice()
 {
-    delete[] _buttons;
-    delete[] _touchedButtons;
     delete[] _axes;
 }
 
@@ -42,9 +46,9 @@ void JoystickDevice::SetJoystickConnectionState(const bool connectionState)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-KeyState JoystickDevice::ButtonState(const JoystickButton button) const
+ButtonState JoystickDevice::GetButtonState(const JoystickButton button, const Utility::TimeSpan& timeSpan) const
 {
-    return _buttons[static_cast<int>(button)].State();
+    return _buttons[static_cast<int>(button)].GetState(timeSpan);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,14 +67,14 @@ std::string JoystickDevice::Name() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-unsigned int JoystickDevice::VendorId() const
+uint32_t JoystickDevice::VendorId() const
 {
     return sf::Joystick::getIdentification(_joystickId).vendorId;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-unsigned int JoystickDevice::ProductId() const
+uint32_t JoystickDevice::ProductId() const
 {
     return sf::Joystick::getIdentification(_joystickId).productId;
 }
@@ -84,13 +88,13 @@ bool JoystickDevice::IsConnected() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void JoystickDevice::HandleJoystickEvents(const sf::Event& event)
+void JoystickDevice::HandleJoystickEvents(const sf::Event& event, const Utility::Time& time)
 {
     switch (event.type)
     {
     case sf::Event::EventType::JoystickButtonPressed:
     case sf::Event::EventType::JoystickButtonReleased:
-        _HandleJoystickButtonEvent(event);
+        _HandleJoystickButtonEvent(event, time);
         break;
     case sf::Event::EventType::JoystickMoved:
         _HandleJoystickMoveEvent(event);
@@ -103,36 +107,18 @@ void JoystickDevice::HandleJoystickEvents(const sf::Event& event)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void JoystickDevice::UpdateNotTouchedButtons()
-{
-    for (auto i = 0; i < sf::Joystick::ButtonCount; ++i)
-    {
-        if (_touchedButtons[i])
-        {
-            _touchedButtons[i] = false;
-        }
-        else
-        {
-            _buttons[i].UpdateState(KeyState::NotTouched);
-        }
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event)
+void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event, const Utility::Time& time)
 {
     _isConnected = true;
+
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::JoystickButtonPressed)
     {
-        _buttons[event.joystickButton.button].UpdateState(KeyState::Pressed);
-        _touchedButtons[event.joystickButton.button] = true;
+        _buttons[event.joystickButton.button].UpdateState(ButtonState::Pressed, time);
     }
     else if (event.type == sf::Event::EventType::JoystickButtonReleased)
     {
-        _buttons[event.joystickButton.button].UpdateState(KeyState::Released);
-        _touchedButtons[event.joystickButton.button] = true;
+        _buttons[event.joystickButton.button].UpdateState(ButtonState::Released, time);
     }
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Scene/RenderableSceneMapInterface.hpp"
+#include "Input/InputSystemHandlerInterface.hpp"
 #include "Renderer/RenderSystemInterface.hpp"
 #include "Renderer/Window/Window.hpp"
 #include "Utility/Time/TimeSpan.hpp"
@@ -28,9 +29,12 @@ namespace Renderer
         /*!
          * \brief Starts the rendering process with specified scene map.
          * \param sceneMap - const reference to a scene map that will be used in render process.
+         * \param inputSystem - reference to input system which will handle input events from the window.
          * \param renderLoopTimeSpan - time span of render loop.
          */
-        void Start(const Core::RenderableSceneMapInterface& sceneMap, Utility::TimeSpan& renderLoopTimeSpan);
+        void Start(const Core::RenderableSceneMapInterface& sceneMap, 
+                   Input::InputSystemHandlerInterface& inputSystem,
+                   Utility::TimeSpan& renderLoopTimeSpan);
 
         /*!
          * \brief Stops render process.

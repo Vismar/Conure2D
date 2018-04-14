@@ -1,5 +1,5 @@
 #include "InputAxis.hpp"
-#include "DirectInput.hpp"
+#include "Input/InputSystemInterface.hpp"
 
 using namespace Input;
 
@@ -49,22 +49,22 @@ bool InputAxis::operator==(const InputAxis& other) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float InputAxis::GetPosition() const
+float InputAxis::GetPosition(const InputSystemInterface& inputSystem) const
 {
     float position(0.0f);
 
     if (_axisType == AxisType::Axis)
     {
-        position = DirectInput::GetJoystickAxisPosition(_joystickId, _joystickAxis);
+        position = inputSystem.Joystick(_joystickId).JoystickAxisPosition(_joystickAxis);
     }
     else
     {
-        if (DirectInput::IsActionActive(_negativeAction))
+        if (inputSystem.Map().IsActionActive(_negativeAction))
         {
             position -= 1.0f;
         }
         
-        if (DirectInput::IsActionActive(_positiveAction))
+        if (inputSystem.Map().IsActionActive(_positiveAction))
         {
             position += 1.0f;
         }

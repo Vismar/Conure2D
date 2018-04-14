@@ -1,13 +1,18 @@
 #pragma once
 
-namespace Renderer
-{
-    class RenderSystemInterface;
-}
-
 namespace Core
 {
     class SceneMapSystemInterface;
+}
+
+namespace Input
+{
+    class InputSystemInterface;
+}
+
+namespace Renderer
+{
+    class RenderSystemInterface;
 }
 
 namespace Utility
@@ -28,6 +33,12 @@ namespace Engine
      * \return Reference to the scene map system.
      */
     Core::SceneMapSystemInterface& GetSceneMapSystem();
+
+    /*!
+     * \brief Grabs input system.
+     * \return Reference to the input system.
+     */
+    Input::InputSystemInterface& GetInputSystem();
 
     /*!
      * \brief Grabs render loop time span.

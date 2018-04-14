@@ -1,65 +1,33 @@
 #include "KeyboardDevice.hpp"
-#include "Utilities/KeyStateHandler.hpp"
-#include "Utilities//Keys/KeyboardKeys.hpp"
-#include "SFML/Window/Keyboard.hpp"
-#include "SFML/Window/Event.hpp"
 
 using namespace Input;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 KeyboardDevice::KeyboardDevice()
-    : _keys(new KeyStateHandler[sf::Keyboard::KeyCount]())
-    , _touchedKeys(new bool[sf::Keyboard::KeyCount]())
-{ }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-KeyboardDevice::~KeyboardDevice()
 {
-    delete[] _keys;
-    delete[] _touchedKeys;
+    _buttons.resize(sf::Keyboard::KeyCount);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-KeyState KeyboardDevice::KeyState(KeyboardKey key) const
+ButtonState KeyboardDevice::GetButtonState(KeyboardButton button, const Utility::TimeSpan& timeSpan) const
 {
-    return _keys[static_cast<int>(key)].State();
+    return _buttons[static_cast<int>(button)].GetState(timeSpan);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void KeyboardDevice::HandleKeyboardEvent(const sf::Event& event)  
+void KeyboardDevice::HandleKeyboardEvent(const sf::Event& event, const Utility::Time& time)
 {
-    // If key was pressed or released, get its code and update state
+    // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::KeyPressed)
     {
-        _keys[event.key.code].UpdateState(KeyState::Pressed);
-        _touchedKeys[event.key.code] = true;
-
+        _buttons[event.key.code].UpdateState(ButtonState::Pressed, time);
     }
     else if (event.type == sf::Event::EventType::KeyReleased)
     {
-        _keys[event.key.code].UpdateState(KeyState::Released);
-        _touchedKeys[event.key.code] = true;
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void KeyboardDevice::UpdateNotTouchedKeys()
-{
-    for (auto i = 0; i < sf::Keyboard::KeyCount; ++i)
-    {
-        if (_touchedKeys[i])
-        {
-            _touchedKeys[i] = false;
-        }
-        else
-        {
-            _keys[i].UpdateState(KeyState::NotTouched);
-        }
+        _buttons[event.key.code].UpdateState(ButtonState::Released, time);
     }
 }
 

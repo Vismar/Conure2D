@@ -1,26 +1,23 @@
 #pragma once
+#include "Input/Devices/JoystickDeviceInterface.hpp"
+#include "Input/Utilities/Buttons/JoystickButtons.hpp"
+#include "Input/Utilities/ButtonStateHandler.hpp"
+#include "SFML/Window/Event.hpp"
 #include <atomic>
 #include <string>
-
-namespace sf { class Event; }
+#include <vector>
 
 namespace Input
 {
-    enum class KeyState;
-    enum class JoystickButton;
-    enum class JoystickAxis;
-    class KeyStateHandler;
-
     /*!
      * \brief Device which handles all joystick actions.
      */
-    class JoystickDevice
+    class JoystickDevice : public JoystickDeviceInterface
     {
     public:
-        JoystickDevice(const JoystickDevice&) = delete;
-        JoystickDevice(JoystickDevice&&) = delete;
         JoystickDevice& operator=(const JoystickDevice&) = delete;
         JoystickDevice& operator=(JoystickDevice&&) = delete;
+        JoystickDevice(JoystickDevice&& other) = delete;
 
         /*!
          * \brief Default constructor that initializes inner arrays of buttons.
@@ -28,7 +25,14 @@ namespace Input
         JoystickDevice();
 
         /*!
-         * \brief Default destructor that frees initialized inner arrays of buttons.
+         * \brief Copy constructor.
+         * 
+         * Copy constructor is required because we have several joysticks that can be connected and handled.
+         */
+        JoystickDevice(const JoystickDevice& other);
+
+        /*!
+         * \brief Simple destructor.
          */
         ~JoystickDevice();
 
@@ -44,65 +48,59 @@ namespace Input
          */
         void SetJoystickConnectionState(const bool connectionState);
 
-        /*!
-         * \brief Returns state of specified joystick button.
-         * \param button - specified mouse joystick to return its state.
-         * \return KeyState which defines in what state specified button is.
-         */
-        KeyState ButtonState(const JoystickButton button) const;
+         /*!
+          * \brief Returns state of specified joystick button.
+          * \param button - joystick button which should be checked.
+          * \param timeSpan - time span in which button should be checked.
+          * \return ButtonState which defines in what state specified button is.
+          */
+        ButtonState GetButtonState(const JoystickButton button, const Utility::TimeSpan& timeSpan) const;
 
         /*!
-         * \brief Returns position [range: -100.0 .. 100.0] of specified joystick axis.
+         * \brief Returns position [range: -100.0f .. 100.0f] of specified joystick axis.
          * \param axis - axis, value of which is required.
          * \return Position of specified axis.
          */
-        float JoystickAxisPosition(const JoystickAxis axis) const;
+        float JoystickAxisPosition(const JoystickAxis axis) const final;
 
         /*!
          * \brief Returns name of current joystick.
          * \return Vendors name via string,
          */
-        std::string Name() const;
+        std::string Name() const final;
 
         /*!
          * \brief Returns vendor id of current joystick.
          * \return Id of vendor.
          */
-        unsigned int VendorId() const;
+        uint32_t VendorId() const final;
 
         /*!
          * \brief Returns product id of current joystick.
          * \return Id of product.
          */
-        unsigned int ProductId() const;
+        uint32_t ProductId() const final;
 
         /*!
          * \brief Check if current joystick is connected.
          * \return True if joystick connected. Otherwise - false.
          */
-        bool IsConnected() const;
+        bool IsConnected() const final;
 
         /*!
          * \brief Handles joystick events.
          * \param event - joystick event to handle.
+         * \param time - new time that will be used by button.
          */
-        void HandleJoystickEvents(const sf::Event& event);
-
-        /*!
-         * \brief Updates state of buttons that was not touched during the normal update.
-         * 
-         * Joystick device stores additional array of buttons that was updated during the update phase.
-         * So, when this function is called, it will updates all buttons that was not updated and resets that additional array.
-         * This function should be executed only after all events was handled during the update phase.
-         */
-        void UpdateNotTouchedButtons();
+        void HandleJoystickEvents(const sf::Event& event, const Utility::Time& time);
 
     private:
         /*!
          * \brief Handles joystick button events.
          * \param event - joystick button event.
+         * \param time - new time that will be used by button.
          */
-        void _HandleJoystickButtonEvent(const sf::Event& event);
+        void _HandleJoystickButtonEvent(const sf::Event& event, const Utility::Time& time);
 
         /*!
          * \brief Handles joystick axis movement event.
@@ -111,9 +109,7 @@ namespace Input
         void _HandleJoystickMoveEvent(const sf::Event& event);
 
         /*! Buttons states. */
-        KeyStateHandler* _buttons;
-        /*! Additional array to know what buttons was updated. */
-        bool* _touchedButtons;
+        std::vector<ButtonStateHandler> _buttons;
         /*! Axis states. */
         std::atomic<float>* _axes;
         /*! Inner joystick id which is required to identify itself. */
@@ -122,6 +118,5 @@ namespace Input
         std::atomic<bool> _isConnected;
 
         friend class JoystickDeviceTests;
-        friend class InputDeviceManagerTests;
     };
 }

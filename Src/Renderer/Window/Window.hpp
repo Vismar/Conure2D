@@ -1,5 +1,6 @@
 #pragma once
 #include "WindowSettings.hpp"
+#include "Input/InputSystemHandlerInterface.hpp"
 #include <atomic>
 
 namespace sf { class RenderWindow; class Drawable; class Image; }
@@ -60,8 +61,10 @@ namespace Renderer
 
         /*!
          * \brief Gather all window events and handles it via Input module.
+         * \param inputSystem - reference to input system which will handle input events from the window.
+         * \param time - time which will be used along with events.
          */
-        void PollEvents() const;
+        void PollEvents(Input::InputSystemHandlerInterface& inputSystem, const Utility::Time& time) const;
 
         /*!
         * \brief Initiates drawing process: applies window settings and new icon if it required before rendering new frame.

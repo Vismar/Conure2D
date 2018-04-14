@@ -101,7 +101,7 @@ namespace Utility
 
     private:
         /*! Time value that stored as nanoseconds. */
-        std::atomic<uint64_t> _timeValue;
+        std::atomic<uint64_t> _timeValue = 0;
     };
     
     /*!

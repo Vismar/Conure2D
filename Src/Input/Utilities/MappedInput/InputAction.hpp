@@ -2,10 +2,11 @@
 
 namespace Input
 {
-    enum class KeyState;
-    enum class KeyboardKey;
+    enum class ButtonState;
+    enum class KeyboardButton;
     enum class MouseButton;
     enum class JoystickButton;
+    class InputSystemInterface;
 
     /*!
      * \brief Simple enumeration of input types.
@@ -23,10 +24,10 @@ namespace Input
     union ButtonUnion
     {
         /*!
-         * \brief Constructor to assign keyboard key as value.
-         * \param keyValue - keyboard key.
+         * \brief Constructor to assign keyboard button as value.
+         * \param keyboardButtonValue - keyboard button.
          */
-        explicit ButtonUnion(const KeyboardKey keyValue);
+        explicit ButtonUnion(const KeyboardButton keyboardButtonValue);
 
         /*!
          * \brief Constructor to assign mouse button as value.
@@ -45,8 +46,8 @@ namespace Input
          */
         bool operator==(const ButtonUnion& other) const;
 
-        /*! Keyboard key. */
-        KeyboardKey key;
+        /*! Keyboard button. */
+        KeyboardButton keyboardButton;
         /*! Mouse button. */
         MouseButton mouseButton;
         /*! Joystick button. */
@@ -59,10 +60,10 @@ namespace Input
     struct ActionButton
     {
         /*!
-         * \brief Constructor to create action button from keyboard key.
-         * \param key - keyboard key that will be used to set input action and its type.
+         * \brief Constructor to create action button from keyboard button.
+         * \param keyboardButton - keyboard button that will be used to set input action and its type.
          */
-        explicit ActionButton(const KeyboardKey key);
+        explicit ActionButton(const KeyboardButton keyboardButton);
 
         /*!
          * \brief Constructor to create action button from mouse button.
@@ -82,10 +83,10 @@ namespace Input
         bool operator==(const ActionButton& other) const;
 
         /*!
-         * \brief Sets input type to keyboard and keyboard key as input action.
-         * \param key - keyboard key.
+         * \brief Sets input type to keyboard and keyboard button as input action.
+         * \param keyboardButton - keyboard button.
          */
-        void SetButton(const KeyboardKey key);
+        void SetButton(const KeyboardButton keyboardButton);
 
         /*!
          * \brief Sets input type to mouse and mouse button as input action.
@@ -111,6 +112,9 @@ namespace Input
     class InputAction
     {
     public:
+        /*!
+         * \brief Default constructor.
+         */
         InputAction();
 
         /*!
@@ -120,7 +124,7 @@ namespace Input
          *                     Can be set to anything if action button is not joystick button.
          * \param actionButton - actual button that will be checked to activate input action.
          */
-        InputAction(const KeyState& state, const int joystickId, const ActionButton& actionButton);
+        InputAction(const ButtonState state, const int joystickId, const ActionButton& actionButton);
 
         /*!
          * \brief Relational operator to compare one InputAction to another.
@@ -129,15 +133,16 @@ namespace Input
 
         /*!
          * \brief Check if input action is currently active.
+         * \param inputSystem - reference to the input system from which action will be checked.
          * \return True if specified button is in required state. Otherwise - false.
          */
-        bool IsActive() const;
+        bool IsActive(const InputSystemInterface& inputSystem) const;
 
         /*!
-         * \brief Sets required key state to specified one.
-         * \param state - key state that will be set as required.
+         * \brief Sets required button state to specified one.
+         * \param state - button state that will be set as required.
          */
-        void SetRequiredState(const KeyState& state);
+        void SetRequiredState(const ButtonState state);
 
         /*!
          * \brief Sets required button to check activation of input action.
@@ -150,24 +155,27 @@ namespace Input
     private:
         /*!
          * \brief Checks if stored button was pressed during the frame.
+         * \param inputSystem - reference to the input system from which button will be checked.
          * \return True if stored button was pressed.
          */
-        bool _IsButtonPressed() const;
+        bool _IsButtonPressed(const InputSystemInterface& inputSystem) const;
 
         /*!
          * \brief Checks if stored button was held down during the frame.
+         * \param inputSystem - reference to the input system from which button will be checked.
          * \return True if stored button was held down.
          */
-        bool _IsButtonHeldDown() const;
+        bool _IsButtonHeldDown(const InputSystemInterface& inputSystem) const;
 
         /*!
          * \brief Checks if stored button was released during the frame.
+         * \param inputSystem - reference to the input system from which button will be checked.
          * \return True if stored button was released.
          */
-        bool _IsButtonReleased() const;
+        bool _IsButtonReleased(const InputSystemInterface& inputSystem) const;
 
         /*! Required state of button. */
-        KeyState _requiredState;
+        ButtonState _requiredState;
         /*! Button that will be checked to activate input action. */
         ActionButton _button;
         /*! Joystick id that will be used if button specified for joystick device. */
