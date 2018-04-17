@@ -9,6 +9,7 @@ InputSystem::InputSystem(const Utility::TimeSpan& logicLoopTimeSpan)
     : _logicLoopTimeSpan(logicLoopTimeSpan)
     , _keyboard(std::make_unique<KeyboardDevice>())
     , _mouse(std::make_unique<MouseDevice>())
+    , _lastJoystickId(-1)
     , _inputMap(std::make_unique<InputMap>(*this))
 {
     _joystick.resize(sf::Joystick::Count);
@@ -43,9 +44,15 @@ void InputSystem::HandleInputEvent(const sf::Event& inputEvent, const Utility::T
     case sf::Event::EventType::JoystickButtonPressed:
     case sf::Event::EventType::JoystickButtonReleased:
         _joystick[inputEvent.joystickButton.joystickId]->HandleJoystickEvents(inputEvent, time);
+        // Update joystick id which was used and time when it happened
+        _lastTimeJoystickUsed = time;
+        _lastJoystickId = inputEvent.joystickButton.joystickId;        
         break;
     case sf::Event::EventType::JoystickMoved:
         _joystick[inputEvent.joystickMove.joystickId]->HandleJoystickEvents(inputEvent, time);
+        // Update joystick id which was used and time when it happened
+        _lastTimeJoystickUsed = time;
+        _lastJoystickId = inputEvent.joystickButton.joystickId;
         break;
     default:
         // Unexpected event
@@ -118,6 +125,27 @@ bool InputSystem::ButtonReleased(const uint32_t joystickId, const JoystickButton
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+bool InputSystem::AnyButtonPressed() const
+{
+    return _AnyButtonState(ButtonState::Pressed);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool InputSystem::AnyButtonHeldDown() const
+{
+    return _AnyButtonState(ButtonState::HeldDown);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool InputSystem::AnyButtonReleased() const
+{
+    return _AnyButtonState(ButtonState::Released);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 MouseDeviceInterface& InputSystem::Mouse() const
 {
     return *_mouse;
@@ -132,9 +160,55 @@ JoystickDeviceInterface& InputSystem::Joystick(const uint32_t joystickId) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+int32_t InputSystem::LastJoystickUsed() const
+{
+    auto joystickId(-1);
+
+    if (_logicLoopTimeSpan.Start() <= _lastTimeJoystickUsed)
+    {
+        joystickId = _lastJoystickId;
+    }
+
+    return joystickId;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 InputMapInterface& InputSystem::Map() const
 {
     return *_inputMap;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool InputSystem::_AnyButtonState(const ButtonState state) const
+{
+    bool anyButtonInState(false);
+
+    // Check if any keyboard button was in specified state
+    for (auto i = 0; i < sf::Keyboard::KeyCount; ++i)
+    {
+        if (_keyboard->GetButtonState(static_cast<KeyboardButton>(i), _logicLoopTimeSpan) == state)
+        {
+            anyButtonInState = true;
+            break;
+        }
+    }
+
+    // If keyboard button was not in specified state, check mouse buttons
+    if (!anyButtonInState)
+    {
+        for (auto i = 0; i < sf::Mouse::ButtonCount; ++i)
+        {
+            if (_mouse->GetButtonState(static_cast<MouseButton>(i), _logicLoopTimeSpan) == state)
+            {
+                anyButtonInState = true;
+                break;
+            }
+        }
+    }
+
+    return anyButtonInState;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

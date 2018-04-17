@@ -90,6 +90,24 @@ namespace Input
         virtual bool ButtonReleased(const uint32_t joystickId, const JoystickButton joystickButton) const = 0;
 
         /*!
+         * \brief Checks if any button on keyboard or mouse was pressed.
+         * \return True if at least one button was pressed. Otherwise - false.
+         */
+        virtual bool AnyButtonPressed() const = 0;
+
+        /*!
+         * \brief Checks if any button on keyboard or mouse was held down.
+         * \return True if at least one button was held down. Otherwise - false.
+         */
+        virtual bool AnyButtonHeldDown() const = 0;
+
+        /*!
+         * \brief Checks if any button on keyboard or mouse was released.
+         * \return True if at least one button was released. Otherwise - false.
+         */
+        virtual bool AnyButtonReleased() const = 0;
+
+        /*!
          * \brief Grabs mouse device.
          * \return Reference to the public mouse device interface.
          */
@@ -101,6 +119,13 @@ namespace Input
          * \return Reference to the public joystick device interface of specified joystick.
          */
         virtual JoystickDeviceInterface& Joystick(const uint32_t joystickId) const = 0;
+
+        /*!
+         * \brief Checks if any joystick was used and returns id of joystick which was used last time.
+         * \return Id of joystick which was used last time.
+         *         If joystick was not used during the update phase, -1 will be returned.
+         */
+        virtual int32_t LastJoystickUsed() const = 0;
 
         /*!
          * \brief Grabs input map.

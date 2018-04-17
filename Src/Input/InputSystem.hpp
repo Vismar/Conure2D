@@ -109,6 +109,24 @@ namespace Input
         bool ButtonReleased(const uint32_t joystickId, const JoystickButton joystickButton) const final;
 
         /*!
+         * \brief Checks if any button on keyboard or mouse was pressed.
+         * \return True if at least one button was pressed. Otherwise - false.
+         */
+        bool AnyButtonPressed() const final;
+
+        /*!
+         * \brief Checks if any button on keyboard or mouse was held down.
+         * \return True if at least one button was held down. Otherwise - false.
+         */
+        bool AnyButtonHeldDown() const final;
+
+        /*!
+         * \brief Checks if any button on keyboard or mouse was released.
+         * \return True if at least one button was released. Otherwise - false.
+         */
+        bool AnyButtonReleased() const final;
+
+        /*!
          * \brief Grabs mouse device.
          * \return Reference to the public mouse device interface.
          */
@@ -122,12 +140,26 @@ namespace Input
         JoystickDeviceInterface& Joystick(const uint32_t joystickId) const final;
 
         /*!
+         * \brief Checks if any joystick was used and returns id of joystick which was used last time.
+         * \return Id of joystick which was used last time.
+         *         If joystick was not used during the update phase, -1 will be returned.
+         */
+        int32_t LastJoystickUsed() const final;
+
+        /*!
          * \brief Grabs input map.
          * \return Reference to the public interface of input map.
          */
         InputMapInterface& Map() const final;
 
     private:
+        /*!
+         * \brief Checks if any button on keyboard or mouse is in specified state.
+         * \param state - specified state in which any button should be.
+         * \return True if at least one button in required state. Otherwise - false.
+         */
+        bool _AnyButtonState(const ButtonState state) const;
+
         /*! Const reference to the logic loop time span that is used by input system to check button states. */
         const Utility::TimeSpan& _logicLoopTimeSpan;
         /*! Keyboard device which handles keyboard events. */
@@ -136,6 +168,10 @@ namespace Input
         std::unique_ptr<MouseDevice> _mouse;
         /*! Array of joystick devices that handles joystick events. */
         std::vector<std::unique_ptr<JoystickDevice>> _joystick;
+        /*! A time when any joystick was used last time. */
+        Utility::Time _lastTimeJoystickUsed;
+        /*! An id of a joystick which was used last time. */
+        int32_t _lastJoystickId;
         /*! Input map system which stores and handle control of mapped actions and axes. */
         std::unique_ptr<InputMap> _inputMap;
         //Utility::RingBuffer<> _inputEvents;
