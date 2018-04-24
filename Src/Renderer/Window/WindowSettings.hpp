@@ -30,7 +30,7 @@ namespace Renderer
          * \brief Returns SFML window style.
          * \return Check what current window style is and then returns equivalent SFML style.
          */
-        unsigned int GetSfmlStyle() const;
+        uint32_t GetSfmlStyle() const;
 
         /*!
          * \brief Returns context settings for SFML window.
@@ -43,25 +43,25 @@ namespace Renderer
         /*! Window style. */
         WindowStyle style = WindowStyle::Windowed;
         /*! Window width. */
-        unsigned int width = 1280;
+        uint32_t width = 1280;
         /*! Window height. */
-        unsigned int height = 720;
+        uint32_t height = 720;
         /*! Number of bits per pixel.. */
-        unsigned int bitsPerPixel = 32;
+        uint32_t bitsPerPixel = 32;
         /*! Level of anti-aliasing. */
-        unsigned int antialiasing = 0;
+        uint32_t antialiasing = 0;
         /*! Bits of the depth buffer. */
-        unsigned int depthBits = 0;
+        uint32_t depthBits = 0;
         /*! Bits of the stencil buffer.  */
-        unsigned int stencilBits = 0;
+        uint32_t stencilBits = 0;
         /*! Major number of the context version to create. */
-        unsigned int majorContextVersion = 2;
+        uint32_t majorContextVersion = 2;
         /*! Minor number of the context version to create. */
-        unsigned int minorContaxtVersion = 0;
+        uint32_t minorContaxtVersion = 0;
         /*! Flag which defines vertical synchronization. */
         bool verticalSync = false;
         /*! Limit of frames per second. 0 - turns limit off. */
-        unsigned int frameLimit = 0;
+        uint32_t frameLimit = 0;
         /*! Flag which defines visibility of cursor on the window. */
         bool cursorIsVisible = true;
         /*! Flag which defines if cursor can leave the window. */

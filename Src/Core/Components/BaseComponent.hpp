@@ -60,7 +60,7 @@ namespace Core
          * \brief Turns component on/off.
          * \param turnOn - flag that defines if component should be turned on or off.
          */
-        void TurnOn(const bool turnOn = true);
+        void TurnOn(bool turnOn = true);
 
         /*!
          * \brief Initializes component.

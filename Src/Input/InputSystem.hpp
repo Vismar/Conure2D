@@ -47,14 +47,14 @@ namespace Input
          * \param keyboardButton - keyboard button which will be checked.
          * \return True if specified button was pressed. Otherwise - false.
          */
-        bool ButtonPressed(const KeyboardButton keyboardButton) const final;
+        bool ButtonPressed(KeyboardButton keyboardButton) const final;
         
         /*!
          * \brief Checks if specified button was pressed.
          * \param mouseButton - mouse button which will be checked.
          * \return True if specified button was pressed. Otherwise - false.
          */
-        bool ButtonPressed(const MouseButton mouseButton) const final;
+        bool ButtonPressed(MouseButton mouseButton) const final;
         
         /*!
          * \brief Checks if specified button was pressed.
@@ -62,21 +62,21 @@ namespace Input
          * \param joystickButton - joystick button which will be checked.
          * \return True if specified button was pressed. Otherwise - false.
          */
-        bool ButtonPressed(const uint32_t joystickId, const JoystickButton joystickButton) const final;
+        bool ButtonPressed(uint32_t joystickId, JoystickButton joystickButton) const final;
 
         /*!
          * \brief Checks if specified button was held down.
          * \param keyboardButton - keyboard button which will be checked.
          * \return True if specified button was held down. Otherwise - false.
          */
-        bool ButtonHeldDown(const KeyboardButton keyboardButton) const final;
+        bool ButtonHeldDown(KeyboardButton keyboardButton) const final;
         
         /*!
          * \brief Checks if specified button was held down.
          * \param mouseButton - mouse button which will be checked.
          * \return True if specified button was held down. Otherwise - false.
          */
-        bool ButtonHeldDown(const MouseButton mouseButton) const final;
+        bool ButtonHeldDown(MouseButton mouseButton) const final;
         
         /*!
          * \brief Checks if specified button was held down.
@@ -84,21 +84,21 @@ namespace Input
          * \param joystickButton - joystick button which will be checked.
          * \return True if specified button was held down. Otherwise - false.
          */
-        bool ButtonHeldDown(const uint32_t joystickId, const JoystickButton joystickButton) const final;
+        bool ButtonHeldDown(uint32_t joystickId, const JoystickButton joystickButton) const final;
 
         /*!
          * \brief Checks if specified button was released.
          * \param keyboardButton - keyboard button which will be checked.
          * \return True if specified button was released. Otherwise - false.
          */
-        bool ButtonReleased(const KeyboardButton keyboardButton) const final;
+        bool ButtonReleased(KeyboardButton keyboardButton) const final;
         
         /*!
          * \brief Checks if specified button was released.
          * \param mouseButton - mouse button which will be checked.
          * \return True if specified button was released. Otherwise - false.
          */
-        bool ButtonReleased(const MouseButton mouseButton) const final;
+        bool ButtonReleased(MouseButton mouseButton) const final;
         
         /*!
          * \brief Checks if specified button was released.
@@ -106,7 +106,7 @@ namespace Input
          * \param joystickButton - joystick button which will be checked.
          * \return True if specified button was released. Otherwise - false.
          */
-        bool ButtonReleased(const uint32_t joystickId, const JoystickButton joystickButton) const final;
+        bool ButtonReleased(uint32_t joystickId, JoystickButton joystickButton) const final;
 
         /*!
          * \brief Checks if any button on keyboard or mouse was pressed.
@@ -137,7 +137,7 @@ namespace Input
          * \param joystickId - id of joystick.
          * \return Reference to the public joystick device interface of specified joystick.
          */
-        JoystickDeviceInterface& Joystick(const uint32_t joystickId) const final;
+        JoystickDeviceInterface& Joystick(uint32_t joystickId) const final;
 
         /*!
          * \brief Checks if any joystick was used and returns id of joystick which was used last time.
@@ -158,7 +158,7 @@ namespace Input
          * \param state - specified state in which any button should be.
          * \return True if at least one button in required state. Otherwise - false.
          */
-        bool _AnyButtonState(const ButtonState state) const;
+        bool _AnyButtonState(ButtonState state) const;
 
         /*! Const reference to the logic loop time span that is used by input system to check button states. */
         const Utility::TimeSpan& _logicLoopTimeSpan;

@@ -14,9 +14,9 @@ sf::VideoMode WindowSettings::GetVideoMode() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-unsigned int WindowSettings::GetSfmlStyle() const
+uint32_t WindowSettings::GetSfmlStyle() const
 {
-    unsigned int sfStyle = sf::Style::Close;
+    uint32_t sfStyle = sf::Style::Close;
 
     switch (style)
     {

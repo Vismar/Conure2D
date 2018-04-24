@@ -36,7 +36,7 @@ namespace Core
          * \brief Sets activation flag to specified value.
          * \param activate - bool flag that will be applied to scene.
          */
-        void Activate(const bool activate);
+        void Activate(bool activate);
 
         /*!
          * \brief Returns flag value that indicates the state of the scene..
@@ -83,7 +83,7 @@ namespace Core
          * \param renderabelComponent - weak pointer to the renderable component that should be updated.
          * \param layer - new layer value. Not used.
          */
-        void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, const int8_t layer);
+        void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, int8_t layer);
 
         /*! Simple flag that defines if scene is activated or not. Used to know if scene should be rendered. */
         std::atomic<bool> _activated;

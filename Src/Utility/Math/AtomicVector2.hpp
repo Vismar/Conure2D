@@ -26,7 +26,7 @@ namespace Utility
          * \param xValue - value for x parameter.
          * \param yValue - value for y parameter.
          */
-        AtomicVector2(const T xValue, const T yValue);
+        AtomicVector2(T xValue, T yValue);
 
         /*!
          * \brief Copy constructor.   
@@ -133,14 +133,14 @@ namespace Utility
          * \param scalar - scalar value with the same template type.
          * \return New atomic vector as result of math operation.
          */
-        AtomicVector2 operator*(const T scalar) const;
+        AtomicVector2 operator*(T scalar) const;
 
         /*!
          * \brief Division operator.
          * \param scalar - scalar value with the same template type.
          * \return New atomic vector as result of math operation.
          */
-        AtomicVector2 operator/(const T scalar) const;
+        AtomicVector2 operator/(T scalar) const;
 
         /*!
          * \brief Addition operator.
@@ -182,14 +182,14 @@ namespace Utility
          * \param scalar - scalar value with the same template type.
          * \return Reference to atomic vector after math operation and assignment.
          */
-        AtomicVector2& operator/=(const T scalar);
+        AtomicVector2& operator/=(T scalar);
 
         /*!
          * \brief Multiplication and assignment operator.
          * \param scalar - scalar value with the same template type.
          * \return Reference to atomic vector after math operation and assignment.
          */
-        AtomicVector2& operator*=(const T scalar);
+        AtomicVector2& operator*=(T scalar);
 
         /*!
          * \brief Sets each of atomic vector parameters to zero.
@@ -219,7 +219,7 @@ namespace Utility
      * \return New atomic vector as result of math operation.
      */
     template <typename T>
-    AtomicVector2<T> operator*(const T scalar, const AtomicVector2<T>& right);
+    AtomicVector2<T> operator*(T scalar, const AtomicVector2<T>& right);
 
 #include "AtomicVector2.inl"
 

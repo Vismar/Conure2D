@@ -87,7 +87,7 @@ namespace Utility
          * \param index - index to check.
          * \return True if specified index is in range between head and tail of the ring. Otherwise - false.
          */
-        bool _ValidateIndex(const uint64_t index);
+        bool _ValidateIndex(uint64_t index);
 
         /*!
          * \brief Increases specified index by 1.

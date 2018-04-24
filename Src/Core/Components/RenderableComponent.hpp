@@ -80,7 +80,7 @@ namespace Core
          * \brief Sets layer number.
          * \param newLayerNumber - number of the layer.
          */
-        void SetLayerNumber(const int8_t newLayerNumber);
+        void SetLayerNumber(int8_t newLayerNumber);
 
         /*!
          * \brief Returns status of the visibility of this object.

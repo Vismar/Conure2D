@@ -50,12 +50,12 @@ namespace Utility
          * \param microseconds - number of microseconds.
          * \param nanoseconds - number of nanoseconds.
          */
-        explicit Time(const uint64_t hours = 0ll, 
-                      const uint64_t minutes = 0ll,
-                      const uint64_t seconds = 0ll,
-                      const uint64_t milliseconds = 0ll,
-                      const uint64_t microseconds = 0ll,
-                      const uint64_t nanoseconds = 0ll);
+        explicit Time(uint64_t hours = 0ll, 
+                      uint64_t minutes = 0ll,
+                      uint64_t seconds = 0ll,
+                      uint64_t milliseconds = 0ll,
+                      uint64_t microseconds = 0ll,
+                      uint64_t nanoseconds = 0ll);
 
         /*!
          * \brief Returns current time.
@@ -190,7 +190,7 @@ namespace Utility
      * \param right - a number value.
      * \return left multiplied by right.
      */
-    Time operator*(const Time& left, const double right);
+    Time operator*(const Time& left, double right);
 
     /*!
      * \brief Overload of binary * operator to scale a time value.
@@ -198,15 +198,7 @@ namespace Utility
      * \param right - a number value.
      * \return left multiplied by right.
      */
-    Time operator*(const Time& left, const uint64_t right);
-
-    /*!
-     * \brief Overload of binary * operator to scale a time value.
-     * \param left - a number value.
-     * \param right - a time value.
-     * \return right multiplied by left.
-     */
-    Time operator*(const double left, const Time& right);
+    Time operator*(const Time& left, uint64_t right);
 
     /*!
      * \brief Overload of binary * operator to scale a time value.
@@ -214,7 +206,15 @@ namespace Utility
      * \param right - a time value.
      * \return right multiplied by left.
      */
-    Time operator*(const uint64_t left, const Time& right);
+    Time operator*(double left, const Time& right);
+
+    /*!
+     * \brief Overload of binary * operator to scale a time value.
+     * \param left - a number value.
+     * \param right - a time value.
+     * \return right multiplied by left.
+     */
+    Time operator*(uint64_t left, const Time& right);
 
     /*!
      * \brief Overload of binary *= operator to scale/assign a time value.
@@ -222,7 +222,7 @@ namespace Utility
      * \param right - a number value.
      * \return left multiplied by right.
      */
-    Time& operator*=(Time& left, const double right);
+    Time& operator*=(Time& left, double right);
 
     /*!
      * \brief Overload of binary *= operator to scale/assign a time value.
@@ -230,7 +230,7 @@ namespace Utility
      * \param right - a number value.
      * \return left multiplied by right.
      */
-    Time& operator*=(Time& left, const uint64_t right);
+    Time& operator*=(Time& left, uint64_t right);
 
     /*!
      * \brief Overload of binary / operator to scale a time value.
@@ -238,7 +238,7 @@ namespace Utility
      * \param right - a number value.
      * \return left divided by right.
      */
-    Time operator/(const Time& left, const double right);
+    Time operator/(const Time& left, double right);
 
     /*!
      * \brief Overload of binary / operator to scale a time value.
@@ -246,7 +246,7 @@ namespace Utility
      * \param right - a number value.
      * \return left divided by right.
      */
-    Time operator/(const Time& left, const uint64_t right);
+    Time operator/(const Time& left, uint64_t right);
 
     /*!
      * \brief Overload of binary /= operator to scale/assign a time value.
@@ -254,7 +254,7 @@ namespace Utility
      * \param right -
      * \return left divided by right.
      */
-    Time& operator/=(Time& left, const double right);
+    Time& operator/=(Time& left, double right);
 
     /*!
      * \brief Overload of binary /= operator to scale/assign a time value.
@@ -262,7 +262,7 @@ namespace Utility
      * \param right - a number value.
      * \return left divided by right.
      */
-    Time& operator/=(Time& left, const uint64_t right);
+    Time& operator/=(Time& left, uint64_t right);
 
     /*!
      * \brief Overload of binary / operator to compute the ratio of two time values.
@@ -293,40 +293,40 @@ namespace Utility
      * \param hours - a number of hours.
      * \return Constructed time from given value.
      */
-    Time operator""_h(const uint64_t hours);
+    Time operator""_h(uint64_t hours);
 
     /*!
      * \brief Construct a time value from a number of minutes.
      * \param minutes - a number of minutes.
      * \return Constructed time from given value.
      */
-    Time operator""_min(const uint64_t minutes);
+    Time operator""_min(uint64_t minutes);
 
     /*!
      * \brief Construct a time value from a number of seconds.
      * \param seconds - a number of seconds.
      * \return Constructed time from given value.
      */
-    Time operator""_s(const uint64_t seconds);
+    Time operator""_s(uint64_t seconds);
 
     /*!
      * \brief Construct a time value from a number of milliseconds.
      * \param milliseconds - a number of milliseconds.
      * \return Constructed time from given value.
      */
-    Time operator""_ms(const uint64_t milliseconds);
+    Time operator""_ms(uint64_t milliseconds);
 
     /*!
      * \brief Construct a time value from a number of microseconds.
      * \param microseconds - a number of microseconds.
      * \return Constructed time from given value.
      */
-    Time operator""_us(const uint64_t microseconds);
+    Time operator""_us(uint64_t microseconds);
 
     /*!
      * \brief Construct a time value from a number of nanoseconds.
      * \param nanoseconds - a number of nanoseconds.
      * \return Constructed time from given value.
      */
-    Time operator""_ns(const uint64_t nanoseconds);
+    Time operator""_ns(uint64_t nanoseconds);
 }

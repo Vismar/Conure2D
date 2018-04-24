@@ -2,6 +2,7 @@
 #include "WindowSettings.hpp"
 #include "Input/InputSystemHandlerInterface.hpp"
 #include <atomic>
+#include <memory>
 
 namespace sf { class RenderWindow; class Drawable; class Image; }
 
@@ -31,13 +32,10 @@ namespace Renderer
         virtual ~Window();
    
         /*!
-         * \brief Applies specified settings to window before next frame.
-         * \param settings - specified window settings.
-         *
-         * Overall, this function changes stored settings to specified and nothing more.
-         * New settings will be applied only before rendering of a new frame if settings were changed.
+         * \brief Applies new settings to window.
+         * \param windowSettings - specified window settings.
          */
-        void SetSettings(WindowSettings settings);
+        void SetNewSettings(WindowSettings windowSettings);
         
         /*!
          * \brief Returns const reference to stored window settings.
@@ -46,12 +44,55 @@ namespace Renderer
         const WindowSettings& GetSettings() const;
 
         /*!
+         * \brief Sets new title to the window.
+         * \param title - new title that will be used by window.
+         */
+        void SetTitle(const std::string& title);
+
+        /*!
+         * \brief Resizes window to specified size.
+         * \param width - new width of the window.
+         * \param height - new height of the window.
+         */
+        void SetSize(uint32_t width, uint32_t height);
+
+        /*!
          * \brief Sets new icon to the window.
          * \param icon - new icon that will be applied to the window.
          * 
          * Actually saves specified icon and apply it before rendering a new frame.
          */
         void SetIcon(const sf::Image& icon);
+
+        /*!
+         * \brief Sets new antialiasing level.
+         * \param antialiasingLevel - new level of antialiasing.
+         */
+        void SetAntialiasing(uint32_t antialiasingLevel);
+
+        /*!
+         * \brief Turns vertical sync On/Off.
+         * \param enabled - flag that defines if vertical sync should be turned on or off.
+         */
+        void SetVerticalSyncEnabled(bool enabled);
+
+        /*!
+         * \brief Sets framerate limit a maximum fixed frequency.
+         * \param frameLimit - new framerate limit, in frames per seconds (use 0 to disable limit).
+         */
+        void SetFramerateLimit(uint32_t frameLimit);
+        
+        /*!
+         * \brief Turns on or off visibility of the mouse cursor.
+         * \param visible - flag that defines if mouse cursor should be visible or not.
+         */
+        void SetMouseCursorVisible(bool visible);
+
+        /*!
+         * \brief Grabs or releases the mouse cursor.
+         * \param grabbed - flag that defines if mouse cursor should be grabbed or not.
+         */
+        void SetMouseCursorGrabbed(bool grabbed);
 
         /*!
          * \brief Checks if window is currently opened.
@@ -67,36 +108,27 @@ namespace Renderer
         void PollEvents(Input::InputSystemHandlerInterface& inputSystem, const Utility::Time& time) const;
 
         /*!
-        * \brief Initiates drawing process: applies window settings and new icon if it required before rendering new frame.
-        */
-        void BeginDraw();
+         * \brief Initiates drawing process: applies window settings and new icon if it required before rendering new frame.
+         */
+        void BeginDraw() const;
 
         /*!
-        * \brief Draws a specified drawable thing.
-        * \param drawable - drawable entity.
-        */
+         * \brief Draws a specified drawable thing.
+         * \param drawable - drawable entity.
+         */
         void Draw(const sf::Drawable& drawable) const;
 
         /*!
-        * \brief Finalizes drawing process.
-        */
+         * \brief Finalizes drawing process.
+         */
         void EndDraw() const;
 
-    private:        
-        /*!
-        * \brief Applies window settings to the window.
-        */
-        void _ApplySettings();
-
-        /*! Simple flag that defines if new settings should be applied to the window or not. */
-        std::atomic<bool> _applyNewSettings;
+    private:
         /*! Stored window settings. */
         WindowSettings _settings;
-        /*! Simple flag that defines if new icon should be applied to the window or not. */
-        std::atomic<bool> _applyNewIcon;
         /*! Stored icon of the window */
         sf::Image* _icon;
         /*! Actual SFML window that is used to render everything. */
-        sf::RenderWindow* _renderWindow;
+        std::unique_ptr<sf::RenderWindow> _renderWindow;
     };
 }

@@ -22,7 +22,7 @@ namespace Input
          * \param axis - axis, value of which is required.
          * \return Position of specified axis.
          */
-        virtual float JoystickAxisPosition(const JoystickAxis axis) const = 0;
+        virtual float JoystickAxisPosition(JoystickAxis axis) const = 0;
 
         /*!
          * \brief Returns name of current joystick.

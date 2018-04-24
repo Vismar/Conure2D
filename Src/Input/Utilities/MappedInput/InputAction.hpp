@@ -27,19 +27,19 @@ namespace Input
          * \brief Constructor to assign keyboard button as value.
          * \param keyboardButtonValue - keyboard button.
          */
-        explicit ButtonUnion(const KeyboardButton keyboardButtonValue);
+        explicit ButtonUnion(KeyboardButton keyboardButtonValue);
 
         /*!
          * \brief Constructor to assign mouse button as value.
          * \param mouseButtonValue - mouse button.
          */
-        explicit ButtonUnion(const MouseButton mouseButtonValue);
+        explicit ButtonUnion(MouseButton mouseButtonValue);
 
         /*!
          * \brief Constructor to assign joystick button as value.
          * \param joystickButtonValue - joystick button.
          */
-        explicit ButtonUnion(const JoystickButton joystickButtonValue);
+        explicit ButtonUnion(JoystickButton joystickButtonValue);
 
         /*!
          * \brief Relational operator to compare one ButtonUnion to another.
@@ -63,19 +63,19 @@ namespace Input
          * \brief Constructor to create action button from keyboard button.
          * \param keyboardButton - keyboard button that will be used to set input action and its type.
          */
-        explicit ActionButton(const KeyboardButton keyboardButton);
+        explicit ActionButton(KeyboardButton keyboardButton);
 
         /*!
          * \brief Constructor to create action button from mouse button.
          * \param mouseButton - mouse button that will be used to set input action and its type.
          */
-        explicit ActionButton(const MouseButton mouseButton);
+        explicit ActionButton(MouseButton mouseButton);
 
         /*!
          * \brief Constructor to create action button from joystick button.
          * \param joystickButton - joystick button that will be used to set input action and its type.
          */
-        explicit ActionButton(const JoystickButton joystickButton);
+        explicit ActionButton(JoystickButton joystickButton);
 
         /*!
          * \brief Relational operator to compare one ActionButton to another.
@@ -86,19 +86,19 @@ namespace Input
          * \brief Sets input type to keyboard and keyboard button as input action.
          * \param keyboardButton - keyboard button.
          */
-        void SetButton(const KeyboardButton keyboardButton);
+        void SetButton(KeyboardButton keyboardButton);
 
         /*!
          * \brief Sets input type to mouse and mouse button as input action.
          * \param mouseButton - mouse button.
          */
-        void SetButton(const MouseButton mouseButton);
+        void SetButton(MouseButton mouseButton);
 
         /*!
          * \brief Sets input type to joystick and joystick button as input action.
          * \param joystickButton - joystick button.
          */
-        void SetButton(const JoystickButton joystickButton);
+        void SetButton(JoystickButton joystickButton);
 
         /*! Type of input. */
         InputType type;
@@ -124,7 +124,7 @@ namespace Input
          *                     Can be set to anything if action button is not joystick button.
          * \param actionButton - actual button that will be checked to activate input action.
          */
-        InputAction(const ButtonState state, const int joystickId, const ActionButton& actionButton);
+        InputAction(ButtonState state, int joystickId, const ActionButton& actionButton);
 
         /*!
          * \brief Relational operator to compare one InputAction to another.
@@ -142,7 +142,7 @@ namespace Input
          * \brief Sets required button state to specified one.
          * \param state - button state that will be set as required.
          */
-        void SetRequiredState(const ButtonState state);
+        void SetRequiredState(ButtonState state);
 
         /*!
          * \brief Sets required button to check activation of input action.
@@ -150,7 +150,7 @@ namespace Input
          *                     Can be set to anything if action button is not joystick button.
          * \param actionButton - actual button that will be checked to activate input action.
          */
-        void SetRequriedButton(const int joystickId, const ActionButton& actionButton);
+        void SetRequriedButton(int joystickId, const ActionButton& actionButton);
                 
     private:
         /*!

@@ -8,14 +8,12 @@ using namespace Renderer;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Window::Window(WindowSettings settings)
-    : _applyNewSettings(false)
-    , _settings(std::move(settings))
-    , _applyNewIcon(false)
+    : _settings(std::move(settings))
     , _icon(new sf::Image())
-    , _renderWindow(new sf::RenderWindow(_settings.GetVideoMode(), 
-                                         _settings.title, 
-                                         _settings.GetSfmlStyle(), 
-                                         _settings.GetContextSettings()))
+    , _renderWindow(std::make_unique<sf::RenderWindow>(_settings.GetVideoMode(),
+                                                       _settings.title, 
+                                                       _settings.GetSfmlStyle(), 
+                                                       _settings.GetContextSettings()))
 {
     _renderWindow->setKeyRepeatEnabled(false);
     _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
@@ -29,14 +27,28 @@ Window::Window(WindowSettings settings)
 Window::~Window()
 {
     _renderWindow->close();
-    delete _renderWindow;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Window::SetSettings(WindowSettings settings)
+void Window::SetNewSettings(WindowSettings windowSettings)
 {
-    _settings = std::move(settings);
+    _settings = std::move(windowSettings);
+
+    // Recreate window
+    _renderWindow->create(_settings.GetVideoMode(), _settings.title, _settings.GetSfmlStyle(), _settings.GetContextSettings());
+
+    // Set some default parameters
+    _renderWindow->setKeyRepeatEnabled(false);
+
+    // Set icon for window
+    _renderWindow->setIcon(_icon->getSize().x, _icon->getSize().y, _icon->getPixelsPtr());
+
+    // Set other settings
+    _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
+    _renderWindow->setFramerateLimit(_settings.frameLimit);
+    _renderWindow->setMouseCursorVisible(_settings.cursorIsVisible);
+    _renderWindow->setMouseCursorGrabbed(_settings.cursorIsGrabbed);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,10 +60,68 @@ const WindowSettings& Window::GetSettings() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void Window::SetTitle(const std::string& title)
+{
+    _settings.title = title;
+    _renderWindow->setTitle(title);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Window::SetSize(const uint32_t width, const uint32_t height)
+{
+    _settings.width = width;
+    _settings.height = height;
+    _renderWindow->setSize(sf::Vector2u(width, height));
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Window::SetIcon(const sf::Image& icon)
 {
     *_icon = icon;
-    _applyNewIcon = true;
+    _renderWindow->setIcon(_icon->getSize().x, _icon->getSize().y, _icon->getPixelsPtr());
+    //_applyNewIcon = true;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Window::SetAntialiasing(const uint32_t antialiasingLevel)
+{
+    _settings.antialiasing = antialiasingLevel;
+    _renderWindow->create(_settings.GetVideoMode(), _settings.title, _settings.GetSfmlStyle(), _settings.GetContextSettings());
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Window::SetVerticalSyncEnabled(const bool enabled)
+{
+    _settings.verticalSync = enabled;
+    _renderWindow->setVerticalSyncEnabled(enabled);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Window::SetFramerateLimit(const uint32_t frameLimit)
+{
+    _settings.frameLimit = frameLimit;
+    _renderWindow->setFramerateLimit(frameLimit);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Window::SetMouseCursorVisible(const bool visible)
+{
+    _settings.cursorIsVisible = visible;
+    _renderWindow->setMouseCursorVisible(visible);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Window::SetMouseCursorGrabbed(const bool grabbed)
+{
+    _settings.cursorIsGrabbed = grabbed;
+    _renderWindow->setMouseCursorGrabbed(grabbed);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,18 +152,8 @@ void Window::PollEvents(Input::InputSystemHandlerInterface& inputSystem, const U
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Renderer::Window::BeginDraw()
+void Window::BeginDraw() const
 {
-    if (_applyNewSettings)
-    {
-        _ApplySettings();
-    }
-    else if (_applyNewIcon)
-    {
-        _renderWindow->setIcon(_icon->getSize().x, _icon->getSize().y, _icon->getPixelsPtr());
-        _applyNewIcon = false;
-    }
-
     _renderWindow->clear();
 }
 
@@ -106,31 +166,9 @@ void Window::Draw(const sf::Drawable& drawable) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Renderer::Window::EndDraw() const
+void Window::EndDraw() const
 {
     _renderWindow->display();
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Window::_ApplySettings()
-{
-    // Recreate window
-    _renderWindow->create(_settings.GetVideoMode(), _settings.title, _settings.GetSfmlStyle(), _settings.GetContextSettings());
-
-    // Set some default parameters
-    _renderWindow->setKeyRepeatEnabled(false);
-
-    // Set icon for window
-    _renderWindow->setIcon(_icon->getSize().x, _icon->getSize().y, _icon->getPixelsPtr());
-
-    // Set other settings
-    _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
-    _renderWindow->setFramerateLimit(_settings.frameLimit);
-    _renderWindow->setMouseCursorVisible(_settings.cursorIsVisible);
-    _renderWindow->setMouseCursorGrabbed(_settings.cursorIsGrabbed);
-
-    _applyNewSettings = false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

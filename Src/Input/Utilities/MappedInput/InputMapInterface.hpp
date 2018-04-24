@@ -32,7 +32,7 @@ namespace Input
          *
          * Only one action can be assigned to a certain name. If name was already used, its button will be rewritten.
          */
-        virtual void MapAction(const std::string& actionName, const ButtonState state, const KeyboardButton keyBoardButton) = 0;
+        virtual void MapAction(const std::string& actionName, ButtonState state, KeyboardButton keyBoardButton) = 0;
 
         /*!
          * \brief Map specified action to a certain name.
@@ -42,7 +42,7 @@ namespace Input
          * 
          * Only one action can be assigned to a certain name. If name was already used, its button will be rewritten.
          */
-        virtual void MapAction(const std::string& actionName, const ButtonState state, const MouseButton mouseButton) = 0;
+        virtual void MapAction(const std::string& actionName, ButtonState state, MouseButton mouseButton) = 0;
 
         /*!
          * \brief Map specified action to a certain name.
@@ -54,9 +54,9 @@ namespace Input
          * Only one action can be assigned to a certain name. If name was already used, its button will be rewritten.
          */
         virtual void MapAction(const std::string& actionName, 
-                               const ButtonState state, 
-                               const int joystickId, 
-                               const JoystickButton joystickButton) = 0;
+                               ButtonState state, 
+                               int joystickId, 
+                               JoystickButton joystickButton) = 0;
 
         /*!
          * \brief Map specified axis to a certain name.
@@ -66,7 +66,7 @@ namespace Input
          *
          * Only one axis can be assigned to a certain name. If name was already used, its axis will be rewritten.
          */
-        virtual void MapAxis(const std::string& axisName, const int joystickId, const JoystickAxis axis) = 0;
+        virtual void MapAxis(const std::string& axisName, int joystickId, JoystickAxis axis) = 0;
 
         /*!
          * \brief Map specified axis to a certain name.

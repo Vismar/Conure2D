@@ -35,7 +35,7 @@ namespace  Input
          * 
          * Only one action can be assigned to a certain name. If name was already used, its button will be rewritten.
          */
-        void MapAction(const std::string& actionName, const ButtonState state, const KeyboardButton keyBoardButton) final;
+        void MapAction(const std::string& actionName, ButtonState state, KeyboardButton keyBoardButton) final;
 
         /*!
          * \brief Map specified action to a certain name.
@@ -45,7 +45,7 @@ namespace  Input
          * 
          * Only one action can be assigned to a certain name. If name was already used, its button will be rewritten.
          */
-        void MapAction(const std::string& actionName, const ButtonState state, const MouseButton mouseButton) final;
+        void MapAction(const std::string& actionName, ButtonState state, MouseButton mouseButton) final;
 
         /*!
          * \brief Map specified action to a certain name.
@@ -57,9 +57,9 @@ namespace  Input
          * Only one action can be assigned to a certain name. If name was already used, its button will be rewritten.
          */
         void MapAction(const std::string& actionName, 
-                       const ButtonState state, 
-                       const int joystickId, 
-                       const JoystickButton joystickButton) final;
+                       ButtonState state, 
+                       int joystickId, 
+                       JoystickButton joystickButton) final;
 
         /*!
          * \brief Map specified axis to a certain name.
@@ -69,7 +69,7 @@ namespace  Input
          * 
          * Only one axis can be assigned to a certain name. If name was already used, its axis will be rewritten.
          */
-        void MapAxis(const std::string& axisName, const int joystickId, const JoystickAxis axis) final;
+        void MapAxis(const std::string& axisName, int joystickId, JoystickAxis axis) final;
 
         /*!
          * \brief Map specified axis to a certain name.

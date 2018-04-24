@@ -21,7 +21,7 @@ namespace Utility
          * \param start - time value that represent start of the time span.
          * \param end - time value that represent end of the time span.
          */
-        TimeSpan(const Time& start, const Time& end);
+        TimeSpan(Time start, Time end);
 
         /*!
          * \brief Sets new end of the time period.

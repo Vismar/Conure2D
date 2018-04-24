@@ -33,7 +33,7 @@ namespace Input
          * \param state - state for which new time will be assigned.
          * \param time - new time that will be assigned to a specified state.
          */
-        void UpdateState(const ButtonState state, const Utility::Time& time);
+        void UpdateState(ButtonState state, const Utility::Time& time);
 
         /*!
          * \brief Calculates state of a button in a specified time span.

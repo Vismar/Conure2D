@@ -40,13 +40,13 @@ namespace Input
          * \brief Sets inner id of current joystick.
          * \param joystickId - inner id of joystick that will be used by device to identify itself.
          */
-        void SetJoystickId(const unsigned int joystickId);
+        void SetJoystickId(unsigned int joystickId);
 
         /*!
          * \brief Sets connection state of current joystick.
          * \param connectionState - state of connection.
          */
-        void SetJoystickConnectionState(const bool connectionState);
+        void SetJoystickConnectionState(bool connectionState);
 
          /*!
           * \brief Returns state of specified joystick button.
@@ -54,14 +54,14 @@ namespace Input
           * \param timeSpan - time span in which button should be checked.
           * \return ButtonState which defines in what state specified button is.
           */
-        ButtonState GetButtonState(const JoystickButton button, const Utility::TimeSpan& timeSpan) const;
+        ButtonState GetButtonState(JoystickButton button, const Utility::TimeSpan& timeSpan) const;
 
         /*!
          * \brief Returns position [range: -100.0f .. 100.0f] of specified joystick axis.
          * \param axis - axis, value of which is required.
          * \return Position of specified axis.
          */
-        float JoystickAxisPosition(const JoystickAxis axis) const final;
+        float JoystickAxisPosition(JoystickAxis axis) const final;
 
         /*!
          * \brief Returns name of current joystick.

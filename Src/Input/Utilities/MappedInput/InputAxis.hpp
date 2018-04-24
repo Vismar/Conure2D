@@ -33,7 +33,7 @@ namespace Input
          * \param joystickId - joystick id that will be used to check proper joystick device.
          * \param axis - joystick axis that will be used.
          */
-        InputAxis(const int joystickId, const JoystickAxis axis);
+        InputAxis(int joystickId, JoystickAxis axis);
 
         /*!
          * \brief Constructor to create input axis from two already mapped actions.
@@ -61,7 +61,7 @@ namespace Input
          * \param joystickId - joystick id that will be used to check proper joystick device.
          * \param axis - joystick axis that will be used.
          */
-        void SetAxis(const int joystickId, const JoystickAxis& axis);
+        void SetAxis(int joystickId, const JoystickAxis& axis);
 
         /*!
          * \brief Sets two already mapped actions to be interpreted as input axis.

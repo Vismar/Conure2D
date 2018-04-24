@@ -26,10 +26,10 @@ SpriteRenderComponent::SpriteRenderComponent(const std::shared_ptr<Core::SceneOb
 
 void SpriteRenderComponent::SetTextureCoordinates(const sf::IntRect& rect)
 {
-    const float left = static_cast<float>(rect.left);
-    const float right = left + rect.width;
-    const float top = static_cast<float>(rect.top);
-    const float bottom = top + rect.height;
+    const auto left = static_cast<float>(rect.left);
+    const auto right = left + rect.width;
+    const auto top = static_cast<float>(rect.top);
+    const auto bottom = top + rect.height;
 
     _vertices[0].texCoords = sf::Vector2f(left, top);
     _vertices[1].texCoords = sf::Vector2f(left, bottom);

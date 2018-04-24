@@ -53,7 +53,7 @@ namespace Core
          * \param newOriginX - X value of new transform origin.
          * \param newOriginY - Y value of new transform origin.
          */
-        void SetOrigin(const float newOriginX, const float newOriginY);
+        void SetOrigin(float newOriginX, float newOriginY);
 
         /*!
          * \brief Sets transform origin to specified value.
@@ -84,7 +84,7 @@ namespace Core
          * \param newPositionX - X value of new local transform position.
          * \param newPositionY - Y value of new local transform position.
          */
-        void SetPosition(const float newPositionX, const float newPositionY);
+        void SetPosition(float newPositionX, float newPositionY);
 
         /*!
          * \brief Sets local transform position to specified value.
@@ -103,7 +103,7 @@ namespace Core
          * \param offsetX - X value of offset.
          * \param offsetY - Y value of offset.
          */
-        void Move(const float offsetX, const float offsetY);
+        void Move(float offsetX, float offsetY);
 
         /*!
          * \brief Moves local transform position by specified offset value.
@@ -127,13 +127,13 @@ namespace Core
          * \brief Sets local transform rotation to specified value.
          * \param newRotation - rotation that will be set as new local transform rotation.
          */
-        void SetRotation(const float newRotation);
+        void SetRotation(float newRotation);
 
         /*!
          * \brief Rotates local transform rotation by specified degree.
          * \param angle - angle value that will add to local transform rotation.
          */
-        void Rotate(const float angle);
+        void Rotate(float angle);
 
         /*!
          * \brief Returns global transform scale.
@@ -152,7 +152,7 @@ namespace Core
          * \param newScaleX - X value of new local transform scale.
          * \param newScaleY - Y value of new local transform scale.
          */
-        void SetScale(const float newScaleX, const float newScaleY);
+        void SetScale(float newScaleX, float newScaleY);
 
         /*!
          * \brief Sets local transform scale to specified value.
@@ -171,7 +171,7 @@ namespace Core
          * \param factorX - X value of factor.
          * \param factorY - Y value of factor.
          */
-        void Scale(const float factorX, const float factorY);
+        void Scale(float factorX, float factorY);
 
         /*!
          * \brief Scales(multiply) local transform scale by specified factor value.

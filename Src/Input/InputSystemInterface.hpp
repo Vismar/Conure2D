@@ -28,14 +28,14 @@ namespace Input
          * \param keyboardButton - keyboard button which will be checked.
          * \return True if specified button was pressed. Otherwise - false.
          */
-        virtual bool ButtonPressed(const KeyboardButton keyboardButton) const = 0;
+        virtual bool ButtonPressed(KeyboardButton keyboardButton) const = 0;
 
         /*!
          * \brief Checks if specified button was pressed.
          * \param mouseButton - mouse button which will be checked.
          * \return True if specified button was pressed. Otherwise - false.
          */
-        virtual bool ButtonPressed(const MouseButton mouseButton) const = 0;
+        virtual bool ButtonPressed(MouseButton mouseButton) const = 0;
         
         /*!
          * \brief Checks if specified button was pressed.
@@ -43,21 +43,21 @@ namespace Input
          * \param joystickButton - joystick button which will be checked.
          * \return True if specified button was pressed. Otherwise - false.
          */
-        virtual bool ButtonPressed(const uint32_t joystickId, const JoystickButton joystickButton) const = 0;
+        virtual bool ButtonPressed(uint32_t joystickId, JoystickButton joystickButton) const = 0;
 
         /*!
          * \brief Checks if specified button was held down.
          * \param keyboardButton - keyboard button which will be checked.
          * \return True if specified button was held down. Otherwise - false.
          */
-        virtual bool ButtonHeldDown(const KeyboardButton keyboardButton) const = 0;
+        virtual bool ButtonHeldDown(KeyboardButton keyboardButton) const = 0;
 
         /*!
          * \brief Checks if specified button was held down.
          * \param mouseButton - mouse button which will be checked.
          * \return True if specified button was held down. Otherwise - false.
          */
-        virtual bool ButtonHeldDown(const MouseButton mouseButton) const = 0;
+        virtual bool ButtonHeldDown(MouseButton mouseButton) const = 0;
 
         /*!
          * \brief Checks if specified button was held down.
@@ -65,21 +65,21 @@ namespace Input
          * \param joystickButton - joystick button which will be checked.
          * \return True if specified button was held down. Otherwise - false.
          */
-        virtual bool ButtonHeldDown(const uint32_t joystickId, const JoystickButton joystickButton) const = 0;
+        virtual bool ButtonHeldDown(uint32_t joystickId, JoystickButton joystickButton) const = 0;
 
         /*!
          * \brief Checks if specified button was released.
          * \param keyboardButton - keyboard button which will be checked.
          * \return True if specified button was released. Otherwise - false.
          */
-        virtual bool ButtonReleased(const KeyboardButton keyboardButton) const = 0;
+        virtual bool ButtonReleased(KeyboardButton keyboardButton) const = 0;
 
         /*!
          * \brief Checks if specified button was released.
          * \param mouseButton - mouse button which will be checked.
          * \return True if specified button was released. Otherwise - false.
          */
-        virtual bool ButtonReleased(const MouseButton mouseButton) const = 0;
+        virtual bool ButtonReleased(MouseButton mouseButton) const = 0;
 
         /*!
          * \brief Checks if specified button was released.
@@ -87,7 +87,7 @@ namespace Input
          * \param joystickButton - joystick button which will be checked.
          * \return True if specified button was released. Otherwise - false.
          */
-        virtual bool ButtonReleased(const uint32_t joystickId, const JoystickButton joystickButton) const = 0;
+        virtual bool ButtonReleased(uint32_t joystickId, JoystickButton joystickButton) const = 0;
 
         /*!
          * \brief Checks if any button on keyboard or mouse was pressed.
@@ -118,7 +118,7 @@ namespace Input
          * \param joystickId - id of joystick.
          * \return Reference to the public joystick device interface of specified joystick.
          */
-        virtual JoystickDeviceInterface& Joystick(const uint32_t joystickId) const = 0;
+        virtual JoystickDeviceInterface& Joystick(uint32_t joystickId) const = 0;
 
         /*!
          * \brief Checks if any joystick was used and returns id of joystick which was used last time.
