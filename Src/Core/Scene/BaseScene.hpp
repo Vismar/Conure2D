@@ -44,6 +44,11 @@ namespace Core
          */
         bool Activated() const;
 
+        /*!
+         * \brief Marks the scene to be deleted when the time comes.
+         */
+        void DeleteLater();
+
     protected:
         /*! Array of shared pointers to scene objects. */
         std::vector<std::shared_ptr<SceneObject>> _sceneObjects;
@@ -85,6 +90,8 @@ namespace Core
          */
         void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, int8_t layer);
 
+        /*! Flag that defines if scene should be deleted or not. */
+        std::atomic<bool> _deleteLater;
         /*! Simple flag that defines if scene is activated or not. Used to know if scene should be rendered. */
         std::atomic<bool> _activated;
         /*! Set of renderable components that should be used by render system. */

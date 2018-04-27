@@ -35,8 +35,8 @@ Time& Time::operator=(Time&& other) noexcept
 
 Time::Time(const uint64_t hours, const uint64_t minutes, const uint64_t seconds, 
            const uint64_t milliseconds, const uint64_t microseconds, const uint64_t nanoseconds)
-    : _timeValue(nanoseconds + microseconds * 1000ll + milliseconds * 1000000ll +
-                 seconds * 1000000000ll + minutes * 60000000000ll + hours * 1440000000000ll)
+: _timeValue(nanoseconds + microseconds * 1000ll + milliseconds * 1000000ll +
+             seconds * 1000000000ll + minutes * 60000000000ll + hours * 1440000000000ll)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

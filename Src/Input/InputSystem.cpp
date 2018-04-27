@@ -6,11 +6,11 @@ using namespace Input;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputSystem::InputSystem(const Utility::TimeSpan& logicLoopTimeSpan) 
-    : _logicLoopTimeSpan(logicLoopTimeSpan)
-    , _keyboard(std::make_unique<KeyboardDevice>())
-    , _mouse(std::make_unique<MouseDevice>())
-    , _lastJoystickId(-1)
-    , _inputMap(std::make_unique<InputMap>(*this))
+: _logicLoopTimeSpan(logicLoopTimeSpan)
+, _keyboard(std::make_unique<KeyboardDevice>())
+, _mouse(std::make_unique<MouseDevice>())
+, _lastJoystickId(-1)
+, _inputMap(std::make_unique<InputMap>(*this))
 {
     _joystick.resize(sf::Joystick::Count);
     for (auto& joystick : _joystick)

@@ -4,8 +4,8 @@
 
 template <class T>
 RingBuffer<T>::ReverseIterator::ReverseIterator(uint64_t index, RingBuffer<T>* ringBuffer) 
-    : _index(index)
-    , _ringBuffer(ringBuffer)
+: _index(index)
+, _ringBuffer(ringBuffer)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

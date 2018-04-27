@@ -6,27 +6,27 @@ using namespace Input;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputAxis::InputAxis()
-    : _axisType(AxisType::Axis)
-    , _joystickAxis(JoystickAxis::PovX)
-    , _joystickId(0)
+: _axisType(AxisType::Axis)
+, _joystickAxis(JoystickAxis::PovX)
+, _joystickId(0)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputAxis::InputAxis(const int joystickId, const JoystickAxis axis)
-    : _axisType(AxisType::Axis)
-    , _joystickAxis(axis)
-    , _joystickId(joystickId)
+: _axisType(AxisType::Axis)
+, _joystickAxis(axis)
+, _joystickId(joystickId)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputAxis::InputAxis(std::string&& negativeAction, std::string&& positiveAction)
-    : _axisType(AxisType::Buttons)
-    , _joystickAxis()
-    , _joystickId(-1)
-    , _negativeAction(negativeAction)
-    , _positiveAction(positiveAction)
+: _axisType(AxisType::Buttons)
+, _joystickAxis()
+, _joystickId(-1)
+, _negativeAction(negativeAction)
+, _positiveAction(positiveAction)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

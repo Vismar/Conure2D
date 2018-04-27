@@ -7,9 +7,9 @@ using namespace Input;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputMap::InputMap(const InputSystemInterface& inputSystem)
-    : _inputSystem(inputSystem)
-    , _inputActionMap(std::make_unique<std::unordered_map<std::string, InputAction>>())
-    , _inputAxisMap(std::make_unique<std::unordered_map<std::string, InputAxis>>())
+: _inputSystem(inputSystem)
+, _inputActionMap(std::make_unique<std::unordered_map<std::string, InputAction>>())
+, _inputAxisMap(std::make_unique<std::unordered_map<std::string, InputAxis>>())
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@ using namespace Renderer;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 SpriteRenderComponent::SpriteRenderComponent(const std::shared_ptr<Core::SceneObject>& sceneObject)
-    : RenderableComponent(sceneObject)
+: RenderableComponent(sceneObject)
 {
     _vertices.setPrimitiveType(sf::Quads);
     _vertices.resize(4);

@@ -6,10 +6,10 @@ using namespace Input;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 MouseDevice::MouseDevice()
-    : _verticalWheelDiff(0.0f)
-    , _horizontalWheelDiff(0.0f)
-    , _posX(0)
-    , _posY(0)
+: _verticalWheelDiff(0.0f)
+, _horizontalWheelDiff(0.0f)
+, _posX(0)
+, _posY(0)
 {
     _buttons.resize(sf::Mouse::ButtonCount);
 }

@@ -81,17 +81,17 @@ void ActionButton::SetButton(const JoystickButton joystickButton)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputAction::InputAction()
-    : _requiredState(ButtonState::Pressed)
-    , _button(KeyboardButton::Escape)
-    , _joystickId(-1)
+: _requiredState(ButtonState::Pressed)
+, _button(KeyboardButton::Escape)
+, _joystickId(-1)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 InputAction::InputAction(const ButtonState state, const int joystickId, const ActionButton& actionButton)
-    : _requiredState(state)
-    , _button(actionButton)
-    , _joystickId(joystickId)
+: _requiredState(state)
+, _button(actionButton)
+, _joystickId(joystickId)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

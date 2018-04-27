@@ -48,7 +48,8 @@ bool SceneMap::RemoveScene(const std::string& sceneName)
     const auto scene = _scenes.find(sceneName);
     if (scene != _scenes.end())
     {
-        _scenes.erase(scene);
+        // Mark a scene so it will be deleted later
+        scene->second->DeleteLater();
         removed = true;
     }
 
@@ -59,6 +60,16 @@ bool SceneMap::RemoveScene(const std::string& sceneName)
 
 void SceneMap::UpdateScenes()
 {
+    // Check if any scenes should be deleted and delete it
+    for (auto scene = _scenes.begin(); scene != _scenes.end(); ++scene)
+    {
+        if (scene->second->_deleteLater)
+        {
+            scene = _scenes.erase(scene);
+        }
+    }
+
+    // Update remained scenes
     for (auto& scene : _scenes)
     {
         // Update scene only if was activated

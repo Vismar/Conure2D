@@ -9,9 +9,9 @@ using namespace Core;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 RenderableComponent::RenderableComponent(const std::shared_ptr<SceneObject>& sceneObject) 
-    : BaseComponent(sceneObject)
-    , _layerNumber(0)
-    , _transformNeedUpdate(true)
+: BaseComponent(sceneObject)
+, _layerNumber(0)
+, _transformNeedUpdate(true)
 {
     if (const auto object = GetSceneObject().lock())
     {

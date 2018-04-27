@@ -5,11 +5,11 @@ using namespace Renderer;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 RenderSystem::RenderSystem() 
-    : _working(false)
-    , _noErrors(true)
-    , _recreateWindow(false)
-    , _updateWindowParameters(false)
-    , _window(WindowSettings())
+: _working(false)
+, _noErrors(true)
+, _recreateWindow(false)
+, _updateWindowParameters(false)
+, _window(WindowSettings())
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

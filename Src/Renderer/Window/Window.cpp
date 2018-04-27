@@ -8,12 +8,12 @@ using namespace Renderer;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Window::Window(WindowSettings settings)
-    : _settings(std::move(settings))
-    , _icon(new sf::Image())
-    , _renderWindow(std::make_unique<sf::RenderWindow>(_settings.GetVideoMode(),
-                                                       _settings.title, 
-                                                       _settings.GetSfmlStyle(), 
-                                                       _settings.GetContextSettings()))
+: _settings(std::move(settings))
+, _icon(new sf::Image())
+, _renderWindow(std::make_unique<sf::RenderWindow>(_settings.GetVideoMode(),
+                                                   _settings.title, 
+                                                   _settings.GetSfmlStyle(), 
+                                                   _settings.GetContextSettings()))
 {
     _renderWindow->setKeyRepeatEnabled(false);
     _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);

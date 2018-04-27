@@ -24,21 +24,21 @@ namespace Core
          * \param newScene - shared pointer to the new scene that should be added.
          * \return True if scene was added. Otherwise, if scene with such name already added, false.
          */
-        bool AddScene(const std::string& sceneName, std::shared_ptr<BaseScene>&& newScene);
+        bool AddScene(const std::string& sceneName, std::shared_ptr<BaseScene>&& newScene) final;
 
         /*!
          * \brief Grabs specified scene if it exists in scene map.
          * \param sceneName - name of a scene that should be returned.
          * \return Weak pointer to a specified scene.
          */
-        std::weak_ptr<BaseScene> GetScene(const std::string& sceneName) const;
+        std::weak_ptr<BaseScene> GetScene(const std::string& sceneName) const final;
 
         /*!
          * \brief Removes specified scene from the scene map.
          * \param sceneName - name of the scene that should be removed.
          * \return True if scene was removed. Otherwise, if scene with such name does not exist, false.
          */
-        bool RemoveScene(const std::string& sceneName);
+        bool RemoveScene(const std::string& sceneName) final;
 
         /*!
          * \brief Updates all scenes that stored in the scene map.
@@ -58,7 +58,7 @@ namespace Core
          * P.S. If new render order will not contain all scenes that are already (or will) exist
          * in the list, then not mentioned scenes will be added to the front of the list.
          */
-        void SetRenderOrder(const std::list<std::string>& renderOrder);
+        void SetRenderOrder(const std::list<std::string>& renderOrder) final;
 
         /*!
          * \brief Returns list of scene names that should be interpreted as the render order.

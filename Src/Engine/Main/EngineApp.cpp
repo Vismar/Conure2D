@@ -5,10 +5,10 @@ using namespace Engine;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 EngineApp::EngineApp()
-    : _renderSystem(std::make_unique<Renderer::RenderSystem>())
-    , _logicThreadIsWorking(false)
-    , _sceneMap(std::make_unique<Core::SceneMap>())
-    , _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
+: _renderSystem(std::make_unique<Renderer::RenderSystem>())
+, _logicThreadIsWorking(false)
+, _sceneMap(std::make_unique<Core::SceneMap>())
+, _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
