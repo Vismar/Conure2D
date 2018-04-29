@@ -74,6 +74,13 @@ namespace Renderer
         void SetWindowSize(uint32_t width, uint32_t height) final;
 
         /*!
+         * \brief Resizes window resolution to specified values.
+         * \param width - new width of the window resolution.
+         * \param height - new height of the window resolution.
+         */
+        void SetWindowResolution(uint32_t width, uint32_t height) final;
+
+        /*!
          * \brief Sets new antialiasing level.
          * \param antialiasingLevel - new level of antialiasing.
          */

@@ -46,6 +46,10 @@ namespace Renderer
         uint32_t width = 1280;
         /*! Window height. */
         uint32_t height = 720;
+        /*! Window resolution width. */
+        uint32_t resolutionWidth = 1280;
+        /*! Window resolution height. */
+        uint32_t resolutionHeight = 720;
         /*! Number of bits per pixel.. */
         uint32_t bitsPerPixel = 32;
         /*! Level of anti-aliasing. */

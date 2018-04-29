@@ -16,6 +16,7 @@ Window::Window(WindowSettings settings)
                                                    _settings.GetContextSettings()))
 {
     _renderWindow->setKeyRepeatEnabled(false);
+    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
     _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
     _renderWindow->setFramerateLimit(_settings.frameLimit);
     _renderWindow->setMouseCursorVisible(_settings.cursorIsVisible);
@@ -41,8 +42,8 @@ void Window::SetNewSettings(WindowSettings windowSettings)
     // Set some default parameters
     _renderWindow->setKeyRepeatEnabled(false);
 
-    // Set icon for window
-    _renderWindow->setIcon(_icon->getSize().x, _icon->getSize().y, _icon->getPixelsPtr());
+    // Set window size
+    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
 
     // Set other settings
     _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
@@ -77,11 +78,23 @@ void Window::SetSize(const uint32_t width, const uint32_t height)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void Window::SetResolution(const uint32_t width, const uint32_t height)
+{
+    _settings.resolutionWidth = width;
+    _settings.resolutionHeight = height;
+    _renderWindow->create(_settings.GetVideoMode(), 
+                          _settings.title, 
+                          _settings.GetSfmlStyle(), 
+                          _settings.GetContextSettings());
+    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Window::SetIcon(const sf::Image& icon)
 {
     *_icon = icon;
     _renderWindow->setIcon(_icon->getSize().x, _icon->getSize().y, _icon->getPixelsPtr());
-    //_applyNewIcon = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +102,11 @@ void Window::SetIcon(const sf::Image& icon)
 void Window::SetAntialiasing(const uint32_t antialiasingLevel)
 {
     _settings.antialiasing = antialiasingLevel;
-    _renderWindow->create(_settings.GetVideoMode(), _settings.title, _settings.GetSfmlStyle(), _settings.GetContextSettings());
+    _renderWindow->create(_settings.GetVideoMode(), 
+                          _settings.title, 
+                          _settings.GetSfmlStyle(), 
+                          _settings.GetContextSettings());
+    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

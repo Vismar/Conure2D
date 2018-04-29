@@ -57,6 +57,13 @@ namespace Renderer
         void SetSize(uint32_t width, uint32_t height);
 
         /*!
+         * \brief Resizes window resolution to specified values.
+         * \param width - new width of the window resolution.
+         * \param height - new height of the window resolution.
+         */
+        void SetResolution(uint32_t width, uint32_t height);
+
+        /*!
          * \brief Sets new icon to the window.
          * \param icon - new icon that will be applied to the window.
          * 

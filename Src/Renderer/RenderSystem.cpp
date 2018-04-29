@@ -91,7 +91,9 @@ void RenderSystem::SetNewSettings(WindowSettings windowSettings)
     std::lock_guard<std::mutex> lock(_settingsMutex);
 
     // These parameters require recreating the window
-    if ((windowSettings.style != _settings.style) ||
+    if ((windowSettings.resolutionWidth != _settings.resolutionWidth) ||
+        (windowSettings.resolutionHeight != _settings.resolutionHeight) ||
+        (windowSettings.style != _settings.style) ||
         (windowSettings.bitsPerPixel != _settings.bitsPerPixel) ||
         (windowSettings.depthBits != _settings.depthBits) ||
         (windowSettings.stencilBits != _settings.stencilBits) ||
@@ -150,6 +152,20 @@ void RenderSystem::SetWindowSize(const uint32_t width, const uint32_t height)
         _settings.width = width;
         _settings.height = height;
         _updateWindowParameters = true;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void RenderSystem::SetWindowResolution(const uint32_t width, const uint32_t height)
+{
+    std::lock_guard<std::mutex> lock(_settingsMutex);
+
+    if (width != _settings.resolutionWidth || height != _settings.resolutionHeight)
+    {
+        _settings.resolutionWidth = width;
+        _settings.resolutionHeight = height;
+        _recreateWindow = true;
     }
 }
 

@@ -9,7 +9,7 @@ using namespace Renderer;
 
 sf::VideoMode WindowSettings::GetVideoMode() const
 {
-    return { width, height, bitsPerPixel };
+    return { resolutionWidth, resolutionHeight, bitsPerPixel };
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
