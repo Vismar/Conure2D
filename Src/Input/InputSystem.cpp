@@ -21,19 +21,19 @@ InputSystem::InputSystem(const Utility::TimeSpan& logicLoopTimeSpan)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void InputSystem::HandleInputEvent(const sf::Event& inputEvent, const Utility::Time& time)
+void InputSystem::HandleInputEvent(const sf::Event& inputEvent)
 {
     switch (inputEvent.type)
     {
     case sf::Event::EventType::KeyPressed:
     case sf::Event::EventType::KeyReleased:
-        _keyboard->HandleKeyboardEvent(inputEvent, time);
+        _keyboard->HandleKeyboardEvent(inputEvent);
         break;
     case sf::Event::EventType::MouseButtonPressed:
     case sf::Event::EventType::MouseButtonReleased:
     case sf::Event::EventType::MouseWheelScrolled:
     case sf::Event::EventType::MouseMoved:
-        _mouse->HandleMouseEvent(inputEvent, time);
+        _mouse->HandleMouseEvent(inputEvent);
         break;
     case sf::Event::EventType::JoystickConnected:
         _joystick[inputEvent.joystickConnect.joystickId]->SetJoystickConnectionState(true);
@@ -43,15 +43,15 @@ void InputSystem::HandleInputEvent(const sf::Event& inputEvent, const Utility::T
         break;
     case sf::Event::EventType::JoystickButtonPressed:
     case sf::Event::EventType::JoystickButtonReleased:
-        _joystick[inputEvent.joystickButton.joystickId]->HandleJoystickEvents(inputEvent, time);
+        _joystick[inputEvent.joystickButton.joystickId]->HandleJoystickEvents(inputEvent);
         // Update joystick id which was used and time when it happened
-        _lastTimeJoystickUsed = time;
+        _lastTimeJoystickUsed = Utility::Time::CurrentTime();
         _lastJoystickId = inputEvent.joystickButton.joystickId;        
         break;
     case sf::Event::EventType::JoystickMoved:
-        _joystick[inputEvent.joystickMove.joystickId]->HandleJoystickEvents(inputEvent, time);
+        _joystick[inputEvent.joystickMove.joystickId]->HandleJoystickEvents(inputEvent);
         // Update joystick id which was used and time when it happened
-        _lastTimeJoystickUsed = time;
+        _lastTimeJoystickUsed = Utility::Time::CurrentTime();
         _lastJoystickId = inputEvent.joystickButton.joystickId;
         break;
     default:

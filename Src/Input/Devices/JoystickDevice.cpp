@@ -88,13 +88,13 @@ bool JoystickDevice::IsConnected() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void JoystickDevice::HandleJoystickEvents(const sf::Event& event, const Utility::Time& time)
+void JoystickDevice::HandleJoystickEvents(const sf::Event& event)
 {
     switch (event.type)
     {
     case sf::Event::EventType::JoystickButtonPressed:
     case sf::Event::EventType::JoystickButtonReleased:
-        _HandleJoystickButtonEvent(event, time);
+        _HandleJoystickButtonEvent(event);
         break;
     case sf::Event::EventType::JoystickMoved:
         _HandleJoystickMoveEvent(event);
@@ -107,18 +107,18 @@ void JoystickDevice::HandleJoystickEvents(const sf::Event& event, const Utility:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event, const Utility::Time& time)
+void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event)
 {
     _isConnected = true;
 
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::JoystickButtonPressed)
     {
-        _buttons[event.joystickButton.button].UpdateState(ButtonState::Pressed, time);
+        _buttons[event.joystickButton.button].UpdateState(ButtonState::Pressed, Utility::Time::CurrentTime());
     }
     else if (event.type == sf::Event::EventType::JoystickButtonReleased)
     {
-        _buttons[event.joystickButton.button].UpdateState(ButtonState::Released, time);
+        _buttons[event.joystickButton.button].UpdateState(ButtonState::Released, Utility::Time::CurrentTime());
     }
 }
 

@@ -90,17 +90,15 @@ namespace Input
         /*!
          * \brief Handles joystick events.
          * \param event - joystick event to handle.
-         * \param time - new time that will be used by button.
          */
-        void HandleJoystickEvents(const sf::Event& event, const Utility::Time& time);
+        void HandleJoystickEvents(const sf::Event& event);
 
     private:
         /*!
          * \brief Handles joystick button events.
          * \param event - joystick button event.
-         * \param time - new time that will be used by button.
          */
-        void _HandleJoystickButtonEvent(const sf::Event& event, const Utility::Time& time);
+        void _HandleJoystickButtonEvent(const sf::Event& event);
 
         /*!
          * \brief Handles joystick axis movement event.

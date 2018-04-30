@@ -18,16 +18,16 @@ ButtonState KeyboardDevice::GetButtonState(KeyboardButton button, const Utility:
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void KeyboardDevice::HandleKeyboardEvent(const sf::Event& event, const Utility::Time& time)
+void KeyboardDevice::HandleKeyboardEvent(const sf::Event& event)
 {
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::KeyPressed)
     {
-        _buttons[event.key.code].UpdateState(ButtonState::Pressed, time);
+        _buttons[event.key.code].UpdateState(ButtonState::Pressed, Utility::Time::CurrentTime());
     }
     else if (event.type == sf::Event::EventType::KeyReleased)
     {
-        _buttons[event.key.code].UpdateState(ButtonState::Released, time);
+        _buttons[event.key.code].UpdateState(ButtonState::Released, Utility::Time::CurrentTime());
     }
 }
 

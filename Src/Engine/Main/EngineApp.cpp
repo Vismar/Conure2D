@@ -91,11 +91,6 @@ void EngineApp::_LogicLoop()
             // Update scenes
             _sceneMap->UpdateScenes();
 
-            // Make sure that logic loop runs only <= 125 times per second.
-            // If it will run faster, then a user input might be missed during some loops.
-            // It will lead to possible bugs.
-            while ((Utility::Time::CurrentTime() - _logicLoopTimeSpan.End()).ToMilliseconds() < 8) {}
-
             // Update time span
             _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
         }

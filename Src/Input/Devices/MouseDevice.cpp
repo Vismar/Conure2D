@@ -65,16 +65,16 @@ int MouseDevice::PositionY() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void MouseDevice::HandleMouseEvent(const sf::Event& event, const Utility::Time& time)
+void MouseDevice::HandleMouseEvent(const sf::Event& event)
 {
     switch (event.type)
     {
     case sf::Event::EventType::MouseButtonPressed:
     case sf::Event::EventType::MouseButtonReleased:
-        _HandleMouseButtonEvent(event, time);
+        _HandleMouseButtonEvent(event);
         break;
     case sf::Event::EventType::MouseWheelScrolled:
-        _HandleMouseWheelEvent(event, time);
+        _HandleMouseWheelEvent(event);
         break;
     case sf::Event::EventType::MouseMoved:
         _HandleMouseMoveEvent(event);
@@ -87,32 +87,32 @@ void MouseDevice::HandleMouseEvent(const sf::Event& event, const Utility::Time& 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void MouseDevice::_HandleMouseButtonEvent(const sf::Event& event, const Utility::Time& time)
+void MouseDevice::_HandleMouseButtonEvent(const sf::Event& event)
 {
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::MouseButtonPressed)
     {
-        _buttons[event.mouseButton.button].UpdateState(ButtonState::Pressed, time);
+        _buttons[event.mouseButton.button].UpdateState(ButtonState::Pressed, Utility::Time::CurrentTime());
     }
     else if (event.type == sf::Event::EventType::MouseButtonReleased)
     {
-        _buttons[event.mouseButton.button].UpdateState(ButtonState::Released, time);
+        _buttons[event.mouseButton.button].UpdateState(ButtonState::Released, Utility::Time::CurrentTime());
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void MouseDevice::_HandleMouseWheelEvent(const sf::Event& event, const Utility::Time& time)
+void MouseDevice::_HandleMouseWheelEvent(const sf::Event& event)
 {
     if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::VerticalWheel)
     {
         _verticalWheelDiff = event.mouseWheelScroll.delta;
-        _verticalWheelMovedTime = time;
+        _verticalWheelMovedTime = Utility::Time::CurrentTime();
     }
     else
     {
         _horizontalWheelDiff = event.mouseWheelScroll.delta;
-        _horizontalWheelMovedTime = time;
+        _horizontalWheelMovedTime = Utility::Time::CurrentTime();
     }
 }
 

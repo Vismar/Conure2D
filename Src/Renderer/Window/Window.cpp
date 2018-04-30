@@ -149,7 +149,7 @@ bool Window::IsOpen() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Window::PollEvents(Input::InputSystemHandlerInterface& inputSystem, const Utility::Time& time) const
+void Window::PollEvents(Input::InputSystemHandlerInterface& inputSystem) const
 {
     sf::Event event{};
 
@@ -161,7 +161,7 @@ void Window::PollEvents(Input::InputSystemHandlerInterface& inputSystem, const U
         }
         else
         {
-            inputSystem.HandleInputEvent(event, time);
+            inputSystem.HandleInputEvent(event);
         }
     }
 }

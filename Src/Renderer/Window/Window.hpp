@@ -110,9 +110,8 @@ namespace Renderer
         /*!
          * \brief Gather all window events and handles it via Input module.
          * \param inputSystem - reference to input system which will handle input events from the window.
-         * \param time - time which will be used along with events.
          */
-        void PollEvents(Input::InputSystemHandlerInterface& inputSystem, const Utility::Time& time) const;
+        void PollEvents(Input::InputSystemHandlerInterface& inputSystem) const;
 
         /*!
          * \brief Initiates drawing process: applies window settings and new icon if it required before rendering new frame.

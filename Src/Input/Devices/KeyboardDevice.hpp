@@ -34,9 +34,8 @@ namespace Input
         /*!
          * \brief Handles keyboard events.
          * \param event - keyboard event to handle.
-         * \param time - new time that will be used by button.
          */
-        void HandleKeyboardEvent(const sf::Event& event, const Utility::Time& time);
+        void HandleKeyboardEvent(const sf::Event& event);
 
     private:
         /*! Buttons states. */

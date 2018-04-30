@@ -28,7 +28,7 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
         while (_working && _window.IsOpen())
         {
             // Poll events
-            _window.PollEvents(inputSystem, renderLoopTimeSpan.Start());
+            _window.PollEvents(inputSystem);
 
             // Update window
             _UpdateWindow();

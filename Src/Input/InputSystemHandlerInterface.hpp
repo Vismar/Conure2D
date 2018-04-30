@@ -24,8 +24,7 @@ namespace Input
         /*!
          * \brief Handles input events.
          * \param inputEvent - SFML event which will be handled by input system.
-         * \param time - time stamp that will be used by input system.
          */
-        virtual void HandleInputEvent(const sf::Event& inputEvent, const Utility::Time& time) = 0;
+        virtual void HandleInputEvent(const sf::Event& inputEvent) = 0;
     };
 }

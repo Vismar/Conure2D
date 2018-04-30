@@ -38,9 +38,8 @@ namespace Input
         /*!
          * \brief Handles input events.
          * \param inputEvent - SFML event which will be handled by input system.
-         * \param time - time stamp that will be used by input system.
          */
-        void HandleInputEvent(const sf::Event& inputEvent, const Utility::Time& time) final;
+        void HandleInputEvent(const sf::Event& inputEvent) final;
 
         /*!
          * \brief Checks if specified button was pressed.

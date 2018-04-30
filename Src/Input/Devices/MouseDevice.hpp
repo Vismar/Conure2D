@@ -60,24 +60,21 @@ namespace Input
         /*!
          * \brief Handles mouse events.
          * \param event - mouse event to handle.
-         * \param time - new time that will be used by button or wheel.
          */
-        void HandleMouseEvent(const sf::Event& event, const Utility::Time& time);
+        void HandleMouseEvent(const sf::Event& event);
 
     private:
         /*!
          * \brief Handles mouse button events.
          * \param event - mouse button event.
-         * \param time - new time that will be used by button.
          */
-        void _HandleMouseButtonEvent(const sf::Event& event, const Utility::Time& time);
+        void _HandleMouseButtonEvent(const sf::Event& event);
 
         /*!
          * \brief Handles mouse wheel events.
          * \param event - mouse wheel event.
-         * \param time - new time that will be used by wheel.
          */
-        void _HandleMouseWheelEvent(const sf::Event& event, const Utility::Time& time);
+        void _HandleMouseWheelEvent(const sf::Event& event);
 
         /*!
          * \brief Handles mouse move event.
