@@ -2,7 +2,7 @@
 #include "Input/Devices/MouseDeviceInterface.hpp"
 #include "Input/Utilities/Buttons/MouseButtons.hpp"
 #include "Input/Utilities/ButtonStateHandler.hpp"
-#include "SFML/Window/Event.hpp"
+#include <SFML/Window/Event.hpp>
 #include <vector>
 #include <atomic>
 

@@ -1,5 +1,5 @@
 #include "MouseDevice.hpp"
-#include "SFML/Window/Mouse.hpp"
+#include <SFML/Window/Mouse.hpp>
 
 using namespace Input;
 

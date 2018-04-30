@@ -1,6 +1,6 @@
 #include "Window.hpp"
-#include "SFML/Window/Event.hpp"
-#include "SFML/Graphics/RenderWindow.hpp"
+#include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <utility>
 
 using namespace Renderer;
@@ -66,7 +66,6 @@ void Window::SetTitle(const std::string& title)
     _settings.title = title;
     _renderWindow->setTitle(title);
 }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Window::SetSize(const uint32_t width, const uint32_t height)

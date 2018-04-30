@@ -1,7 +1,7 @@
 #include "WindowSettings.hpp"
-#include "SFML/Window/VideoMode.hpp"
-#include "SFML/Window/WindowStyle.hpp"
-#include "SFML/Window/ContextSettings.hpp"
+#include <SFML/Window/VideoMode.hpp>
+#include <SFML/Window/WindowStyle.hpp>
+#include <SFML/Window/ContextSettings.hpp>
 
 using namespace Renderer;
 

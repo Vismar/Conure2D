@@ -2,7 +2,7 @@
 #include "Input/Devices/JoystickDeviceInterface.hpp"
 #include "Input/Utilities/Buttons/JoystickButtons.hpp"
 #include "Input/Utilities/ButtonStateHandler.hpp"
-#include "SFML/Window/Event.hpp"
+#include <SFML/Window/Event.hpp>
 #include <atomic>
 #include <string>
 #include <vector>

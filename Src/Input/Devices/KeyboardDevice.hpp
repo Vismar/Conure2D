@@ -1,7 +1,7 @@
 #pragma once
 #include "Input/Utilities/Buttons/KeyboardButtons.hpp"
 #include "Input/Utilities/ButtonStateHandler.hpp"
-#include "SFML/Window/Event.hpp"
+#include <SFML/Window/Event.hpp>
 #include <vector>
 
 namespace Input

@@ -1,5 +1,5 @@
 #include "JoystickDevice.hpp"
-#include "SFML/Window/Joystick.hpp"
+#include <SFML/Window/Joystick.hpp>
 
 using namespace Input;
 
