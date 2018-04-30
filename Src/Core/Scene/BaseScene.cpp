@@ -14,10 +14,10 @@ BaseScene::BaseScene()
 
 std::weak_ptr<SceneObject> BaseScene::CreateObject()
 {
-    _sceneObjects.emplace_back(std::make_shared<SceneObject>())->_Initialize();
-    _sceneObjects.back()->BindToEvent("ComponentAdded", this, &BaseScene::_OnNewComponentAdded);
+    _newSceneObjects.emplace_back(std::make_shared<SceneObject>())->_Initialize();
+    _newSceneObjects.back()->BindToEvent("ComponentAdded", this, &BaseScene::_OnNewComponentAdded);
 
-    return _sceneObjects.back();
+    return _newSceneObjects.back();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,11 +82,21 @@ std::shared_ptr<RenderableSet> BaseScene::_GetRenderableComponents() const
 
 void BaseScene::_Update()
 {
+    // Move all new scene objects to actual array
+    for (auto sceneObject : _newSceneObjects)
+    {
+        _sceneObjects.emplace_back(sceneObject);
+    }
+    // Clear temporary array
+    _newSceneObjects.clear();
+
+    // Update
     for (auto& sceneObject : _sceneObjects)
     {
         sceneObject->_Update();
     }
 
+    // LateUpdate
     for (auto& sceneObject : _sceneObjects)
     {
         sceneObject->_LateUpdate();

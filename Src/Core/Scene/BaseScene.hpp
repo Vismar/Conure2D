@@ -100,6 +100,8 @@ namespace Core
         mutable RenderableArray _renderableComponentsToAdd;
         /*! Mutex that used to update renderable arrays. */
         mutable std::mutex _renderableArrayMutex;
+        /*! Array of shared pointers to scene objects that were created and should be added to main array before update phase. */
+        std::vector<std::shared_ptr<SceneObject>> _newSceneObjects;
 
         friend class SceneMap;
     };
