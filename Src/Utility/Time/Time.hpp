@@ -287,46 +287,4 @@ namespace Utility
      * \return left modulo right.
      */
     Time& operator%=(Time& left, const Time& right);
-
-    /*!
-     * \brief Construct a time value from a number of hours.
-     * \param hours - a number of hours.
-     * \return Constructed time from given value.
-     */
-    Time operator""_h(uint64_t hours);
-
-    /*!
-     * \brief Construct a time value from a number of minutes.
-     * \param minutes - a number of minutes.
-     * \return Constructed time from given value.
-     */
-    Time operator""_min(uint64_t minutes);
-
-    /*!
-     * \brief Construct a time value from a number of seconds.
-     * \param seconds - a number of seconds.
-     * \return Constructed time from given value.
-     */
-    Time operator""_s(uint64_t seconds);
-
-    /*!
-     * \brief Construct a time value from a number of milliseconds.
-     * \param milliseconds - a number of milliseconds.
-     * \return Constructed time from given value.
-     */
-    Time operator""_ms(uint64_t milliseconds);
-
-    /*!
-     * \brief Construct a time value from a number of microseconds.
-     * \param microseconds - a number of microseconds.
-     * \return Constructed time from given value.
-     */
-    Time operator""_us(uint64_t microseconds);
-
-    /*!
-     * \brief Construct a time value from a number of nanoseconds.
-     * \param nanoseconds - a number of nanoseconds.
-     * \return Constructed time from given value.
-     */
-    Time operator""_ns(uint64_t nanoseconds);
 }

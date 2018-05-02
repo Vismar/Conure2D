@@ -19,6 +19,9 @@
     <Filter Include="Containers\AnyCallable">
       <UniqueIdentifier>{b9db2a38-810b-4b20-b93f-1a71db857693}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Random">
+      <UniqueIdentifier>{06cb313f-0ff5-4690-a8f4-639e62ef489b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\AtomicVector2.hpp">
@@ -54,6 +57,9 @@
     <ClInclude Include="Containers\RingBuffer\RingBufferReverseIterator.hpp">
       <Filter>Containers\RingBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="Random\RandomGenerator.hpp">
+      <Filter>Random</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\AtomicVector2.inl">
@@ -77,6 +83,9 @@
     <None Include="Containers\RingBuffer\RingBufferReverseIterator.inl">
       <Filter>Containers\RingBuffer</Filter>
     </None>
+    <None Include="Random\RandomGenerator.inl">
+      <Filter>Random</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EventSystem\EventManager.cpp">
@@ -90,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="Containers\AnyCallable\AnyCallableHandler.cpp">
       <Filter>Containers\AnyCallable</Filter>
+    </ClCompile>
+    <ClCompile Include="Random\RandomGenerator.cpp">
+      <Filter>Random</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
