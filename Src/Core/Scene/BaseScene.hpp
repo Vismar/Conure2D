@@ -74,6 +74,11 @@ namespace Core
         void _Update();
 
         /*!
+         * \brief Deletes all scene objects that were marked as "delete later".
+         */
+        void _DeleteMarkedObjects();
+
+        /*!
          * \brief Callback that is used to add new renderable components to the renderable array 
          *        when a new component has been added to any scene object.
          * \param newComponent - weak pointer to the newly added component.
@@ -91,7 +96,7 @@ namespace Core
         void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, int8_t layer);
 
         /*! Flag that defines if scene should be deleted or not. */
-        std::atomic<bool> _deleteLater;
+        bool _deleteLater;
         /*! Simple flag that defines if scene is activated or not. Used to know if scene should be rendered. */
         std::atomic<bool> _activated;
         /*! Set of renderable components that should be used by render system. */

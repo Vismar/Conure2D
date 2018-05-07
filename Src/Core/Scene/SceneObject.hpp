@@ -110,6 +110,11 @@ namespace Core
          */
         std::vector<std::shared_ptr<SceneObject>>& GetChildrenList();
 
+        /*!
+         * \brief Marks the object to be deleted when the time comes.
+         */
+        void DeleteLater();
+
     private:
         /*!
          * \brief Add specified object to the children list.
@@ -149,8 +154,10 @@ namespace Core
          * \return Iterator to the found child.
          *         If child was not found, iterator to the end() of the container will be returned.
          */
-        ChildConstIterator _FindChild(const uint64_t childId) const;
+        ChildConstIterator _FindChild(uint64_t childId) const;
 
+        /*! Flag that defines if object should be deleted or not. */
+        bool _deleteLater;
         /*! Unique id of the object. */
         const uint64_t _objectId;
         /*! Name of the object. */

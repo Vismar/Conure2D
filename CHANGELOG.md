@@ -19,7 +19,8 @@
   - **RenderSystemInterface** - interface that provides functionality to work with the system from the game logic.
 - **Core**
   - **Scene**
-    - **BaseScene** - now scene  can be marked as to be deleted later via call `DeleteLater()`.
+    - **SceneObject** - new scene object can be marked as to be deleted later via call `DeleteLater()`.
+    - **BaseScene** - now scene can be marked as to be deleted later via call `DeleteLater()`.
     - **SceneMap** - now when `RemoveScene()` is called, it will mark specified scene to be deleted later and upon update, that scene will be deleted.
     - **SceneMapSystemInterface** - interface that provides functionality to work with the system from the game logic.
 - **Input**
@@ -36,6 +37,8 @@
   - **Time**
     - **Time** - container that stores time data and provides functionality to work with it.
     - **TimeSpan** - container that stores two points of data as a time span.
+  - **Random**
+    - **RandomGenerator** - new utility class which provides functionality to generate pseudo-random numbers via Mersenne Twister algorithm.
 
 ## [0.0.1] - 5th April,2018
 

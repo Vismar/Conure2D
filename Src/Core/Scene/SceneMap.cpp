@@ -60,7 +60,7 @@ bool SceneMap::RemoveScene(const std::string& sceneName)
 
 void SceneMap::UpdateScenes()
 {
-    // Check if any scenes should be deleted and delete it
+    // Deleted scenes that were marked as "delete later"
     for (auto scene = _scenes.begin(); scene != _scenes.end(); ++scene)
     {
         if (scene->second->_deleteLater)

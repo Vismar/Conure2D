@@ -82,6 +82,9 @@ std::shared_ptr<RenderableSet> BaseScene::_GetRenderableComponents() const
 
 void BaseScene::_Update()
 {
+    // Delete objects that were marked as "delete later"
+    _DeleteMarkedObjects();
+
     // Move all new scene objects to actual array
     for (auto sceneObject : _newSceneObjects)
     {
@@ -101,6 +104,16 @@ void BaseScene::_Update()
     {
         sceneObject->_LateUpdate();
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void BaseScene::_DeleteMarkedObjects()
+{
+    _sceneObjects.erase(std::remove_if(_sceneObjects.begin(), 
+                                       _sceneObjects.end(),
+                                       [](const std::shared_ptr<SceneObject> object) { return object->_deleteLater; }),
+                        _sceneObjects.end());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
