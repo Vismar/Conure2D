@@ -128,6 +128,21 @@ namespace Input
         virtual int32_t LastJoystickUsed() const = 0;
 
         /*!
+         * \brief Sets the joystick threshold.
+         * \param newThreshold - New threshold, in the range [0.0f, 100.0f]
+         * 
+         * The joystick threshold is the value below which no JoystickMoved event will be handled.
+         * The threshold value is 0.1 by default.
+         */
+        virtual void SetJoystickThreshold(float newThreshold) = 0;
+
+        /*!
+         * \brief Gets the joystick threshold.
+         * \return The joystick threshold value.
+         */
+        virtual float GetJoystickThreshold() const = 0;
+
+        /*!
          * \brief Grabs input map.
          * \return Reference to the public interface of input map.
          */

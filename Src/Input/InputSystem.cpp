@@ -10,6 +10,7 @@ InputSystem::InputSystem(const Utility::TimeSpan& logicLoopTimeSpan)
 , _keyboard(std::make_unique<KeyboardDevice>())
 , _mouse(std::make_unique<MouseDevice>())
 , _lastJoystickId(-1)
+, _joysticksThreshold(0.1f)
 , _inputMap(std::make_unique<InputMap>(*this))
 {
     _joystick.resize(sf::Joystick::Count);
@@ -49,10 +50,14 @@ void InputSystem::HandleInputEvent(const sf::Event& inputEvent)
         _lastJoystickId = inputEvent.joystickButton.joystickId;        
         break;
     case sf::Event::EventType::JoystickMoved:
-        _joystick[inputEvent.joystickMove.joystickId]->HandleJoystickEvents(inputEvent);
-        // Update joystick id which was used and time when it happened
-        _lastTimeJoystickUsed = Utility::Time::CurrentTime();
-        _lastJoystickId = inputEvent.joystickButton.joystickId;
+        // Check JoystickMove event values to fits the threshold        
+        if (std::abs(inputEvent.joystickMove.position) >= _joysticksThreshold.load())
+        {
+            _joystick[inputEvent.joystickMove.joystickId]->HandleJoystickEvents(inputEvent);
+            // Update joystick id which was used and time when it happened
+            _lastTimeJoystickUsed = Utility::Time::CurrentTime();
+            _lastJoystickId = inputEvent.joystickButton.joystickId;
+        }
         break;
     default:
         // Unexpected event
@@ -166,10 +171,27 @@ int32_t InputSystem::LastJoystickUsed() const
 
     if (_logicLoopTimeSpan.Start() <= _lastTimeJoystickUsed)
     {
-        joystickId = _lastJoystickId;
+        joystickId = _lastJoystickId.load();
     }
 
     return joystickId;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void InputSystem::SetJoystickThreshold(const float newThreshold)
+{
+    if (0.0f <= newThreshold || newThreshold <= 100.0f)
+    {
+        _joysticksThreshold = newThreshold;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float InputSystem::GetJoystickThreshold() const
+{
+    return _joysticksThreshold.load();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

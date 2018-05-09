@@ -3,8 +3,11 @@
 ## Plans
 - **Box2d** - include box2d functionality to the engine.
 - **Debug info** - debug information that helps the development.
+- **Editor** - ui toolchain.
 
-## WIP
+## [0.0.2] - 9th May,2018
+
+### Added
 - **Engine**
   - **EngineApp** - handles whole work of the engine application and all other systems. Works in 2 threads: one for render loop and the second one for the game logic.
   - **EngineInterface** - the point from which user can get any engine system and work with it in game logic. Provides access to:
@@ -30,6 +33,7 @@
     - `AnyButtonHeld()` - checks if any button was held down during the last update.
     - `AnyButtonReleased()` - checks if any button was released during the last update.
     - `LastJoystickUsed()` - checks if any joystick was active during the last update and returns its id.
+    - `Set/Get JoystickThreshold()` - the way to filter the joystick move events to nullify technical imperfection.
   - **InputSystemInterface** - interface that provides functionality to work with the system from the game logic.
 - **Utility**
   - **Containers**
@@ -69,5 +73,4 @@
     - **EventManager** - the tool which provides functionality to create/remove/invoke named events.
 
 [0.0.1]: https://github.com/Vismar/Conure2D/releases/tag/v0.0.1-alpha
-
-https://nn.hh.ru/applicant/resumes/view?resume=b61adf89ff0208a8890039ed1f557236457464
+[0.0.2]: https://github.com/Vismar/Conure2D/releases/tag/v0.0.2-alpha

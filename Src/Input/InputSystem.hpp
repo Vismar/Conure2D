@@ -5,7 +5,6 @@
 #include "Input/Devices/MouseDevice.hpp"
 #include "Input/Devices/JoystickDevice.hpp"
 #include "Input/Utilities/MappedInput/InputMap.hpp"
-//#include "Utility/Containers/RingBuffer/RingBuffer.hpp"
 #include <memory>
 
 namespace Input
@@ -146,6 +145,21 @@ namespace Input
         int32_t LastJoystickUsed() const final;
 
         /*!
+         * \brief Sets the joystick threshold.
+         * \param newThreshold - New threshold, in the range [0.0f, 100.0f]
+         *
+         * The joystick threshold is the value below which no JoystickMoved event will be handled.
+         * The threshold value is 0.1 by default.
+         */
+        void SetJoystickThreshold(float newThreshold) final;
+
+        /*!
+         * \brief Gets the joystick threshold.
+         * \return The joystick threshold value.
+         */
+        float GetJoystickThreshold() const final;
+
+        /*!
          * \brief Grabs input map.
          * \return Reference to the public interface of input map.
          */
@@ -170,9 +184,10 @@ namespace Input
         /*! A time when any joystick was used last time. */
         Utility::Time _lastTimeJoystickUsed;
         /*! An id of a joystick which was used last time. */
-        int32_t _lastJoystickId;
+        std::atomic<int32_t> _lastJoystickId;
+        /*! Joystick threshold that will be used to filter JoystickMoved events by its value. */
+        std::atomic<float> _joysticksThreshold;
         /*! Input map system which stores and handle control of mapped actions and axes. */
         std::unique_ptr<InputMap> _inputMap;
-        //Utility::RingBuffer<> _inputEvents;
     };
 }
