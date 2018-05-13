@@ -12,5 +12,8 @@
     <ClCompile Include="Utility\Containers\RingBufferTests.cpp">
       <Filter>Utility\Containers</Filter>
     </ClCompile>
+    <ClCompile Include="Utility\Containers\LockFreeLinkedQueueTests.cpp">
+      <Filter>Utility\Containers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

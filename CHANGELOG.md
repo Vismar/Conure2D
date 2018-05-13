@@ -5,6 +5,12 @@
 - **Debug info** - debug information that helps the development.
 - **Editor** - ui toolchain.
 
+## WIP
+
+### Added
+- **Utility**
+  - **LockFreeLinkedQueue** - lock-free linked queue which designed to guarantee push/pop operations to be executed simultaneously without any synchronization via mutexes or similar things.
+
 ## [0.0.2] - 9th May,2018
 
 ### Added

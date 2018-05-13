@@ -22,6 +22,9 @@
     <Filter Include="Random">
       <UniqueIdentifier>{06cb313f-0ff5-4690-a8f4-639e62ef489b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Containers\LockFreeLinkedQueue">
+      <UniqueIdentifier>{6de1a65a-a4b6-489a-894f-36cc70aae262}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\AtomicVector2.hpp">
@@ -60,6 +63,9 @@
     <ClInclude Include="Random\RandomGenerator.hpp">
       <Filter>Random</Filter>
     </ClInclude>
+    <ClInclude Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.hpp">
+      <Filter>Containers\LockFreeLinkedQueue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Math\AtomicVector2.inl">
@@ -86,6 +92,9 @@
     <None Include="Random\RandomGenerator.inl">
       <Filter>Random</Filter>
     </None>
+    <None Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.inl">
+      <Filter>Containers\LockFreeLinkedQueue</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EventSystem\EventManager.cpp">
@@ -102,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="Random\RandomGenerator.cpp">
       <Filter>Random</Filter>
+    </ClCompile>
+    <ClCompile Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.cpp">
+      <Filter>Containers\LockFreeLinkedQueue</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

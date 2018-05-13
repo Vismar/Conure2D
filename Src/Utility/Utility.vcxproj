@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Containers\AnyCallable\AnyCallable.hpp" />
     <ClInclude Include="Containers\AnyCallable\AnyCallableHandler.hpp" />
+    <ClInclude Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.hpp" />
     <ClInclude Include="Containers\RingBuffer\RingBuffer.hpp" />
     <ClInclude Include="Containers\RingBuffer\RingBufferIterator.hpp" />
     <ClInclude Include="Containers\RingBuffer\RingBufferReverseIterator.hpp" />
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Containers\AnyCallable\AnyCallable.inl" />
+    <None Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.inl" />
     <None Include="Containers\RingBuffer\RingBuffer.inl" />
     <None Include="Containers\RingBuffer\RingBufferIterator.inl" />
     <None Include="Containers\RingBuffer\RingBufferReverseIterator.inl" />
@@ -182,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Containers\AnyCallable\AnyCallableHandler.cpp" />
+    <ClCompile Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.cpp" />
     <ClCompile Include="EventSystem\EventManager.cpp" />
     <ClCompile Include="Random\RandomGenerator.cpp" />
     <ClCompile Include="Time\Time.cpp" />
