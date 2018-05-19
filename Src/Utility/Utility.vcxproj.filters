@@ -25,6 +25,9 @@
     <Filter Include="Containers\LockFreeLinkedQueue">
       <UniqueIdentifier>{6de1a65a-a4b6-489a-894f-36cc70aae262}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LogSystem">
+      <UniqueIdentifier>{819e152d-5f67-457a-bd6b-168db3bee0c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\AtomicVector2.hpp">
@@ -65,6 +68,12 @@
     </ClInclude>
     <ClInclude Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.hpp">
       <Filter>Containers\LockFreeLinkedQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="LogSystem\LogSystem.hpp">
+      <Filter>LogSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="LogSystem\LogEntry.hpp">
+      <Filter>LogSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +123,12 @@
     </ClCompile>
     <ClCompile Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.cpp">
       <Filter>Containers\LockFreeLinkedQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="LogSystem\LogSystem.cpp">
+      <Filter>LogSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="LogSystem\LogEntry.cpp">
+      <Filter>LogSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

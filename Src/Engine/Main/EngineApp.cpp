@@ -9,6 +9,7 @@ EngineApp::EngineApp()
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<Core::SceneMap>())
 , _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
+, _logSystem(std::make_unique<Utility::LogSystem>())
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +73,13 @@ const Utility::TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
 const Utility::TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
 {
     return _logicLoopTimeSpan;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Utility::LogSystem& EngineApp::GetLogSystem() const
+{
+    return *_logSystem;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

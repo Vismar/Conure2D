@@ -3,6 +3,7 @@
 #include "Core/Scene/SceneMap.hpp"
 #include "Input/InputSystem.hpp"
 #include "Utility/Time/TimeSpan.hpp"
+#include "Utility/LogSystem/LogSystem.hpp"
 
 namespace Engine
 {
@@ -72,6 +73,12 @@ namespace Engine
          */
         const Utility::TimeSpan& GetLogicLoopTimeSpan() const;
 
+        /*!
+         * \brief Returns log system.
+         * \return Reference to the log system.
+         */
+        Utility::LogSystem& GetLogSystem() const;
+
     private:
         /*!
          * \brief Logic loop that runs in separate thread.
@@ -90,5 +97,7 @@ namespace Engine
         std::unique_ptr<Core::SceneMap> _sceneMap;
         /*! Unique pointer to the input system.*/
         std::unique_ptr<Input::InputSystem> _inputSystem;
+        /*! Unique pointer to the log system. */
+        std::unique_ptr<Utility::LogSystem> _logSystem;
     };
 }

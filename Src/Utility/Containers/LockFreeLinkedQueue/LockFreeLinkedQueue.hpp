@@ -28,6 +28,12 @@ namespace Utility
         };
 
     public:
+        LockFreeLinkedQueue(const LockFreeLinkedQueue& other) = delete;
+        LockFreeLinkedQueue(LockFreeLinkedQueue&& other) = delete;
+        LockFreeLinkedQueue& operator=(const LockFreeLinkedQueue& other) = delete;
+        LockFreeLinkedQueue& operator=(LockFreeLinkedQueue&& other) = delete;
+        ~LockFreeLinkedQueue() = default;
+
         /*!
          * \brief Helper class which is used to return stored data in the LockFreeLinkedQueue.
          * 
@@ -37,6 +43,13 @@ namespace Utility
         class Reference
         {
         public:
+            Reference() = delete;
+            Reference(const Reference& other) = default;
+            Reference(Reference&& other) = default;
+            Reference& operator=(const Reference& other) = default;
+            Reference& operator=(Reference&& other) = default;
+            ~Reference() = default;
+
             /*!
              * \brief Constructor with parameter.
              * \param node - node that will be stored inside the Reference.

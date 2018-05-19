@@ -26,6 +26,20 @@
     <ClCompile Include="EngineInterface.cpp" />
     <ClCompile Include="Main\EngineApp.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.vcxproj">
+      <Project>{ca24838e-da21-4d5e-ba8f-2ac687d9fb21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Input\Input.vcxproj">
+      <Project>{cc8a7d9b-a715-43d8-a985-83a6b07c4918}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Renderer\Renderer.vcxproj">
+      <Project>{0b90ea6b-b7e2-46a3-9fc2-482231f93166}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.vcxproj">
+      <Project>{e8b12d25-c8b0-4d3a-8029-5335e28e2d4e}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{F4984C9F-5B19-4E2C-A0C8-76FD75251DDC}</ProjectGuid>
