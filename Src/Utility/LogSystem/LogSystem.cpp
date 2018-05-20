@@ -1,13 +1,15 @@
 #include "LogSystem.hpp"
 #include "Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp"
+#include "Utility/IOSystem/IOSystemInterface.hpp"
 
 using namespace Utility;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LogSystem::LogSystem() 
-: _logLevel(LogLevel::Debug)
-, _numberOfEntriesToFlush(5)
+LogSystem::LogSystem(const IOSystemInterface& ioSystem)
+: _ioSystem(ioSystem)
+, _logLevel(LogLevel::Debug)
+, _numberOfEntriesToFlush(10)
 , _msgQueue(std::make_unique<LockFreeLinkedQueue<LogEntry>>())
 {
     AddEvent("NewEntryAdded", new Dispatcher<void>());
@@ -37,11 +39,11 @@ void LogSystem::SetNumberOfEntriesToFlush(const uint8_t newNumber)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void LogSystem::Flush()
+void LogSystem::Flush() const
 {
-    while (auto logEntry = _msgQueue->PopFront())
+    while (const auto logEntry = _msgQueue->PopFront())
     {
-        //TODO: Implement when IOSystem will be implemented
+        //TODO: Implement when IOSystem will be implemented 
     }
 }
 

@@ -9,7 +9,8 @@ EngineApp::EngineApp()
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<Core::SceneMap>())
 , _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
-, _logSystem(std::make_unique<Utility::LogSystem>())
+, _ioSystem(std::make_unique<Utility::IOSystem>())
+, _logSystem(std::make_unique<Utility::LogSystem>(*_ioSystem))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,6 +25,9 @@ EngineApp& EngineApp::Instance()
 
 void EngineApp::Run()
 {
+    // Start IO thread
+    _ioSystem->Start();
+
     // Start logic thread
     std::thread logicThread(&EngineApp::_LogicLoop, this);
     logicThread.detach();
@@ -34,10 +38,20 @@ void EngineApp::Run()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void EngineApp::End()
+void EngineApp::End() const
 {
-    // Wait all systems to end its work
-    while (_logicThreadIsWorking); // wait until logic thread will end its work
+    // If we come here, so render system already finished its work, no need to do anything with that.
+    // But all other systems should be turned off manually
+
+    // Finish work of logic thread
+    while (_logicThreadIsWorking);  // wait until logic thread will end its work
+
+    // Finish work of log system
+    _logSystem->Flush();            // flush all log entries if any still in queue
+
+    // Finish work of IO system
+    _ioSystem->Stop();              // turn off IO system 
+    while (_ioSystem->IsRunning()); // wait until IO thread will end its work
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +87,13 @@ const Utility::TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
 const Utility::TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
 {
     return _logicLoopTimeSpan;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Utility::IOSystem& EngineApp::GetIOSystem() const
+{
+    return *_ioSystem;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

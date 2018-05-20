@@ -107,6 +107,12 @@ namespace Utility
          */
         uint64_t GetSize() const;
 
+        /*!
+         * \brief Check if queue has not entries.
+         * \return True size of queue is 0. Otherwise - false.
+         */
+        bool IsEmpty() const;
+
     private:
         /*!
          * \brief Add new node to the end of the queue.

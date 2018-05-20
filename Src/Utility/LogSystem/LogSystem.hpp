@@ -6,6 +6,7 @@
 
 namespace Utility
 {
+    class IOSystemInterface;
     template <class T>
     class LockFreeLinkedQueue;
 
@@ -15,6 +16,7 @@ namespace Utility
     class LogSystem : public EventManager
     {
     public:
+        LogSystem() = delete;
         LogSystem(const LogSystem& other) = delete;
         LogSystem(LogSystem&& other) = delete;
         LogSystem& operator=(const LogSystem& other) = delete;
@@ -24,7 +26,7 @@ namespace Utility
         /*!
          * \brief Default constructor.
          */
-        LogSystem();
+        LogSystem(const IOSystemInterface& ioSystem);
 
         /*!
          * \brief Set new log level.
@@ -54,9 +56,11 @@ namespace Utility
         /*!
          * \brief Flushes all stored entries to the log file.
          */
-        void Flush();
+        void Flush() const;
 
     private:
+        /*! Const reference to the IOSystem. */
+        const IOSystemInterface& _ioSystem;
         /*! Current log level of log system. */
         std::atomic<LogLevel> _logLevel;
         /*! Number of log entries that will stored before flushing. */

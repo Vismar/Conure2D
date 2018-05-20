@@ -18,6 +18,7 @@ namespace Renderer
 namespace Utility
 {
     class TimeSpan;
+    class IOSystemInterface;
     class LogSystem;
 }
 
@@ -52,6 +53,12 @@ namespace Engine
      * \return Const reference to the time span of the logic loop.
      */
     const Utility::TimeSpan& GetLogicLoopTimeSpan();
+
+    /*!
+     * \brief Returns IO system.
+     * \return Reference to the IO system.
+     */
+    Utility::IOSystemInterface& GetIOSystem();
 
     /*!
      * \brief Returns log system.

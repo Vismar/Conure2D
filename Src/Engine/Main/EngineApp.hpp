@@ -4,6 +4,7 @@
 #include "Input/InputSystem.hpp"
 #include "Utility/Time/TimeSpan.hpp"
 #include "Utility/LogSystem/LogSystem.hpp"
+#include "Utility/IOSystem/IOSystem.hpp"
 
 namespace Engine
 {
@@ -41,7 +42,7 @@ namespace Engine
         /*!
          * \brief Ends every system of the engine that were launched.
          */
-        void End();
+        void End() const;
 
         /*!
          * \brief Returns render system.
@@ -74,6 +75,12 @@ namespace Engine
         const Utility::TimeSpan& GetLogicLoopTimeSpan() const;
 
         /*!
+         * \brief Returns IO system.
+         * \return Reference to the IO system.
+         */
+        Utility::IOSystem& GetIOSystem() const;
+
+        /*!
          * \brief Returns log system.
          * \return Reference to the log system.
          */
@@ -97,6 +104,8 @@ namespace Engine
         std::unique_ptr<Core::SceneMap> _sceneMap;
         /*! Unique pointer to the input system.*/
         std::unique_ptr<Input::InputSystem> _inputSystem;
+        /*! Unique pointer to the IO system. */
+        std::unique_ptr<Utility::IOSystem> _ioSystem;
         /*! Unique pointer to the log system. */
         std::unique_ptr<Utility::LogSystem> _logSystem;
     };

@@ -166,6 +166,8 @@
     <ClInclude Include="EventSystem\Dispatcher.hpp" />
     <ClInclude Include="EventSystem\DispatcherInterface.hpp" />
     <ClInclude Include="EventSystem\EventManager.hpp" />
+    <ClInclude Include="IOSystem\IOSystem.hpp" />
+    <ClInclude Include="IOSystem\IOSystemInterface.hpp" />
     <ClInclude Include="LogSystem\LogEntry.hpp" />
     <ClInclude Include="LogSystem\LogSystem.hpp" />
     <ClInclude Include="Math\AtomicVector2.hpp" />
@@ -188,6 +190,7 @@
     <ClCompile Include="Containers\AnyCallable\AnyCallableHandler.cpp" />
     <ClCompile Include="Containers\LockFreeLinkedQueue\LockFreeLinkedQueue.cpp" />
     <ClCompile Include="EventSystem\EventManager.cpp" />
+    <ClCompile Include="IOSystem\IOSystem.cpp" />
     <ClCompile Include="LogSystem\LogEntry.cpp" />
     <ClCompile Include="LogSystem\LogSystem.cpp" />
     <ClCompile Include="Random\RandomGenerator.cpp" />

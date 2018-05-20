@@ -28,6 +28,9 @@
     <Filter Include="LogSystem">
       <UniqueIdentifier>{819e152d-5f67-457a-bd6b-168db3bee0c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="IOSystem">
+      <UniqueIdentifier>{119c1bf9-f959-4f01-9988-cfbb30a99605}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\AtomicVector2.hpp">
@@ -74,6 +77,12 @@
     </ClInclude>
     <ClInclude Include="LogSystem\LogEntry.hpp">
       <Filter>LogSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IOSystem\IOSystem.hpp">
+      <Filter>IOSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IOSystem\IOSystemInterface.hpp">
+      <Filter>IOSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +138,9 @@
     </ClCompile>
     <ClCompile Include="LogSystem\LogEntry.cpp">
       <Filter>LogSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="IOSystem\IOSystem.cpp">
+      <Filter>IOSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
