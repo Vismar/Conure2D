@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 #include <atomic>
+#include <string>
+#include <regex>
 
 namespace Utility
 {
@@ -8,7 +10,7 @@ namespace Utility
      * \brief Container that stores time as nanoseconds.
      * 
      * Thread safe container can convert stored time value to any 
-     * time precision (hours/minutes/second/millisecond/microseconds/nanoseconds).
+     * time precision (weeks/days/hours/minutes/second/millisecond/microseconds/nanoseconds).
      */
     class Time
     {
@@ -50,12 +52,12 @@ namespace Utility
          * \param microseconds - number of microseconds.
          * \param nanoseconds - number of nanoseconds.
          */
-        explicit Time(uint64_t hours = 0ll, 
-                      uint64_t minutes = 0ll,
-                      uint64_t seconds = 0ll,
-                      uint64_t milliseconds = 0ll,
-                      uint64_t microseconds = 0ll,
-                      uint64_t nanoseconds = 0ll);
+        explicit Time(uint64_t hours = 0ull, 
+                      uint64_t minutes = 0ull,
+                      uint64_t seconds = 0ull,
+                      uint64_t milliseconds = 0ull,
+                      uint64_t microseconds = 0ull,
+                      uint64_t nanoseconds = 0ull);
 
         /*!
          * \brief Returns current time.
@@ -64,22 +66,28 @@ namespace Utility
         static Time CurrentTime();
 
         /*!
+         * \brief Converts stored value to days.
+         * \return Number of stored days.
+         */
+        uint64_t ToDays() const;
+
+        /*!
          * \brief Converts stored value to hours.
          * \return Number of stored hours.
          */
-        double ToHours() const;
+        uint64_t ToHours() const;
         
         /*!
          * \brief Converts stored value to minutes.
          * \return Number of stored minutes.
          */
-        double ToMinutes() const;
+        uint64_t ToMinutes() const;
         
         /*!
          * \brief Converts stored value to seconds.
          * \return Number of stored seconds.
          */
-        double ToSeconds() const;
+        uint64_t ToSeconds() const;
         
         /*!
          * \brief Converts stored value to milliseconds.
@@ -99,9 +107,39 @@ namespace Utility
          */
         uint64_t ToNanoseconds() const;
 
+        /*!
+         * \brief Returns formated string representation of stored time.
+         * \param format - template string.
+         * 
+         * Specified template can replace next "variables":
+         *   - %d  - number of days [0-7].
+         *   - %h  - number of hours [1-23].
+         *   - %m  - number of minutes [0-59].
+         *   - %s  - number of seconds [0-59].
+         *   - %ms - number of milliseconds [0-999].
+         *   - %us - number of microseconds [0-999].
+         *   - %ns - number of nanoseconds [0-999].
+         */
+        std::string ToString(std::string&& format = "%h:%m:%s.%ms") const;
+
     private:
+        /*! Regex for days variable in template. */
+        const static std::regex DaysRegex;
+        /*! Regex for hours variable in template. */
+        const static std::regex HoursRegex;
+        /*! Regex for minutes variable in template. */
+        const static std::regex MinutesRegex;
+        /*! Regex for seconds variable in template. */
+        const static std::regex SecondsRegex;
+        /*! Regex for milliseconds variable in template. */
+        const static std::regex MillisecondsRegex;
+        /*! Regex for microseconds variable in template. */
+        const static std::regex MicrosecondsRegex;
+        /*! Regex for days nanoseconds in template. */
+        const static std::regex NanosecondsRegex;
+
         /*! Time value that stored as nanoseconds. */
-        std::atomic<uint64_t> _timeValue = 0;
+        std::atomic_uint64_t _timeValue = 0ull;
     };
     
     /*!
