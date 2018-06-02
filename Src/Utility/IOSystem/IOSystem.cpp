@@ -23,8 +23,7 @@ void IOSystem::Start()
     {
         // Start IO thread
         _turnedOn = true;
-        std::thread logicThread(&IOSystem::_Loop, this);
-        logicThread.detach();
+        std::thread(&IOSystem::_Loop, this).detach();
     }
 }
 
@@ -63,28 +62,28 @@ void IOSystem::WriteToTextFile(std::string&& fileName, std::string&& data, const
 
 void IOSystem::_Loop()
 {
+    // Mark system is "running"
+    _isRunning = true;
+
     // If thread is ON or queues still have something to write to files
     while (_turnedOn.load() || !_textWriteQueue->IsEmpty())
     {
-        // Mark system is "running"
-        _isRunning = true;
-
         // If we have something to write to a text files, do it
         if (!_textWriteQueue->IsEmpty())
         {
             _WriteTextData();
         }
 
-        // Work finished
-        _isRunning = false;
-
         // If we do not have anything to do right now, sleep and close all streams
-        if (_textWriteQueue->IsEmpty())
+        if (_textWriteQueue->IsEmpty() && _turnedOn.load())
         {
-            std::this_thread::sleep_for(10ms);
             _textWriteStream.stream.close();
+            std::this_thread::sleep_for(10ms);
         }
     }
+
+    // Work finished
+    _isRunning = false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -7,7 +7,13 @@ using namespace Utility;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 LogSystem::LogSystem(const IOSystemInterface& ioSystem)
-: _ioSystem(ioSystem)
+: _creationTime(Time::CurrentTime())
+, _ioSystem(ioSystem)
+, _timeRegex("(%w_time)")
+, _logLevelRegex("(%log)")
+, _msgRegex("(%msg)")
+, _logFileName(std::make_shared<std::string>("LogFile"))
+, _logEntryTemplate(std::make_shared<std::string>("[%w_time]\t %log: %msg \n"))
 , _logLevel(LogLevel::Debug)
 , _numberOfEntriesToFlush(10)
 , _msgQueue(std::make_unique<LockFreeLinkedQueue<LogEntry>>())
@@ -31,19 +37,52 @@ LogLevel LogSystem::GetLogLevel() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void LogSystem::SetLogFileName(const std::string& newLogFileName)
+{
+    // Since log system can be called from any thread, log file name should be accessible to change without data race
+    const auto newLogFileNamePtr = std::make_shared<std::string>(newLogFileName);
+    auto currentLogFileName = std::atomic_load(&_logFileName);
+    while (!std::atomic_compare_exchange_weak(&_logFileName, &currentLogFileName, newLogFileNamePtr));
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void LogSystem::SetLogEntryTemplate(const std::string& newLogEntryTemplate)
+{
+    // Since log system can be called from any thread, template should be accessible to change without data race
+    const auto newLogEntryTemplatePtr = std::make_shared<std::string>(newLogEntryTemplate);
+    auto currentLogEntryTempalte = std::atomic_load(&_logEntryTemplate);
+    while (!std::atomic_compare_exchange_weak(&_logEntryTemplate, &currentLogEntryTempalte, newLogEntryTemplatePtr));
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void LogSystem::SetNumberOfEntriesToFlush(const uint8_t newNumber)
 {
-    auto oldNumber = _numberOfEntriesToFlush.load();
-    while (!_numberOfEntriesToFlush.compare_exchange_weak(oldNumber, newNumber));
+    _numberOfEntriesToFlush = newNumber;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void LogSystem::Flush() const
 {
+    // Grab current log file name and template
+    const auto logFileName = std::atomic_load(&_logFileName);
+    const auto logEntryTemplate = std::atomic_load(&_logEntryTemplate);
+
+    // For every stored entry
     while (const auto logEntry = _msgQueue->PopFront())
     {
-        //TODO: Implement when IOSystem will be implemented 
+        // Copy template to a new variable
+        auto logEntryData = *logEntryTemplate;
+
+        // Find places in template where were used text variables
+        logEntryData = std::regex_replace(logEntryData, _timeRegex, (logEntry->timestamp - _creationTime).ToString());
+        logEntryData = std::regex_replace(logEntryData, _logLevelRegex, LogLevelText[static_cast<int>(logEntry->logLevel)]);
+        logEntryData = std::regex_replace(logEntryData, _msgRegex, logEntry->message);
+
+        // Write finished entries to a log file
+        _ioSystem.WriteToTextFile(std::string(*logFileName), std::string(logEntryData), std::ios_base::app);
     }
 }
 

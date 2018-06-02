@@ -29,8 +29,7 @@ void EngineApp::Run()
     _ioSystem->Start();
 
     // Start logic thread
-    std::thread logicThread(&EngineApp::_LogicLoop, this);
-    logicThread.detach();
+    std::thread(&EngineApp::_LogicLoop, this).detach();
 
     // Start render system
     _renderSystem->Start(*_sceneMap, *_inputSystem, _renderLoopTimeSpan);
@@ -41,17 +40,17 @@ void EngineApp::Run()
 void EngineApp::End() const
 {
     // If we come here, so render system already finished its work, no need to do anything with that.
-    // But all other systems should be turned off manually
+    // But all other systems should be turned off manually.
 
     // Finish work of logic thread
-    while (_logicThreadIsWorking);  // wait until logic thread will end its work
-
+    while (_logicThreadIsWorking.load());  // wait until logic thread will end its work
+    
     // Finish work of log system
-    _logSystem->Flush();            // flush all log entries if any still in queue
+    _logSystem->Flush();                   // flush all log entries if any still in queue
 
     // Finish work of IO system
-    _ioSystem->Stop();              // turn off IO system 
-    while (_ioSystem->IsRunning()); // wait until IO thread will end its work
+    _ioSystem->Stop();                     // turn off IO system 
+    while (_ioSystem->IsRunning());        // wait until IO thread will end its work
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
