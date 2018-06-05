@@ -1,4 +1,6 @@
 #include "JoystickDevice.hpp"
+#include "Engine/EngineInterface.hpp"
+#include "Utility/LogSystem/LogSystem.hpp"
 #include <SFML/Window/Joystick.hpp>
 
 using namespace Input;
@@ -41,7 +43,11 @@ void JoystickDevice::SetJoystickId(const unsigned int joystickId)
 
 void JoystickDevice::SetJoystickConnectionState(const bool connectionState)
 {
-    _isConnected = connectionState;
+    if (connectionState != _isConnected.load())
+    {
+        _isConnected = connectionState;
+        DEV_LOG(Utility::LogLevel::Debug, "Joystick connection stated was changed. id = " + std::to_string(connectionState));
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

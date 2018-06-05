@@ -19,7 +19,7 @@ IOSystem::IOSystem()
 void IOSystem::Start()
 {
     // Start IO thread only if it was not started previously
-    if (!IsRunning())
+    if (!_turnedOn.load() || _isRunning.load())
     {
         // Start IO thread
         _turnedOn = true;

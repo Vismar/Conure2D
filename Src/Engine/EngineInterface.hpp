@@ -66,3 +66,4 @@ namespace Engine
      */
     Utility::LogSystem& GetLogSystem();
 }
+#include "EngineInterfaceDefinitions.inl"

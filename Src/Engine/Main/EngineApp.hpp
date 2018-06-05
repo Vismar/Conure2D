@@ -92,6 +92,10 @@ namespace Engine
          */
         void _LogicLoop();
 
+        /*! Unique pointer to the IO system. */
+        std::unique_ptr<Utility::IOSystem> _ioSystem;
+        /*! Unique pointer to the log system. */
+        std::unique_ptr<Utility::LogSystem> _logSystem;
         /*! Time span of the render loop. */
         Utility::TimeSpan _renderLoopTimeSpan;
         /*! Unique pointer to the render system. */
@@ -104,9 +108,5 @@ namespace Engine
         std::unique_ptr<Core::SceneMap> _sceneMap;
         /*! Unique pointer to the input system.*/
         std::unique_ptr<Input::InputSystem> _inputSystem;
-        /*! Unique pointer to the IO system. */
-        std::unique_ptr<Utility::IOSystem> _ioSystem;
-        /*! Unique pointer to the log system. */
-        std::unique_ptr<Utility::LogSystem> _logSystem;
     };
 }

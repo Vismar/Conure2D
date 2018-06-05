@@ -1,16 +1,17 @@
 #include "EngineApp.hpp"
+#include "EngineInterface.hpp"
 
 using namespace Engine;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 EngineApp::EngineApp()
-: _renderSystem(std::make_unique<Renderer::RenderSystem>())
+: _ioSystem(std::make_unique<Utility::IOSystem>())
+, _logSystem(std::make_unique<Utility::LogSystem>(*_ioSystem))
+, _renderSystem(std::make_unique<Renderer::RenderSystem>())
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<Core::SceneMap>())
 , _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
-, _ioSystem(std::make_unique<Utility::IOSystem>())
-, _logSystem(std::make_unique<Utility::LogSystem>(*_ioSystem))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,6 +107,8 @@ Utility::LogSystem& EngineApp::GetLogSystem() const
 
 void EngineApp::_LogicLoop()
 {
+    DEV_LOG(Utility::LogLevel::Debug, "Logic loop has started");
+
     // Launch logic loop only if it was not started yet
     if (!_logicThreadIsWorking)
     {
@@ -126,6 +129,8 @@ void EngineApp::_LogicLoop()
         // Mark that logic thread finished its work
         _logicThreadIsWorking = false;
     }
+
+    DEV_LOG(Utility::LogLevel::Debug, "Logic loop has stopped");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

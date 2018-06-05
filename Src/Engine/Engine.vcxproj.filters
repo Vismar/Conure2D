@@ -17,4 +17,7 @@
     </ClCompile>
     <ClCompile Include="EngineInterface.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="EngineInterfaceDefinitions.inl" />
+  </ItemGroup>
 </Project>

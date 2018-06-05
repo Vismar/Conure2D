@@ -59,7 +59,7 @@ std::shared_ptr<RenderableSet> BaseScene::_GetRenderableComponents() const
     }
     
     // Add new pointers to the list
-    std::lock_guard<std::mutex> lock(_renderableArrayMutex);
+    std::lock_guard lock(_renderableArrayMutex);
     for (auto& renderableComponent : _renderableComponentsToAdd)
     {
         const auto result = _renderableComponents->insert(renderableComponent);
@@ -125,7 +125,7 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
         // Check if new component is renderable and then add it to the array
         if ((*component) == std::type_index(typeid(RenderableComponent)))
         {
-            std::lock_guard<std::mutex> lock(_renderableArrayMutex);
+            std::lock_guard lock(_renderableArrayMutex);
 
             if (const auto renderableComponent = std::dynamic_pointer_cast<RenderableComponent>(component))
             {
@@ -140,7 +140,7 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
 
 void BaseScene::_OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, const int8_t layer)
 {
-    std::lock_guard<std::mutex> lock(_renderableArrayMutex);
+    std::lock_guard lock(_renderableArrayMutex);
     _renderableComponentsToAdd.push_back(renderabelComponent);
 }
 

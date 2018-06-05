@@ -1,4 +1,6 @@
 #include "SceneMap.hpp"
+#include "Engine/EngineInterface.hpp"
+#include "Utility/LogSystem/LogSystem.hpp"
 
 using namespace Core;
 
@@ -12,6 +14,8 @@ bool SceneMap::AddScene(const std::string& sceneName, std::shared_ptr<BaseScene>
     const auto scene = _scenes.find(sceneName);
     if (scene == _scenes.end())
     {
+        DEV_LOG(Utility::LogLevel::Debug, "New scene was added - " + sceneName);
+
         _scenes.emplace(sceneName, newScene);
         added = true;
 
@@ -48,6 +52,8 @@ bool SceneMap::RemoveScene(const std::string& sceneName)
     const auto scene = _scenes.find(sceneName);
     if (scene != _scenes.end())
     {
+        DEV_LOG(Utility::LogLevel::Debug, sceneName + " scene was marked to be deleted later");
+
         // Mark a scene so it will be deleted later
         scene->second->DeleteLater();
         removed = true;
@@ -65,6 +71,8 @@ void SceneMap::UpdateScenes()
     {
         if (scene->second->_deleteLater)
         {
+            DEV_LOG(Utility::LogLevel::Debug, scene->first + " scene was deleted");
+
             scene = _scenes.erase(scene);
         }
     }

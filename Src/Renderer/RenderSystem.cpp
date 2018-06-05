@@ -1,4 +1,6 @@
 #include "RenderSystem.hpp"
+#include "Engine/EngineInterface.hpp"
+#include "Utility/LogSystem/LogSystem.hpp"
 
 using namespace Renderer;
 
@@ -18,6 +20,8 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
                          Input::InputSystemHandlerInterface& inputSystem,
                          Utility::TimeSpan& renderLoopTimeSpan)
 {
+    DEV_LOG(Utility::LogLevel::Debug, "Render loop has started");
+
     if (!_working)
     {
         _working = true;
@@ -68,6 +72,8 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
         _working = false;
         _noErrors = false;
     }
+
+    DEV_LOG(Utility::LogLevel::Debug, "Render loop has stopped");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,7 +94,9 @@ bool RenderSystem::NoErrors() const
 
 void RenderSystem::SetNewSettings(WindowSettings windowSettings)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    DEV_LOG(Utility::LogLevel::Debug, "Copying new window settings");
+
+    std::lock_guard lock(_settingsMutex);
 
     // These parameters require recreating the window
     if ((windowSettings.resolutionWidth != _settings.resolutionWidth) ||
@@ -123,7 +131,7 @@ void RenderSystem::SetNewSettings(WindowSettings windowSettings)
 
 WindowSettings RenderSystem::GetSettings() const
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     return _settings;
 }
@@ -132,7 +140,7 @@ WindowSettings RenderSystem::GetSettings() const
 
 void RenderSystem::SetWindowTitle(const std::string& title)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     if (title != _settings.title)
     {
@@ -145,7 +153,7 @@ void RenderSystem::SetWindowTitle(const std::string& title)
 
 void RenderSystem::SetWindowSize(const uint32_t width, const uint32_t height)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     if (width != _settings.width || height != _settings.height)
     {
@@ -159,7 +167,7 @@ void RenderSystem::SetWindowSize(const uint32_t width, const uint32_t height)
 
 void RenderSystem::SetWindowResolution(const uint32_t width, const uint32_t height)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     if (width != _settings.resolutionWidth || height != _settings.resolutionHeight)
     {
@@ -173,7 +181,7 @@ void RenderSystem::SetWindowResolution(const uint32_t width, const uint32_t heig
 
 void RenderSystem::SetAntialiasing(const uint32_t antialiasingLevel)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     if (antialiasingLevel != _settings.antialiasing)
     {
@@ -186,7 +194,7 @@ void RenderSystem::SetAntialiasing(const uint32_t antialiasingLevel)
 
 void RenderSystem::SetVerticalSyncEnabled(const bool enabled)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     if (enabled != _settings.verticalSync)
     {
@@ -199,7 +207,7 @@ void RenderSystem::SetVerticalSyncEnabled(const bool enabled)
 
 void RenderSystem::SetFramerateLimit(const uint32_t frameLimit)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     if (frameLimit != _settings.frameLimit)
     {
@@ -212,7 +220,7 @@ void RenderSystem::SetFramerateLimit(const uint32_t frameLimit)
 
 void RenderSystem::SetMouseCursorVisible(const bool visible)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
     
     if (visible != _settings.cursorIsVisible)
     {
@@ -225,7 +233,7 @@ void RenderSystem::SetMouseCursorVisible(const bool visible)
 
 void RenderSystem::SetMouseCursorGrabbed(const bool grabbed)
 {
-    std::lock_guard<std::mutex> lock(_settingsMutex);
+    std::lock_guard lock(_settingsMutex);
 
     if (grabbed != _settings.cursorIsGrabbed)
     {
@@ -240,7 +248,9 @@ void RenderSystem::_UpdateWindow()
 {
     if (_recreateWindow || _updateWindowParameters)
     {
-        std::lock_guard<std::mutex> lock(_settingsMutex);
+        DEV_LOG(Utility::LogLevel::Debug, "Applying new window settings");
+
+        std::lock_guard lock(_settingsMutex);
 
         // Recreate window if it is needed
         if (_recreateWindow)
