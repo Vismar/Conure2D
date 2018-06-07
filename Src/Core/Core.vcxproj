@@ -240,6 +240,7 @@
     <ClInclude Include="Components\TransformComponent.hpp" />
     <ClInclude Include="Components\Utility\RenderablesCompare.hpp" />
     <ClInclude Include="Scene\BaseScene.hpp" />
+    <ClInclude Include="Scene\BaseSceneInterface.hpp" />
     <ClInclude Include="Scene\RenderableSceneMapInterface.hpp" />
     <ClInclude Include="Scene\SceneMap.hpp" />
     <ClInclude Include="Scene\SceneMapSystemInterface.hpp" />

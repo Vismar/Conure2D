@@ -4,8 +4,9 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BaseScene::BaseScene() 
-: _deleteLater(false)
+BaseScene::BaseScene(const std::string_view sceneName)
+: _sceneName(sceneName)
+, _deleteLater(false)
 , _activated(false)
 , _renderableComponents(std::make_shared<RenderableSet>())
 { }
@@ -36,6 +37,13 @@ bool BaseScene::Activated() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const std::string& BaseScene::GetName() const
+{
+    return _sceneName;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void BaseScene::DeleteLater()
 {
     _deleteLater = true;
@@ -43,7 +51,7 @@ void BaseScene::DeleteLater()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::shared_ptr<RenderableSet> BaseScene::_GetRenderableComponents() const
+std::shared_ptr<RenderableSet> BaseScene::GetRenderableComponents() const
 {
     // Remove "dead" pointers 
     for (auto iter = _renderableComponents->begin(); iter != _renderableComponents->end(); )
@@ -80,7 +88,7 @@ std::shared_ptr<RenderableSet> BaseScene::_GetRenderableComponents() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void BaseScene::_Update()
+void BaseScene::Update()
 {
     // Delete objects that were marked as "delete later"
     _DeleteMarkedObjects();
@@ -104,6 +112,13 @@ void BaseScene::_Update()
     {
         sceneObject->_LateUpdate();
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool BaseScene::MarkedAsDeleteLater() const
+{
+    return _deleteLater;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

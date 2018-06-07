@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Scene/RenderableSceneMapInterface.hpp"
 #include "Core/Scene/SceneMapSystemInterface.hpp"
-#include "Core/Scene/BaseScene.hpp"
+#include "Core/Scene/BaseSceneInterface.hpp"
 
 namespace Core
 {
@@ -20,11 +20,10 @@ namespace Core
 
         /*!
          * \brief Adds new specified scene to the scene map.
-         * \param sceneName - name that will be associated with new scene.
          * \param newScene - shared pointer to the new scene that should be added.
          * \return True if scene was added. Otherwise, if scene with such name already added, false.
          */
-        bool AddScene(const std::string& sceneName, std::shared_ptr<BaseScene>&& newScene) final;
+        bool AddScene(std::shared_ptr<BaseScene>&& newScene) final;
 
         /*!
          * \brief Grabs specified scene if it exists in scene map.
@@ -94,6 +93,6 @@ namespace Core
          */
         std::list<std::string> _renderOrder;
         /*! Map of the scenes. */
-        std::unordered_map<std::string, std::shared_ptr<BaseScene>> _scenes;
+        std::unordered_map<std::string, std::shared_ptr<BaseSceneInterface>> _scenes;
     };
 }

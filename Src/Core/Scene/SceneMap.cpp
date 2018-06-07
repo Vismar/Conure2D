@@ -6,21 +6,21 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool SceneMap::AddScene(const std::string& sceneName, std::shared_ptr<BaseScene>&& newScene)
+bool SceneMap::AddScene(std::shared_ptr<BaseScene>&& newScene)
 {
     bool added(false);
 
     // If scene map do not already store any scene with such name, then add it
-    const auto scene = _scenes.find(sceneName);
+    const auto scene = _scenes.find(newScene->GetName());
     if (scene == _scenes.end())
     {
-        DEV_LOG(Utility::LogLevel::Debug, "New scene was added - " + sceneName);
+        DEV_LOG(Utility::LogLevel::Debug, "New scene was added - " + newScene->GetName());
 
-        _scenes.emplace(sceneName, newScene);
+        _scenes.emplace(newScene->GetName(), newScene);
         added = true;
 
         // Update render order list with new scene name
-        _AddSceneNameToRenderList(sceneName);
+        _AddSceneNameToRenderList(newScene->GetName());
     }
 
     return added;
@@ -36,7 +36,7 @@ std::weak_ptr<BaseScene> SceneMap::GetScene(const std::string& sceneName) const
     const auto scene = _scenes.find(sceneName);
     if (scene != _scenes.end())
     {
-        scenePointer = scene->second;
+        scenePointer = std::dynamic_pointer_cast<BaseScene>(scene->second);
     }
 
     return scenePointer;
@@ -69,7 +69,7 @@ void SceneMap::UpdateScenes()
     // Deleted scenes that were marked as "delete later"
     for (auto scene = _scenes.begin(); scene != _scenes.end(); ++scene)
     {
-        if (scene->second->_deleteLater)
+        if (scene->second->MarkedAsDeleteLater())
         {
             DEV_LOG(Utility::LogLevel::Debug, scene->first + " scene was deleted");
 
@@ -83,7 +83,7 @@ void SceneMap::UpdateScenes()
         // Update scene only if was activated
         if (scene.second->Activated())
         {
-            scene.second->_Update();
+            scene.second->Update();
         }
     }
 }
@@ -118,7 +118,7 @@ std::shared_ptr<RenderableSet> SceneMap::GetRenderableComponentsFromScene(const 
     const auto scene = _scenes.find(sceneName);
     if ((scene != _scenes.end()) && (scene->second->Activated()))
     {
-        renderableComponents = scene->second->_GetRenderableComponents();
+        renderableComponents = scene->second->GetRenderableComponents();
     }
 
     return renderableComponents;

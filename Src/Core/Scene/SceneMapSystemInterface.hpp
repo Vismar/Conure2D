@@ -18,11 +18,10 @@ namespace Core
 
         /*!
          * \brief Adds new specified scene to the scene map.
-         * \param sceneName - name that will be associated with new scene.
          * \param newScene - shared pointer to the new scene that should be added.
          * \return True if scene was added. Otherwise, if scene with such name already added, false.
          */
-        virtual bool AddScene(const std::string& sceneName, std::shared_ptr<BaseScene>&& newScene) = 0;
+        virtual bool AddScene(std::shared_ptr<BaseScene>&& newScene) = 0;
 
         /*!
          * \brief Grabs specified scene if it exists in scene map.
