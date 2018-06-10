@@ -5,6 +5,10 @@ using namespace Utility;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// float templates
+template class LockFreeLinkedQueue<float>;
+template class LockFreeLinkedQueue<double>;
+
 // 8-bit integer templates
 template class LockFreeLinkedQueue<int8_t>;
 template class LockFreeLinkedQueue<uint8_t>;

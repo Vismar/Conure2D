@@ -1,12 +1,5 @@
 #pragma once
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Important note
-// --------------------
-// Since this class using std::atomic, some template parameters do not have specialization for operators 
-// like "+=", "-=", "*=", "/=". So there is why you can find code like this:
-//     x = x + right.x;
-//     y = y + right.y;
-//
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -36,6 +29,30 @@ AtomicVector2<T>::AtomicVector2(AtomicVector2&& other) noexcept : x(std::move(ot
 template <typename T>
 template <typename U>
 AtomicVector2<T>::AtomicVector2(const AtomicVector2<U>& other) : x(other.x.load()), y(other.y.load())
+{ }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename T>
+AtomicVector2<T>::AtomicVector2(const sf::Vector2<T>& other) : x(other.x), y(other.y)
+{ }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename T>
+AtomicVector2<T>::AtomicVector2(sf::Vector2<T>&& other) : x(std::move(other.x)), y(std::move(other.y))
+{ }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename T>
+AtomicVector2<T>::AtomicVector2(const Vector2<T>& other) : x(other.x), y(other.y)
+{ }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename T>
+AtomicVector2<T>::AtomicVector2(Vector2<T>&& other) : x(std::move(other.x)), y(std::move(other.y))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +113,7 @@ AtomicVector2<T>& AtomicVector2<T>::operator=(AtomicVector2<U>&& other)
 template <typename T>
 bool AtomicVector2<T>::operator==(const AtomicVector2& right)
 {
-    return ((x == right.x) && (y == right.y));
+    return ((x.load() == right.x.load()) && (y.load() == right.y.load()));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,7 +129,7 @@ bool AtomicVector2<T>::operator!=(const AtomicVector2& right)
 template <typename T>
 T AtomicVector2<T>::operator*(const AtomicVector2& right) const
 {
-    return (x * right.x + y * right.y);
+    return (x.load() * right.x.load() + y.load() * right.y.load());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +137,7 @@ T AtomicVector2<T>::operator*(const AtomicVector2& right) const
 template <typename T>
 AtomicVector2<T> AtomicVector2<T>::operator*(const T scalar) const
 {
-    return AtomicVector2<T>(x * scalar, y * scalar);
+    return AtomicVector2<T>(x.load() * scalar, y.load() * scalar);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -128,9 +145,9 @@ AtomicVector2<T> AtomicVector2<T>::operator*(const T scalar) const
 template <typename T>
 AtomicVector2<T> AtomicVector2<T>::operator/(const T scalar) const
 {
-    const T invertedScalar = 1.0 / scalar;
+    const T invertedScalar = (T)1.0 / scalar;
 
-    return AtomicVector2<T>(x * invertedScalar, y * invertedScalar);
+    return AtomicVector2<T>(x.load() * invertedScalar, y.load() * invertedScalar);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +155,7 @@ AtomicVector2<T> AtomicVector2<T>::operator/(const T scalar) const
 template <typename T>
 AtomicVector2<T> AtomicVector2<T>::operator+(const AtomicVector2& right) const
 {
-    return AtomicVector2<T>(x + right.x, y + right.y);
+    return AtomicVector2<T>(x.load() + right.x.load(), y.load() + right.y.load());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -146,7 +163,7 @@ AtomicVector2<T> AtomicVector2<T>::operator+(const AtomicVector2& right) const
 template <typename T>
 AtomicVector2<T> AtomicVector2<T>::operator-(const AtomicVector2& right) const
 {
-    return AtomicVector2<T>(x - right.x, y - right.y);
+    return AtomicVector2<T>(x.load() - right.x.load(), y.load() - right.y.load());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,8 +171,8 @@ AtomicVector2<T> AtomicVector2<T>::operator-(const AtomicVector2& right) const
 template <typename T>
 AtomicVector2<T>& AtomicVector2<T>::operator+=(const AtomicVector2& right)
 {
-    x = x + right.x;
-    y = y + right.y;
+    x = x.load() + right.x.load();
+    y = y.load() + right.y.load();
 
     return *this;
 }
@@ -165,8 +182,8 @@ AtomicVector2<T>& AtomicVector2<T>::operator+=(const AtomicVector2& right)
 template <typename T>
 AtomicVector2<T>& AtomicVector2<T>::operator-=(const AtomicVector2& right)
 {
-    x = x - right.x;
-    y = y - right.y;
+    x = x.load() - right.x.load();
+    y = y.load() - right.y.load();
 
     return *this;
 }
@@ -176,8 +193,8 @@ AtomicVector2<T>& AtomicVector2<T>::operator-=(const AtomicVector2& right)
 template <typename T>
 AtomicVector2<T>& AtomicVector2<T>::operator/=(const AtomicVector2& right)
 {
-    x = x / right.x;
-    y = y / right.y;
+    x = x.load() / right.x.load();
+    y = y.load() / right.y.load();
 
     return *this;
 }
@@ -187,9 +204,9 @@ AtomicVector2<T>& AtomicVector2<T>::operator/=(const AtomicVector2& right)
 template <typename T>
 AtomicVector2<T>& AtomicVector2<T>::operator/=(const T scalar)
 {
-    const T invertedScalar = 1.0 / scalar;
-    x = x * invertedScalar;
-    y = y * invertedScalar;
+    const T invertedScalar = (T)1.0 / scalar;
+    x = x.load() * invertedScalar;
+    y = y.load() * invertedScalar;
 
     return *this;
 }
@@ -199,8 +216,8 @@ AtomicVector2<T>& AtomicVector2<T>::operator/=(const T scalar)
 template <typename T>
 AtomicVector2<T>& AtomicVector2<T>::operator*=(const T scalar)
 {
-    x = x * scalar;
-    y = y *scalar;
+    x = x.load() * scalar;
+    y = y.load() *scalar;
 
     return *this;
 }
@@ -210,7 +227,7 @@ AtomicVector2<T>& AtomicVector2<T>::operator*=(const T scalar)
 template <typename T>
 AtomicVector2<T> operator-(const AtomicVector2<T>& right)
 {
-    return AtomicVector2<T>(-right.x, -right.y);
+    return AtomicVector2<T>(-right.x.load(), -right.y.load());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,7 +235,7 @@ AtomicVector2<T> operator-(const AtomicVector2<T>& right)
 template <typename T>
 AtomicVector2<T> operator*(const T scalar, const AtomicVector2<T>& right)
 {
-    return AtomicVector2<T>(right.x * scalar, right.y * scalar);
+    return AtomicVector2<T>(right.x.load() * scalar, right.y.load() * scalar);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

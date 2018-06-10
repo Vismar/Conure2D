@@ -1,15 +1,18 @@
 #pragma once
 #include <atomic>
 
+namespace sf { template <typename T> class Vector2; }
+
 namespace Utility
 {
+    template <typename T>
+    class Vector2;
+
     /*!
      * \brief Simple 2d vector with atomic parameters.
      * \tparam T - type of used data.
      * 
-     * Because of nature of atomic data type this 2d vector was created.
-     * Atomic type cannot be directly copied or applied to typical math operations (i.e. T == float || T == double),
-     * so this class was created for some places where thread-safe 2d vector is required.
+     * This class was created for some places where thread-safe 2d vector is required.
      */
     template <typename T>
     class AtomicVector2
@@ -31,18 +34,38 @@ namespace Utility
         /*!
          * \brief Copy constructor.   
          * \param other - const reference to other atomic vector with the same template type.
-         * 
-         * The same type of atomic vector as a parameter.
          */
         AtomicVector2(const AtomicVector2& other);
 
         /*!
          * \brief Move constructor. 
          * \param other - double reference to other atomic vector value with the same template type.
-         * 
-         * The same type of atomic vector as a parameter.
          */
         AtomicVector2(AtomicVector2&& other) noexcept;
+
+        /*!
+         * \brief Copy constructor.
+         * \param other - const reference to sf::Vector2 vector with the same template type.
+         */
+        AtomicVector2(const sf::Vector2<T>& other);
+
+        /*!
+         * \brief Move constructor.
+         * \param other - double reference to sf::Vector2 value with the same template type.
+         */
+        AtomicVector2(sf::Vector2<T>&& other);
+
+        /*!
+         * \brief Copy constructor.
+         * \param other - const reference to Vector2 with the same template type.
+         */
+        AtomicVector2(const Vector2<T>& other);
+
+        /*!
+         * \brief Move constructor.
+         * \param other - double reference to Vector2 value with the same template type.
+         */
+        AtomicVector2(Vector2<T>&& other);
 
         /*! 
          * \brief Copy constructor.
@@ -195,7 +218,7 @@ namespace Utility
          * \brief Sets each of atomic vector parameters to zero.
          */
         void Zero();
-        
+
         /*! X value of vector. */
         std::atomic<T> x;
         /*! Y value of vector. */

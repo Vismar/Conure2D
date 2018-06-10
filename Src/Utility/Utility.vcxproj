@@ -248,7 +248,9 @@
     <ClInclude Include="IOSystem\IOSystemInterface.hpp" />
     <ClInclude Include="LogSystem\LogEntry.hpp" />
     <ClInclude Include="LogSystem\LogSystem.hpp" />
-    <ClInclude Include="Math\AtomicVector2.hpp" />
+    <ClInclude Include="Math\Vector2\AtomicVector2.hpp" />
+    <ClInclude Include="Math\Vector2\Vector2.hpp" />
+    <ClInclude Include="Math\Vectors.hpp" />
     <ClInclude Include="Random\RandomGenerator.hpp" />
     <ClInclude Include="Time\Time.hpp" />
     <ClInclude Include="Time\TimeSpan.hpp" />
@@ -261,7 +263,8 @@
     <None Include="Containers\RingBuffer\RingBufferReverseIterator.inl" />
     <None Include="EventSystem\Dispatcher.inl" />
     <None Include="EventSystem\EventManager.inl" />
-    <None Include="Math\AtomicVector2.inl" />
+    <None Include="Math\Vector2\AtomicVector2.inl" />
+    <None Include="Math\Vector2\Vector2.inl" />
     <None Include="Random\RandomGenerator.inl" />
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +274,7 @@
     <ClCompile Include="IOSystem\IOSystem.cpp" />
     <ClCompile Include="LogSystem\LogEntry.cpp" />
     <ClCompile Include="LogSystem\LogSystem.cpp" />
+    <ClCompile Include="Math\Vector2\Vector2PrecompiledTemplates.cpp" />
     <ClCompile Include="Random\RandomGenerator.cpp" />
     <ClCompile Include="Time\Time.cpp" />
     <ClCompile Include="Time\TimeSpan.cpp" />

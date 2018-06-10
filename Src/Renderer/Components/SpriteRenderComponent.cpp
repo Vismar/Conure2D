@@ -11,11 +11,11 @@ SpriteRenderComponent::SpriteRenderComponent(const std::shared_ptr<Core::SceneOb
     _vertices.setPrimitiveType(sf::TriangleStrip);
     _vertices.resize(5);
 
-    _vertices[0].position = sf::Vector2f(0.0f, 0.0f);
-    _vertices[1].position = sf::Vector2f(0.0f, 100.0f);
-    _vertices[2].position = sf::Vector2f(100.0f, 100.0f);
-    _vertices[3].position = sf::Vector2f(100.0f, 0.0f);    
-    _vertices[4].position = sf::Vector2f(0.0f, 0.0f);
+    _vertices[0].position = { 0.0f, 0.0f };
+    _vertices[1].position = { 0.0f, 100.0f };
+    _vertices[2].position = { 100.0f, 100.0f };
+    _vertices[3].position = { 100.0f, 0.0f };
+    _vertices[4].position = { 0.0f, 0.0f };
 
     _vertices[0].color = sf::Color::White;
     _vertices[1].color = sf::Color::White;
@@ -33,11 +33,11 @@ void SpriteRenderComponent::SetTextureCoordinates(const sf::IntRect& rect)
     const auto top = static_cast<float>(rect.top);
     const auto bottom = top + rect.height;
 
-    _vertices[0].texCoords = sf::Vector2f(left, top);
-    _vertices[1].texCoords = sf::Vector2f(left, bottom);
-    _vertices[2].texCoords = sf::Vector2f(right, bottom);
-    _vertices[3].texCoords = sf::Vector2f(right, top);
-    _vertices[4].texCoords = sf::Vector2f(left, top);
+    _vertices[0].texCoords = { left, top };
+    _vertices[1].texCoords = { left, bottom };
+    _vertices[2].texCoords = { right, bottom };
+    _vertices[3].texCoords = { right, top };
+    _vertices[4].texCoords = { left, top };
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

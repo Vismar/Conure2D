@@ -102,7 +102,7 @@ namespace Core
          * \brief Removes child from the children list by specified id.
          * \param childId - id of a child that should be removed from the children list.
          */
-        void RemoveChild(const uint64_t childId);
+        void RemoveChild(uint64_t childId);
 
         /*!
          * \brief Returns list of children.

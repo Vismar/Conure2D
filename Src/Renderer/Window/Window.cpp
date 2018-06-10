@@ -16,7 +16,7 @@ Window::Window(WindowSettings settings)
                                                    _settings.GetContextSettings()))
 {
     _renderWindow->setKeyRepeatEnabled(false);
-    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
+    _renderWindow->setSize({ _settings.width, _settings.height });
     _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
     _renderWindow->setFramerateLimit(_settings.frameLimit);
     _renderWindow->setMouseCursorVisible(_settings.cursorIsVisible);
@@ -43,7 +43,7 @@ void Window::SetNewSettings(WindowSettings windowSettings)
     _renderWindow->setKeyRepeatEnabled(false);
 
     // Set window size
-    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
+    _renderWindow->setSize({ _settings.width, _settings.height });
 
     // Set other settings
     _renderWindow->setVerticalSyncEnabled(_settings.verticalSync);
@@ -72,7 +72,7 @@ void Window::SetSize(const uint32_t width, const uint32_t height)
 {
     _settings.width = width;
     _settings.height = height;
-    _renderWindow->setSize(sf::Vector2u(width, height));
+    _renderWindow->setSize({ width, height });
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ void Window::SetResolution(const uint32_t width, const uint32_t height)
                           _settings.title, 
                           _settings.GetSfmlStyle(), 
                           _settings.GetContextSettings());
-    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
+    _renderWindow->setSize({ _settings.width, _settings.height });
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ void Window::SetAntialiasing(const uint32_t antialiasingLevel)
                           _settings.title, 
                           _settings.GetSfmlStyle(), 
                           _settings.GetContextSettings());
-    _renderWindow->setSize(sf::Vector2u(_settings.width, _settings.height));
+    _renderWindow->setSize({ _settings.width, _settings.height });
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
