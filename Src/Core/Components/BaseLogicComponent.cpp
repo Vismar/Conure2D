@@ -4,25 +4,10 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BaseLogicComponent::BaseLogicComponent(const std::shared_ptr<SceneObject>& sceneObject)
+BaseLogicComponent::BaseLogicComponent(std::weak_ptr<SceneObject>&& sceneObject)
 : _sceneObject(sceneObject)
 , _turnedOn(true)
-, _typeIndex(typeid(BaseLogicComponent))
 { }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-bool BaseLogicComponent::operator==(const BaseLogicComponent& other) const
-{
-    return (other._typeIndex == _typeIndex);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-bool BaseLogicComponent::operator==(const std::type_index& typeIndex) const
-{
-    return (typeIndex == _typeIndex);
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,7 +34,7 @@ void BaseLogicComponent::TurnOn(const bool turnOn)
 
 void BaseLogicComponent::Initialize()
 {
-    if (_typeIndex == typeid(BaseLogicComponent))
+    if (_typeIndex == typeid(BaseComponent))
     {
         _typeIndex = typeid(*this);
     }

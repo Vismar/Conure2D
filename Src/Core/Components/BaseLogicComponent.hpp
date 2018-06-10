@@ -1,5 +1,5 @@
 #pragma once
-#include <typeindex>
+#include "Core/Components/BaseComponent.hpp"
 #include <atomic>
 #include <memory>
 
@@ -8,12 +8,11 @@ namespace Core
     class SceneObject;
 
     /*!
-     * \brief Base class for all components that can be attached to SceneObject.
+     * \brief Base class for all components which should have some logic in it and can be attached to SceneObject.
      * 
-     * This component contains basic functions that are required by all components 
-     * and provides functionality to compare them by its type so only 1 component of 1 type can be attached to SceneObject.
+     * This component contains basic functions that are required by all logic components.
      */
-    class BaseLogicComponent : public std::enable_shared_from_this<BaseLogicComponent>
+    class BaseLogicComponent : public BaseComponent
     {
     public:
         BaseLogicComponent() = delete;
@@ -29,19 +28,7 @@ namespace Core
          * 
          * After creating a component, we MUST initialize it with Initialize() method of base class. 
          */
-        explicit BaseLogicComponent(const std::shared_ptr<SceneObject>& sceneObject);
-        
-        /*!
-         * \brief Comparison of two base components by their type info.
-         * \return True if both components are the same type. Otherwise - false.
-         */
-        bool operator==(const BaseLogicComponent& other) const;
-
-        /*!
-         * \brief Comparison of component type info as left value and specified type info as right value.
-         * \return True if component and type info are the same type. Otherwise - false.
-         */
-        bool operator==(const std::type_index& typeIndex) const;
+        explicit BaseLogicComponent(std::weak_ptr<SceneObject>&& sceneObject);
 
         /*!
          * \brief Return weak pointer to the scene object that contain this component.
@@ -84,21 +71,8 @@ namespace Core
         /*! Weak pointer to the scene object that store this component. */
         std::weak_ptr<SceneObject> _sceneObject;
         /*! Flag that identifies if component is turned on or not. */
-        std::atomic<bool> _turnedOn;
-        /*! Type id of component. This variable is used in to identify identical components by its type. */
-        std::type_index _typeIndex;
+        std::atomic_bool _turnedOn;
 
-        friend bool operator==(const std::type_index& typeIndex, const BaseLogicComponent& component);
         friend class SceneObject;
-        friend class RenderableComponent;
     };
-
-    /*!
-     * \brief Comparison of specified type info as left value and component type info as right value.
-     * \return True if type info and component are the same type. Otherwise - false.
-     */
-    inline bool operator==(const std::type_index& typeIndex, const BaseLogicComponent& component)
-    {
-        return (typeIndex == component._typeIndex);
-    }
 }

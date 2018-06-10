@@ -133,7 +133,7 @@ void BaseScene::_DeleteMarkedObjects()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseLogicComponent> newComponent)
+void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
 {
     if (const auto component = newComponent.lock())
     {

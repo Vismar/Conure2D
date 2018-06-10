@@ -48,7 +48,7 @@ void SceneObject::SetName(std::string&& newName)
 std::weak_ptr<TransformComponent> SceneObject::GetTransformComponent() const
 {
     // Every scene object ALWAYS have transform component
-    return std::dynamic_pointer_cast<TransformComponent>(_componentMap.at(std::type_index(typeid(TransformComponent))));
+    return std::dynamic_pointer_cast<TransformComponent>(_logicComponentMap.at(std::type_index(typeid(TransformComponent))));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -122,7 +122,7 @@ void SceneObject::RemoveChild(const uint64_t childId)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::vector<std::shared_ptr<SceneObject>>& SceneObject::GetChildrenList()
+std::vector<std::weak_ptr<SceneObject>>& SceneObject::GetChildrenList()
 {
     return _children;
 }
@@ -155,9 +155,10 @@ bool SceneObject::_AddChild(const std::shared_ptr<SceneObject>& newChild)
 void SceneObject::_Initialize()
 {
     // Every scene object ALWAYS must have transform component 
-    AddComponent<TransformComponent>();
-
-    AddEvent("ComponentAdded", new Utility::Dispatcher<void>);
+    if (AddComponent<TransformComponent>())
+    {
+        AddEvent("ComponentAdded", new Utility::Dispatcher<void>);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +166,7 @@ void SceneObject::_Initialize()
 void SceneObject::_Update()
 {
     // Update the components
-    for (auto component : _componentMap)
+    for (auto component : _logicComponentMap)
     {
         // Only if component is turned on we should call the function
         if (component.second->IsTurnedOn())
@@ -180,7 +181,7 @@ void SceneObject::_Update()
 void SceneObject::_LateUpdate()
 {
     // Late update the components
-    for (auto component : _componentMap)
+    for (auto component : _logicComponentMap)
     {
         // Only if component is turned on we should call the function
         if (component.second->IsTurnedOn())
@@ -199,10 +200,13 @@ SceneObject::ChildConstIterator SceneObject::_FindChild(const uint64_t childId) 
     // Loop through the list of the children and try to find one with the same id that was specified
     for (auto child = _children.begin(); child != _children.end(); ++child)
     {
-        if ((*child)->GetId() == childId)
+        if (const auto lockedChild = child->lock())
         {
-            returningIterator = child;
-            break;
+            if (lockedChild->GetId() == childId)
+            {
+                returningIterator = child;
+                break;
+            }
         }
     }
 

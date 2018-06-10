@@ -322,7 +322,10 @@ void TransformComponent::_TransformNeedUpdate() const
     {
         for (auto& child : object->GetChildrenList())
         {
-            child->GetTransformComponent().lock()->_TransformNeedUpdate();
+            if (const auto lockedChild = child.lock())
+            {
+                lockedChild->GetTransformComponent().lock()->_TransformNeedUpdate();
+            }
         }
     }
 }

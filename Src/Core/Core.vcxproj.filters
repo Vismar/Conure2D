@@ -42,6 +42,12 @@
     <ClInclude Include="Components\BaseLogicComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Components\BaseDataComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\BaseComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\TransformComponent.cpp">
@@ -63,6 +69,12 @@
       <Filter>Components\Utility</Filter>
     </ClCompile>
     <ClCompile Include="Components\BaseLogicComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\BaseComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\BaseDataComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>

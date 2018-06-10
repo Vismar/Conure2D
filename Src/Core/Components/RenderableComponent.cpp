@@ -32,9 +32,9 @@ bool RenderableComponent::operator<(const RenderableComponent& right) const
     // If layer numbers are the same, then we can just compare ids of scene objects that owns this components
     if (_layerNumber == right._layerNumber)
     {
-        if (const auto leftObject = _sceneObject.lock())
+        if (const auto leftObject = GetSceneObject().lock())
         {
-            if (const auto rightObject = right._sceneObject.lock())
+            if (const auto rightObject = right.GetSceneObject().lock())
             {
                 less = leftObject->GetId() < rightObject->GetId();
             }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Components/TransformComponent.hpp"
+#include "Core/Components/BaseDataComponent.hpp"
 #include <typeindex>
 
 namespace Core
@@ -108,7 +109,7 @@ namespace Core
          * \brief Returns list of children.
          * \return Reference to the array of children.
          */
-        std::vector<std::shared_ptr<SceneObject>>& GetChildrenList();
+        std::vector<std::weak_ptr<SceneObject>>& GetChildrenList();
 
         /*!
          * \brief Marks the object to be deleted when the time comes.
@@ -146,7 +147,7 @@ namespace Core
         void _LateUpdate();
 
         /*! Simple alias that was created just for a shorter name. */
-        using ChildConstIterator = std::vector<std::shared_ptr<SceneObject>>::const_iterator;
+        using ChildConstIterator = std::vector<std::weak_ptr<SceneObject>>::const_iterator;
         
         /*!
          * \brief Finds a child from the children list by specified object id.
@@ -162,12 +163,14 @@ namespace Core
         const uint64_t _objectId;
         /*! Name of the object. */
         std::string _name;
-        /*! Map of components. Only one instance of a component should exist in the map. */
-        std::unordered_map<std::type_index, std::shared_ptr<BaseLogicComponent>> _componentMap;
+        /*! Map of data components. Only one instance of a component should exist in the map. */
+        std::unordered_map<std::type_index, std::shared_ptr<BaseDataComponent>> _dataComponentMap;
+        /*! Map of logic components. Only one instance of a component should exist in the map. */
+        std::unordered_map<std::type_index, std::shared_ptr<BaseLogicComponent>> _logicComponentMap;
         /*! Weak pointer to a parent scene object. */
         std::weak_ptr<SceneObject> _parent;
         /*! Array of shared pointers to the children of this object. */
-        std::vector<std::shared_ptr<SceneObject>> _children;
+        std::vector<std::weak_ptr<SceneObject>> _children;
         /*! Global static counter that is used to generate unique ids for scene objects upon it creation. */
         static std::atomic_uint64_t _globalIdCounter;
 
