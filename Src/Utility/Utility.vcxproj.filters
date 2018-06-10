@@ -90,10 +90,10 @@
     <ClInclude Include="Math\Vector2\Vector2.hpp">
       <Filter>Math\Vector2</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Vectors.hpp">
-      <Filter>Math\Vector2</Filter>
-    </ClInclude>
     <ClInclude Include="Math\MathConstants.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vectors.hpp">
       <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>

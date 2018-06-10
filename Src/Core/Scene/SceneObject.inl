@@ -12,11 +12,11 @@ bool SceneObject::AddComponent()
     if (_componentMap.find(componentTypeIndex) == _componentMap.end())
     {
         _componentMap.emplace(componentTypeIndex, std::make_shared<Component>(this->shared_from_this()));
-        _componentMap[componentTypeIndex]->BaseComponent::Initialize();
+        _componentMap[componentTypeIndex]->BaseLogicComponent::Initialize();
         _componentMap[componentTypeIndex]->Initialize();
         added = true;
 
-        InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _componentMap[componentTypeIndex]);
+        InvokeEvent<void, std::weak_ptr<BaseLogicComponent>>("ComponentAdded", _componentMap[componentTypeIndex]);
     }
 
     return added;

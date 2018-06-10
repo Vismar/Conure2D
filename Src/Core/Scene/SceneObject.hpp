@@ -163,7 +163,7 @@ namespace Core
         /*! Name of the object. */
         std::string _name;
         /*! Map of components. Only one instance of a component should exist in the map. */
-        std::unordered_map<std::type_index, std::shared_ptr<BaseComponent>> _componentMap;
+        std::unordered_map<std::type_index, std::shared_ptr<BaseLogicComponent>> _componentMap;
         /*! Weak pointer to a parent scene object. */
         std::weak_ptr<SceneObject> _parent;
         /*! Array of shared pointers to the children of this object. */

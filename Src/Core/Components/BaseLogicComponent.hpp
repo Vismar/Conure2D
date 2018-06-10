@@ -13,15 +13,15 @@ namespace Core
      * This component contains basic functions that are required by all components 
      * and provides functionality to compare them by its type so only 1 component of 1 type can be attached to SceneObject.
      */
-    class BaseComponent : public std::enable_shared_from_this<BaseComponent>
+    class BaseLogicComponent : public std::enable_shared_from_this<BaseLogicComponent>
     {
     public:
-        BaseComponent() = delete;
-        BaseComponent(const BaseComponent& other) = delete;
-        BaseComponent(BaseComponent&& other) = delete;
-        BaseComponent& operator=(const BaseComponent& other) = delete;
-        BaseComponent& operator=(BaseComponent&& other) = delete;
-        virtual ~BaseComponent() = default;
+        BaseLogicComponent() = delete;
+        BaseLogicComponent(const BaseLogicComponent& other) = delete;
+        BaseLogicComponent(BaseLogicComponent&& other) = delete;
+        BaseLogicComponent& operator=(const BaseLogicComponent& other) = delete;
+        BaseLogicComponent& operator=(BaseLogicComponent&& other) = delete;
+        virtual ~BaseLogicComponent() = default;
 
         /*! 
          * \brief Default constructor.
@@ -29,13 +29,13 @@ namespace Core
          * 
          * After creating a component, we MUST initialize it with Initialize() method of base class. 
          */
-        explicit BaseComponent(const std::shared_ptr<SceneObject>& sceneObject);
+        explicit BaseLogicComponent(const std::shared_ptr<SceneObject>& sceneObject);
         
         /*!
          * \brief Comparison of two base components by their type info.
          * \return True if both components are the same type. Otherwise - false.
          */
-        bool operator==(const BaseComponent& other) const;
+        bool operator==(const BaseLogicComponent& other) const;
 
         /*!
          * \brief Comparison of component type info as left value and specified type info as right value.
@@ -55,13 +55,13 @@ namespace Core
          */
         bool IsTurnedOn() const;
 
-    protected:
         /*!
-         * \brief Turns component on/off.
-         * \param turnOn - flag that defines if component should be turned on or off.
-         */
+        * \brief Turns component on/off.
+        * \param turnOn - flag that defines if component should be turned on or off.
+        */
         void TurnOn(bool turnOn = true);
 
+    protected:
         /*!
          * \brief Initializes component.
          *
@@ -88,7 +88,7 @@ namespace Core
         /*! Type id of component. This variable is used in to identify identical components by its type. */
         std::type_index _typeIndex;
 
-        friend bool operator==(const std::type_index& typeIndex, const BaseComponent& component);
+        friend bool operator==(const std::type_index& typeIndex, const BaseLogicComponent& component);
         friend class SceneObject;
         friend class RenderableComponent;
     };
@@ -97,7 +97,7 @@ namespace Core
      * \brief Comparison of specified type info as left value and component type info as right value.
      * \return True if type info and component are the same type. Otherwise - false.
      */
-    inline bool operator==(const std::type_index& typeIndex, const BaseComponent& component)
+    inline bool operator==(const std::type_index& typeIndex, const BaseLogicComponent& component)
     {
         return (typeIndex == component._typeIndex);
     }

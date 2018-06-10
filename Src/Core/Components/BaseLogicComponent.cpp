@@ -1,57 +1,56 @@
-#include "BaseComponent.hpp"
+#include "BaseLogicComponent.hpp"
 
 using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BaseComponent::BaseComponent(const std::shared_ptr<SceneObject>& sceneObject)
+BaseLogicComponent::BaseLogicComponent(const std::shared_ptr<SceneObject>& sceneObject)
 : _sceneObject(sceneObject)
 , _turnedOn(true)
-, _typeIndex(typeid(BaseComponent))
+, _typeIndex(typeid(BaseLogicComponent))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool BaseComponent::operator==(const BaseComponent& other) const
+bool BaseLogicComponent::operator==(const BaseLogicComponent& other) const
 {
     return (other._typeIndex == _typeIndex);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool BaseComponent::operator==(const std::type_index& typeIndex) const
+bool BaseLogicComponent::operator==(const std::type_index& typeIndex) const
 {
     return (typeIndex == _typeIndex);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<SceneObject> BaseComponent::GetSceneObject() const
+std::weak_ptr<SceneObject> BaseLogicComponent::GetSceneObject() const
 {
     return _sceneObject;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool BaseComponent::IsTurnedOn() const
+bool BaseLogicComponent::IsTurnedOn() const
 {
     return _turnedOn;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void BaseComponent::TurnOn(const bool turnOn)
+void BaseLogicComponent::TurnOn(const bool turnOn)
 {
     _turnedOn = turnOn;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void BaseComponent::Initialize()
+void BaseLogicComponent::Initialize()
 {
-    if (_typeIndex == typeid(BaseComponent))
+    if (_typeIndex == typeid(BaseLogicComponent))
     {
-        // There is no other way to store type of an object
         _typeIndex = typeid(*this);
     }
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/Components/BaseComponent.hpp"
+#include "Core/Components/BaseLogicComponent.hpp"
 #include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/RenderablesCompare.hpp"
 #include <SFML/Graphics/Drawable.hpp>
@@ -18,7 +18,7 @@ namespace Core
      * - Inherited components will have the same characteristics in comparison, 
      *   so scene object will not be able to store more than one renderable component.
      */
-    class RenderableComponent : public BaseComponent, public Utility::EventManager, public sf::Drawable
+    class RenderableComponent : public BaseLogicComponent, public Utility::EventManager, public sf::Drawable
     {
     public:
         RenderableComponent() = delete;

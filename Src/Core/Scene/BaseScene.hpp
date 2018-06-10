@@ -100,7 +100,7 @@ namespace Core
          * Callback that is bonded to every scene object and called when any of them has added a new component. 
          * Checks if the new component is a renderable component and then adds it to the array.
          */
-        void _OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent);
+        void _OnNewComponentAdded(std::weak_ptr<BaseLogicComponent> newComponent);
 
         /*!
          * \brief Callback that is used to update renderable components in the set when they change their layer.

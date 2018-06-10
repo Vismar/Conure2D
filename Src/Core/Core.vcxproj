@@ -235,7 +235,7 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Components\BaseComponent.hpp" />
+    <ClInclude Include="Components\BaseLogicComponent.hpp" />
     <ClInclude Include="Components\RenderableComponent.hpp" />
     <ClInclude Include="Components\TransformComponent.hpp" />
     <ClInclude Include="Components\Utility\RenderablesCompare.hpp" />
@@ -247,7 +247,7 @@
     <ClInclude Include="Scene\SceneObject.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Components\BaseComponent.cpp" />
+    <ClCompile Include="Components\BaseLogicComponent.cpp" />
     <ClCompile Include="Components\RenderableComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Components\Utility\RenderablesCompare.cpp" />
