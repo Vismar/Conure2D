@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Components/BaseComponent.hpp"
 #include "Utility/EventSystem/EventManager.hpp"
-#include "Utility/Math/AtomicVector2.hpp"
+#include "Utility/Math/Vectors.hpp"
 #include <SFML/Graphics/Transform.hpp>
 
 namespace Core
@@ -44,9 +44,9 @@ namespace Core
 
         /*!
          * \brief Returns transform origin.
-         * \return Const reference to a float atomic vector that contains transform origin.
+         * \return Vector2 that contains transform origin.
          */
-        const Utility::AtomicVector2F& GetOrigin() const;
+        Utility::Vector2F GetOrigin() const;
 
         /*!
          * \brief Sets transform origin to specified values.
@@ -57,27 +57,21 @@ namespace Core
 
         /*!
          * \brief Sets transform origin to specified value.
-         * \param newOrigin - const reference to a new transform origin (sf::Vector2f).
+         * \param newOrigin - const reference to a new transform origin.
          */
-        void SetOrigin(const sf::Vector2f& newOrigin);
-
-        /*!
-         * \brief Sets transform origin to specified value.
-         * \param newOrigin - const reference to a new transform origin (Utility::AtomicVector2F).
-         */
-        void SetOrigin(const Utility::AtomicVector2F& newOrigin);
+        void SetOrigin(const Utility::Vector2F& newOrigin);
 
         /*!
          * \brief Returns global transform position.
-         * \return Const reference to a float atomic vector that contains global transform position.
+         * \return Vector2 that contains global transform position.
          */
-        const Utility::AtomicVector2F& GetGlobalPosition() const;
+        Utility::Vector2F GetGlobalPosition() const;
 
         /*!
          * \brief Returns local transform position.
-         * \return Const reference to a float atomic vector that contains local transform position.
+         * \return Vector2 that contains local transform position.
          */
-        const Utility::AtomicVector2F& GetPosition() const;
+        Utility::Vector2F GetPosition() const;
 
         /*!
          * \brief Sets local transform position to specified values.
@@ -88,15 +82,9 @@ namespace Core
 
         /*!
          * \brief Sets local transform position to specified value.
-         * \param newPosition - const reference to a new local transform position (sf::Vector2f).
+         * \param newPosition - const reference to a new local transform position.
          */
-        void SetPosition(const sf::Vector2f& newPosition);
-
-        /*!
-         * \brief Sets local transform position to specified value.
-         * \param newPosition - const reference to a new local transform position (Utility::AtomicVector2F).
-         */
-        void SetPosition(const Utility::AtomicVector2F& newPosition);
+        void SetPosition(const Utility::Vector2F& newPosition);
 
         /*!
          * \brief Moves local transform position by specified offset values.
@@ -107,9 +95,9 @@ namespace Core
 
         /*!
          * \brief Moves local transform position by specified offset value.
-         * \param offset - const reference to an atomic offset vector.
+         * \param offset - const reference to an offset vector.
          */
-        void Move(const Utility::AtomicVector2F& offset);
+        void Move(const Utility::Vector2F& offset);
 
         /*!
          * \brief Returns global transform rotation.
@@ -137,15 +125,15 @@ namespace Core
 
         /*!
          * \brief Returns global transform scale.
-         * \return Const reference to a float atomic vector that contains global transform scale.
+         * \return Vector2 that contains global transform scale.
          */
-        const Utility::AtomicVector2F& GetGlobalScale() const;
+        Utility::Vector2F GetGlobalScale() const;
 
         /*!
          * \brief Returns local transform scale.
-         * \return Const reference to a float atomic vector that contains local transform scale.
+         * \return Vector2 that contains local transform scale.
          */
-        const Utility::AtomicVector2F& GetScale() const;
+        Utility::Vector2F GetScale() const;
 
         /*!
          * \brief Sets local transform scale to specified values.
@@ -156,15 +144,9 @@ namespace Core
 
         /*!
          * \brief Sets local transform scale to specified value.
-         * \param newScale - const reference to a new local transform scale (sf::Vector2f).
+         * \param newScale - const reference to a new local transform scale.
          */
-        void SetScale(const sf::Vector2f& newScale);
-
-        /*!
-         * \brief Sets local transform scale to specified value.
-         * \param newScale - const reference to a new local transform scale (Utility::AtomicVector2F).
-         */
-        void SetScale(const Utility::AtomicVector2F& newScale);
+        void SetScale(const Utility::Vector2F& newScale);
 
         /*!
          * \brief Scales(multiply) local transform scale by specified factor values.
@@ -175,9 +157,9 @@ namespace Core
 
         /*!
          * \brief Scales(multiply) local transform scale by specified factor value.
-         * \param factor - const reference to an atomic factor vector.
+         * \param factor - const reference to an factor vector.
          */
-        void Scale(const Utility::AtomicVector2F& factor);
+        void Scale(const Utility::Vector2F& factor);
 
         /*!
          * \brief Calculates transform matrix of the object and returns it.
@@ -235,9 +217,9 @@ namespace Core
         void _UpdateGlobalTransformations() const;
 
         /*! Simple flag to identify if transform was updated and we should invoke "OnTransformUpdate" event. */
-        mutable std::atomic<bool> _transformUpdated;
+        mutable std::atomic_bool _transformUpdated;
         /*! Simple flag to identify if global transformations need to be updated. */
-        mutable std::atomic<bool> _globalTransformationsNeedUpdate;
+        mutable std::atomic_bool _globalTransformationsNeedUpdate;
         /*! Transform origin. Stores origin point of an object. */
         mutable Utility::AtomicVector2F _origin;
         /*! Local transform position. Stores local position of an object. */

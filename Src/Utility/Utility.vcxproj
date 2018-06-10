@@ -248,6 +248,7 @@
     <ClInclude Include="IOSystem\IOSystemInterface.hpp" />
     <ClInclude Include="LogSystem\LogEntry.hpp" />
     <ClInclude Include="LogSystem\LogSystem.hpp" />
+    <ClInclude Include="Math\MathConstants.hpp" />
     <ClInclude Include="Math\Vector2\AtomicVector2.hpp" />
     <ClInclude Include="Math\Vector2\Vector2.hpp" />
     <ClInclude Include="Math\Vectors.hpp" />

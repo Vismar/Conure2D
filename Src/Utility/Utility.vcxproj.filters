@@ -93,6 +93,9 @@
     <ClInclude Include="Math\Vectors.hpp">
       <Filter>Math\Vector2</Filter>
     </ClInclude>
+    <ClInclude Include="Math\MathConstants.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="EventSystem\Dispatcher.inl">
