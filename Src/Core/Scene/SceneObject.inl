@@ -12,7 +12,7 @@ bool SceneObject::AddComponent()
     {
         if (_dataComponentMap.find(componentTypeIndex) == _dataComponentMap.end())
         {
-            _dataComponentMap.emplace(componentTypeIndex, std::make_shared<Component>());
+            _dataComponentMap.emplace(componentTypeIndex, std::make_shared<Component>(this->shared_from_this()));
             _dataComponentMap[componentTypeIndex]->BaseDataComponent::Initialize();
             _dataComponentMap[componentTypeIndex]->Initialize();
             added = true;

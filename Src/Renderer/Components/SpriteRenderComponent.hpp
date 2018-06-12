@@ -31,6 +31,11 @@ namespace Renderer
 
     private:
         /*!
+         * \brief Do nothing.
+         */
+        void Reset() final {}
+
+        /*!
          * \brief Callback that is used to update texture coordinates when a new texture has been assigned to the component.
          */
         void _OnTextureChanged();
