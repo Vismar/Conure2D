@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/Components/BaseComponent.hpp"
+#include "Core/Components/Base/BaseComponent.hpp"
 #include <atomic>
 #include <memory>
 
@@ -29,13 +29,7 @@ namespace Core
          * After creating a component, we MUST initialize it with Initialize() method of base class. 
          */
         explicit BaseLogicComponent(std::weak_ptr<SceneObject>&& sceneObject);
-
-        /*!
-         * \brief Return weak pointer to the scene object that contain this component.
-         * \return Weak pointer to the scene object.
-         */
-        std::weak_ptr<SceneObject> GetSceneObject() const;
-
+        
         /*!
          * \brief Check if component is turned on.
          * \return True if component is turned on. Otherwise - false.
@@ -68,8 +62,6 @@ namespace Core
         virtual void LateUpdate() = 0;
 
     private:
-        /*! Weak pointer to the scene object that store this component. */
-        std::weak_ptr<SceneObject> _sceneObject;
         /*! Flag that identifies if component is turned on or not. */
         std::atomic_bool _turnedOn;
 

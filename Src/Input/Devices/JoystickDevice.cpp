@@ -9,7 +9,7 @@ using namespace Input;
 
 JoystickDevice::JoystickDevice() 
 : _axes(new std::atomic<float>[sf::Joystick::AxisCount]())
-, _joystickId(-1)
+, _joystickId(UINT_MAX)
 , _isConnected(false)
 {
     _buttons.resize(sf::Joystick::ButtonCount);
@@ -17,9 +17,9 @@ JoystickDevice::JoystickDevice()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-JoystickDevice::JoystickDevice(const JoystickDevice& other)
+JoystickDevice::JoystickDevice(const JoystickDevice&)
 : _axes(new std::atomic<float>[sf::Joystick::AxisCount]())
-, _joystickId(-1)
+, _joystickId(UINT_MAX)
 , _isConnected(false)
 {
     _buttons.resize(sf::Joystick::ButtonCount);

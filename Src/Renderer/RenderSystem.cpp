@@ -53,8 +53,8 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
                     {
                         if (const auto renderable = renderableComponent.lock())
                         {
-                            // Renderable component should be turned on and be visible
-                            if (renderable->IsTurnedOn() && renderable->IsVisible())
+                            // Renderable component should be visible
+                            if (renderable->IsVisible())
                             {
                                 _window.Draw(*renderable);
                             }

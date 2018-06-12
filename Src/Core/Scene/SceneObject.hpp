@@ -1,6 +1,7 @@
 #pragma once
+#include "Core/Components/Base/BaseDataComponent.hpp"
+#include "Core/Components/Base/BaseLogicComponent.hpp"
 #include "Core/Components/TransformComponent.hpp"
-#include "Core/Components/BaseDataComponent.hpp"
 #include <typeindex>
 
 namespace Core

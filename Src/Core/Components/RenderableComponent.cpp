@@ -8,8 +8,8 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-RenderableComponent::RenderableComponent(const std::shared_ptr<SceneObject>& sceneObject) 
-: BaseLogicComponent(sceneObject)
+RenderableComponent::RenderableComponent(std::weak_ptr<SceneObject>&& sceneObject) 
+: BaseDataComponent(std::move(sceneObject))
 , _layerNumber(0)
 , _transformNeedUpdate(true)
 {

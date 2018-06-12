@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/Components/BaseComponent.hpp"
+#include "Core/Components/Base/BaseComponent.hpp"
 
 namespace Core
 {
@@ -9,12 +9,17 @@ namespace Core
     class BaseDataComponent : public BaseComponent
     {
     public:
-        BaseDataComponent() = default;
-        BaseDataComponent(const BaseDataComponent& other) = default;
-        BaseDataComponent(BaseDataComponent&& other) = default;
-        BaseDataComponent& operator=(const BaseDataComponent& other) = default;
-        BaseDataComponent& operator=(BaseDataComponent&& other) = default;
+        BaseDataComponent() = delete;
+        BaseDataComponent(const BaseDataComponent& other) = delete;
+        BaseDataComponent(BaseDataComponent&& other) = delete;
+        BaseDataComponent& operator=(const BaseDataComponent& other) = delete;
+        BaseDataComponent& operator=(BaseDataComponent&& other) = delete;
         virtual ~BaseDataComponent() = default;
+
+        /*!
+         * \brief Constructor.
+         */
+        explicit BaseDataComponent(std::weak_ptr<SceneObject>&& sceneObject);
 
         /*!
          * \brief Initializes component.

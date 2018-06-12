@@ -15,7 +15,7 @@ namespace Renderer
          * \brief Default constructor.
          * \param sceneObject - shared pointer to the object which contains this component.
          */
-        explicit SpriteRenderComponent(const std::shared_ptr<Core::SceneObject>& sceneObject);
+        explicit SpriteRenderComponent(std::weak_ptr<Core::SceneObject>&& sceneObject);
 
         /*!
          * \brief Sets texture coordinates.
@@ -28,16 +28,6 @@ namespace Renderer
          * \brief Initializes component and binds callbacks to certain events.
          */
         void Initialize() final;
-
-        /*!
-         * \brief Empty function.
-         */
-        void Update() final;
-
-        /*!
-         * \brief Empty function.
-         */
-        void LateUpdate() final;
 
     private:
         /*!

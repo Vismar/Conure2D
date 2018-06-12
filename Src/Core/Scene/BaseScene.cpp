@@ -153,7 +153,7 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void BaseScene::_OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, const int8_t layer)
+void BaseScene::_OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, int8_t)
 {
     std::lock_guard lock(_renderableArrayMutex);
     _renderableComponentsToAdd.push_back(renderabelComponent);

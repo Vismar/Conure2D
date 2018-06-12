@@ -1,10 +1,11 @@
 #pragma once
-#include "Core/Components/BaseLogicComponent.hpp"
+#include "Core/Components/Base/BaseDataComponent.hpp"
 #include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/RenderablesCompare.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <set>
+#include <atomic>
 
 namespace Core
 {
@@ -18,7 +19,7 @@ namespace Core
      * - Inherited components will have the same characteristics in comparison, 
      *   so scene object will not be able to store more than one renderable component.
      */
-    class RenderableComponent : public BaseLogicComponent, public Utility::EventManager, public sf::Drawable
+    class RenderableComponent : public BaseDataComponent, public Utility::EventManager, public sf::Drawable
     {
     public:
         RenderableComponent() = delete;
@@ -32,7 +33,7 @@ namespace Core
          * \brief Default constructor.
          * \param sceneObject - shared pointer to the object which contains this component.
          */
-        explicit RenderableComponent(const std::shared_ptr<SceneObject>& sceneObject);
+        explicit RenderableComponent(std::weak_ptr<SceneObject>&& sceneObject);
 
         /*!
          * \brief Operator "lesser".
@@ -140,9 +141,9 @@ namespace Core
         void draw(sf::RenderTarget& target, sf::RenderStates states) const final;
 
         /*! Number of the layer. The higher the layer - later object should be rendered. */
-        std::atomic<int8_t> _layerNumber;
+        std::atomic_int8_t _layerNumber;
         /*! Simple atomic flag of the need of the update of the transform. */
-        mutable std::atomic<bool> _transformNeedUpdate;
+        mutable std::atomic_bool _transformNeedUpdate;
         /*! Transform that will be used in render. */
         mutable sf::Transform _transform;
     };

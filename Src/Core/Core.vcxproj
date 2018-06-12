@@ -176,7 +176,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Production|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -216,7 +216,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Production|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -235,9 +235,9 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Components\BaseComponent.hpp" />
-    <ClInclude Include="Components\BaseDataComponent.hpp" />
-    <ClInclude Include="Components\BaseLogicComponent.hpp" />
+    <ClInclude Include="Components\Base\BaseComponent.hpp" />
+    <ClInclude Include="Components\Base\BaseDataComponent.hpp" />
+    <ClInclude Include="Components\Base\BaseLogicComponent.hpp" />
     <ClInclude Include="Components\RenderableComponent.hpp" />
     <ClInclude Include="Components\TransformComponent.hpp" />
     <ClInclude Include="Components\Utility\RenderablesCompare.hpp" />
@@ -249,9 +249,9 @@
     <ClInclude Include="Scene\SceneObject.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Components\BaseComponent.cpp" />
-    <ClCompile Include="Components\BaseDataComponent.cpp" />
-    <ClCompile Include="Components\BaseLogicComponent.cpp" />
+    <ClCompile Include="Components\Base\BaseComponent.cpp" />
+    <ClCompile Include="Components\Base\BaseDataComponent.cpp" />
+    <ClCompile Include="Components\Base\BaseLogicComponent.cpp" />
     <ClCompile Include="Components\RenderableComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Components\Utility\RenderablesCompare.cpp" />

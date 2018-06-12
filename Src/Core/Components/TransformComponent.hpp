@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/Components/BaseLogicComponent.hpp"
+#include "Core/Components/Base/BaseLogicComponent.hpp"
 #include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/Math/Vectors.hpp"
 #include <SFML/Graphics/Transform.hpp>

@@ -10,6 +10,9 @@
     <Filter Include="Components\Utility">
       <UniqueIdentifier>{77382cb0-38ac-4bf2-b2a5-454fa58d7a27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Base">
+      <UniqueIdentifier>{c888aa66-2890-4479-8958-3eac93fe4e94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\TransformComponent.hpp">
@@ -39,14 +42,14 @@
     <ClInclude Include="Scene\BaseSceneInterface.hpp">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Components\BaseLogicComponent.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="Components\Base\BaseComponent.hpp">
+      <Filter>Components\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Components\BaseDataComponent.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="Components\Base\BaseDataComponent.hpp">
+      <Filter>Components\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Components\BaseComponent.hpp">
-      <Filter>Components</Filter>
+    <ClInclude Include="Components\Base\BaseLogicComponent.hpp">
+      <Filter>Components\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,14 +71,14 @@
     <ClCompile Include="Components\Utility\RenderablesCompare.cpp">
       <Filter>Components\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Components\BaseLogicComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Components\Base\BaseComponent.cpp">
+      <Filter>Components\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Components\BaseComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Components\Base\BaseDataComponent.cpp">
+      <Filter>Components\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Components\BaseDataComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Components\Base\BaseLogicComponent.cpp">
+      <Filter>Components\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

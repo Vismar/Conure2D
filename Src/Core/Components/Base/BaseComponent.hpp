@@ -4,6 +4,8 @@
 
 namespace Core
 {
+    class SceneObject;
+
     /*!
      * \brief Base class for all components.
      * 
@@ -12,16 +14,17 @@ namespace Core
     class BaseComponent : public std::enable_shared_from_this<BaseComponent>
     {
     public:
-        BaseComponent(const BaseComponent& other) = default;
-        BaseComponent(BaseComponent&& other) = default;
-        BaseComponent& operator=(const BaseComponent& other) = default;
-        BaseComponent& operator=(BaseComponent&& other) = default;
+        BaseComponent() = delete;
+        BaseComponent(const BaseComponent& other) = delete;
+        BaseComponent(BaseComponent&& other) = delete;
+        BaseComponent& operator=(const BaseComponent& other) = delete;
+        BaseComponent& operator=(BaseComponent&& other) = delete;
         virtual ~BaseComponent() = default;
 
         /*!
-         * \brief Default constructor.
+         * \brief Constructor.
          */
-        BaseComponent();
+        explicit BaseComponent(std::weak_ptr<SceneObject>&& sceneObject);
 
         /*!
          * \brief Comparison of two base components by their type info.
@@ -35,11 +38,20 @@ namespace Core
          */
         bool operator==(const std::type_index& typeIndex) const;
 
+        /*!
+         * \brief Return weak pointer to the scene object that contain this component.
+         * \return Weak pointer to the scene object.
+         */
+        std::weak_ptr<SceneObject> GetSceneObject() const;
+
     protected:
         /*! Type id of component. This variable is used in to identify identical components by its type. */
         std::type_index _typeIndex;
 
     private:
+        /*! Weak pointer to the scene object that store this component. */
+        std::weak_ptr<SceneObject> _sceneObject;
+
         friend bool operator==(const std::type_index& typeIndex, const BaseComponent& component);
     };
 

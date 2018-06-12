@@ -29,7 +29,7 @@ namespace Input
          * 
          * Copy constructor is required because we have several joysticks that can be connected and handled.
          */
-        JoystickDevice(const JoystickDevice& other);
+        JoystickDevice(const JoystickDevice&);
 
         /*!
          * \brief Simple destructor.

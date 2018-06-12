@@ -82,7 +82,7 @@ namespace Input
          * \param joystickButton - joystick button which will be checked.
          * \return True if specified button was held down. Otherwise - false.
          */
-        bool ButtonHeldDown(uint32_t joystickId, const JoystickButton joystickButton) const final;
+        bool ButtonHeldDown(uint32_t joystickId, JoystickButton joystickButton) const final;
 
         /*!
          * \brief Checks if specified button was released.
