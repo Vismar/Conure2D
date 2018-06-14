@@ -4,7 +4,7 @@
 
 template <class Ret>
 template <class ... Args>
-const AnyCallableHandler& Dispatcher<Ret>::AddCallable(Ret(*function)(Args...))
+AnyCallableHandler Dispatcher<Ret>::AddCallable(Ret(*function)(Args...))
 {
     AnyCallable<Ret> callable(function);
     if (_NotAdded(callable))
@@ -21,7 +21,7 @@ const AnyCallableHandler& Dispatcher<Ret>::AddCallable(Ret(*function)(Args...))
 
 template <class Ret>
 template <class UserClass, class ... Args>
-const AnyCallableHandler& Dispatcher<Ret>::AddCallable(UserClass* userClass, Ret(UserClass::*function)(Args...))
+AnyCallableHandler Dispatcher<Ret>::AddCallable(UserClass* userClass, Ret(UserClass::*function)(Args...))
 {
     AnyCallable<Ret> callable(userClass, function);
     if (_NotAdded(callable))

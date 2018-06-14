@@ -27,7 +27,7 @@ namespace Core
         RenderableComponent(RenderableComponent&& other) = delete;
         RenderableComponent& operator=(const RenderableComponent& other) = delete;
         RenderableComponent& operator=(RenderableComponent&& other) = delete;
-        virtual ~RenderableComponent() = default;
+        virtual ~RenderableComponent();
 
         /*!
          * \brief Default constructor.
@@ -146,6 +146,8 @@ namespace Core
         mutable std::atomic_bool _transformNeedUpdate;
         /*! Transform that will be used in render. */
         mutable sf::Transform _transform;
+        /*! Handler of TransformUpdated event from transform component. */
+        Utility::AnyCallableHandler _transformUpdatedHandler;
     };
 
     /*! Simple alias to shorten the name of the vector of weak pointers to renderable components. */

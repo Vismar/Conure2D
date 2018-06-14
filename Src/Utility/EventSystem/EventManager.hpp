@@ -48,8 +48,7 @@ namespace Utility
          * Callable should NOT be const.
          */
         template <class Ret, class ... Args>
-        const AnyCallableHandler& BindToEvent(const std::string& eventName, 
-                                              Ret(*function)(Args...));
+        AnyCallableHandler BindToEvent(const std::string& eventName, Ret(*function)(Args...));
 
         /*!
          * \brief Binds class method to specified event.
@@ -64,9 +63,9 @@ namespace Utility
          * Callable should NOT be const.
          */
         template <class Ret, class UserClass, class ... Args>
-        const AnyCallableHandler& BindToEvent(const std::string& eventName, 
-                                              UserClass* userClass, 
-                                              Ret(UserClass::*function)(Args...));
+        AnyCallableHandler BindToEvent(const std::string& eventName, 
+                                       UserClass* userClass, 
+                                       Ret(UserClass::*function)(Args...));
 
         /*!
          * \brief Unbinds the callable that handled by handler from specified event.

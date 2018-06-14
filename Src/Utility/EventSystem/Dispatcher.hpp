@@ -24,7 +24,7 @@ namespace Utility
          * \return Handler of callable if it was stored. Otherwise - empty handler.
          */
         template <class ... Args>
-        const AnyCallableHandler& AddCallable(Ret(*function)(Args...));
+        AnyCallableHandler AddCallable(Ret(*function)(Args...));
 
         /*!
          * \brief Adds callable to the array and returns handle of added callable.
@@ -35,7 +35,7 @@ namespace Utility
          * \return Handler of callable if it was stored. Otherwise - empty handler.
          */
         template <class UserClass, class ... Args>
-        const AnyCallableHandler& AddCallable(UserClass* userClass, Ret(UserClass::*function)(Args...));
+        AnyCallableHandler AddCallable(UserClass* userClass, Ret(UserClass::*function)(Args...));
 
         /*!
          * \brief Invokes every stored callable in the dispatcher with specified parameters.

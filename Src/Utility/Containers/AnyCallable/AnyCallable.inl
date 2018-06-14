@@ -47,7 +47,7 @@ Ret AnyCallable<Ret>::operator()(Args&& ... args)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>
-const AnyCallableHandler& AnyCallable<Ret>::GetHandler() const
+AnyCallableHandler AnyCallable<Ret>::GetHandler() const
 {
     return _handler;
 }

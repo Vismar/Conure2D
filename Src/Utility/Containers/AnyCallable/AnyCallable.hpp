@@ -63,7 +63,7 @@ namespace Utility
          * \brief Returns handler.
          * \return Handler of this particular instance of AnyCallable.
          */
-        const AnyCallableHandler& GetHandler() const;
+        AnyCallableHandler GetHandler() const;
 
     private:
         /*!

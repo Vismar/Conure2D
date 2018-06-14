@@ -8,6 +8,20 @@ using namespace Core;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+RenderableComponent::~RenderableComponent()
+{
+    if (const auto object = GetSceneObject().lock())
+    {
+        _transformComponent = object->GetTransformComponent();
+        if (const auto transform = _transformComponent.lock())
+        {
+            transform->UnbindFromEvent("TransformUpdated", _transformUpdatedHandler);
+        }
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 RenderableComponent::RenderableComponent(std::weak_ptr<SceneObject>&& sceneObject) 
 : BaseDataComponent(std::move(sceneObject))
 , _layerNumber(0)
@@ -18,7 +32,7 @@ RenderableComponent::RenderableComponent(std::weak_ptr<SceneObject>&& sceneObjec
         _transformComponent = object->GetTransformComponent();
         if (const auto transform = _transformComponent.lock())
         {
-            transform->BindToEvent("TransformUpdated", this, &RenderableComponent::_OnTransformComponentUpdated);
+            _transformUpdatedHandler = transform->BindToEvent("TransformUpdated", this, &RenderableComponent::_OnTransformComponentUpdated);
         }
     }
 }
