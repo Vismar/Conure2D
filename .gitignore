@@ -1,8 +1,11 @@
 # Folders to ignore
 SFML/
 Bin/
-\.vs/
+Lib/
 Docs/html/
+\.vs/
+\.idea/
+\cmake-build*
 
 # File types to ignore
 *.db

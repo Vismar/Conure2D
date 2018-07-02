@@ -51,8 +51,8 @@ void LogSystem::SetLogEntryTemplate(const std::string& newLogEntryTemplate)
 {
     // Since log system can be called from any thread, template should be accessible to change without data race
     const auto newLogEntryTemplatePtr = std::make_shared<std::string>(newLogEntryTemplate);
-    auto currentLogEntryTempalte = std::atomic_load(&_logEntryTemplate);
-    while (!std::atomic_compare_exchange_weak(&_logEntryTemplate, &currentLogEntryTempalte, newLogEntryTemplatePtr));
+    auto currentLogEntryTemplate = std::atomic_load(&_logEntryTemplate);
+    while (!std::atomic_compare_exchange_weak(&_logEntryTemplate, &currentLogEntryTemplate, newLogEntryTemplatePtr));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ void LogSystem::Flush() const
 
 void LogSystem::AddEntry(const LogLevel logLevel, const std::string& message)
 {
-    if (logLevel >= _logLevel)
+    if (logLevel >= _logLevel.load())
     {
         _msgQueue->EmplaceBack(LogEntry(logLevel, std::string(message)));
         InvokeEvent<void, LogEntry>("NewEntryAdded", LogEntry(logLevel, std::string(message)));

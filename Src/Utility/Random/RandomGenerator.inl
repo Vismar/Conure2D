@@ -5,7 +5,7 @@
 template <typename T>
 T RandomGenerator::Get(const T from, const T to)
 {
-    const std::uniform_int_distribution<T> dist(from, to);
+    std::uniform_int_distribution<T> dist(from, to);
     return dist(_mtEngine);
 }
 
@@ -14,7 +14,7 @@ T RandomGenerator::Get(const T from, const T to)
 template <>
 inline int64_t RandomGenerator::Get<int64_t>(const int64_t from, const int64_t to)
 {
-    const std::uniform_int_distribution<int64_t> dist(from, to);
+    std::uniform_int_distribution<int64_t> dist(from, to);
     return dist(_mtEngine64);
 }
 
@@ -23,7 +23,7 @@ inline int64_t RandomGenerator::Get<int64_t>(const int64_t from, const int64_t t
 template <>
 inline uint64_t RandomGenerator::Get<uint64_t>(const uint64_t from, const uint64_t to)
 {
-    const std::uniform_int_distribution<uint64_t> dist(from, to);
+    std::uniform_int_distribution<uint64_t> dist(from, to);
     return dist(_mtEngine64);
 }
 
@@ -32,7 +32,7 @@ inline uint64_t RandomGenerator::Get<uint64_t>(const uint64_t from, const uint64
 template <>
 inline float RandomGenerator::Get<float>(const float from, const float to)
 {
-    const std::uniform_real_distribution<float> dist(from, to);
+    std::uniform_real_distribution<float> dist(from, to);
     return dist(_mtEngine);
 }
 
@@ -41,14 +41,14 @@ inline float RandomGenerator::Get<float>(const float from, const float to)
 template <>
 inline double RandomGenerator::Get<double>(const double from, const double to)
 {
-    const std::uniform_real_distribution<double> dist(from, to);
+    std::uniform_real_distribution<double> dist(from, to);
     return dist(_mtEngine64);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T>
-T RandomGenerator::Get(const std::uniform_int_distribution<T>& distr)
+T RandomGenerator::Get(std::uniform_int_distribution<T>& distr)
 {
     return distr(_mtEngine);
 }
@@ -56,7 +56,7 @@ T RandomGenerator::Get(const std::uniform_int_distribution<T>& distr)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <>
-inline int64_t RandomGenerator::Get<int64_t>(const std::uniform_int_distribution<int64_t>& distr)
+inline int64_t RandomGenerator::Get<int64_t>(std::uniform_int_distribution<int64_t>& distr)
 {
     return distr(_mtEngine64);
 }
@@ -64,7 +64,7 @@ inline int64_t RandomGenerator::Get<int64_t>(const std::uniform_int_distribution
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <>
-inline uint64_t RandomGenerator::Get<uint64_t>(const std::uniform_int_distribution<uint64_t>& distr)
+inline uint64_t RandomGenerator::Get<uint64_t>(std::uniform_int_distribution<uint64_t>& distr)
 {
     return distr(_mtEngine64);
 }
@@ -72,7 +72,7 @@ inline uint64_t RandomGenerator::Get<uint64_t>(const std::uniform_int_distributi
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <>
-inline float RandomGenerator::Get<float>(const std::uniform_real_distribution<float>& distr)
+inline float RandomGenerator::Get<float>(std::uniform_real_distribution<float>& distr)
 {
     return distr(_mtEngine);
 }
@@ -80,7 +80,7 @@ inline float RandomGenerator::Get<float>(const std::uniform_real_distribution<fl
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <>
-inline double RandomGenerator::Get<double>(const std::uniform_real_distribution<double>& distr)
+inline double RandomGenerator::Get<double>(std::uniform_real_distribution<double>& distr)
 {
     return distr(_mtEngine64);
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <cstddef>
 #include "Utility/Containers/AnyCallable/AnyCallableHandler.hpp"
 
 namespace Utility
