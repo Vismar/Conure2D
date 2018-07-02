@@ -16,7 +16,7 @@ namespace Utility
     };
 
     /*! String representation of log levels. */
-    static std::string LogLevelText[] = {"Debug", "Warning", "Error", "Critical"};
+    const static std::string LogLevelText[] = {"Debug", "Warning", "Error", "Critical"};
 
     /*!
      * \brief Stores necessary data of log entry.
