@@ -6,8 +6,8 @@ set(dir ${CMAKE_CURRENT_SOURCE_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${dir}../../../Lib")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${dir}../../../Lib")
 
-include_directories(${dir}../)
-include_directories(${dir}../../)
+include_directories(../)
+include_directories(../../)
 
 add_library(Utility
             Containers/AnyCallable/AnyCallable.hpp
