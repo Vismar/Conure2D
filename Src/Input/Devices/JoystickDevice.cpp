@@ -1,7 +1,7 @@
 #include "JoystickDevice.hpp"
 #include "Engine/EngineInterface.hpp"
 #include "Utility/LogSystem/LogSystem.hpp"
-#include <SFML/Window/Joystick.hpp>
+#include <climits>
 
 using namespace Input;
 
