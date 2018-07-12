@@ -11,7 +11,7 @@
   - [ ] Engine component covered.
   - [ ] Render component covered.
   - [ ] Core component covered.
-  - [ ] Input component covered.
+  - [*] Input component covered.
   - [*] Utility component covered.
 - **Core**
   - **Scene**
