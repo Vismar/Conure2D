@@ -34,4 +34,11 @@ add_library(Input
             ${Src}/Input/InputSystemHandlerInterface.hpp
             ${Src}/Input/InputSystemInterface.hpp)
 
+# Prefix
 set_target_properties(Input PROPERTIES PREFIX "")
+# Postfix
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set_target_properties(Input PROPERTIES DEBUG_POSTFIX "-d")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    set_target_properties(Input PROPERTIES RELEASE_POSTFIX "-r")
+endif (CMAKE_BUILD_TYPE MATCHES Debug)

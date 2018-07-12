@@ -49,4 +49,11 @@ add_library(Utility
             ${Src}/Utility/Time/TimeSpan.cpp
             ${Src}/Utility/Time/TimeSpan.hpp)
 
+# Prefix
 set_target_properties(Utility PROPERTIES PREFIX "")
+# Postfix
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set_target_properties(Utility PROPERTIES DEBUG_POSTFIX "-d")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    set_target_properties(Utility PROPERTIES RELEASE_POSTFIX "-r")
+endif (CMAKE_BUILD_TYPE MATCHES Debug)

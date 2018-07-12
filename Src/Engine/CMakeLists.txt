@@ -14,4 +14,11 @@ add_library(Engine
             ${Src}/Engine/EngineInterface.hpp
             ${Src}/Engine/EngineInterfaceDefinitions.inl)
 
+# Prefix
 set_target_properties(Engine PROPERTIES PREFIX "")
+# Postfix
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set_target_properties(Engine PROPERTIES DEBUG_POSTFIX "-d")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    set_target_properties(Engine PROPERTIES RELEASE_POSTFIX "-r")
+endif (CMAKE_BUILD_TYPE MATCHES Debug)

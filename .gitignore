@@ -8,6 +8,7 @@ Docs/html/
 \.idea/
 \.vscode/
 \cmake-build*
+\CMakeFiles*
 
 # File types to ignore
 *.db

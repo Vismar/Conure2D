@@ -30,4 +30,11 @@ add_library(Core
             ${Src}/Core/Scene/SceneObject.hpp
             ${Src}/Core/Scene/SceneObject.inl)
 
+# Prefix
 set_target_properties(Core PROPERTIES PREFIX "")
+# Postfix
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set_target_properties(Core PROPERTIES DEBUG_POSTFIX "-d")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    set_target_properties(Core PROPERTIES RELEASE_POSTFIX "-r")
+endif (CMAKE_BUILD_TYPE MATCHES Debug)

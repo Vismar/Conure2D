@@ -18,4 +18,11 @@ add_library(Render
             ${Src}/Render/RenderSystem.hpp
             ${Src}/Render/RenderSystemInterface.hpp)
 
+# Prefix
 set_target_properties(Render PROPERTIES PREFIX "")
+# Postfix
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set_target_properties(Render PROPERTIES DEBUG_POSTFIX "-d")
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    set_target_properties(Render PROPERTIES RELEASE_POSTFIX "-r")
+endif (CMAKE_BUILD_TYPE MATCHES Debug)
