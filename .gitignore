@@ -2,9 +2,11 @@
 SFML/
 Bin/
 Lib/
+build/
 Docs/html/
 \.vs/
 \.idea/
+\.vscode/
 \cmake-build*
 
 # File types to ignore

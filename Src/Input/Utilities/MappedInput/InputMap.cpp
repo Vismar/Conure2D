@@ -1,6 +1,4 @@
 #include "InputMap.hpp"
-#include "Input/Utilities/MappedInput/InputAction.hpp"
-#include "Input/Utilities/MappedInput/InputAxis.hpp"
 
 using namespace Input;
 

@@ -22,7 +22,7 @@
     - `InputSystemInterface` - interface to input system.
     - `RenderLoopTimeSpan` - time span of the previous render loop.
     - `LogicLoopTimeSpan` - time span of the previous game logic loop.
-- **Renderer**
+- **Render**
   - Now render system has methods to change window settings via the interface.
   - Window now can change its resolution independent on its size.
   - **RenderSystemInterface** - interface that provides functionality to work with the system from the game logic.
@@ -53,7 +53,7 @@
 ## [0.0.1] - 5th April,2018
 
 ### Added
-- **Renderer**
+- **Render**
   - The base system which obtains required data from a scene map and draws everything that is supposed to be drawn. As an addition handles all user input via input system.
   - **Components**
     - **SpriteRenderComponent** - simple renderable component that provides functionality to render basic sprites.
@@ -61,11 +61,11 @@
   - **Components**
     - **BaseComponent** - base class for all components that can be attached to any scene object.
     - **TransformComponent** - most important component that every scene object has. It stores transform data and provide functionality to operate on that data.
-    - **RenderableComponent** - base class for all renderable components that are used by the renderer.
+    - **RenderableComponent** - base class for all renderable components that are used by the render.
   - **Scene**
     - **SceneObject** - core and bones to which user supposed to add components that will make an object something unique.
     - **BaseScene** - a base scene that provides the core functionality of scenes.
-    - **SceneMap** - the map which stores all scenes and provides required functionality to the renderer. Handles game logic loop that should be in the separate thread.
+    - **SceneMap** - the map which stores all scenes and provides required functionality to the render. Handles game logic loop that should be in the separate thread.
 - **Input**
   - Direct access to state of buttons/axes of keyboard/mouse/joysticks.
   - Mapping named actions.

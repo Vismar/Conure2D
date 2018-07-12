@@ -1,5 +1,7 @@
 #pragma once
 #include "InputMapInterface.hpp"
+#include "Input/Utilities/MappedInput/InputAction.hpp"
+#include "Input/Utilities/MappedInput/InputAxis.hpp"
 #include <string>
 #include <unordered_map>
 #include <memory>

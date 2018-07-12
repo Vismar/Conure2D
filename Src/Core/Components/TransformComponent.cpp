@@ -2,6 +2,7 @@
 #include "Utility/EventSystem/Dispatcher.hpp"
 #include "Utility/Math/MathConstants.hpp"
 #include "Core/Scene/SceneObject.hpp"
+#include <cmath>
 
 using namespace Core;
 
