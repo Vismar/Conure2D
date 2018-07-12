@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include <string>
 
 namespace Input
@@ -57,18 +56,18 @@ namespace Input
         Menu,      /*!< The Menu button. */
         LBracket,  /*!< The [ button. */
         RBracket,  /*!< The ] button. */
-        SemiColon, /*!< The ; button. */
+        Semicolon, /*!< The ; button. */
         Comma,     /*!< The , button. */
         Period,    /*!< The . button. */
         Quote,     /*!< The ' button. */
         Slash,     /*!< The / button. */
-        BackSlash, /*!< The \ button. */
+        Backslash, /*!< The \ button. */
         Tilde,     /*!< The ~ button. */
         Equal,     /*!< The = button. */
-        Dash,      /*!< The - button. */
+        Hyphen,    /*!< The - button. */
         Space,     /*!< The Space button. */
-        Return,    /*!< The Return button. */
-        BackSpace, /*!< The Backspace button. */
+        Enter,     /*!< The Enter/Return button. */
+        Backspace, /*!< The Backspace button. */
         Tab,       /*!< The Tabulation button. */
         PageUp,    /*!< The Page up button. */
         PageDown,  /*!< The Page down button. */
@@ -163,18 +162,18 @@ namespace Input
         "Menu",
         "LBracket",
         "RBracket",
-        "SemiColon",
+        "Semicolon",
         "Comma",
         "Period",
         "Quote",
         "Slash",
-        "BackSlash",
+        "Backslash",
         "Tilde",
         "Equal",
-        "Dash",
+        "Hyphen",
         "Space",
-        "Return",
-        "BackSpace",
+        "Enter",
+        "Backspace",
         "Tab",
         "PageUp",
         "PageDown",
