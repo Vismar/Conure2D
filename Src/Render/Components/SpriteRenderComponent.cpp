@@ -1,14 +1,14 @@
 #include "SpriteRenderComponent.hpp"
 #include <SFML/Graphics/Texture.hpp>
 
-using namespace Renderer;
+using namespace Render;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 SpriteRenderComponent::SpriteRenderComponent(std::weak_ptr<Core::SceneObject>&& sceneObject)
 : RenderableComponent(std::move(sceneObject))
 {
-    _vertices.setPrimitiveType(sf::TriangleStrip);
+    _vertices.setPrimitiveType(sf::TrianglesStrip);
     _vertices.resize(5);
 
     _vertices[0].position = { 0.0f, 0.0f };

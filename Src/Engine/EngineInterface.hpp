@@ -10,7 +10,7 @@ namespace Input
     class InputSystemInterface;
 }
 
-namespace Renderer
+namespace Render
 {
     class RenderSystemInterface;
 }
@@ -28,7 +28,7 @@ namespace Engine
      * \brief Grabs render system.
      * \return Reference to the render system.
      */
-    Renderer::RenderSystemInterface& GetRenderSystem();
+    Render::RenderSystemInterface& GetRenderSystem();
 
     /*!
      * \brief Grabs scene map system.

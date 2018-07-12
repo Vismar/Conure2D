@@ -5,7 +5,7 @@ using namespace Engine;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Renderer::RenderSystemInterface& Engine::GetRenderSystem()
+Render::RenderSystemInterface& Engine::GetRenderSystem()
 {
     return EngineApp::Instance().GetRenderSystem();
 }

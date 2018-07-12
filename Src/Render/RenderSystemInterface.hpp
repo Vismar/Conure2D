@@ -1,7 +1,7 @@
 #pragma once
-#include "Renderer/Window/WindowSettings.hpp"
+#include "Render/Window/WindowSettings.hpp"
 
-namespace Renderer
+namespace Render
 {
     /*!
      * \brief Public interface for render system that should be used by game logic.

@@ -1,12 +1,12 @@
 #pragma once
 #include "Core/Scene/RenderableSceneMapInterface.hpp"
 #include "Input/InputSystemHandlerInterface.hpp"
-#include "Renderer/RenderSystemInterface.hpp"
-#include "Renderer/Window/Window.hpp"
+#include "Render/RenderSystemInterface.hpp"
+#include "Render/Window/Window.hpp"
 #include "Utility/Time/TimeSpan.hpp"
 #include <mutex>
 
-namespace Renderer
+namespace Render
 {
     /*!
      * \brief System that handles render process.

@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Components/RenderableComponent.hpp"
 
-namespace Renderer
+namespace Render
 {
     /*!
      * \brief Simple renderable component.

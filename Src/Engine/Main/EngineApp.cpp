@@ -9,7 +9,7 @@ using namespace Engine;
 EngineApp::EngineApp()
 : _ioSystem(std::make_unique<Utility::IOSystem>())
 , _logSystem(std::make_unique<Utility::LogSystem>(*_ioSystem))
-, _renderSystem(std::make_unique<Renderer::RenderSystem>())
+, _renderSystem(std::make_unique<Render::RenderSystem>())
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<Core::SceneMap>())
 , _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
@@ -57,7 +57,7 @@ void EngineApp::End() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Renderer::RenderSystem& EngineApp::GetRenderSystem() const
+Render::RenderSystem& EngineApp::GetRenderSystem() const
 {
     return *_renderSystem;
 }

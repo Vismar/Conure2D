@@ -3,7 +3,7 @@
 
 namespace sf { class VideoMode; struct ContextSettings; }
 
-namespace Renderer
+namespace Render
 {
     /*!
      * \brief Enumeration of styles that can be used by window.

@@ -1,5 +1,5 @@
 #pragma once
-#include "Renderer/RenderSystem.hpp"
+#include "Render/RenderSystem.hpp"
 #include "Core/Scene/SceneMap.hpp"
 #include "Input/InputSystem.hpp"
 #include "Utility/Time/TimeSpan.hpp"
@@ -48,7 +48,7 @@ namespace Engine
          * \brief Returns render system.
          * \return Reference to the render system.
          */
-        Renderer::RenderSystem& GetRenderSystem() const;
+        Render::RenderSystem& GetRenderSystem() const;
 
         /*!
          * \brief Returns scene map.
@@ -99,7 +99,7 @@ namespace Engine
         /*! Time span of the render loop. */
         Utility::TimeSpan _renderLoopTimeSpan;
         /*! Unique pointer to the render system. */
-        std::unique_ptr<Renderer::RenderSystem> _renderSystem;
+        std::unique_ptr<Render::RenderSystem> _renderSystem;
         /*! Atomic flag for logic thread. */
         std::atomic<bool> _logicThreadIsWorking;
         /*! Time span of the logic loop. */
