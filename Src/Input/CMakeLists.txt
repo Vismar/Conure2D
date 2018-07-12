@@ -34,4 +34,4 @@ add_library(Input
             ${Src}/Input/InputSystemHandlerInterface.hpp
             ${Src}/Input/InputSystemInterface.hpp)
 
-set_target_properties(Input   PROPERTIES PREFIX "")
+set_target_properties(Input PROPERTIES PREFIX "")

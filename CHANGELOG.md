@@ -10,9 +10,9 @@
 - **CMake**
   - [ ] Engine component covered.
   - [ ] Render component covered.
-  - [ ] Core component covered.
-  - [*] Input component covered.
-  - [*] Utility component covered.
+  - [x] Core component covered.
+  - [x] Input component covered.
+  - [x] Utility component covered.
 - **Core**
   - **Scene**
     - **BaseScene** - now BaseScene stores name of itself. Also BaseScene now derived from new interface BaseSceneInterface which is used only by inner systems so user still should use BaseScene class.
