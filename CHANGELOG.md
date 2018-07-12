@@ -8,7 +8,7 @@
 
 ### Added
 - **CMake**
-  - [ ] Engine component covered.
+  - [x] Engine component covered.
   - [x] Render component covered.
   - [x] Core component covered.
   - [x] Input component covered.
