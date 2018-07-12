@@ -1,15 +1,32 @@
 # Changelog
 
 ## Plans
-- **Box2d** - include box2d functionality to the engine.
 - **Debug info** - debug information that helps the development.
 - **Editor** - ui toolchain.
 
 ## WIP
 
 ### Added
+- **Core**
+  - **Scene**
+    - **BaseScene** - now BaseScene stores name of itself. Also BaseScene now derived from new interface BaseSceneInterface which is used only by inner systems so user still should use BaseScene class.
+  - **Components**
+    - Now here is 2 kind of components:
+      - **DataComponent** - should be used only to store data. Nothing more, nothing less.
+      - **LogicComponent** - should be used to create logic because it provides special methods that is called by scene in update cycle.
 - **Utility**
   - **LockFreeLinkedQueue** - lock-free linked queue which designed to guarantee push/pop operations to be executed simultaneously without any synchronization via mutexes or similar things.
+  - **LogSystem** - system that provides functionality to log work of an engine and applications based on it.
+  - **IOSystem** - system that currently provides functionality only to write data to text files.
+  - **Time**
+    - New functions were introduced:
+      - `ToString()` - new method to convert stored time to formated string.
+
+### Fixed
+- **Overall**
+  - Now code can be built on linux! Missing headers was added here and there, some other tweaks, etc.
+- **Utility**
+  - **AnyCallable** - now method `GetHandler()` returns value type instead of reference type. It was an issue because if you tried to access that handler if AnyCallable that stored that handler was removed (for example if any_cast was bad) then app crashes.
 
 ## [0.0.2] - 9th May,2018
 
