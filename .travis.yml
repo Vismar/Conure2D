@@ -7,6 +7,7 @@ os:
 before_script:
   # Installing gcc-8
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 # mongodb keys can expire and build will fail so we should ignore it
   - sudo apt update
   - sudo apt-get install -y gcc-8 g++-8
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100
