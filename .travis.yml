@@ -31,3 +31,5 @@ script:
   # echo Conure2D - Production build
   - cmake .. -DCMAKE_BUILD_TYPE=Production
   - make
+  - cd ../Lib
+  - ls
