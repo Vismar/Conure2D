@@ -28,6 +28,9 @@ set(VERSION_PATCH 3)
 
 project(Conure2D)
 
+# Include directory in case of user have SMFL in Conure2D folder
+include_directories(.)
+
 # Static libs
 add_subdirectory(Src/Utility)
 add_subdirectory(Src/Input)

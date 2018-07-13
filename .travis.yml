@@ -5,13 +5,40 @@ compiler:
 os:
   - linux
 before_script:
+  - echo ======================================
   - echo Installing gcc-8
+  - echo ======================================
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt update
   - sudo apt-get install -y gcc-8 g++-8
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 100
+  - echo ======================================
+  - echo Installing SFML
+  - echo ======================================
+  - cd ../
+  - wget https://www.sfml-dev.org/files/SFML-2.5.0-linux-gcc-64-bit.tar.gz
+  - tar -xzf SFML-2.5.0-linux-gcc-64-bit.tar.gz
+  - mv -v ./SFML-2.5.0/include/* ./Conure2D/
+script: 
+  - echo ======================================
+  - echo Building Conure2D
+  - echo ======================================
+  - cd Conure2D
   - mkdir build
   - cd build
-  - cmake ..
-script: make
+  - echo ======================================
+  - echo Conure2D - Debug build
+  - echo ======================================
+  - cmake .. -DCMAKE_BUILD_TYPE=Debug
+  - make
+  - echo ======================================
+  - echo Conure2D - Release build
+  - echo ======================================
+  - cmake .. -DCMAKE_BUILD_TYPE=Release
+  - make
+  - echo ======================================
+  - echo Conure2D - Production build
+  - echo ======================================
+  - cmake .. -DCMAKE_BUILD_TYPE=Production
+  - make
