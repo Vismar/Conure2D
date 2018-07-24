@@ -7,12 +7,10 @@
 ## WIP
 
 ### Added
+- **Auto build**
+  - Now every new commit to master branch is building on Travis CI to check if everything is okay.
 - **CMake**
-  - [x] Engine component covered.
-  - [x] Render component covered.
-  - [x] Core component covered.
-  - [x] Input component covered.
-  - [x] Utility component covered.
+  - Whole project can be build via cmake
 - **Core**
   - **Scene**
     - **BaseScene** - now BaseScene stores name of itself. Also BaseScene now derived from new interface BaseSceneInterface which is used only by inner systems so user still should use BaseScene class.
