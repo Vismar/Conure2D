@@ -14,7 +14,7 @@ namespace Utility
     /*!
      * \brief Thread-safe log system which handles creating and storing logs of all events that occur.
      */
-    class LogSystem : public EventManager
+    class LogSystem final : public EventManager
     {
     public:
         LogSystem() = delete;
@@ -22,7 +22,7 @@ namespace Utility
         LogSystem(LogSystem&& other) = delete;
         LogSystem& operator=(const LogSystem& other) = delete;
         LogSystem& operator=(LogSystem&& other) = delete;
-        ~LogSystem() = default;
+        ~LogSystem() final = default;
 
         /*!
          * \brief Default constructor.

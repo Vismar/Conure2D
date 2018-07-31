@@ -16,7 +16,7 @@ namespace Core
         SceneMap& operator=(const SceneMap& other) = delete;
         SceneMap& operator=(SceneMap&& other) = delete;
         SceneMap() = default;
-        ~SceneMap() = default;
+        ~SceneMap() override = default;
 
         /*!
          * \brief Adds new specified scene to the scene map.

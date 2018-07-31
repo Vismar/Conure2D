@@ -27,7 +27,7 @@ namespace Core
         RenderableComponent(RenderableComponent&& other) = delete;
         RenderableComponent& operator=(const RenderableComponent& other) = delete;
         RenderableComponent& operator=(RenderableComponent&& other) = delete;
-        virtual ~RenderableComponent();
+        ~RenderableComponent() override;
 
         /*!
          * \brief Default constructor.

@@ -21,7 +21,7 @@ namespace Core
         BaseScene(BaseScene&& other) = delete;
         BaseScene& operator=(const BaseScene& other) = delete;
         BaseScene& operator=(BaseScene&& other) = delete;
-        virtual ~BaseScene() = default;
+        ~BaseScene() override = default;
 
         /*! 
          * \brief Default constructor.

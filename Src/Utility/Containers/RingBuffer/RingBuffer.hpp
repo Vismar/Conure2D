@@ -15,9 +15,9 @@ namespace Utility
         class ReverseIterator;
 
         RingBuffer(const RingBuffer& other) = default;
-        RingBuffer(RingBuffer&& other) = default;
+        RingBuffer(RingBuffer&& other) noexcept = default;
         RingBuffer& operator=(const RingBuffer& other) = default;
-        RingBuffer& operator=(RingBuffer&& other) = default;
+        RingBuffer& operator=(RingBuffer&& other) noexcept = default;
         ~RingBuffer() = default;
 
         /*!

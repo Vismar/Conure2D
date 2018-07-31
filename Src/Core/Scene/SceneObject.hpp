@@ -23,7 +23,7 @@ namespace Core
         SceneObject(SceneObject&& other) = delete;
         SceneObject& operator=(const SceneObject& other) = delete;
         SceneObject& operator=(SceneObject&& other) = delete;
-        ~SceneObject() = default;
+        ~SceneObject() final = default;
 
         /*!
          * \brief Default constructor.

@@ -19,10 +19,10 @@ namespace Utility
     public:
         AnyCallable() = default;
         AnyCallable(const AnyCallable& other) = default;
-        AnyCallable(AnyCallable&& other) = default;
+        AnyCallable(AnyCallable&& other) noexcept = default;
         ~AnyCallable() = default;
         AnyCallable& operator=(const AnyCallable& other) = default;
-        AnyCallable& operator=(AnyCallable&& other) = default;
+        AnyCallable& operator=(AnyCallable&& other) noexcept = default;
 
         /*!
          * \brief Constructor that creates AnyCallable from pointer to a function.

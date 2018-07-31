@@ -10,7 +10,7 @@ namespace Utility
      * \brief System which works in separate thread and provides functionality
      *        to write and read data from text and binary files.
      */
-    class IOSystem : public IOSystemInterface
+    class IOSystem final : public IOSystemInterface
     {
     public:
         IOSystem(const IOSystem& other) = delete;

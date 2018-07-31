@@ -37,7 +37,7 @@ namespace Core
         TransformComponent(TransformComponent&& other) = delete;
         TransformComponent& operator=(const TransformComponent& other) = delete;
         TransformComponent& operator=(TransformComponent&& other) = delete;
-        ~TransformComponent() = default;
+        ~TransformComponent() final = default;
 
         /*! \brief Default constructor. */
         explicit TransformComponent(const std::shared_ptr<SceneObject>& sceneObject);

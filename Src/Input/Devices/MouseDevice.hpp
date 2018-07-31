@@ -11,14 +11,14 @@ namespace Input
     /*!
      * \brief Device which handles all mouse actions.
      */
-    class MouseDevice : public MouseDeviceInterface
+    class MouseDevice final : public MouseDeviceInterface
     {
     public:
         MouseDevice(const MouseDevice&) = delete;
         MouseDevice(MouseDevice&&) = delete;
         MouseDevice& operator=(const MouseDevice&) = delete;
         MouseDevice& operator=(MouseDevice&&) = delete;
-        ~MouseDevice() = default;
+        ~MouseDevice() final = default;
 
         /*!
          * \brief Default constructor that initializes inner arrays of buttons.

@@ -45,9 +45,9 @@ namespace Utility
         public:
             Reference() = delete;
             Reference(const Reference& other) = default;
-            Reference(Reference&& other) = default;
+            Reference(Reference&& other) noexcept = default;
             Reference& operator=(const Reference& other) = default;
-            Reference& operator=(Reference&& other) = default;
+            Reference& operator=(Reference&& other) noexcept = default;
             ~Reference() = default;
 
             /*!

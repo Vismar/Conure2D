@@ -4,17 +4,17 @@
 using namespace Utility;
 
 /*! Number of nanoseconds in microsecond. */
-constexpr uint64_t NsInUs = 1000ull;
+constexpr int64_t NsInUs = 1000ll;
 /*! Number of nanoseconds in millisecond. */
-constexpr uint64_t NsInMs = NsInUs * 1000ull;
+constexpr int64_t NsInMs = NsInUs * 1000ll;
 /*! Number of nanoseconds in second. */
-constexpr uint64_t NsInS  = NsInMs * 1000ull;
+constexpr int64_t NsInS  = NsInMs * 1000ll;
 /*! Number of nanoseconds in minute. */
-constexpr uint64_t NsInM  = NsInS  * 60ull;
+constexpr int64_t NsInM  = NsInS  * 60ll;
 /*! Number of nanoseconds in hour. */
-constexpr uint64_t NsInH  = NsInM  * 60ull;
+constexpr int64_t NsInH  = NsInM  * 60ll;
 /*! Number of nanoseconds in day. */
-constexpr uint64_t NsInD  = NsInH  * 24ull;
+constexpr int64_t NsInD  = NsInH  * 24ll;
 
 // Regex's
 const std::regex Time::DaysRegex("(%d)");
@@ -55,8 +55,8 @@ Time& Time::operator=(Time&& other) noexcept
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time::Time(const uint64_t hours, const uint64_t minutes, const uint64_t seconds, 
-           const uint64_t milliseconds, const uint64_t microseconds, const uint64_t nanoseconds)
+Time::Time(const int64_t hours, const int64_t minutes, const int64_t seconds,
+           const int64_t milliseconds, const int64_t microseconds, const int64_t nanoseconds)
 : _timeValue(nanoseconds + microseconds * NsInUs + milliseconds * NsInMs +
              seconds * NsInS + minutes * NsInM + hours * NsInH)
 { }
@@ -66,7 +66,7 @@ Time::Time(const uint64_t hours, const uint64_t minutes, const uint64_t seconds,
 Time Time::CurrentTime()
 {
     const auto currentTimeDuration = std::chrono::system_clock::now().time_since_epoch();
-    const uint64_t nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(currentTimeDuration).count();
+    const auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(currentTimeDuration).count();
 
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ull, 0ull, 0ull, 0ull, 0ull, nanoseconds);
@@ -74,49 +74,49 @@ Time Time::CurrentTime()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Time::ToDays() const
+int64_t Time::ToDays() const
 {
     return _timeValue.load() / NsInD;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Time::ToHours() const
+int64_t Time::ToHours() const
 {
     return _timeValue.load() / NsInH;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Time::ToMinutes() const
+int64_t Time::ToMinutes() const
 {
     return _timeValue.load() / NsInM;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Time::ToSeconds() const
+int64_t Time::ToSeconds() const
 {
     return _timeValue.load() / NsInS;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Time::ToMilliseconds() const
+int64_t Time::ToMilliseconds() const
 {
     return _timeValue.load() / NsInMs;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Time::ToMicroseconds() const
+int64_t Time::ToMicroseconds() const
 {
     return _timeValue.load() / NsInUs;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Time::ToNanoseconds() const
+int64_t Time::ToNanoseconds() const
 {
     return _timeValue.load();
 }
@@ -204,7 +204,7 @@ bool Utility::operator>=(const Time& left, const Time& right)
 Time Utility::operator-(const Time& left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, left.ToNanoseconds() - right.ToNanoseconds());
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() - right.ToNanoseconds());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,7 +212,7 @@ Time Utility::operator-(const Time& left, const Time& right)
 Time Utility::operator+(const Time& left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, left.ToNanoseconds() + right.ToNanoseconds());
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() + right.ToNanoseconds());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -236,15 +236,15 @@ Time& Utility::operator+=(Time& left, const Time& right)
 Time Utility::operator*(const Time& left, const double right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, static_cast<uint64_t>(left.ToNanoseconds() * right));
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, static_cast<int64_t>(left.ToNanoseconds() * right));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator*(const Time& left, const uint64_t right)
+Time Utility::operator*(const Time& left, const int64_t right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, left.ToNanoseconds() * right);
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() * right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -252,15 +252,15 @@ Time Utility::operator*(const Time& left, const uint64_t right)
 Time Utility::operator*(const double left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, static_cast<uint64_t>(left * right.ToNanoseconds()));
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, static_cast<int64_t>(left * right.ToNanoseconds()));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator*(const uint64_t left, const Time& right)
+Time Utility::operator*(const int64_t left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, left * right.ToNanoseconds());
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, left * right.ToNanoseconds());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -273,7 +273,7 @@ Time& Utility::operator*=(Time& left, const double right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator*=(Time& left, const uint64_t right)
+Time& Utility::operator*=(Time& left, const int64_t right)
 {
     left = left * right;
     return left;
@@ -284,15 +284,15 @@ Time& Utility::operator*=(Time& left, const uint64_t right)
 Time Utility::operator/(const Time& left, const double right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, static_cast<uint64_t>(left.ToNanoseconds() / right));
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, static_cast<int64_t>(left.ToNanoseconds() / right));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator/(const Time& left, const uint64_t right)
+Time Utility::operator/(const Time& left, const int64_t right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, left.ToNanoseconds() / right);
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() / right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,7 +305,7 @@ Time& Utility::operator/=(Time& left, const double right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator/=(Time& left, const uint64_t right)
+Time& Utility::operator/=(Time& left, const int64_t right)
 {
     left = left / right;
     return left;
@@ -323,7 +323,7 @@ double Utility::operator/(const Time& left, const Time& right)
 Time Utility::operator%(const Time& left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
-    return Time(0ull, 0ull, 0ull, 0ull, 0ull, left.ToNanoseconds() % right.ToNanoseconds());
+    return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() % right.ToNanoseconds());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

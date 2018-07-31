@@ -14,7 +14,7 @@ namespace Core
         BaseDataComponent(BaseDataComponent&& other) = delete;
         BaseDataComponent& operator=(const BaseDataComponent& other) = delete;
         BaseDataComponent& operator=(BaseDataComponent&& other) = delete;
-        virtual ~BaseDataComponent() = default;
+        ~BaseDataComponent() override = default;
 
         /*!
          * \brief Constructor.

@@ -34,7 +34,7 @@ namespace Input
         /*!
          * \brief Simple destructor.
          */
-        ~JoystickDevice();
+        ~JoystickDevice() final;
 
         /*!
          * \brief Sets inner id of current joystick.

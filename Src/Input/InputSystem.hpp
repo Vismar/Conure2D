@@ -18,7 +18,7 @@ namespace Input
      *  - Get joystick axes values and vendor information
      *  - Create/edit/delete mapped actions and axes
      */
-    class InputSystem : public InputSystemInterface, public InputSystemHandlerInterface
+    class InputSystem final : public InputSystemInterface, public InputSystemHandlerInterface
     {
     public:
         InputSystem(const InputSystem& other) = delete;
@@ -26,13 +26,13 @@ namespace Input
         InputSystem& operator=(const InputSystem& other) = delete;
         InputSystem& operator=(InputSystem&& other) = delete;
         InputSystem() = delete;
-        ~InputSystem() = default;
+        ~InputSystem() final = default;
 
         /*!
          * \brief Default constructor.
          * \param logicLoopTimeSpan - time span of logic loop that will be used to check input events.
          */
-        InputSystem(const Utility::TimeSpan& logicLoopTimeSpan);
+        explicit InputSystem(const Utility::TimeSpan& logicLoopTimeSpan);
 
         /*!
          * \brief Handles input events.

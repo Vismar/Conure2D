@@ -13,14 +13,14 @@ namespace Render
      * 
      * Render system require SceneMap from which it will gather data to render.
      */
-    class RenderSystem : public RenderSystemInterface
+    class RenderSystem final : public RenderSystemInterface
     {
     public:
         RenderSystem(const RenderSystem& other) = delete;
         RenderSystem(RenderSystem&& other) = delete;
         RenderSystem& operator=(const RenderSystem& other) = delete;
         RenderSystem& operator=(RenderSystem&& other) = delete;
-        ~RenderSystem() = default;
+        ~RenderSystem() final = default;
         
         /*!
          * \brief Default constructor.

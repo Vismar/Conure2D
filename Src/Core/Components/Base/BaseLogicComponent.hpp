@@ -20,7 +20,7 @@ namespace Core
         BaseLogicComponent(BaseLogicComponent&& other) = delete;
         BaseLogicComponent& operator=(const BaseLogicComponent& other) = delete;
         BaseLogicComponent& operator=(BaseLogicComponent&& other) = delete;
-        virtual ~BaseLogicComponent() = default;
+        ~BaseLogicComponent() override = default;
 
         /*! 
          * \brief Default constructor.

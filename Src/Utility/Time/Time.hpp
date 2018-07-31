@@ -52,12 +52,12 @@ namespace Utility
          * \param microseconds - number of microseconds.
          * \param nanoseconds - number of nanoseconds.
          */
-        explicit Time(uint64_t hours = 0ull, 
-                      uint64_t minutes = 0ull,
-                      uint64_t seconds = 0ull,
-                      uint64_t milliseconds = 0ull,
-                      uint64_t microseconds = 0ull,
-                      uint64_t nanoseconds = 0ull);
+        explicit Time(int64_t hours = 0ll,
+                      int64_t minutes = 0ll,
+                      int64_t seconds = 0ll,
+                      int64_t milliseconds = 0ll,
+                      int64_t microseconds = 0ll,
+                      int64_t nanoseconds = 0ll);
 
         /*!
          * \brief Returns current time.
@@ -69,43 +69,43 @@ namespace Utility
          * \brief Converts stored value to days.
          * \return Number of stored days.
          */
-        uint64_t ToDays() const;
+        int64_t ToDays() const;
 
         /*!
          * \brief Converts stored value to hours.
          * \return Number of stored hours.
          */
-        uint64_t ToHours() const;
+        int64_t ToHours() const;
         
         /*!
          * \brief Converts stored value to minutes.
          * \return Number of stored minutes.
          */
-        uint64_t ToMinutes() const;
+        int64_t ToMinutes() const;
         
         /*!
          * \brief Converts stored value to seconds.
          * \return Number of stored seconds.
          */
-        uint64_t ToSeconds() const;
+        int64_t ToSeconds() const;
         
         /*!
          * \brief Converts stored value to milliseconds.
          * \return Number of stored milliseconds.
          */
-        uint64_t ToMilliseconds() const;
+        int64_t ToMilliseconds() const;
         
         /*!
          * \brief Converts stored value to microseconds.
          * \return Number of stored microseconds.
          */
-        uint64_t ToMicroseconds() const;
+        int64_t ToMicroseconds() const;
         
         /*!
          * \brief Converts stored value to nanoseconds.
          * \return Number of stored nanoseconds.
          */
-        uint64_t ToNanoseconds() const;
+        int64_t ToNanoseconds() const;
 
         /*!
          * \brief Returns formated string representation of stored time.
@@ -139,7 +139,7 @@ namespace Utility
         const static std::regex NanosecondsRegex;
 
         /*! Time value that stored as nanoseconds. */
-        std::atomic_uint64_t _timeValue = 0ull;
+        std::atomic_int64_t _timeValue = 0ull;
     };
     
     /*!
@@ -236,7 +236,7 @@ namespace Utility
      * \param right - a number value.
      * \return left multiplied by right.
      */
-    Time operator*(const Time& left, uint64_t right);
+    Time operator*(const Time& left, int64_t right);
 
     /*!
      * \brief Overload of binary * operator to scale a time value.
@@ -252,7 +252,7 @@ namespace Utility
      * \param right - a time value.
      * \return right multiplied by left.
      */
-    Time operator*(uint64_t left, const Time& right);
+    Time operator*(int64_t left, const Time& right);
 
     /*!
      * \brief Overload of binary *= operator to scale/assign a time value.
@@ -268,7 +268,7 @@ namespace Utility
      * \param right - a number value.
      * \return left multiplied by right.
      */
-    Time& operator*=(Time& left, uint64_t right);
+    Time& operator*=(Time& left, int64_t right);
 
     /*!
      * \brief Overload of binary / operator to scale a time value.
@@ -284,7 +284,7 @@ namespace Utility
      * \param right - a number value.
      * \return left divided by right.
      */
-    Time operator/(const Time& left, uint64_t right);
+    Time operator/(const Time& left, int64_t right);
 
     /*!
      * \brief Overload of binary /= operator to scale/assign a time value.
@@ -300,7 +300,7 @@ namespace Utility
      * \param right - a number value.
      * \return left divided by right.
      */
-    Time& operator/=(Time& left, uint64_t right);
+    Time& operator/=(Time& left, int64_t right);
 
     /*!
      * \brief Overload of binary / operator to compute the ratio of two time values.

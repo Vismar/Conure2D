@@ -13,7 +13,7 @@ namespace  Input
     /*!
      * \brief Manager that handles creating/updating/deleting of mapped input actions and axes.
      */
-    class InputMap : public InputMapInterface
+    class InputMap final : public InputMapInterface
     {
     public:
         InputMap(const InputMap&) = delete;
@@ -21,7 +21,7 @@ namespace  Input
         InputMap& operator=(const InputMap&) = delete;
         InputMap& operator=(InputMap&&) = delete;
         InputMap() = delete;
-        ~InputMap() = default;
+        ~InputMap() final = default;
 
         /*!
          * \brief Default constructor that initializes maps of input actions and input axes.
