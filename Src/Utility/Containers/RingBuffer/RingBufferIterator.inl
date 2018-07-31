@@ -1,4 +1,8 @@
 #pragma once
+#include "RingBufferIterator.hpp"
+
+namespace Utility
+{
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -12,7 +16,7 @@ template <class T>
 typename RingBuffer<T>::Iterator& RingBuffer<T>::Iterator::operator++()
 {
     // If stored index is equal to the end index, that means that we should do nothing here
-    if (_index != EndIndex)
+    if (_index != RingBuffer<T>::EndIndex)
     {
         // Check pointer to the ring buffer
         if (_ringBuffer != nullptr)
@@ -20,7 +24,7 @@ typename RingBuffer<T>::Iterator& RingBuffer<T>::Iterator::operator++()
             // If stored index is equal to tail, then next iterator should point to the end
             if (_index == _ringBuffer->_tailIndex)
             {
-                _index = EndIndex;
+                _index = RingBuffer<T>::EEndIndex;
             }
             else
             {
@@ -76,3 +80,5 @@ const T* RingBuffer<T>::Iterator::operator->() const
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}

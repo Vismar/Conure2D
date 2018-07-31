@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 #include <vector>
 
 namespace Utility
@@ -31,14 +32,14 @@ namespace Utility
          * 
          * newSize cannot be less than 1 and equal to max size.
          */
-        void Resize(uint64_t newSize);
+        void Resize(std::vector::size_type newSize);
 
         /*!
          * \brief Grabs number of allocated entries.
          * \return Number of allocated entries.
          */
-        uint64_t GetSize() const;
-        
+        std::vector::size_type GetSize() const;
+
         /*!
          * \brief Adds new entry to the end of ring buffer.
          * \param entry - new entry that will be copied to the ring buffer.
@@ -103,10 +104,10 @@ namespace Utility
          * 
          * If specified index equal to 0, it will cycle the value to (_buffer.size() - 1).
          */
-        void _DecreseIndex(uint64_t& index);
+        void _DecreaseIndex(uint64_t& index);
 
         /*! Simple index that is used by "end" iterator. */
-        static const uint64_t EndIndex = -1;
+        static const uint64_t EndIndex = INT64_MAX;
         /*! Index of the first entry in the buffer. */
         uint64_t _headIndex;
         /*! Index of the last entry in the buffer. */
@@ -116,8 +117,8 @@ namespace Utility
         /*! Buffer that stores data. */
         std::vector<T> _buffer;
     };
+}
 
 #include "RingBufferIterator.hpp"
 #include "RingBufferReverseIterator.hpp"
 #include "RingBuffer.inl"
-}

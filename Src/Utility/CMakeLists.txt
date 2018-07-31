@@ -1,53 +1,50 @@
 cmake_minimum_required(VERSION 3.9)
 project(Utility)
 
-set(Src ${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 
-include_directories(${Src}/)
-
 add_library(Utility 
-            ${Src}/Utility/Containers/AnyCallable/AnyCallable.hpp
-            ${Src}/Utility/Containers/AnyCallable/AnyCallable.inl
-            ${Src}/Utility/Containers/AnyCallable/AnyCallableHandler.cpp
-            ${Src}/Utility/Containers/AnyCallable/AnyCallableHandler.hpp
-            ${Src}/Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.cpp
-            ${Src}/Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp
-            ${Src}/Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.inl
-            ${Src}/Utility/Containers/RingBuffer/RingBuffer.hpp
-            ${Src}/Utility/Containers/RingBuffer/RingBuffer.inl
-            ${Src}/Utility/Containers/RingBuffer/RingBufferIterator.hpp
-            ${Src}/Utility/Containers/RingBuffer/RingBufferIterator.inl
-            ${Src}/Utility/Containers/RingBuffer/RingBufferReverseIterator.hpp
-            ${Src}/Utility/Containers/RingBuffer/RingBufferReverseIterator.inl
-            ${Src}/Utility/EventSystem/Dispatcher.hpp
-            ${Src}/Utility/EventSystem/Dispatcher.inl
-            ${Src}/Utility/EventSystem/DispatcherInterface.hpp
-            ${Src}/Utility/EventSystem/EventManager.cpp
-            ${Src}/Utility/EventSystem/EventManager.hpp
-            ${Src}/Utility/EventSystem/EventManager.inl
-            ${Src}/Utility/IOSystem/IOSystem.cpp
-            ${Src}/Utility/IOSystem/IOSystem.hpp
-            ${Src}/Utility/IOSystem/IOSystemInterface.hpp
-            ${Src}/Utility/LogSystem/LogEntry.cpp
-            ${Src}/Utility/LogSystem/LogEntry.hpp
-            ${Src}/Utility/LogSystem/LogSystem.cpp
-            ${Src}/Utility/LogSystem/LogSystem.hpp
-            ${Src}/Utility/Math/Vector2/AtomicVector2.hpp
-            ${Src}/Utility/Math/Vector2/AtomicVector2.inl
-            ${Src}/Utility/Math/Vector2/Vector2.hpp
-            ${Src}/Utility/Math/Vector2/Vector2.inl
-            ${Src}/Utility/Math/Vector2/Vector2PrecompiledTemplates.cpp
-            ${Src}/Utility/Math/MathConstants.hpp
-            ${Src}/Utility/Math/Vectors.hpp
-            ${Src}/Utility/Random/RandomGenerator.cpp
-            ${Src}/Utility/Random/RandomGenerator.hpp
-            ${Src}/Utility/Random/RandomGenerator.inl
-            ${Src}/Utility/Time/Time.cpp
-            ${Src}/Utility/Time/Time.hpp
-            ${Src}/Utility/Time/TimeSpan.cpp
-            ${Src}/Utility/Time/TimeSpan.hpp)
+            Containers/AnyCallable/AnyCallable.hpp
+            Containers/AnyCallable/AnyCallable.inl
+            Containers/AnyCallable/AnyCallableHandler.cpp
+            Containers/AnyCallable/AnyCallableHandler.hpp
+            Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.cpp
+            Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp
+            Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.inl
+            Containers/RingBuffer/RingBuffer.hpp
+            Containers/RingBuffer/RingBuffer.inl
+            Containers/RingBuffer/RingBufferIterator.hpp
+            Containers/RingBuffer/RingBufferIterator.inl
+            Containers/RingBuffer/RingBufferReverseIterator.hpp
+            Containers/RingBuffer/RingBufferReverseIterator.inl
+            EventSystem/Dispatcher.hpp
+            EventSystem/Dispatcher.inl
+            EventSystem/DispatcherInterface.hpp
+            EventSystem/EventManager.cpp
+            EventSystem/EventManager.hpp
+            EventSystem/EventManager.inl
+            IOSystem/IOSystem.cpp
+            IOSystem/IOSystem.hpp
+            IOSystem/IOSystemInterface.hpp
+            LogSystem/LogEntry.cpp
+            LogSystem/LogEntry.hpp
+            LogSystem/LogSystem.cpp
+            LogSystem/LogSystem.hpp
+            Math/Vector2/AtomicVector2.hpp
+            Math/Vector2/AtomicVector2.inl
+            Math/Vector2/Vector2.hpp
+            Math/Vector2/Vector2.inl
+            Math/Vector2/Vector2PrecompiledTemplates.cpp
+            Math/MathConstants.hpp
+            Math/Vectors.hpp
+            Random/RandomGenerator.cpp
+            Random/RandomGenerator.hpp
+            Random/RandomGenerator.inl
+            Time/Time.cpp
+            Time/Time.hpp
+            Time/TimeSpan.cpp
+            Time/TimeSpan.hpp)
 
 # Prefix
 set_target_properties(Utility PROPERTIES PREFIX "")

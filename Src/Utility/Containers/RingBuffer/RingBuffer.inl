@@ -1,4 +1,9 @@
 #pragma once
+#include "RingBuffer.hpp"
+#include <algorithm>
+
+namespace Utility
+{
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11,7 +16,7 @@ RingBuffer<T>::RingBuffer() : _headIndex(0), _tailIndex(0), _empty(true)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::Resize(uint64_t newSize)
+void RingBuffer<T>::Resize(std::vector::size_type newSize)
 {
     // RingBuffer cannot have number of elements less than 1
     if (newSize >= 1 && newSize < EndIndex)
@@ -99,7 +104,7 @@ void RingBuffer<T>::Resize(uint64_t newSize)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-uint64_t RingBuffer<T>::GetSize() const
+std::vector::size_type RingBuffer<T>::GetSize() const
 {
     return _buffer.size();
 }
@@ -225,7 +230,7 @@ bool RingBuffer<T>::_ValidateIndex(const uint64_t index)
     // If so - index is not valid.
     else if ((_tailIndex > _headIndex) && (_tailIndex < (_buffer.size() - 1)))
     {
-        valid = index > _tailIndex ? false : true;
+        valid = index <= _tailIndex;
     }
 
     return valid;
@@ -245,7 +250,7 @@ void RingBuffer<T>::_IncreaseIndex(uint64_t& index)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::_DecreseIndex(uint64_t& index)
+void RingBuffer<T>::_DecreaseIndex(uint64_t& index)
 {
     if (index == 0)
     {
@@ -258,3 +263,5 @@ void RingBuffer<T>::_DecreseIndex(uint64_t& index)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}
