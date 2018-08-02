@@ -16,7 +16,7 @@ RingBuffer<T>::RingBuffer() : _headIndex(0), _tailIndex(0), _empty(true)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::Resize(std::vector::size_type newSize)
+void RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
 {
     // RingBuffer cannot have number of elements less than 1
     if (newSize >= 1 && newSize < EndIndex)
@@ -104,7 +104,7 @@ void RingBuffer<T>::Resize(std::vector::size_type newSize)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-std::vector::size_type RingBuffer<T>::GetSize() const
+typename std::vector<T>::size_type RingBuffer<T>::GetSize() const
 {
     return _buffer.size();
 }
@@ -168,7 +168,7 @@ void RingBuffer<T>::EmplaceBack(T&& entry)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::Iterator RingBuffer<T>::begin()
+auto RingBuffer<T>::begin()
 {
     uint64_t requiredIndex = _headIndex;
     
@@ -184,7 +184,7 @@ typename RingBuffer<T>::Iterator RingBuffer<T>::begin()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::Iterator RingBuffer<T>::end()
+auto RingBuffer<T>::end()
 {
     return Iterator(EndIndex, this);
 }
@@ -192,7 +192,7 @@ typename RingBuffer<T>::Iterator RingBuffer<T>::end()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::ReverseIterator RingBuffer<T>::rbegin()
+auto RingBuffer<T>::rbegin()
 {
     uint64_t requiredIndex = _tailIndex;
 
@@ -208,7 +208,7 @@ typename RingBuffer<T>::ReverseIterator RingBuffer<T>::rbegin()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::ReverseIterator RingBuffer<T>::rend()
+auto RingBuffer<T>::rend()
 {
     return ReverseIterator(EndIndex, this);
 }

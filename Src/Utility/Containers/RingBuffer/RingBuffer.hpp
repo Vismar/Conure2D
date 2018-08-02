@@ -32,13 +32,13 @@ namespace Utility
          * 
          * newSize cannot be less than 1 and equal to max size.
          */
-        void Resize(std::vector::size_type newSize);
+        void Resize(typename std::vector<T>::size_type newSize);
 
         /*!
          * \brief Grabs number of allocated entries.
          * \return Number of allocated entries.
          */
-        std::vector::size_type GetSize() const;
+        typename std::vector<T>::size_type GetSize() const;
 
         /*!
          * \brief Adds new entry to the end of ring buffer.
@@ -62,25 +62,25 @@ namespace Utility
          * \brief Returns an iterator to the beginning of the ring buffer.
          * \return An iterator to the beginning of the ring buffer.
          */
-        Iterator begin();
+        auto begin();
         
         /*!
          * \brief Returns an iterator to the end of the ring buffer.
          * \return An iterator to the end of the ring buffer.
          */
-        Iterator end();
+        auto end();
 
         /*!
          * \brief Returns an reverse iterator to the beginning (actual end) of the ring buffer.
-         * \return An reverse iterator to the beginning (actual end) of the ring buffer.
+         * \return A reverse iterator to the beginning (actual end) of the ring buffer.
          */
-        ReverseIterator rbegin();
+        auto rbegin();
 
         /*!
          * \brief Returns an reverse iterator to the end (actual beginning) of the ring buffer.
-         * \return An reverse iterator to the end (actual beginning) of the ring buffer.
+         * \return A reverse iterator to the end (actual beginning) of the ring buffer.
          */
-        ReverseIterator rend();
+        auto rend();
 
     private:
         /*!
