@@ -11,7 +11,8 @@ namespace Core
     /*!
      * \brief Base component for all camera components.
      *
-     * TODO: Add elaborate description.
+     * Simple data component that stores parameters that are required to create sf::View
+     * and provides basic functionality to change them. Creates sf::View in depends on data from TransformComponent.
      */
     class CameraComponent : public BaseDataComponent
     {
