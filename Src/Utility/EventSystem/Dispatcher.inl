@@ -49,7 +49,6 @@ void Dispatcher<Ret>::Invoke(Args&&... args)
         }
         catch (const std::bad_any_cast& exception)
         {
-            // TODO: Handle error when log system will be introduced
             (void)exception.what();
             iter = _callables.erase(iter);
         }
@@ -70,7 +69,6 @@ void Dispatcher<Ret>::Invoke()
         }
         catch (const std::bad_any_cast& exception)
         {
-            // TODO: Handle error when log system will be introduced
             (void)exception.what();
             iter = _callables.erase(iter);
         }

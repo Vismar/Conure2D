@@ -31,7 +31,7 @@ namespace Core
 
         /*!
          * \brief Default constructor.
-         * \param sceneObject - shared pointer to the object which contains this component.
+         * \param sceneObject - weak pointer to the object which contains this component.
          */
         explicit RenderableComponent(std::weak_ptr<SceneObject>&& sceneObject);
 
