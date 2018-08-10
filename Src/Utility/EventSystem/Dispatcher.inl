@@ -49,6 +49,7 @@ void Dispatcher<Ret>::Invoke(Args&&... args)
         }
         catch (const std::bad_any_cast& exception)
         {
+            // TODO: Handle exceptions when required tool will be added
             (void)exception.what();
             iter = _callables.erase(iter);
         }
@@ -69,6 +70,7 @@ void Dispatcher<Ret>::Invoke()
         }
         catch (const std::bad_any_cast& exception)
         {
+            // TODO: Handle exceptions when required tool will be added
             (void)exception.what();
             iter = _callables.erase(iter);
         }

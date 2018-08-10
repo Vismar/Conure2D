@@ -74,20 +74,20 @@ namespace Utility
         /*!
          * \brief Generates random number by using specified uniform_int_distribution.
          * \tparam T - type of number that will be generated.
-         * \param distr - reference to uniform_int_distribution.
+         * \param distribution - reference to uniform_int_distribution.
          * \return A random number generated in a range which was specified in uniform_int_distribution.
          */
         template <typename T>
-        T Get(std::uniform_int_distribution<T>& distr);
+        T Get(std::uniform_int_distribution<T>& distribution);
 
         /*!
          * \brief Generates random number by using specified uniform_real_distribution.
          * \tparam T - type of number that will be generated.
-         * \param distr - reference to uniform_real_distribution.
+         * \param distribution - reference to uniform_real_distribution.
          * \return A random number generated in a range which was specified in uniform_real_distribution.
          */
         template <typename T>
-        T Get(std::uniform_real_distribution<T>& distr);
+        T Get(std::uniform_real_distribution<T>& distribution);
 
     private:
         /*! Seed that is used by number generators. */

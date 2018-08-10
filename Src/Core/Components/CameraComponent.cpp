@@ -28,7 +28,7 @@ CameraComponent::operator sf::View() const
     if (auto transform = _transformComponent.lock())
     {
         const auto pos = transform->GetGlobalPosition();
-        const Utility::Vector2F size(_size);
+        const Utility::Vector2F size = _size;
         const auto x = pos.x + size.x / 2.0f;
         const auto y = pos.y + size.y / 2.0f;
         view.setCenter(x, y);

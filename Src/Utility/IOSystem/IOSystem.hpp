@@ -17,7 +17,7 @@ namespace Utility
         IOSystem(IOSystem&& other) = delete;
         IOSystem& operator=(const IOSystem& other) = delete;
         IOSystem& operator=(IOSystem&& other) = delete;
-        ~IOSystem() = default;
+        ~IOSystem() final = default;
 
         /*!
          * \brief Default constructor.
