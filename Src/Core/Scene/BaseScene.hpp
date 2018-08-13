@@ -104,9 +104,9 @@ namespace Core
 
         /*!
          * \brief Callback that is used to update renderable components in the set when they change their layer.
-         * \param renderabelComponent - weak pointer to the renderable component that should be updated.
+         * \param renderableComponent - weak pointer to the renderable component that should be updated.
          */
-        void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderabelComponent, int8_t);
+        void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderableComponent, int8_t);
 
         const std::string _sceneName;
         /*! Flag that defines if scene should be deleted or not. */
