@@ -27,7 +27,7 @@ add_library(Core
             Scene/SceneMapSystemInterface.hpp
             Scene/SceneObject.cpp
             Scene/SceneObject.hpp
-            Scene/SceneObject.inl Components/CameraComponent.cpp)
+            Scene/SceneObject.inl)
 
 # Prefix
 set_target_properties(Core PROPERTIES PREFIX "")
