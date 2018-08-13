@@ -63,6 +63,8 @@ namespace Core
          * Returns shared pointer to updated array of weak pointers to renderable components of the scene.
          */
         virtual std::shared_ptr<std::set<std::weak_ptr<RenderableComponent>, RenderablesCompare>> GetRenderableComponents() const = 0;
+
+        // TODO: Use of CameraComponent: Add new method to acquire camera components. Should work as GetRenderableComponents().
         
         /*!
          * \brief Updates all scene objects one by one.

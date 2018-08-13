@@ -147,6 +147,8 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
                 _renderableComponentsToAdd.push_back(renderableComponent);
                 renderableComponent->BindToEvent("LayerUpdated", this, &BaseScene::_OnRenderableComponentLayerChanged);
             }
+
+            // TODO: Use of CameraComponent: Add check of CameraComponent and add to the array of camera components
         }
     }
 }

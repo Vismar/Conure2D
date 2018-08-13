@@ -108,6 +108,7 @@ void RenderableComponent::SetLayerNumber(const int8_t newLayerNumber)
 
 bool RenderableComponent::IsVisible() const
 {
+    // TODO: Use of CameraComponent: This method should acquire camera component as parameter to use it
     return true;
 }
 

@@ -10,12 +10,16 @@ bool SceneObject::AddComponent()
     const auto componentTypeIndex = std::type_index(typeid(Component));
     if constexpr (std::is_base_of<BaseDataComponent, Component>::value)
     {
+        // If component with required type is not added to the map - add it
         if (_dataComponentMap.find(componentTypeIndex) == _dataComponentMap.end())
         {
             _dataComponentMap.emplace(componentTypeIndex, std::make_shared<Component>(this->shared_from_this()));
             _dataComponentMap[componentTypeIndex]->BaseDataComponent::Initialize();
             _dataComponentMap[componentTypeIndex]->Initialize();
             added = true;
+
+            // Notify listeners that new component was added
+            InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _dataComponentMap[componentTypeIndex]);
         }
     }
     else if constexpr (std::is_base_of<BaseLogicComponent, Component>::value)
@@ -28,6 +32,7 @@ bool SceneObject::AddComponent()
             _logicComponentMap[componentTypeIndex]->Initialize();
             added = true;
 
+            // Notify listeners that new component was added
             InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _logicComponentMap[componentTypeIndex]);
         }
     }    

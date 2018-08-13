@@ -48,6 +48,9 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
                 // Try to get set of renderable components from certain scene
                 if (const auto renderableSet = sceneMap.GetRenderableComponentsFromScene(sceneName))
                 {
+                    // TODO: Use of CameraComponent: Acquire all camera components
+                    // TODO: Use of CameraComponent: Here we should go through array of acquired camera components
+
                     // Go through every renderable component in the obtained set
                     for (auto& renderableComponent : (*renderableSet))
                     {
@@ -112,7 +115,7 @@ void RenderSystem::SetNewSettings(WindowSettings windowSettings)
         _recreateWindow = true;
     }
 
-    //These parameters not require to recreate window but new values anyway should be assigned
+    // These parameters do not require to recreate window but new values anyway should be assigned
     if ((windowSettings.title != _settings.title) ||
         (windowSettings.width != _settings.width) ||
         (windowSettings.height != _settings.height) ||
