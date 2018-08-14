@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Components/Base/BaseDataComponent.hpp"
-#include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/RenderablesCompare.hpp"
+#include "Utility/EventSystem/EventManager.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <set>
@@ -72,16 +72,16 @@ namespace Core
         bool operator>=(const RenderableComponent& right) const;
 
         /*!
-         * \brief Return layer number.
-         * \return Number of the layer.
-         */
-        int8_t GetLayerNumber() const;
-
-        /*!
          * \brief Sets layer number.
          * \param newLayerNumber - number of the layer.
          */
         void SetLayerNumber(int8_t newLayerNumber);
+
+        /*!
+         * \brief Return layer number.
+         * \return Number of the layer.
+         */
+        int8_t GetLayerNumber() const;
 
         /*!
          * \brief Returns status of the visibility of this object.

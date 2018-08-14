@@ -126,6 +126,22 @@ std::shared_ptr<RenderableSet> SceneMap::GetRenderableComponentsFromScene(const 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+std::shared_ptr<CameraSet> SceneMap::GetCameraComponentsFromScene(const std::string& sceneName) const
+{
+    std::shared_ptr<CameraSet> cameraComponents;
+
+    // If specified scene exist and it is active, return array of camera components
+    const auto scene = _scenes.find(sceneName);
+    if ((scene != _scenes.end()) && (scene->second->Activated()))
+    {
+        cameraComponents = scene->second->GetCameraComponents();
+    }
+
+    return cameraComponents;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void SceneMap::_AddSceneNameToRenderList(const std::string& newSceneName)
 {
     bool notAdded(true);

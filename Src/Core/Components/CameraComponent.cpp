@@ -8,6 +8,7 @@ using namespace Core;
 
 CameraComponent::CameraComponent(std::weak_ptr<SceneObject> &&sceneObject)
 : BaseDataComponent(std::move(sceneObject))
+, _priority(0)
 , _size(640.0f, 480.0f)
 , _viewportLeftCoord(0.0f)
 , _viewportTopCoord(0.0f)
@@ -18,6 +19,53 @@ CameraComponent::CameraComponent(std::weak_ptr<SceneObject> &&sceneObject)
     {
         _transformComponent = object->GetTransformComponent();
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool CameraComponent::operator<(const CameraComponent& right) const
+{
+    bool less(true);
+
+    // If priority numbers are the same, then we can just compare ids of scene objects that owns this components
+    if (_priority == right._priority)
+    {
+        if (const auto leftObject = GetSceneObject().lock())
+        {
+            if (const auto rightObject = right.GetSceneObject().lock())
+            {
+                less = leftObject->GetId() < rightObject->GetId();
+            }
+        }
+    }
+    // If layer numbers are different, then just compare them
+    else
+    {
+        less = _priority < right._priority;
+    }
+
+    return less;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool CameraComponent::operator>(const CameraComponent& right) const
+{
+    return (right < (*this));
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool CameraComponent::operator<=(const CameraComponent& right) const
+{
+    return !((*this) > right);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool CameraComponent::operator>=(const CameraComponent& right) const
+{
+    return !(right < (*this));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,6 +87,26 @@ CameraComponent::operator sf::View() const
     }
 
     return view;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void CameraComponent::SetPriority(uint8_t newPriority)
+{
+    if (_priority.load() != newPriority)
+    {
+        _priority = newPriority;
+
+        const auto thisComponent = std::dynamic_pointer_cast<CameraComponent>(this->shared_from_this());
+        InvokeEvent<void, std::weak_ptr<CameraComponent>, const int8_t>("PriorityUpdated", thisComponent, _priority.load());
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+uint8_t CameraComponent::GetPriority() const
+{
+    return _priority.load();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,6 +145,8 @@ sf::FloatRect CameraComponent::GetViewport() const
 void CameraComponent::Initialize()
 {
     _typeIndex = typeid(CameraComponent);
+
+    AddEvent("PriorityUpdated", new Utility::Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

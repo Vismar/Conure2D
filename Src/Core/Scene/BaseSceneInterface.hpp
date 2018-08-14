@@ -8,6 +8,8 @@ namespace Core
     class SceneObject;
     class RenderableComponent;
     struct RenderablesCompare;
+    class CameraComponent;
+    struct CamerasCompare;
 
     /*!
      * \brief An interface for a BaseScene class.
@@ -64,8 +66,16 @@ namespace Core
          */
         virtual std::shared_ptr<std::set<std::weak_ptr<RenderableComponent>, RenderablesCompare>> GetRenderableComponents() const = 0;
 
-        // TODO: Use of CameraComponent: Add new method to acquire camera components. Should work as GetRenderableComponents().
-        
+        /*!
+         * \brief Grabs array of camera components of the scene.
+         * \return Shared pointer to the array of camera components of the scene.
+         *
+         * Removes all weak pointers from the array if they are not "alive".
+         * Then adds new camera components that was added during the render phase.
+         * Returns shared pointer to updated array of weak pointers to camera components of the scene.
+         */
+        virtual std::shared_ptr<std::set<std::weak_ptr<CameraComponent>, CamerasCompare>> GetCameraComponents() const = 0;
+
         /*!
          * \brief Updates all scene objects one by one.
          *

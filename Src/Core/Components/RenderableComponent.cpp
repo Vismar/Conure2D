@@ -86,22 +86,22 @@ bool RenderableComponent::operator>=(const RenderableComponent& right) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int8_t RenderableComponent::GetLayerNumber() const
-{
-    return _layerNumber;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void RenderableComponent::SetLayerNumber(const int8_t newLayerNumber)
 {
-    if (_layerNumber != newLayerNumber)
+    if (_layerNumber.load() != newLayerNumber)
     {
         _layerNumber = newLayerNumber;
 
         const auto thisComponent = std::dynamic_pointer_cast<RenderableComponent>(this->shared_from_this());
         InvokeEvent<void, std::weak_ptr<RenderableComponent>, const int8_t>("LayerUpdated", thisComponent, _layerNumber.load());
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int8_t RenderableComponent::GetLayerNumber() const
+{
+    return _layerNumber.load();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

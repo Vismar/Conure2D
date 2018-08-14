@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Components/RenderableComponent.hpp"
+#include "Core/Components/CameraComponent.hpp"
 #include <list>
 #include <memory>
 
@@ -31,10 +32,14 @@ namespace  Core
          * \brief Grabs renderable components from the specified scene.
          * \param sceneName - name of the scene from which renderable components should be grabbed.
          * \return Shared pointer to the array of renderable components of the specified scene.
-         *
-         * Array of renderable components was not sorted or filtered in any way,
-         * so render system should do required operations before rendering if it is necessary.
          */
         virtual std::shared_ptr<RenderableSet> GetRenderableComponentsFromScene(const std::string& sceneName) const = 0;
+
+        /*!
+         * \brief Grabs camera components from the specified scene.
+         * \param sceneName - name of the scene from which camera components should be grabbed.
+         * \return Shared pointer to the array of camera components of the specified scene.
+         */
+        virtual std::shared_ptr<CameraSet> GetCameraComponentsFromScene(const std::string& sceneName) const = 0;
     };
 }

@@ -88,6 +88,43 @@ std::shared_ptr<RenderableSet> BaseScene::GetRenderableComponents() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+std::shared_ptr<CameraSet> BaseScene::GetCameraComponents() const
+{
+    // Remove "dead" pointers
+    for (auto iter = _cameraComponents->begin(); iter != _cameraComponents->end(); )
+    {
+        if ((*iter).lock())
+        {
+            ++iter;
+        }
+        else
+        {
+            iter = _cameraComponents->erase(iter);
+        }
+    }
+
+    // Add new pointers to the list
+    std::lock_guard lock(_cameraArrayMutex);
+    for (auto& cameraComponent : _cameraComponentsToAdd)
+    {
+        const auto result = _cameraComponents->insert(cameraComponent);
+
+        // If such component already in the set, replace it with a new one
+        if (!result.second)
+        {
+            _cameraComponents->erase(result.first);
+            _cameraComponents->insert(cameraComponent);
+        }
+    }
+
+    // Clear to prevent copying
+    _cameraComponentsToAdd.clear();
+
+    return _cameraComponents;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void BaseScene::Update()
 {
     // Delete objects that were marked as "delete later"
@@ -148,9 +185,21 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
                 renderableComponent->BindToEvent("LayerUpdated", this, &BaseScene::_OnRenderableComponentLayerChanged);
             }
 
-            // TODO: Use of CameraComponent: Add check of CameraComponent and add to the array of camera components
+            if (const auto cameraComponent = std::dynamic_pointer_cast<CameraComponent>(component))
+            {
+                _cameraComponentsToAdd.push_back(cameraComponent);
+                cameraComponent->BindToEvent("PriorityUpdated", this, &BaseScene::_OnCameraComponentPriorityChanged);
+            }
         }
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void BaseScene::_OnCameraComponentPriorityChanged(std::weak_ptr<Core::CameraComponent> cameraComponent, int8_t)
+{
+    std::lock_guard lock(_cameraArrayMutex);
+    _cameraComponentsToAdd.push_back(cameraComponent);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

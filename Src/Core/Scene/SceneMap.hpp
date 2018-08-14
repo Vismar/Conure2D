@@ -72,11 +72,15 @@ namespace Core
          * \brief Grabs renderable components from the specified scene.
          * \param sceneName - name of the scene from which renderable components should be grabbed.
          * \return Shared pointer to the array of renderable components of the specified scene.
-         * 
-         * Array of renderable components was not sorted or filtered in any way,
-         * so render system should do required operations before rendering if it is necessary.
          */
         std::shared_ptr<RenderableSet> GetRenderableComponentsFromScene(const std::string& sceneName) const final;
+
+        /*!
+         * \brief Grabs camera components from the specified scene.
+         * \param sceneName - name of the scene from which camera components should be grabbed.
+         * \return Shared pointer to the array of camera components of the specified scene.
+         */
+        std::shared_ptr<CameraSet> GetCameraComponentsFromScene(const std::string& sceneName) const final;
 
     private:
         /*!

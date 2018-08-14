@@ -2,6 +2,7 @@
 #include "BaseSceneInterface.hpp"
 #include "Core/Scene/SceneObject.hpp"
 #include "Core/Components/RenderableComponent.hpp"
+#include "Core/Components/CameraComponent.hpp"
 #include <memory>
 #include <mutex>
 
@@ -73,6 +74,16 @@ namespace Core
         std::shared_ptr<RenderableSet> GetRenderableComponents() const final;
 
         /*!
+         * \brief Grabs array of camera components of the scene.
+         * \return Shared pointer to the array of camera components of the scene.
+         *
+         * Removes all weak pointers from the array if they are not "alive".
+         * Then adds new camera components that was added during the render phase.
+         * Returns shared pointer to updated array of weak pointers to camera components of the scene.
+         */
+        std::shared_ptr<CameraSet> GetCameraComponents() const final;
+
+        /*!
          * \brief Updates all scene objects one by one.
          * 
          * Do next things in described order: \n
@@ -108,6 +119,13 @@ namespace Core
          */
         void _OnRenderableComponentLayerChanged(std::weak_ptr<RenderableComponent> renderableComponent, int8_t);
 
+        /*!
+         * \brief Callback that is used to update camera components in the set when they change their priority.
+         * \param cameraComponent - weak pointer to the camera component that should be updated.
+         */
+        void _OnCameraComponentPriorityChanged(std::weak_ptr<CameraComponent> cameraComponent, int8_t);
+
+        /*! Name of a scene. */
         const std::string _sceneName;
         /*! Flag that defines if scene should be deleted or not. */
         bool _deleteLater;
@@ -119,6 +137,12 @@ namespace Core
         mutable RenderableArray _renderableComponentsToAdd;
         /*! Mutex that used to update renderable arrays. */
         mutable std::mutex _renderableArrayMutex;
+        /*! Set of camera components that should be used by render system. */
+        mutable std::shared_ptr<CameraSet> _cameraComponents;
+        /*! Array of camera components that will be added to main array that goes to a render system. */
+        mutable std::mutex _cameraArrayMutex;
+        /*! Mutex that used to update camera arrays. */
+        mutable CameraArray _cameraComponentsToAdd;
         /*! Array of shared pointers to scene objects that were created and should be added to main array before update phase. */
         std::vector<std::shared_ptr<SceneObject>> _newSceneObjects;
     };

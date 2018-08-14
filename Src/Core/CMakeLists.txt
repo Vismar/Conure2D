@@ -11,6 +11,8 @@ add_library(Core
             Components/Base/BaseDataComponent.hpp
             Components/Base/BaseLogicComponent.cpp
             Components/Base/BaseLogicComponent.hpp
+            Components/Utility/CamerasCompare.cpp
+            Components/Utility/CamerasCompare.hpp
             Components/Utility/RenderablesCompare.cpp
             Components/Utility/RenderablesCompare.hpp
             Components/CameraComponent.cpp
