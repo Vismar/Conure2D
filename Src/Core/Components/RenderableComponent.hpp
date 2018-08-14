@@ -10,6 +10,7 @@
 namespace Core
 {
     class TransformComponent;
+    class CameraComponent;
 
     /*!
      * \brief Base component for all renderable components.
@@ -84,12 +85,13 @@ namespace Core
         int8_t GetLayerNumber() const;
 
         /*!
-         * \brief Returns status of the visibility of this object.
-         * \return True if object is visible.
+         * \brief Returns status of the visibility of this object in view of a specified camera component.
+         * \param cameraComponent - weak pointer to a camera component.
+         * \return True if object is visible for a specified camera component.
          * 
          * Virtual method, can be overridden.
          */
-        virtual bool IsVisible() const;
+        virtual bool IsVisible(std::weak_ptr<CameraComponent> cameraComponent) const;
 
         /*!
          * \brief Sets texture for this component.

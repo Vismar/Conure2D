@@ -179,12 +179,14 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
         {
             std::lock_guard lock(_renderableArrayMutex);
 
+            // Check if added component is renderable component
             if (const auto renderableComponent = std::dynamic_pointer_cast<RenderableComponent>(component))
             {
                 _renderableComponentsToAdd.push_back(renderableComponent);
                 renderableComponent->BindToEvent("LayerUpdated", this, &BaseScene::_OnRenderableComponentLayerChanged);
             }
 
+            // Check if added component is camera component
             if (const auto cameraComponent = std::dynamic_pointer_cast<CameraComponent>(component))
             {
                 _cameraComponentsToAdd.push_back(cameraComponent);

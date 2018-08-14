@@ -45,21 +45,24 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
             // Go through every mentioned scene
             for (auto& sceneName : sceneOrder)
             {
-                // Try to get set of renderable components from certain scene
-                if (const auto renderableSet = sceneMap.GetRenderableComponentsFromScene(sceneName))
+                // Try to get set of renderable and camera components from certain scene
+                const auto renderableSet = sceneMap.GetRenderableComponentsFromScene(sceneName);
+                const auto cameraSet = sceneMap.GetCameraComponentsFromScene(sceneName);
+                if (renderableSet && cameraSet)
                 {
-                    // TODO: Use of CameraComponent: Acquire all camera components
-                    // TODO: Use of CameraComponent: Here we should go through array of acquired camera components
-
-                    // Go through every renderable component in the obtained set
-                    for (auto& renderableComponent : (*renderableSet))
+                    // Go through every camera component in the obtained set
+                    for (auto& cameraComponent : (*cameraSet))
                     {
-                        if (const auto renderable = renderableComponent.lock())
+                        // Go through every renderable component in the obtained set
+                        for (auto& renderableComponent : (*renderableSet))
                         {
-                            // Renderable component should be visible
-                            if (renderable->IsVisible())
+                            if (const auto renderable = renderableComponent.lock())
                             {
-                                _window.Draw(*renderable);
+                                // Renderable component should be visible in current camera
+                                if (renderable->IsVisible(cameraComponent))
+                                {
+                                    _window.Draw(*renderable);
+                                }
                             }
                         }
                     }
