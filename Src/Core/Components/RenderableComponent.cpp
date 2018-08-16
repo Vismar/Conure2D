@@ -106,7 +106,7 @@ int8_t RenderableComponent::GetLayerNumber() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool RenderableComponent::IsVisible(std::weak_ptr<CameraComponent>) const
+bool RenderableComponent::IsVisible(const std::weak_ptr<CameraComponent>&) const
 {
     return true;
 }

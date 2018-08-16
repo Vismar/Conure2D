@@ -24,6 +24,7 @@ add_library(Utility
             EventSystem/EventManager.cpp
             EventSystem/EventManager.hpp
             EventSystem/EventManager.inl
+            Exception/ExceptionHandler.hpp
             IOSystem/IOSystem.cpp
             IOSystem/IOSystem.hpp
             IOSystem/IOSystemInterface.hpp

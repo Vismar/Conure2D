@@ -91,7 +91,7 @@ namespace Core
          * 
          * Virtual method, can be overridden.
          */
-        virtual bool IsVisible(std::weak_ptr<CameraComponent> cameraComponent) const;
+        virtual bool IsVisible(const std::weak_ptr<CameraComponent>& cameraComponent) const;
 
         /*!
          * \brief Sets texture for this component.
