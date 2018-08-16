@@ -1,6 +1,7 @@
 #pragma once
 #include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/LogSystem/LogEntry.hpp"
+#include "Utility/LogSystem/LogUtilities.hpp"
 #include <memory>
 #include <atomic>
 #include <regex>

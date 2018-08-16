@@ -25,10 +25,11 @@ LogSystem::LogSystem(const IOSystemInterface& ioSystem)
     // If the exception handler is empty, assign a simple callback that will just write exception error into log
     if (!ExceptionHandler)
     {
-        ExceptionHandler = [this] (const std::exception& exception)
-                           {
-                                this->AddEntry(LogLevel::Error, exception.what());
-                           };
+        ExceptionHandler =
+            [this] (const std::exception& exception)
+            {
+                this->AddEntry(LogLevel::Error, exception.what());
+            };
     }
 }
 

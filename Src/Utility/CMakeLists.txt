@@ -32,6 +32,7 @@ add_library(Utility
             LogSystem/LogEntry.hpp
             LogSystem/LogSystem.cpp
             LogSystem/LogSystem.hpp
+            LogSystem/LogUtilities.hpp
             Math/Vector2/AtomicVector2.hpp
             Math/Vector2/AtomicVector2.inl
             Math/Vector2/Vector2.hpp
