@@ -48,6 +48,7 @@ void Dispatcher<Ret>::Invoke(Args&&... args)
             (*iter)(std::forward<Args>(args)...);
             ++iter;
         }
+        // TODO: Handle different kind of exception when it will be written
         catch (const std::bad_any_cast& exception)
         {
             if (Utility::ExceptionHandler)
@@ -71,6 +72,7 @@ void Dispatcher<Ret>::Invoke()
             (*iter)();
             ++iter;
         }
+        // TODO: Handle different kind of exception when it will be written
         catch (const std::bad_any_cast& exception)
         {
             if (Utility::ExceptionHandler)

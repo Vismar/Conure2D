@@ -43,7 +43,15 @@ template <class Ret>
 template <class ... Args>
 Ret AnyCallable<Ret>::operator()(Args&& ... args)
 {
-    return std::any_cast<std::function<Ret(Args...)>> (_function)(std::forward<Args>(args)...);
+    try
+    {
+        return std::any_cast<std::function<Ret(Args...)>> (_function)(std::forward<Args>(args)...);
+    }
+    catch (const std::bad_any_cast& exception)
+    {
+        // TODO: Throw BadAnyCallableCall exception when it will be ready
+        //throw ;
+    }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,6 +59,14 @@ template <class Ret>
 AnyCallableHandler AnyCallable<Ret>::GetHandler() const
 {
     return _handler;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class Ret>
+std::type_index AnyCallable<Ret>::GetContainedType() const
+{
+    return _function.type();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
