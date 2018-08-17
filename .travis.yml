@@ -48,6 +48,7 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-6.0
           packages:
+            - g++-8
             - clang-6.0
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
@@ -61,6 +62,7 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-6.0
           packages:
+            - g++-8
             - clang-6.0
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
@@ -74,6 +76,7 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-6.0
           packages:
+            - g++-8
             - clang-6.0
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
