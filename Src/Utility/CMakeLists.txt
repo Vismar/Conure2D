@@ -9,6 +9,8 @@ add_library(Utility
             Containers/AnyCallable/AnyCallable.inl
             Containers/AnyCallable/AnyCallableHandler.cpp
             Containers/AnyCallable/AnyCallableHandler.hpp
+            Containers/AnyCallable/BadAnyCallableCall.inl
+            Containers/AnyCallable/BadAnyCallableCall.hpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.cpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.inl
@@ -24,7 +26,6 @@ add_library(Utility
             EventSystem/EventManager.cpp
             EventSystem/EventManager.hpp
             EventSystem/EventManager.inl
-            Exception/ExceptionHandler.hpp
             IOSystem/IOSystem.cpp
             IOSystem/IOSystem.hpp
             IOSystem/IOSystemInterface.hpp

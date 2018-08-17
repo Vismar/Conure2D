@@ -1,5 +1,20 @@
 language: cpp
 
+before_script:
+# Installing SFML
+- cd ../
+- wget https://www.sfml-dev.org/files/SFML-2.5.0-linux-gcc-64-bit.tar.gz
+- tar -xzf SFML-2.5.0-linux-gcc-64-bit.tar.gz
+- mv -v ./SFML-2.5.0/include/* ./Conure2D/
+script:
+- eval "${MATRIX_EVAL}"
+# Building Conure2D
+- cd Conure2D
+- mkdir build
+- cd build
+- cmake .. ${BUILD_TYPE}
+- make
+
 matrix:
   fast_finish: true
   include:
@@ -81,33 +96,3 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
-before_script:
-  # Installing gcc-8
-  #- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  #- sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 # mongodb keys can expire and build will fail so we should ignore it
-  #- sudo apt update
-  #- sudo apt-get install -y gcc-8 g++-8
-  #- sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100
-  #- sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 100
-  # Installing SFML
-  - cd ../
-  - wget https://www.sfml-dev.org/files/SFML-2.5.0-linux-gcc-64-bit.tar.gz
-  - tar -xzf SFML-2.5.0-linux-gcc-64-bit.tar.gz
-  - mv -v ./SFML-2.5.0/include/* ./Conure2D/
-script:
-  - eval "${MATRIX_EVAL}"
-  # Building Conure2D
-  - cd Conure2D
-  - mkdir build
-  - cd build
-  # Conure2D - Debug build
-  #- cmake .. -DCMAKE_BUILD_TYPE=Debug
-  #- make
-  # echo Conure2D - Release build
-  #- cmake .. -DCMAKE_BUILD_TYPE=Release
-  #- make
-  # echo Conure2D - Production build
-  - cmake .. ${BUILD_TYPE}
-  - make
-  #- cd ../Lib
-  #- ls

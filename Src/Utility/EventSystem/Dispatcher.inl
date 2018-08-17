@@ -1,5 +1,4 @@
 #pragma once
-#include "Utility/Exception/ExceptionHandler.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -48,14 +47,11 @@ void Dispatcher<Ret>::Invoke(Args&&... args)
             (*iter)(std::forward<Args>(args)...);
             ++iter;
         }
-        // TODO: Handle different kind of exception when it will be written
-        catch (const std::bad_any_cast& exception)
+        catch (const BadAnyCallableCall& exception)
         {
-            if (Utility::ExceptionHandler)
-            {
-                Utility::ExceptionHandler(exception);
-            }
             iter = _callables.erase(iter);
+            // TODO: Think of how to pass all possible exceptions upwards but also to finish invocation of stored functions
+            //throw;
         }
     }
 }
@@ -72,14 +68,11 @@ void Dispatcher<Ret>::Invoke()
             (*iter)();
             ++iter;
         }
-        // TODO: Handle different kind of exception when it will be written
-        catch (const std::bad_any_cast& exception)
+        catch (const BadAnyCallableCall& exception)
         {
-            if (Utility::ExceptionHandler)
-            {
-                Utility::ExceptionHandler(exception);
-            }
             iter = _callables.erase(iter);
+            // TODO: Think of how to pass all possible exceptions upwards but also to finish invocation of stored functions
+            //throw;
         }
     }
 }

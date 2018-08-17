@@ -8,6 +8,11 @@
 
 namespace Utility
 {
+    /*!
+     * \brief Demangle (makes readable by human) name of a specified type.
+     * \param typeIndex - type of which name function will return.
+     * \return Demangled name of a specified type.
+     */
     inline std::string PrettyTypeName(const std::type_index& typeIndex)
     {
         std::string typeName = typeIndex.name();
