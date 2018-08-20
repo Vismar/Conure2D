@@ -1,4 +1,5 @@
 #pragma once
+#include "Utility/Exception/ExceptionHandler.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,8 +51,11 @@ void Dispatcher<Ret>::Invoke(Args&&... args)
         catch (const BadAnyCallableCall& exception)
         {
             iter = _callables.erase(iter);
-            // TODO: Think of how to pass all possible exceptions upwards but also to finish invocation of stored functions
-            //throw;
+
+            if (Utility::ExceptionHandler)
+            {
+                Utility::ExceptionHandler(exception);
+            }
         }
     }
 }
@@ -71,8 +75,11 @@ void Dispatcher<Ret>::Invoke()
         catch (const BadAnyCallableCall& exception)
         {
             iter = _callables.erase(iter);
-            // TODO: Think of how to pass all possible exceptions upwards but also to finish invocation of stored functions
-            //throw;
+
+            if (Utility::ExceptionHandler)
+            {
+                Utility::ExceptionHandler(exception);
+            }
         }
     }
 }
