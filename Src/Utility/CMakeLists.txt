@@ -9,6 +9,8 @@ add_library(Utility
             Containers/AnyCallable/AnyCallable.inl
             Containers/AnyCallable/AnyCallableHandler.cpp
             Containers/AnyCallable/AnyCallableHandler.hpp
+            Containers/AnyCallable/BadAnyCallableCall.inl
+            Containers/AnyCallable/BadAnyCallableCall.hpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.cpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.inl

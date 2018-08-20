@@ -1,7 +1,9 @@
 #pragma once
-#include "AnyCallableHandler.hpp"
+#include "Utility/Containers/AnyCallable/BadAnyCallableCall.hpp"
+#include "Utility/Containers/AnyCallable/AnyCallableHandler.hpp"
 #include <any>
 #include <functional>
+#include <typeindex>
 
 namespace Utility
 {
@@ -65,6 +67,13 @@ namespace Utility
          */
         AnyCallableHandler GetHandler() const;
 
+        /*!
+         * \brief Gets the type of the contained value.
+         * \return Returns the type_index of the contained value, if instance is non-empty,
+         *         otherwise type_index(typeid(void)).
+         */
+        std::type_index GetContainedType() const;
+
     private:
         /*!
          * \brief Sets data in handler from given function.
@@ -73,7 +82,7 @@ namespace Utility
          */
         template <class ... Args>
         void _SetHandler(Ret(*function)(Args...));
-        
+
         /*!
          * \brief Sets data in handler from given class and its function.
          * \tparam UserClass - class type.
@@ -89,6 +98,6 @@ namespace Utility
         /*! Container to store any kind of function despite its signature. */
         std::any _function;
     };
+}
 
 #include "AnyCallable.inl"
-}

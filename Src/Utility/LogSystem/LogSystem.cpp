@@ -1,4 +1,3 @@
-#include <Utility/Exception/ExceptionHandler.hpp>
 #include "LogSystem.hpp"
 #include "Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp"
 #include "Utility/IOSystem/IOSystemInterface.hpp"
@@ -23,9 +22,9 @@ LogSystem::LogSystem(const IOSystemInterface& ioSystem)
     AddEvent("NewEntryAdded", new Dispatcher<void>());
 
     // If the exception handler is empty, assign a simple callback that will just write exception error into log
-    if (!ExceptionHandler)
+    if (!Utility::ExceptionHandler)
     {
-        ExceptionHandler =
+        Utility::ExceptionHandler =
             [this] (const std::exception& exception)
             {
                 this->AddEntry(LogLevel::Error, exception.what());

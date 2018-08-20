@@ -48,13 +48,14 @@ void Dispatcher<Ret>::Invoke(Args&&... args)
             (*iter)(std::forward<Args>(args)...);
             ++iter;
         }
-        catch (const std::bad_any_cast& exception)
+        catch (const BadAnyCallableCall& exception)
         {
+            iter = _callables.erase(iter);
+
             if (Utility::ExceptionHandler)
             {
                 Utility::ExceptionHandler(exception);
             }
-            iter = _callables.erase(iter);
         }
     }
 }
@@ -71,13 +72,14 @@ void Dispatcher<Ret>::Invoke()
             (*iter)();
             ++iter;
         }
-        catch (const std::bad_any_cast& exception)
+        catch (const BadAnyCallableCall& exception)
         {
+            iter = _callables.erase(iter);
+
             if (Utility::ExceptionHandler)
             {
                 Utility::ExceptionHandler(exception);
             }
-            iter = _callables.erase(iter);
         }
     }
 }
