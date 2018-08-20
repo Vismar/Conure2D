@@ -16,7 +16,7 @@ namespace Utility
         BadAnyCallableCall(const BadAnyCallableCall& other) = default;
         BadAnyCallableCall(BadAnyCallableCall&& other) noexcept = default;
         BadAnyCallableCall& operator=(const BadAnyCallableCall& other) = default;
-        BadAnyCallableCall& operator=(BadAnyCallableCall&& other) noexcept = default;
+        BadAnyCallableCall& operator=(BadAnyCallableCall&& other) = default;
 
         template <class Ret, class ... Args>
         explicit BadAnyCallableCall(const AnyCallable<Ret>& anyCallable, Args&& ... args);
