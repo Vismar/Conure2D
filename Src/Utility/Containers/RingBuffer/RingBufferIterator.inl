@@ -1,19 +1,16 @@
 #pragma once
 #include "RingBufferIterator.hpp"
 
-namespace Utility
-{
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-RingBuffer<T>::Iterator::Iterator(uint64_t index, RingBuffer<T>* ringBuffer) : _index(index), _ringBuffer(ringBuffer)
+Utility::RingBuffer<T>::Iterator::Iterator(uint64_t index, RingBuffer<T>* ringBuffer) : _index(index), _ringBuffer(ringBuffer)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::Iterator& RingBuffer<T>::Iterator::operator++()
+typename Utility::RingBuffer<T>::Iterator& Utility::RingBuffer<T>::Iterator::operator++()
 {
     // If stored index is equal to the end index, that means that we should do nothing here
     if (_index != RingBuffer<T>::EndIndex)
@@ -39,7 +36,7 @@ typename RingBuffer<T>::Iterator& RingBuffer<T>::Iterator::operator++()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::Iterator RingBuffer<T>::Iterator::operator++(int)
+typename Utility::RingBuffer<T>::Iterator Utility::RingBuffer<T>::Iterator::operator++(int)
 {
     Iterator newIter = *this;
     ++(*this);
@@ -50,7 +47,7 @@ typename RingBuffer<T>::Iterator RingBuffer<T>::Iterator::operator++(int)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-bool RingBuffer<T>::Iterator::operator==(Iterator other) const
+bool Utility::RingBuffer<T>::Iterator::operator==(Iterator other) const
 {
     return ((_ringBuffer == other._ringBuffer) && (_index == other._index));
 }
@@ -58,7 +55,7 @@ bool RingBuffer<T>::Iterator::operator==(Iterator other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-bool RingBuffer<T>::Iterator::operator!=(Iterator other) const
+bool Utility::RingBuffer<T>::Iterator::operator!=(Iterator other) const
 {
     return !(*this == other);
 }
@@ -66,7 +63,7 @@ bool RingBuffer<T>::Iterator::operator!=(Iterator other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-T& RingBuffer<T>::Iterator::operator*() const
+T& Utility::RingBuffer<T>::Iterator::operator*() const
 {
     return _ringBuffer->_buffer[_index];
 }
@@ -74,11 +71,9 @@ T& RingBuffer<T>::Iterator::operator*() const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-const T* RingBuffer<T>::Iterator::operator->() const
+const T* Utility::RingBuffer<T>::Iterator::operator->() const
 {
     return &(_ringBuffer->_buffer[_index]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}

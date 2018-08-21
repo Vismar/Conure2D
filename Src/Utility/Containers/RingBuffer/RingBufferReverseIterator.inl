@@ -1,13 +1,10 @@
 #pragma once
 #include "RingBufferReverseIterator.hpp"
 
-namespace Utility
-{
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-RingBuffer<T>::ReverseIterator::ReverseIterator(uint64_t index, RingBuffer<T>* ringBuffer)
+Utility::RingBuffer<T>::ReverseIterator::ReverseIterator(uint64_t index, RingBuffer<T>* ringBuffer)
 : _index(index)
 , _ringBuffer(ringBuffer)
 { }
@@ -15,7 +12,7 @@ RingBuffer<T>::ReverseIterator::ReverseIterator(uint64_t index, RingBuffer<T>* r
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::ReverseIterator& RingBuffer<T>::ReverseIterator::operator++()
+typename Utility::RingBuffer<T>::ReverseIterator& Utility::RingBuffer<T>::ReverseIterator::operator++()
 {
     // If stored index is equal to the end index, that means that we should do nothing here
     if (_index != RingBuffer<T>::EndIndex)
@@ -41,7 +38,7 @@ typename RingBuffer<T>::ReverseIterator& RingBuffer<T>::ReverseIterator::operato
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename RingBuffer<T>::ReverseIterator RingBuffer<T>::ReverseIterator::operator++(int)
+typename Utility::RingBuffer<T>::ReverseIterator Utility::RingBuffer<T>::ReverseIterator::operator++(int)
 {
     ReverseIterator newIter = *this;
     ++(*this);
@@ -52,7 +49,7 @@ typename RingBuffer<T>::ReverseIterator RingBuffer<T>::ReverseIterator::operator
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-bool RingBuffer<T>::ReverseIterator::operator==(ReverseIterator other) const
+bool Utility::RingBuffer<T>::ReverseIterator::operator==(ReverseIterator other) const
 {
     return ((_ringBuffer == other._ringBuffer) && (_index == other._index));
 }
@@ -60,7 +57,7 @@ bool RingBuffer<T>::ReverseIterator::operator==(ReverseIterator other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-bool RingBuffer<T>::ReverseIterator::operator!=(ReverseIterator other) const
+bool Utility::RingBuffer<T>::ReverseIterator::operator!=(ReverseIterator other) const
 {
     return !(*this == other);
 }
@@ -68,7 +65,7 @@ bool RingBuffer<T>::ReverseIterator::operator!=(ReverseIterator other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-T& RingBuffer<T>::ReverseIterator::operator*() const
+T& Utility::RingBuffer<T>::ReverseIterator::operator*() const
 {
     return _ringBuffer->_buffer[_index];
 }
@@ -76,11 +73,9 @@ T& RingBuffer<T>::ReverseIterator::operator*() const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-const T* RingBuffer<T>::ReverseIterator::operator->() const
+const T* Utility::RingBuffer<T>::ReverseIterator::operator->() const
 {
     return &(_ringBuffer->_buffer[_index]);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}

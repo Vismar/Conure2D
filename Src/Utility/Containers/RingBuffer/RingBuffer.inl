@@ -2,13 +2,10 @@
 #include "RingBuffer.hpp"
 #include <algorithm>
 
-namespace Utility
-{
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-RingBuffer<T>::RingBuffer() : _headIndex(0), _tailIndex(0), _empty(true)
+Utility::RingBuffer<T>::RingBuffer() : _headIndex(0), _tailIndex(0), _empty(true)
 {
     _buffer.resize(10);
 }
@@ -16,7 +13,7 @@ RingBuffer<T>::RingBuffer() : _headIndex(0), _tailIndex(0), _empty(true)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
+void Utility::RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
 {
     // RingBuffer cannot have number of elements less than 1
     if (newSize >= 1 && newSize < EndIndex)
@@ -104,7 +101,7 @@ void RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-typename std::vector<T>::size_type RingBuffer<T>::GetSize() const
+typename std::vector<T>::size_type Utility::RingBuffer<T>::GetSize() const
 {
     return _buffer.size();
 }
@@ -112,7 +109,7 @@ typename std::vector<T>::size_type RingBuffer<T>::GetSize() const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::PushBack(const T& entry)
+void Utility::RingBuffer<T>::PushBack(const T& entry)
 {
     // If empty flag is true and tail and head indexes are equal, that means buffer is empty 
     // and we should just assign new value to the first buffer element
@@ -140,7 +137,7 @@ void RingBuffer<T>::PushBack(const T& entry)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::EmplaceBack(T&& entry)
+void Utility::RingBuffer<T>::EmplaceBack(T&& entry)
 {
     // If empty flag is true and tail and head indexes are equal, that means buffer is empty 
     // and we should just assign new value to the first buffer element
@@ -168,7 +165,7 @@ void RingBuffer<T>::EmplaceBack(T&& entry)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-auto RingBuffer<T>::begin()
+auto Utility::RingBuffer<T>::begin()
 {
     uint64_t requiredIndex = _headIndex;
     
@@ -184,7 +181,7 @@ auto RingBuffer<T>::begin()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-auto RingBuffer<T>::end()
+auto Utility::RingBuffer<T>::end()
 {
     return Iterator(EndIndex, this);
 }
@@ -192,7 +189,7 @@ auto RingBuffer<T>::end()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-auto RingBuffer<T>::rbegin()
+auto Utility::RingBuffer<T>::rbegin()
 {
     uint64_t requiredIndex = _tailIndex;
 
@@ -208,7 +205,7 @@ auto RingBuffer<T>::rbegin()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-auto RingBuffer<T>::rend()
+auto Utility::RingBuffer<T>::rend()
 {
     return ReverseIterator(EndIndex, this);
 }
@@ -216,7 +213,7 @@ auto RingBuffer<T>::rend()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-bool RingBuffer<T>::_ValidateIndex(const uint64_t index)
+bool Utility::RingBuffer<T>::_ValidateIndex(const uint64_t index)
 {
     bool valid(true);
 
@@ -239,7 +236,7 @@ bool RingBuffer<T>::_ValidateIndex(const uint64_t index)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::_IncreaseIndex(uint64_t& index)
+void Utility::RingBuffer<T>::_IncreaseIndex(uint64_t& index)
 {
     if (++index >= _buffer.size())
     {
@@ -250,7 +247,7 @@ void RingBuffer<T>::_IncreaseIndex(uint64_t& index)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
-void RingBuffer<T>::_DecreaseIndex(uint64_t& index)
+void Utility::RingBuffer<T>::_DecreaseIndex(uint64_t& index)
 {
     if (index == 0)
     {
@@ -263,5 +260,3 @@ void RingBuffer<T>::_DecreaseIndex(uint64_t& index)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}

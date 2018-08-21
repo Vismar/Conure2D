@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.9)
 
 # Setup flags
+set(CFLAGS "-Wall -Werror")
 set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -DDEV_BUILD")
-set(CMAKE_CXX_FLAGS_PRODUCTION "${CMAKE_CXX_FLAGS_RELEASE} -Wall")
-set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_PRODUCTION} -DDEV_BUILD")
+set(CMAKE_CXX_FLAGS_PRODUCTION "${CMAKE_CXX_FLAGS_RELEASE} ${CFLAGS}")
+set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_PRODUCTION} -DDEV_BUILD ${CFLAGS}")
+
+if (NOT CMAKE_BUILD_TYPE)
+    message(STATUS "No build type was specified, default to Production")
+    set(CMAKE_BUILD_TYPE "Production")
+endif ()
 
 # Setup configuration
 if (CMAKE_BUILD_TYPE MATCHES Debug)
@@ -12,10 +18,10 @@ elseif(CMAKE_BUILD_TYPE MATCHES Release)
     set(CONFIGURATION "Release")
 elseif(CMAKE_BUILD_TYPE MATCHES Production)
     set(CONFIGURATION "Production")
-endif (CMAKE_BUILD_TYPE MATCHES Debug)
+endif ()
 
 # Simple notification
-message("Conure2D build started with ${CONFIGURATION} configuration")
+message(STATUS "Conure2D build started with ${CONFIGURATION} configuration")
 
 # Conure2D using some features from C++17
 set(CMAKE_CXX_STANDARD 17)
