@@ -1,19 +1,11 @@
 language: cpp
 
-before_script:
-# Installing SFML
-- cd ../
-- wget https://www.sfml-dev.org/files/SFML-2.5.0-linux-gcc-64-bit.tar.gz
-- tar -xzf SFML-2.5.0-linux-gcc-64-bit.tar.gz
-- mv -v ./SFML-2.5.0/include/* ./Conure2D/
 script:
 - eval "${MATRIX_EVAL}"
-# Building Conure2D
-- cd Conure2D
-- mkdir build
-- cd build
+- mkdir Build
+- cd Build
 - cmake .. ${BUILD_TYPE}
-- make
+- sudo make
 
 matrix:
   fast_finish: true
@@ -26,6 +18,13 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            # Required by SFML
+            - libxrandr-dev
+            - libudev-dev
+            - libopenal-dev
+            - libvorbis-dev
+            - libflac-dev
+            # C++17
             - g++-8
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
@@ -38,6 +37,13 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            # Required by SFML
+            - libxrandr-dev
+            - libudev-dev
+            - libopenal-dev
+            - libvorbis-dev
+            - libflac-dev
+            # C++17
             - g++-8
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
@@ -50,6 +56,13 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            # Required by SFML
+            - libxrandr-dev
+            - libudev-dev
+            - libopenal-dev
+            - libvorbis-dev
+            - libflac-dev
+            # C++17
             - g++-8
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
@@ -63,6 +76,13 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-6.0
           packages:
+            # Required by SFML
+            - libxrandr-dev
+            - libudev-dev
+            - libopenal-dev
+            - libvorbis-dev
+            - libflac-dev
+            # C++17
             - g++-8
             - clang-6.0
       env:
@@ -77,6 +97,13 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-6.0
           packages:
+            # Required by SFML
+            - libxrandr-dev
+            - libudev-dev
+            - libopenal-dev
+            - libvorbis-dev
+            - libflac-dev
+            # C++17
             - g++-8
             - clang-6.0
       env:
@@ -91,6 +118,13 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-6.0
           packages:
+            # Required by SFML
+            - libxrandr-dev
+            - libudev-dev
+            - libopenal-dev
+            - libvorbis-dev
+            - libflac-dev
+            # C++17
             - g++-8
             - clang-6.0
       env:

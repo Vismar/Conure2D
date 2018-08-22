@@ -2,8 +2,9 @@
 SFML/
 Bin/
 Lib/
-build/
+Build/
 Docs/html/
+External/
 \.vs/
 \.idea/
 \.vscode/
