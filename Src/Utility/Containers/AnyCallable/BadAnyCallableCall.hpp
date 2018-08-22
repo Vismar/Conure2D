@@ -35,7 +35,7 @@ namespace Utility
          * \brief Grabs message that contains information about exception
          * \return Returns message that contains what happend when exception was thrown.
          */
-        const char* what() const noexcept override;
+        const char* what() const noexcept final;
 
     private:
         /*! Message of an exception. */

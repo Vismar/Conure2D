@@ -4,7 +4,7 @@ include(ExternalProject)
 #######################################################################################################################
 # Setup stuff
 ## Flags
-set(CFLAGS "-Wall -Werror")
+set(CFLAGS "-Wall")
 set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -DDEV_BUILD")
 set(CMAKE_CXX_FLAGS_PRODUCTION "${CMAKE_CXX_FLAGS_RELEASE} ${CFLAGS}")
 set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_PRODUCTION} -DDEV_BUILD ${CFLAGS}")
@@ -29,12 +29,17 @@ message(STATUS "Conure2D build started with ${CONFIGURATION} configuration")
 
 #######################################################################################################################
 # Install dependencies
-#set(EXTERNAL_INSTALL_DIR ${CMAKE_CURRENT_LIST_DIR}/external)
+set(EXTERNAL_INSTALL_DIR ../External/)
 
 ## SFML
 ExternalProject_Add(SFML
                     GIT_REPOSITORY https://github.com/SFML/SFML
-                    PREFIX ../External/)
+                    PREFIX ${EXTERNAL_INSTALL_DIR})
+
+## Google Test
+ExternalProject_Add(GoogleTest
+                    GIT_REPOSITORY https://github.com/google/googletest
+                    PREFIX ${EXTERNAL_INSTALL_DIR})
 
 ## C++17 is required
 set(CMAKE_CXX_STANDARD 17)
@@ -50,7 +55,8 @@ set(VERSION_MINOR 0)
 set(VERSION_PATCH 3)
 
 ## Include directories
-include_directories(./external/src/SFML/include)
+include_directories(./External/src/GoogleTest/googletest/include)
+include_directories(./External/src/SFML/include)
 include_directories(./Src)
 include_directories(./)
 
@@ -60,3 +66,9 @@ add_subdirectory(Src/Input)
 add_subdirectory(Src/Core)
 add_subdirectory(Src/Render)
 add_subdirectory(Src/Engine)
+
+#######################################################################################################################
+# Tests
+enable_testing ()
+add_subdirectory(UnitTests/Utility)
+#######################################################################################################################
