@@ -21,7 +21,7 @@ typename Utility::RingBuffer<T>::Iterator& Utility::RingBuffer<T>::Iterator::ope
             // If stored index is equal to tail, then next iterator should point to the end
             if (_index == _ringBuffer->_tailIndex)
             {
-                _index = RingBuffer<T>::EEndIndex;
+                _index = RingBuffer<T>::EndIndex;
             }
             else
             {

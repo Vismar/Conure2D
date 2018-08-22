@@ -1,14 +1,19 @@
 cmake_minimum_required(VERSION 3.9)
 project(Utility)
 
+#######################################################################################################################
+# Output path
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 
+#######################################################################################################################
+# Build static library
 add_library(Utility 
             Containers/AnyCallable/AnyCallable.hpp
             Containers/AnyCallable/AnyCallable.inl
             Containers/AnyCallable/AnyCallableHandler.cpp
             Containers/AnyCallable/AnyCallableHandler.hpp
+            Containers/AnyCallable/BadAnyCallableCall.cpp
             Containers/AnyCallable/BadAnyCallableCall.inl
             Containers/AnyCallable/BadAnyCallableCall.hpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.cpp
@@ -50,14 +55,17 @@ add_library(Utility
             Time/TimeSpan.cpp
             Time/TimeSpan.hpp)
 
-# Dependencies
+## Dependencies
 add_dependencies(Utility SFML)
 
-# Prefix
+## Prefix
 set_target_properties(Utility PROPERTIES PREFIX "")
-# Postfix
+
+## Postfix
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     set_target_properties(Utility PROPERTIES DEBUG_POSTFIX "-d")
 elseif(CMAKE_BUILD_TYPE MATCHES Release)
     set_target_properties(Utility PROPERTIES RELEASE_POSTFIX "-r")
 endif (CMAKE_BUILD_TYPE MATCHES Debug)
+
+#######################################################################################################################

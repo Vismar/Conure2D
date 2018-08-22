@@ -52,6 +52,13 @@ namespace Utility
         bool operator==(const AnyCallable& other) const;
 
         /*!
+         * \brief Inequality operator.
+         * \param other - const reference to other AnyCallable.
+         * \return True if AnyCallables do not have equal handlers. Otherwise - false.
+         */
+        bool operator!=(const AnyCallable& other) const;
+
+        /*!
          * \brief Function call operator.
          * \tparam Args - list of arguments.
          * \param args - arguments that will be used in call of stored function.

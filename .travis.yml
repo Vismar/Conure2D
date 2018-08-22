@@ -6,6 +6,7 @@ script:
 - cd Build
 - cmake .. ${BUILD_TYPE}
 - sudo make
+- make test ARGS="-V"
 
 matrix:
   fast_finish: true
@@ -29,7 +30,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Debug"
-      # Linux, GCC, Release
+    # Linux, GCC, Release
     - os: linux
       sudo: required
       addons:

@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.9)
 project(Render)
 
+#######################################################################################################################
+# Output path
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 
+#######################################################################################################################
+# Build static library
 add_library(Render
             Components/SpriteRenderComponent.cpp
             Components/SpriteRenderComponent.hpp
@@ -15,14 +19,17 @@ add_library(Render
             RenderSystem.hpp
             RenderSystemInterface.hpp)
 
-# Dependencies
+## Dependencies
 add_dependencies(Render SFML)
 
-# Prefix
+## Prefix
 set_target_properties(Render PROPERTIES PREFIX "")
-# Postfix
+
+## Postfix
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     set_target_properties(Render PROPERTIES DEBUG_POSTFIX "-d")
 elseif(CMAKE_BUILD_TYPE MATCHES Release)
     set_target_properties(Render PROPERTIES RELEASE_POSTFIX "-r")
 endif (CMAKE_BUILD_TYPE MATCHES Debug)
+
+#######################################################################################################################

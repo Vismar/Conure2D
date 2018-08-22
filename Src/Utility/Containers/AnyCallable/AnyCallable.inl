@@ -40,6 +40,14 @@ bool Utility::AnyCallable<Ret>::operator==(const AnyCallable& other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>
+bool Utility::AnyCallable<Ret>::operator!=(const AnyCallable& other) const
+{
+    return !(*this == other);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class Ret>
 template <class ... Args>
 Ret Utility::AnyCallable<Ret>::operator()(Args&& ... args)
 {
@@ -52,6 +60,7 @@ Ret Utility::AnyCallable<Ret>::operator()(Args&& ... args)
         throw BadAnyCallableCall(*this, std::forward<Args>(args)...);
     }
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>

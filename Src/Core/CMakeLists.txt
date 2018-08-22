@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.9)
 project(Core)
 
+#######################################################################################################################
+# Output path
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/")
 
+#######################################################################################################################
+# Build static library
 add_library(Core
             Components/Base/BaseComponent.cpp
             Components/Base/BaseComponent.hpp
@@ -31,14 +35,17 @@ add_library(Core
             Scene/SceneObject.hpp
             Scene/SceneObject.inl)
 
-# Dependencies
+## Dependencies
 add_dependencies(Core SFML)
 
-# Prefix
+## Prefix
 set_target_properties(Core PROPERTIES PREFIX "")
-# Postfix
+
+## Postfix
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     set_target_properties(Core PROPERTIES DEBUG_POSTFIX "-d")
 elseif(CMAKE_BUILD_TYPE MATCHES Release)
     set_target_properties(Core PROPERTIES RELEASE_POSTFIX "-r")
 endif (CMAKE_BUILD_TYPE MATCHES Debug)
+
+#######################################################################################################################
