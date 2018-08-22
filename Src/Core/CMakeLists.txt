@@ -31,6 +31,9 @@ add_library(Core
             Scene/SceneObject.hpp
             Scene/SceneObject.inl)
 
+# Dependencies
+add_dependencies(Core SFML)
+
 # Prefix
 set_target_properties(Core PROPERTIES PREFIX "")
 # Postfix

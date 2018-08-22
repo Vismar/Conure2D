@@ -50,6 +50,9 @@ add_library(Utility
             Time/TimeSpan.cpp
             Time/TimeSpan.hpp)
 
+# Dependencies
+add_dependencies(Utility SFML)
+
 # Prefix
 set_target_properties(Utility PROPERTIES PREFIX "")
 # Postfix
