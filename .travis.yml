@@ -9,7 +9,8 @@ before_script:
 script:
 - eval "${MATRIX_EVAL}"
 # Building Conure2D
-- cd Conure2D
+#- cd Conure2D
+- pwd
 - mkdir Build
 - cd Build
 - cmake .. ${BUILD_TYPE}
@@ -27,6 +28,11 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
+            - libxrandr-dev
+            - libudev-dev
+            - libopenal-dev
+            - libvorbis-dev
+            - libflac-dev
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Debug"
