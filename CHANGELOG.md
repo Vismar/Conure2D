@@ -1,16 +1,30 @@
 # Changelog
 
 ## Plans
+- **New architecture in version 0.1.0** - current architecture is that great and I need to rethink all of it 
+  and reimplement everything that was written up until now. There will be:
+  - Changes in namespace,
+  - Changes in interfaces and its names,
+  - Overall architecture will be rewritten with job system in mind,
+  - Unit tests for everything,
+  - Etc.
 - **Debug info** - debug information that helps the development.
 - **Editor** - ui toolchain.
 
 ## WIP
 
+**--------------------------------------------------------------------------------------------------------------------**
+
+## [0.0.3] - 30th August,2018
+
 ### Added
 - **Auto build**
-  - Now every new commit to master branch is building on Travis CI to check if everything is okay.
+  - Now every new commit to master branch is building on Travis CI to check if everything is ok.
 - **CMake**
-  - Whole project can be build via cmake
+  - Whole project can be build via cmake that will grab dependencies (SFML and GoogleTest) and build it.
+- **Render**
+  - **CameraComponent** - new component that can be used to to traverse virtual space withing the scenes.
+    - Render uses camera components to understand what and how render in the scenes.
 - **Core**
   - **Scene**
     - **BaseScene** - now BaseScene stores name of itself. Also BaseScene now derived from new interface BaseSceneInterface which is used only by inner systems so user still should use BaseScene class.
@@ -19,12 +33,20 @@
       - **DataComponent** - should be used only to store data. Nothing more, nothing less.
       - **LogicComponent** - should be used to create logic because it provides special methods that is called by scene in update cycle.
 - **Utility**
+  - **AnyCallable**
+    - **BadAnyCallableCall** - exception that will be thrown if call of `AnyCallable` was failed.
   - **LockFreeLinkedQueue** - lock-free linked queue which designed to guarantee push/pop operations to be executed simultaneously without any synchronization via mutexes or similar things.
   - **LogSystem** - system that provides functionality to log work of an engine and applications based on it.
+    - **LogUtilities** - here you can find some great utility functions.
+      - `PrettyrTypeName()` - returns readable by humans name of type.
   - **IOSystem** - system that currently provides functionality only to write data to text files.
   - **Time**
     - New functions were introduced:
       - `ToString()` - new method to convert stored time to formated string.
+    - Now stores signed values instead of unsigned.
+- **Tests**
+  - Test were moved from MS tests to GoogleTests.
+  - **RingBufferTest** - unit tests (kinda) for `Utility::RingBuffer`.
 
 ### Fixed
 - **Overall**
@@ -101,3 +123,4 @@
 
 [0.0.1]: https://github.com/Vismar/Conure2D/releases/tag/v0.0.1-alpha
 [0.0.2]: https://github.com/Vismar/Conure2D/releases/tag/v0.0.2-alpha
+[0.0.3]: https://github.com/Vismar/Conure2D/releases/tag/v0.0.3-alpha
