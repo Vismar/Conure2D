@@ -6,39 +6,39 @@
  */
 TEST(RingBuffer, Resize)
 {
-    Utility::RingBuffer<uint64_t> ringBuffer;
+    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
 
     // Default size
-    EXPECT_EQ(10, ringBuffer.GetSize());
+    EXPECT_EQ(10ull, ringBuffer.GetSize());
 
     // Check size values that are not accepted by ring buffer
-    ringBuffer.Resize(0ll);
-    EXPECT_EQ(10, ringBuffer.GetSize());
-    ringBuffer.Resize(-1ll);
-    EXPECT_EQ(10, ringBuffer.GetSize());
+    ringBuffer.Resize(0ull);
+    EXPECT_EQ(10ull, ringBuffer.GetSize());
+    ringBuffer.Resize(-1ull);
+    EXPECT_EQ(10ull, ringBuffer.GetSize());
 
     // Check resize to valid value
-    ringBuffer.Resize(20);
-    EXPECT_EQ(20, ringBuffer.GetSize());
-    ringBuffer.Resize(1);
-    EXPECT_EQ(1, ringBuffer.GetSize());
+    ringBuffer.Resize(20ull);
+    EXPECT_EQ(20ull, ringBuffer.GetSize());
+    ringBuffer.Resize(1ull);
+    EXPECT_EQ(1ull, ringBuffer.GetSize());
 
     // Set new size
-    ringBuffer.Resize(5);
+    ringBuffer.Resize(5ull);
     // Add entries to the ring buffer
-    for (uint64_t i = 0; i < 5; ++i)
+    for (uint64_t i = 0ull; i < 5ull; ++i)
     {
         ringBuffer.PushBack(i);
     }
     // Resize ring buffer
-    ringBuffer.Resize(10);
+    ringBuffer.Resize(10ull);
     // Add some new entries to the ring buffer
-    for (uint64_t i = 5; i < 10; ++i)
+    for (uint64_t i = 5ull; i < 10ull; ++i)
     {
         ringBuffer.PushBack(i);
     }
     // Check entry values
-    uint64_t checkValue(0);
+    uint64_t checkValue(0ull);
     for (auto& entry : ringBuffer)
     {
         EXPECT_EQ(checkValue, entry);
@@ -46,25 +46,25 @@ TEST(RingBuffer, Resize)
     }
 
     // Set smaller size of the ring buffer
-    ringBuffer.Resize(5);
+    ringBuffer.Resize(5ull);
     // Check entry values
-    checkValue = 5;
+    checkValue = 5ull;
     for (auto& entry : ringBuffer)
     {
         EXPECT_EQ(checkValue, entry);
         ++checkValue;
     }
-    for (uint64_t i = checkValue; i < checkValue + 2; ++i)
+    for (uint64_t i = checkValue; i < checkValue + 2ull; ++i)
     {
         ringBuffer.PushBack(i);
     }
-    checkValue += 2;
-    ringBuffer.Resize(10);
-    for (uint64_t i = checkValue; i < checkValue + 5; ++i)
+    checkValue += 2ull;
+    ringBuffer.Resize(10ull);
+    for (uint64_t i = checkValue; i < checkValue + 5ull; ++i)
     {
         ringBuffer.PushBack(i);
     }
-    checkValue = 7;
+    checkValue = 7ull;
     for (auto& entry : ringBuffer)
     {
         EXPECT_EQ(checkValue, entry);
@@ -77,31 +77,31 @@ TEST(RingBuffer, Resize)
  */
 TEST(RingBuffer, PushBack)
 {
-    Utility::RingBuffer<uint64_t> ringBuffer;
+    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
 
     // Add some values to ring buffer
-    for (uint64_t i = 0; i < 5; ++i)
+    for (uint64_t i = 0ull; i < 5ull; ++i)
     {
         ringBuffer.PushBack(i);
     }
 
     // Check entries in ring buffer
-    uint64_t count(0);
+    uint64_t count(0ull);
     for (auto& entry : ringBuffer)
     {
         EXPECT_EQ(count, entry);
         ++count;
     }
     // Check number of entries in ring buffer
-    EXPECT_EQ(5, count);
+    EXPECT_EQ(5ull, count);
 
     // Fill ring buffer with additional values that will overwrite already added entries
-    for (uint64_t i = 990; i < 1000; ++i)
+    for (uint64_t i = 990ull; i < 1000ull; ++i)
     {
         ringBuffer.PushBack(i);
     }
 
-    count = 990;
+    count = 990ull;
     // Check entries in ring buffer
     for (auto& entry : ringBuffer)
     {
@@ -109,7 +109,7 @@ TEST(RingBuffer, PushBack)
         ++count;
     }
     // Check number of entries in ring buffer
-    EXPECT_EQ(10, (count - 990));
+    EXPECT_EQ(10ull, (count - 990ull));
 }
 
 /*!
@@ -117,32 +117,32 @@ TEST(RingBuffer, PushBack)
  */
 TEST(RingBuffer, EmplaceBack)
 {
-    Utility::RingBuffer<uint64_t> ringBuffer;
-    const uint64_t addition(1000);
+    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    const uint64_t addition(1000ull);
 
     // Add some values to ring buffer
-    for (uint64_t i = 0; i < 5; ++i)
+    for (uint64_t i = 0ull; i < 5ull; ++i)
     {
         ringBuffer.EmplaceBack(i + addition);
     }
 
     // Check entries in ring buffer
-    uint64_t count(0 + addition);
+    uint64_t count(0ull + addition);
     for (auto& entry : ringBuffer)
     {
         EXPECT_EQ(count, entry);
         ++count;
     }
     // Check number of entries in ring buffer
-    EXPECT_EQ(5, (count - addition));
+    EXPECT_EQ(5ull, (count - addition));
 
     // Fill ring buffer with additional values that will overwrite already added entries
-    for (uint64_t i = 990; i < 1000; ++i)
+    for (uint64_t i = 990ull; i < 1000ull; ++i)
     {
         ringBuffer.EmplaceBack(i + addition);
     }
 
-    count = 990 + addition;
+    count = 990ull + addition;
     // Check entries in ring buffer
     for (auto& entry : ringBuffer)
     {
@@ -150,39 +150,128 @@ TEST(RingBuffer, EmplaceBack)
         ++count;
     }
     // Check number of entries in ring buffer
-    EXPECT_EQ(10, (count - addition - 990));
+    EXPECT_EQ(10ull, (count - addition - 990ull));
 }
 
 /*!
  * Testing straight and reverse iterators
  */
-TEST(RingBuffer, Iterators)
+TEST(RingBuffer, Iterator)
 {
-    Utility::RingBuffer<uint64_t> ringBuffer;
+    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    std::vector<uint64_t> vector;
 
     // Add some entries to ring buffer
-    for (uint64_t i = 0; i < 10; ++i)
+    for (uint64_t i = 0ull; i < 10ull; ++i)
     {
         ringBuffer.PushBack(i);
+        vector.push_back(i);
     }
 
     // Check entries in ring buffer with straight iterator
-    uint64_t count(0);
+    uint64_t count(0ull);
     for (auto& entry : ringBuffer)
     {
         EXPECT_EQ(count, entry);
+        EXPECT_EQ(vector[count], entry);
         ++count;
     }
     // Check number of entries in ring buffer
-    EXPECT_EQ(10, count);
+    EXPECT_EQ(10ull, count);
+}
+
+TEST(RingBuffer, ConstIterator)
+{
+    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    std::vector<uint64_t> vector;
+
+    // Add some entries to ring buffer
+    for (uint64_t i = 0ull; i < 10ull; ++i)
+    {
+        ringBuffer.PushBack(i);
+        vector.push_back(i);
+    }
+
+    // Check entries in ring buffer with const straight iterator via begin()
+    uint64_t count(0ull);
+    for (Conure::Utility::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.begin(); entry != ringBuffer.end(); ++entry)
+    {
+        EXPECT_EQ(count, *entry);
+        EXPECT_EQ(vector[count], *entry);
+        ++count;
+    }
+    // Check number of entries in ring buffer
+    EXPECT_EQ(10ull, count);
+
+    // Check entries in ring buffer with const straight iterator via cbegin()
+    count = 0ull;
+    for (Conure::Utility::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.cbegin(); entry != ringBuffer.cend(); ++entry)
+    {
+        EXPECT_EQ(count, *entry);
+        EXPECT_EQ(vector[count], *entry);
+        ++count;
+    }
+    // Check number of entries in ring buffer
+    EXPECT_EQ(10ull, count);
+}
+
+TEST(RingBuffer, ReverseIterator)
+{
+    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    std::vector<uint64_t> vector;
+
+    // Add some entries to ring buffer
+    for (uint64_t i = 0ull; i < 10ull; ++i)
+    {
+        ringBuffer.PushBack(i);
+        vector.push_back(i);
+    }
 
     // Check entries in ring buffer with reverse iterator
-    --count;
+    uint64_t count = 9ull;
     for (auto entry = ringBuffer.rbegin(); entry != ringBuffer.rend(); ++entry)
     {
         EXPECT_EQ(count, *entry );
+        EXPECT_EQ(vector[count], *entry);
         --count;
     }
     // Check number of entries in ring buffer
-    EXPECT_EQ(0, ++count);
+    EXPECT_EQ(0ull, ++count);
+}
+
+TEST(RingBuffer, ConstReverseIterator)
+{
+    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    std::vector<uint64_t> vector;
+
+    // Add some entries to ring buffer
+    for (uint64_t i = 0ull; i < 10ull; ++i)
+    {
+        ringBuffer.PushBack(i);
+        vector.push_back(i);
+    }
+
+    // Check entries in ring buffer with const straight iterator via begin()
+    uint64_t count(9ull);
+    for (Conure::Utility::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.rbegin(); entry != ringBuffer.rend(); ++entry)
+    {
+        EXPECT_EQ(count, *entry);
+        EXPECT_EQ(vector[count], *entry);
+        --count;
+    }
+    ++count;
+    // Check number of entries in ring buffer
+    EXPECT_EQ(0ull, count);
+
+    // Check entries in ring buffer with const straight iterator via cbegin()
+    count = 9ull;
+    for (Conure::Utility::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.crbegin(); entry != ringBuffer.crend(); ++entry)
+    {
+        EXPECT_EQ(count, *entry);
+        EXPECT_EQ(vector[count], *entry);
+        --count;
+    }
+    ++count;
+    // Check number of entries in ring buffer
+    EXPECT_EQ(0ull, count);
 }
