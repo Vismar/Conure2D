@@ -21,9 +21,9 @@ add_library(Utility
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.inl
             Containers/RingBuffer/RingBuffer.hpp
             Containers/RingBuffer/RingBuffer.inl
-            Containers/RingBuffer/RingBufferIterator.hpp
+            Containers/RingBuffer/RingBufferConstIterator.inl
+            Containers/RingBuffer/RingBufferConstReverseIterator.inl
             Containers/RingBuffer/RingBufferIterator.inl
-            Containers/RingBuffer/RingBufferReverseIterator.hpp
             Containers/RingBuffer/RingBufferReverseIterator.inl
             EventSystem/Dispatcher.hpp
             EventSystem/Dispatcher.inl

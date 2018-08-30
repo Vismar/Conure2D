@@ -3,8 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-RingBuffer<T, A>::Iterator::Iterator(RingBuffer<T, A>::size_type index,
-                                                      RingBuffer<T, A>* ringBuffer)
+RingBuffer<T, A>::ConstIterator::ConstIterator(RingBuffer<T, A>::size_type index, const RingBuffer<T, A>* ringBuffer)
 : _index(index)
 , _ringBuffer(ringBuffer)
 { }
@@ -12,7 +11,15 @@ RingBuffer<T, A>::Iterator::Iterator(RingBuffer<T, A>::size_type index,
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::Iterator& RingBuffer<T, A>::Iterator::operator++()
+RingBuffer<T, A>::ConstIterator::ConstIterator(const Iterator& iterator)
+: _index(iterator._index)
+, _ringBuffer(iterator._ringBuffer)
+{ }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::ConstIterator& RingBuffer<T, A>::ConstIterator::operator++()
 {
     // If stored index is equal to the end index, that means that we should do nothing here
     if (_index != RingBuffer<T>::EndIndex)
@@ -39,9 +46,9 @@ typename RingBuffer<T, A>::Iterator& RingBuffer<T, A>::Iterator::operator++()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::Iterator::operator++(int)
+typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::ConstIterator::operator++(int)
 {
-    Iterator newIter = *this;
+    ConstIterator newIter = *this;
     ++(*this);
 
     return newIter;
@@ -50,7 +57,7 @@ typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::Iterator::operator++(int)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-bool RingBuffer<T, A>::Iterator::operator==(const Iterator& other) const
+bool RingBuffer<T, A>::ConstIterator::operator==(const ConstIterator& other) const
 {
     return ((_ringBuffer == other._ringBuffer) && (_index == other._index));
 }
@@ -58,7 +65,7 @@ bool RingBuffer<T, A>::Iterator::operator==(const Iterator& other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-bool RingBuffer<T, A>::Iterator::operator!=(const Iterator& other) const
+bool RingBuffer<T, A>::ConstIterator::operator!=(const ConstIterator& other) const
 {
     return !(*this == other);
 }
@@ -66,7 +73,7 @@ bool RingBuffer<T, A>::Iterator::operator!=(const Iterator& other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::Iterator::reference RingBuffer<T, A>::Iterator::operator*() const
+typename RingBuffer<T, A>::ConstIterator::reference RingBuffer<T, A>::ConstIterator::operator*() const
 {
     return _ringBuffer->_buffer[_index];
 }
@@ -74,7 +81,7 @@ typename RingBuffer<T, A>::Iterator::reference RingBuffer<T, A>::Iterator::opera
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::Iterator::pointer RingBuffer<T, A>::Iterator::operator->() const
+typename RingBuffer<T, A>::ConstIterator::pointer RingBuffer<T, A>::ConstIterator::operator->() const
 {
     return &(_ringBuffer->_buffer[_index]);
 }

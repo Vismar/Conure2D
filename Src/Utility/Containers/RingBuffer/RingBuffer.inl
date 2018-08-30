@@ -1,19 +1,17 @@
 #pragma once
-#include "RingBuffer.hpp"
-#include <algorithm>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-Utility::RingBuffer<T>::RingBuffer() : _headIndex(0), _tailIndex(0), _empty(true)
+template <class T, class A>
+RingBuffer<T, A>::RingBuffer() : _headIndex(0), _tailIndex(0), _empty(true)
 {
     _buffer.resize(10);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-void Utility::RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
+template <class T, class A>
+void RingBuffer<T, A>::Resize(size_type newSize)
 {
     // RingBuffer cannot have number of elements less than 1
     if (newSize >= 1 && newSize < EndIndex)
@@ -34,10 +32,10 @@ void Utility::RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
                 // If new tail index not equal to current tail index, we should rotate vector
                 if (newTailIndex != _tailIndex)
                 {
-                    uint64_t leftShift(0ll);
-                    uint64_t rightShift(0ll);
+                    size_type leftShift(0ll);
+                    size_type rightShift(0ll);
 
-                    // If tail index is bigger than new tail index, 
+                    // If tail index is bigger than new tail index,
                     // we should check in which direction rotation will be more efficient
                     if (_tailIndex > newTailIndex)
                     {
@@ -69,8 +67,8 @@ void Utility::RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
             // Resize buffer
             _buffer.resize(newSize);
         }
-        // If a new size is bigger than a current one, we should rotate vector in such way
-        // that head of the ring would be at the start of the vector
+            // If a new size is bigger than a current one, we should rotate vector in such way
+            // that head of the ring would be at the start of the vector
         else if (newSize > _buffer.size())
         {
             // If head of the ring is not at the start of the vector, we should rotate vector before resizing it
@@ -81,7 +79,7 @@ void Utility::RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
                 {
                     std::rotate(_buffer.begin(), _buffer.begin() + _headIndex, _buffer.end());
                 }
-                // If head index is closer to the end of vector (or distance is equal), use right rotation
+                    // If head index is closer to the end of vector (or distance is equal), use right rotation
                 else
                 {
                     std::rotate(_buffer.rbegin(), _buffer.rbegin() + (_buffer.size() - _headIndex), _buffer.rend());
@@ -100,18 +98,18 @@ void Utility::RingBuffer<T>::Resize(typename std::vector<T>::size_type newSize)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-typename std::vector<T>::size_type Utility::RingBuffer<T>::GetSize() const
+template <class T, class A>
+typename RingBuffer<T, A>::size_type RingBuffer<T, A>::GetSize() const
 {
     return _buffer.size();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-void Utility::RingBuffer<T>::PushBack(const T& entry)
+template <class T, class A>
+void RingBuffer<T, A>::PushBack(const T& entry)
 {
-    // If empty flag is true and tail and head indexes are equal, that means buffer is empty 
+    // If empty flag is true and tail and head indexes are equal, that means buffer is empty
     // and we should just assign new value to the first buffer element
     if (_empty && (_tailIndex == _headIndex))
     {
@@ -119,15 +117,17 @@ void Utility::RingBuffer<T>::PushBack(const T& entry)
 
         _empty = false;
     }
-    // If tail and head indexes are different then just do a common indexes shifts and other operations
+        // If tail and head indexes are different then just do a common indexes shifts and other operations
     else
     {
-        _IncreaseIndex(_tailIndex);
+        _ChangeIndex(_tailIndex, 1);
+        //_IncreaseIndex(_tailIndex);
 
         // If tail and head indexes are equal, increase head index
         if (_tailIndex == _headIndex)
         {
-            _IncreaseIndex(_headIndex);
+            _ChangeIndex(_headIndex, 1);
+            //_IncreaseIndex(_headIndex);
         }
 
         _buffer[_tailIndex] = entry;
@@ -136,10 +136,10 @@ void Utility::RingBuffer<T>::PushBack(const T& entry)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-void Utility::RingBuffer<T>::EmplaceBack(T&& entry)
+template <class T, class A>
+void RingBuffer<T, A>::EmplaceBack(T&& entry)
 {
-    // If empty flag is true and tail and head indexes are equal, that means buffer is empty 
+    // If empty flag is true and tail and head indexes are equal, that means buffer is empty
     // and we should just assign new value to the first buffer element
     if (_empty && (_tailIndex == _headIndex))
     {
@@ -147,15 +147,17 @@ void Utility::RingBuffer<T>::EmplaceBack(T&& entry)
 
         _empty = false;
     }
-    // If tail and head indexes are different then just do a common indexes shifts and other operations
+        // If tail and head indexes are different then just do a common indexes shifts and other operations
     else
     {
-        _IncreaseIndex(_tailIndex);
+        _ChangeIndex(_tailIndex, 1);
+        //_IncreaseIndex(_tailIndex);
 
         // If tail and head indexes are equal, increase head index
         if (_tailIndex == _headIndex)
         {
-            _IncreaseIndex(_headIndex);
+            _ChangeIndex(_headIndex, 1);
+            //_IncreaseIndex(_headIndex);
         }
 
         _buffer[_tailIndex] = entry;
@@ -164,11 +166,11 @@ void Utility::RingBuffer<T>::EmplaceBack(T&& entry)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-auto Utility::RingBuffer<T>::begin()
+template <class T, class A>
+typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::begin()
 {
-    uint64_t requiredIndex = _headIndex;
-    
+    size_type requiredIndex = _headIndex;
+
     // If buffer is still empty, we should return "end" iterator
     if (_empty)
     {
@@ -180,18 +182,42 @@ auto Utility::RingBuffer<T>::begin()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-auto Utility::RingBuffer<T>::end()
+template <class T, class A>
+typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::begin() const
 {
-    return Iterator(EndIndex, this);
+    size_type requiredIndex = _headIndex;
+
+    // If buffer is still empty, we should return "end" iterator
+    if (_empty)
+    {
+        requiredIndex = EndIndex;
+    }
+
+    return ConstIterator(requiredIndex, this);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-auto Utility::RingBuffer<T>::rbegin()
+template <class T, class A>
+typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::cbegin() const
 {
-    uint64_t requiredIndex = _tailIndex;
+    size_type requiredIndex = _headIndex;
+
+    // If buffer is still empty, we should return "end" iterator
+    if (_empty)
+    {
+        requiredIndex = EndIndex;
+    }
+
+    return ConstIterator(requiredIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::rbegin()
+{
+    size_type requiredIndex = _tailIndex;
 
     // If buffer is still empty, we should return "end" iterator
     if (_empty)
@@ -204,27 +230,99 @@ auto Utility::RingBuffer<T>::rbegin()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-auto Utility::RingBuffer<T>::rend()
+template <class T, class A>
+typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::rbegin() const
+{
+    size_type requiredIndex = _tailIndex;
+
+    // If buffer is still empty, we should return "end" iterator
+    if (_empty)
+    {
+        requiredIndex = EndIndex;
+    }
+
+    return ConstReverseIterator(requiredIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::crbegin() const
+{
+    size_type requiredIndex = _tailIndex;
+
+    // If buffer is still empty, we should return "end" iterator
+    if (_empty)
+    {
+        requiredIndex = EndIndex;
+    }
+
+    return ConstReverseIterator(requiredIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::end()
+{
+    return Iterator(EndIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::end() const
+{
+    return ConstIterator(EndIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::cend() const
+{
+    return ConstIterator(EndIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::rend()
 {
     return ReverseIterator(EndIndex, this);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-bool Utility::RingBuffer<T>::_ValidateIndex(const uint64_t index)
+template <class T, class A>
+typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::rend() const
+{
+    return ConstReverseIterator(EndIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::crend() const
+{
+    return ConstReverseIterator(EndIndex, this);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T, class A>
+bool RingBuffer<T, A>::_ValidateIndex(const size_type index)
 {
     bool valid(true);
 
-    // if index is bigger or equal to the buffer size, index is not valid
+    // If index is bigger or equal to the buffer size, index is not valid
     if (index >= _buffer.size())
     {
         valid = false;
     }
-    // If tail index is bigger than head index (not cycled yet) and tail index is not reached the end of a buffer,
-    // we should check if specified index is in range between tail index and end of the buffer.
-    // If so - index is not valid.
+        // If tail index is bigger than head index (not cycled yet) and tail index is not reached the end of a buffer,
+        // we should check if specified index is in range between tail index and end of the buffer.
+        // If so - index is not valid.
     else if ((_tailIndex > _headIndex) && (_tailIndex < (_buffer.size() - 1)))
     {
         valid = index <= _tailIndex;
@@ -235,27 +333,26 @@ bool Utility::RingBuffer<T>::_ValidateIndex(const uint64_t index)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-void Utility::RingBuffer<T>::_IncreaseIndex(uint64_t& index)
+template <class T, class A>
+void RingBuffer<T, A>::_ChangeIndex(size_type &index, size_type diff) const
 {
-    if (++index >= _buffer.size())
-    {
-        index = 0;
-    }
-}
+    index += diff;
+    const auto bufferSize = _buffer.size();
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T>
-void Utility::RingBuffer<T>::_DecreaseIndex(uint64_t& index)
-{
-    if (index == 0)
+    // If the new index value is bigger than buffer size
+    // then we should continuously make it is smaller
+    // until it will be in the range
+    while (index >= bufferSize)
     {
-        index = _buffer.size() - 1;
+        index -= bufferSize;
     }
-    else
+
+    // If the new index value is lesser than buffer size
+    // then we should continuously make it is bigger
+    // until it will be in the range
+    while (index < 0)
     {
-        --index;
+        index += bufferSize;
     }
 }
 

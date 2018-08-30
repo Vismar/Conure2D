@@ -1,21 +1,20 @@
 #pragma once
-#include "RingBufferReverseIterator.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-Utility::RingBuffer<T>::ReverseIterator::ReverseIterator(uint64_t index, RingBuffer<T>* ringBuffer)
+template <class T, class A>
+RingBuffer<T, A>::ReverseIterator::ReverseIterator(size_type index, RingBuffer<T, A>* ringBuffer)
 : _index(index)
 , _ringBuffer(ringBuffer)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-typename Utility::RingBuffer<T>::ReverseIterator& Utility::RingBuffer<T>::ReverseIterator::operator++()
+template <class T, class A>
+typename RingBuffer<T, A>::ReverseIterator& RingBuffer<T, A>::ReverseIterator::operator++()
 {
     // If stored index is equal to the end index, that means that we should do nothing here
-    if (_index != RingBuffer<T>::EndIndex)
+    if (_index != RingBuffer<T, A>::EndIndex)
     {
         // Check pointer to the ring buffer
         if (_ringBuffer != nullptr)
@@ -27,7 +26,8 @@ typename Utility::RingBuffer<T>::ReverseIterator& Utility::RingBuffer<T>::Revers
             }
             else
             {
-                _ringBuffer->_DecreaseIndex(_index);
+                // Decrease index
+                _ringBuffer->_ChangeIndex(_index, -1);
             }
         }
     }
@@ -37,8 +37,8 @@ typename Utility::RingBuffer<T>::ReverseIterator& Utility::RingBuffer<T>::Revers
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-typename Utility::RingBuffer<T>::ReverseIterator Utility::RingBuffer<T>::ReverseIterator::operator++(int)
+template <class T, class A>
+typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::ReverseIterator::operator++(int)
 {
     ReverseIterator newIter = *this;
     ++(*this);
@@ -48,32 +48,32 @@ typename Utility::RingBuffer<T>::ReverseIterator Utility::RingBuffer<T>::Reverse
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-bool Utility::RingBuffer<T>::ReverseIterator::operator==(ReverseIterator other) const
+template <class T, class A>
+bool RingBuffer<T, A>::ReverseIterator::operator==(const ReverseIterator& other) const
 {
     return ((_ringBuffer == other._ringBuffer) && (_index == other._index));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-bool Utility::RingBuffer<T>::ReverseIterator::operator!=(ReverseIterator other) const
+template <class T, class A>
+bool RingBuffer<T, A>::ReverseIterator::operator!=(const ReverseIterator& other) const
 {
     return !(*this == other);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-T& Utility::RingBuffer<T>::ReverseIterator::operator*() const
+template <class T, class A>
+typename RingBuffer<T, A>::ReverseIterator::reference RingBuffer<T, A>::ReverseIterator::operator*() const
 {
     return _ringBuffer->_buffer[_index];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <class T>
-const T* Utility::RingBuffer<T>::ReverseIterator::operator->() const
+template <class T, class A>
+typename RingBuffer<T, A>::ReverseIterator::pointer RingBuffer<T, A>::ReverseIterator::operator->() const
 {
     return &(_ringBuffer->_buffer[_index]);
 }
