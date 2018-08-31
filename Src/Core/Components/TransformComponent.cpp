@@ -20,7 +20,7 @@ TransformComponent::TransformComponent(const std::shared_ptr<SceneObject>& scene
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::Vector2F TransformComponent::GetOrigin() const
+Conure::Utility::Vector2F TransformComponent::GetOrigin() const
 {
     return _origin;
 }
@@ -37,14 +37,14 @@ void TransformComponent::SetOrigin(const float newOriginX, const float newOrigin
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::SetOrigin(const Utility::Vector2F& newOrigin)
+void TransformComponent::SetOrigin(const Conure::Utility::Vector2F& newOrigin)
 {
     SetOrigin(newOrigin.x, newOrigin.y);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::Vector2F TransformComponent::GetGlobalPosition() const
+Conure::Utility::Vector2F TransformComponent::GetGlobalPosition() const
 {
     _UpdateGlobalTransformations();
 
@@ -53,7 +53,7 @@ Utility::Vector2F TransformComponent::GetGlobalPosition() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::Vector2F TransformComponent::GetPosition() const
+Conure::Utility::Vector2F TransformComponent::GetPosition() const
 {
     return _position;
 }
@@ -70,7 +70,7 @@ void TransformComponent::SetPosition(const float newPositionX, const float newPo
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::SetPosition(const Utility::Vector2F& newPosition)
+void TransformComponent::SetPosition(const Conure::Utility::Vector2F& newPosition)
 {
     SetPosition(newPosition.x, newPosition.y);
 }
@@ -84,7 +84,7 @@ void TransformComponent::Move(const float offsetX, const float offsetY)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::Move(const Utility::Vector2F& offset)
+void TransformComponent::Move(const Conure::Utility::Vector2F& offset)
 {
     SetPosition(_position.x.load() + offset.x, _position.y.load() + offset.y);
 }
@@ -128,7 +128,7 @@ void TransformComponent::Rotate(const float angle)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::Vector2F TransformComponent::GetGlobalScale() const
+Conure::Utility::Vector2F TransformComponent::GetGlobalScale() const
 {
     _UpdateGlobalTransformations();
 
@@ -137,7 +137,7 @@ Utility::Vector2F TransformComponent::GetGlobalScale() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::Vector2F TransformComponent::GetScale() const
+Conure::Utility::Vector2F TransformComponent::GetScale() const
 {
     return _scale;
 }
@@ -154,7 +154,7 @@ void TransformComponent::SetScale(const float newScaleX, const float newScaleY)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::SetScale(const Utility::Vector2F& newScale)
+void TransformComponent::SetScale(const Conure::Utility::Vector2F& newScale)
 {
     SetScale(newScale.x, newScale.y);
 }
@@ -168,7 +168,7 @@ void TransformComponent::Scale(const float factorX, const float factorY)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::Scale(const Utility::Vector2F& factor)
+void TransformComponent::Scale(const Conure::Utility::Vector2F& factor)
 {
     SetScale(_scale.x.load() * factor.x, _scale.y = _scale.y.load() * factor.y);
 }
@@ -180,7 +180,7 @@ sf::Transform TransformComponent::GetTransform() const
     const float scaleX(_scale.x.load()), scaleY(_scale.y.load());
     const float originX(_origin.x.load()), originY(_origin.y.load());
 
-    const auto angle = -_rotation.load() * FromDegToRad;
+    const auto angle = -_rotation.load() * Conure::Utility::FromDegToRad;
     const auto cos = std::cos(angle);
     const auto sin = std::sin(angle);
     const auto sxc = scaleX * cos;
@@ -259,10 +259,10 @@ Transformations TransformComponent::GetTransformationsRelativeTo(const std::shar
     const auto matrix = newTransform.getMatrix();
 
     // Rotation
-    relativeTransformations.rotation = std::atan2(matrix[1], matrix[0]) * FromRadToDeg;
+    relativeTransformations.rotation = std::atan2(matrix[1], matrix[0]) * Conure::Utility::FromRadToDeg;
 
     // Scale
-    const auto angle = -relativeTransformations.rotation * FromDegToRad;
+    const auto angle = -relativeTransformations.rotation * Conure::Utility::FromDegToRad;
     const auto cos = std::cos(angle);
     relativeTransformations.scale.x = matrix[0] / cos;
     relativeTransformations.scale.y = matrix[5] / cos;
@@ -292,7 +292,7 @@ void TransformComponent::SetTransformations(const Transformations& transformatio
 
 void TransformComponent::Initialize()
 {
-    AddEvent("TransformUpdated", new Utility::Dispatcher<void>());
+    AddEvent("TransformUpdated", new Conure::Utility::Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -341,10 +341,10 @@ void TransformComponent::_UpdateGlobalTransformations() const
         const auto transformMatrix = GetTransform().getMatrix();
 
         // Rotation
-        _globalRotation = std::atan2(transformMatrix[1], transformMatrix[0]) * FromRadToDeg;
+        _globalRotation = std::atan2(transformMatrix[1], transformMatrix[0]) * Conure::Utility::FromRadToDeg;
 
         // Scale
-        const auto angle = -_globalRotation.load() * FromDegToRad;
+        const auto angle = -_globalRotation.load() * Conure::Utility::FromDegToRad;
         const auto cos = std::cos(angle);
         _globalScale.x = transformMatrix[0] / cos;
         _globalScale.y = transformMatrix[5] / cos;

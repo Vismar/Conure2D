@@ -18,15 +18,15 @@ RenderSystem::RenderSystem()
 
 void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
                          Input::InputSystemHandlerInterface& inputSystem,
-                         Utility::TimeSpan& renderLoopTimeSpan)
+                         Conure::Utility::TimeSpan& renderLoopTimeSpan)
 {
-    DEV_LOG(Utility::LogLevel::Debug, "Render loop has started");
+    DEV_LOG(Conure::Utility::LogLevel::Debug, "Render loop has started");
 
     if (!_working)
     {
         _working = true;
-        renderLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
-        renderLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
+        renderLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
+        renderLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
 
         // If render was started, window is open and scene map is not nullptr, render
         while (_working && _window.IsOpen())
@@ -72,14 +72,14 @@ void RenderSystem::Start(const Core::RenderableSceneMapInterface& sceneMap,
             _window.EndDraw();
 
             // Update time span
-            renderLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
+            renderLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
         }
 
         _working = false;
         _noErrors = false;
     }
 
-    DEV_LOG(Utility::LogLevel::Debug, "Render loop has stopped");
+    DEV_LOG(Conure::Utility::LogLevel::Debug, "Render loop has stopped");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ bool RenderSystem::NoErrors() const
 
 void RenderSystem::SetNewSettings(WindowSettings windowSettings)
 {
-    DEV_LOG(Utility::LogLevel::Debug, "Copying new window settings");
+    DEV_LOG(Conure::Utility::LogLevel::Debug, "Copying new window settings");
 
     std::lock_guard lock(_settingsMutex);
 
@@ -254,7 +254,7 @@ void RenderSystem::_UpdateWindow()
 {
     if (_recreateWindow || _updateWindowParameters)
     {
-        DEV_LOG(Utility::LogLevel::Debug, "Applying new window settings");
+        DEV_LOG(Conure::Utility::LogLevel::Debug, "Applying new window settings");
 
         std::lock_guard lock(_settingsMutex);
 

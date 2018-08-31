@@ -7,8 +7,8 @@ using namespace Engine;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 EngineApp::EngineApp()
-: _ioSystem(std::make_unique<Utility::IOSystem>())
-, _logSystem(std::make_unique<Utility::LogSystem>(*_ioSystem))
+: _ioSystem(std::make_unique<Conure::Utility::IOSystem>())
+, _logSystem(std::make_unique<Conure::Utility::LogSystem>(*_ioSystem))
 , _renderSystem(std::make_unique<Render::RenderSystem>())
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<Core::SceneMap>())
@@ -78,28 +78,28 @@ Input::InputSystem& EngineApp::GetInputSystem() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Utility::TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
+const Conure::Utility::TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
 {
     return _renderLoopTimeSpan;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Utility::TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
+const Conure::Utility::TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
 {
     return _logicLoopTimeSpan;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::IOSystem& EngineApp::GetIOSystem() const
+Conure::Utility::IOSystem& EngineApp::GetIOSystem() const
 {
     return *_ioSystem;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::LogSystem& EngineApp::GetLogSystem() const
+Conure::Utility::LogSystem& EngineApp::GetLogSystem() const
 {
     return *_logSystem;
 }
@@ -108,14 +108,14 @@ Utility::LogSystem& EngineApp::GetLogSystem() const
 
 void EngineApp::_LogicLoop()
 {
-    DEV_LOG(Utility::LogLevel::Debug, "Logic loop has started");
+    DEV_LOG(Conure::Utility::LogLevel::Debug, "Logic loop has started");
 
     // Launch logic loop only if it was not started yet
     if (!_logicThreadIsWorking)
     {
         _logicThreadIsWorking = true;
-        _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
-        _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
+        _logicLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
+        _logicLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
 
         // If render system works properly, update scenes
         while (_renderSystem->NoErrors())
@@ -124,14 +124,14 @@ void EngineApp::_LogicLoop()
             _sceneMap->UpdateScenes();
 
             // Update time span
-            _logicLoopTimeSpan.SetNewEnd(Utility::Time::CurrentTime());
+            _logicLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
         }
 
         // Mark that logic thread finished its work
         _logicThreadIsWorking = false;
     }
 
-    DEV_LOG(Utility::LogLevel::Debug, "Logic loop has stopped");
+    DEV_LOG(Conure::Utility::LogLevel::Debug, "Logic loop has stopped");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -35,7 +35,7 @@ namespace Render
          */
         void Start(const Core::RenderableSceneMapInterface& sceneMap, 
                    Input::InputSystemHandlerInterface& inputSystem,
-                   Utility::TimeSpan& renderLoopTimeSpan);
+                   Conure::Utility::TimeSpan& renderLoopTimeSpan);
 
         /*!
          * \brief Stops render process.

@@ -2,7 +2,7 @@
 #include "Utility/EventSystem/Dispatcher.hpp"
 #include <unordered_map>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Manager that provides functionality to create/delete named events and invoke them.

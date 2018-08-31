@@ -1,5 +1,4 @@
 #pragma once
-#include "Utility/Exception/ExceptionHandler.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -52,9 +51,9 @@ void Dispatcher<Ret>::Invoke(Args&&... args)
         {
             iter = _callables.erase(iter);
 
-            if (Utility::ExceptionHandler)
+            if (ExceptionHandler)
             {
-                Utility::ExceptionHandler(exception);
+                ExceptionHandler(exception);
             }
         }
     }
@@ -76,9 +75,9 @@ void Dispatcher<Ret>::Invoke()
         {
             iter = _callables.erase(iter);
 
-            if (Utility::ExceptionHandler)
+            if (ExceptionHandler)
             {
-                Utility::ExceptionHandler(exception);
+                ExceptionHandler(exception);
             }
         }
     }

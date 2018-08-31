@@ -2,7 +2,7 @@
 
 namespace sf { template <typename T> class Vector2; }
 
-namespace Utility
+namespace Conure::Utility
 {
     template <typename T>
     class AtomicVector2;

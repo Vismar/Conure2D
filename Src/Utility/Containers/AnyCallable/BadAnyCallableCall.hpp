@@ -1,9 +1,10 @@
 #pragma once
+#include "Utility/LogSystem/LogUtilities.hpp"
 #include <any>
 #include <sstream>
 #include <vector>
 
-namespace Utility
+namespace Conure::Utility
 {
     template <class Ret>
     class AnyCallable;
@@ -41,6 +42,6 @@ namespace Utility
         /*! Message of an exception. */
         std::string _exceptionMessage;
     };
-}
 
 #include "BadAnyCallableCall.inl"
+}

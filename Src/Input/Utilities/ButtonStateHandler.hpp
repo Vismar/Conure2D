@@ -33,14 +33,14 @@ namespace Input
          * \param state - state for which new time will be assigned.
          * \param time - new time that will be assigned to a specified state.
          */
-        void UpdateState(ButtonState state, const Utility::Time& time);
+        void UpdateState(ButtonState state, const Conure::Utility::Time& time);
 
         /*!
          * \brief Calculates state of a button in a specified time span.
          * \param timeSpan - time span in which button should be checked.
          * \return State of a button in specified time span.
          */
-        ButtonState GetState(const Utility::TimeSpan& timeSpan) const;
+        ButtonState GetState(const Conure::Utility::TimeSpan& timeSpan) const;
 
     private:
         /*!
@@ -48,25 +48,25 @@ namespace Input
          * \param timeSpan - time span in which button should be checked.
          * \return True if button was pressed during a specified time span. Otherwise - false.
          */
-        bool _IsPressed(const Utility::TimeSpan& timeSpan) const;
+        bool _IsPressed(const Conure::Utility::TimeSpan& timeSpan) const;
         
         /*!
          * \brief Checks if button was held down during a specified time span.
          * \param timeSpan - time span in which button should be checked.
          * \return True if button was held down during a specified time span. Otherwise - false.
          */
-        bool _IsHeldDown(const Utility::TimeSpan& timeSpan) const;
+        bool _IsHeldDown(const Conure::Utility::TimeSpan& timeSpan) const;
         
         /*!
          * \brief Checks if button was released during a specified time span.
          * \param timeSpan - time span in which button should be checked.
          * \return True if button was released during a specified time span. Otherwise - false.
          */
-        bool _IsReleased(const Utility::TimeSpan& timeSpan) const;
+        bool _IsReleased(const Conure::Utility::TimeSpan& timeSpan) const;
 
         /*! Timestamp of a moment when button was pressed. */
-        Utility::Time _pressTime;
+        Conure::Utility::Time _pressTime;
         /*! Timestamp of a moment when button was released. */
-        Utility::Time _releaseTime;
+        Conure::Utility::Time _releaseTime;
     };
 }

@@ -4,7 +4,7 @@
 
 template <class Ret>
 template <class ... Args>
-Utility::AnyCallable<Ret>::AnyCallable(Ret(*function)(Args...))
+AnyCallable<Ret>::AnyCallable(Ret(*function)(Args...))
 {
     _SetHandler(function);
 
@@ -16,7 +16,7 @@ Utility::AnyCallable<Ret>::AnyCallable(Ret(*function)(Args...))
 
 template <class Ret>
 template <class UserClass, class ... Args>
-Utility::AnyCallable<Ret>::AnyCallable(UserClass* userClass, Ret(UserClass::*function)(Args...))
+AnyCallable<Ret>::AnyCallable(UserClass* userClass, Ret(UserClass::*function)(Args...))
 {
     _SetHandler(userClass, function);
 
@@ -32,7 +32,7 @@ Utility::AnyCallable<Ret>::AnyCallable(UserClass* userClass, Ret(UserClass::*fun
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>
-bool Utility::AnyCallable<Ret>::operator==(const AnyCallable& other) const
+bool AnyCallable<Ret>::operator==(const AnyCallable& other) const
 {
     return (_handler == other._handler);
 }
@@ -40,7 +40,7 @@ bool Utility::AnyCallable<Ret>::operator==(const AnyCallable& other) const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>
-bool Utility::AnyCallable<Ret>::operator!=(const AnyCallable& other) const
+bool AnyCallable<Ret>::operator!=(const AnyCallable& other) const
 {
     return !(*this == other);
 }
@@ -49,7 +49,7 @@ bool Utility::AnyCallable<Ret>::operator!=(const AnyCallable& other) const
 
 template <class Ret>
 template <class ... Args>
-Ret Utility::AnyCallable<Ret>::operator()(Args&& ... args)
+Ret AnyCallable<Ret>::operator()(Args&& ... args)
 {
     try
     {
@@ -64,7 +64,7 @@ Ret Utility::AnyCallable<Ret>::operator()(Args&& ... args)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>
-Utility::AnyCallableHandler Utility::AnyCallable<Ret>::GetHandler() const
+AnyCallableHandler AnyCallable<Ret>::GetHandler() const
 {
     return _handler;
 }
@@ -72,7 +72,7 @@ Utility::AnyCallableHandler Utility::AnyCallable<Ret>::GetHandler() const
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class Ret>
-std::type_index Utility::AnyCallable<Ret>::GetContainedType() const
+std::type_index AnyCallable<Ret>::GetContainedType() const
 {
     return _function.type();
 }
@@ -81,7 +81,7 @@ std::type_index Utility::AnyCallable<Ret>::GetContainedType() const
 
 template <class Ret>
 template <class ... Args>
-void Utility::AnyCallable<Ret>::_SetHandler(Ret(*function)(Args...))
+void AnyCallable<Ret>::_SetHandler(Ret(*function)(Args...))
 {
     _handler._firstHandler = reinterpret_cast<std::size_t>(function);
 }
@@ -90,7 +90,7 @@ void Utility::AnyCallable<Ret>::_SetHandler(Ret(*function)(Args...))
 
 template <class Ret>
 template <class UserClass, class ... Args>
-void Utility::AnyCallable<Ret>::_SetHandler(UserClass* userClass, Ret(UserClass::*function)(Args...))
+void AnyCallable<Ret>::_SetHandler(UserClass* userClass, Ret(UserClass::*function)(Args...))
 {
     _handler._firstHandler = reinterpret_cast<std::size_t>(userClass);
     _handler._secondHandler = const_cast<std::type_info*>(&typeid(function));

@@ -32,7 +32,7 @@ namespace Input
          * \brief Default constructor.
          * \param logicLoopTimeSpan - time span of logic loop that will be used to check input events.
          */
-        explicit InputSystem(const Utility::TimeSpan& logicLoopTimeSpan);
+        explicit InputSystem(const Conure::Utility::TimeSpan& logicLoopTimeSpan);
 
         /*!
          * \brief Handles input events.
@@ -174,7 +174,7 @@ namespace Input
         bool _AnyButtonState(ButtonState state) const;
 
         /*! Const reference to the logic loop time span that is used by input system to check button states. */
-        const Utility::TimeSpan& _logicLoopTimeSpan;
+        const Conure::Utility::TimeSpan& _logicLoopTimeSpan;
         /*! Keyboard device which handles keyboard events. */
         std::unique_ptr<KeyboardDevice> _keyboard;
         /*! Mouse device which handles mouse events. */
@@ -182,7 +182,7 @@ namespace Input
         /*! Array of joystick devices that handles joystick events. */
         std::vector<std::unique_ptr<JoystickDevice>> _joystick;
         /*! A time when any joystick was used last time. */
-        Utility::Time _lastTimeJoystickUsed;
+        Conure::Utility::Time _lastTimeJoystickUsed;
         /*! An id of a joystick which was used last time. */
         std::atomic<int32_t> _lastJoystickId;
         /*! Joystick threshold that will be used to filter JoystickMoved events by its value. */

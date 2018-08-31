@@ -2,7 +2,7 @@
 #include <memory>
 #include <atomic>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief A lock-free linked queue.
@@ -128,5 +128,6 @@ namespace Utility
         std::atomic_uint64_t _size;
     };
 
+#include "LockFreeLinkedQueueReference.inl"
 #include "LockFreeLinkedQueue.inl"
 }

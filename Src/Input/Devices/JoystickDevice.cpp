@@ -46,13 +46,13 @@ void JoystickDevice::SetJoystickConnectionState(const bool connectionState)
     if (connectionState != _isConnected.load())
     {
         _isConnected = connectionState;
-        DEV_LOG(Utility::LogLevel::Debug, "Joystick connection stated was changed. id = " + std::to_string(connectionState));
+        DEV_LOG(Conure::Utility::LogLevel::Debug, "Joystick connection stated was changed. id = " + std::to_string(connectionState));
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ButtonState JoystickDevice::GetButtonState(const JoystickButton button, const Utility::TimeSpan& timeSpan) const
+ButtonState JoystickDevice::GetButtonState(const JoystickButton button, const Conure::Utility::TimeSpan& timeSpan) const
 {
     return _buttons[static_cast<int>(button)].GetState(timeSpan);
 }
@@ -120,11 +120,11 @@ void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event)
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::JoystickButtonPressed)
     {
-        _buttons[event.joystickButton.button].UpdateState(ButtonState::Pressed, Utility::Time::CurrentTime());
+        _buttons[event.joystickButton.button].UpdateState(ButtonState::Pressed, Conure::Utility::Time::CurrentTime());
     }
     else if (event.type == sf::Event::EventType::JoystickButtonReleased)
     {
-        _buttons[event.joystickButton.button].UpdateState(ButtonState::Released, Utility::Time::CurrentTime());
+        _buttons[event.joystickButton.button].UpdateState(ButtonState::Released, Conure::Utility::Time::CurrentTime());
     }
 }
 

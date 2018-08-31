@@ -4,7 +4,7 @@
 #include <fstream>
 #include <atomic>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief System which works in separate thread and provides functionality

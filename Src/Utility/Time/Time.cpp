@@ -1,7 +1,7 @@
 #include "Time.hpp"
 #include <chrono>
 
-using namespace Utility;
+using namespace Conure::Utility;
 
 /*! Number of nanoseconds in microsecond. */
 constexpr int64_t NsInUs = 1000ll;
@@ -160,48 +160,48 @@ std::string Time::ToString(std::string&& format) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Utility::operator==(const Time& left, const Time& right)
+bool Conure::Utility::operator==(const Time& left, const Time& right)
 {
     return left.ToNanoseconds() == right.ToNanoseconds();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool Utility::operator!=(const Time& left, const Time& right)
+bool Conure::Utility::operator!=(const Time& left, const Time& right)
 {
     return !(left == right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Utility::operator<(const Time& left, const Time& right)
+bool Conure::Utility::operator<(const Time& left, const Time& right)
 {
     return left.ToNanoseconds() < right.ToNanoseconds();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Utility::operator>(const Time& left, const Time& right)
+bool Conure::Utility::operator>(const Time& left, const Time& right)
 {
     return !(left < right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Utility::operator<=(const Time& left, const Time& right)
+bool Conure::Utility::operator<=(const Time& left, const Time& right)
 {
     return (left < right) || (left == right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool Utility::operator>=(const Time& left, const Time& right)
+bool Conure::Utility::operator>=(const Time& left, const Time& right)
 {
     return (left > right) || (left == right);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator-(const Time& left, const Time& right)
+Time Conure::Utility::operator-(const Time& left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() - right.ToNanoseconds());
@@ -209,7 +209,7 @@ Time Utility::operator-(const Time& left, const Time& right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator+(const Time& left, const Time& right)
+Time Conure::Utility::operator+(const Time& left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() + right.ToNanoseconds());
@@ -217,7 +217,7 @@ Time Utility::operator+(const Time& left, const Time& right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator-=(Time& left, const Time& right)
+Time& Conure::Utility::operator-=(Time& left, const Time& right)
 {
     left = left - right;
     return left;
@@ -225,7 +225,7 @@ Time& Utility::operator-=(Time& left, const Time& right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator+=(Time& left, const Time& right)
+Time& Conure::Utility::operator+=(Time& left, const Time& right)
 {
     left = left + right;
     return left;
@@ -233,7 +233,7 @@ Time& Utility::operator+=(Time& left, const Time& right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator*(const Time& left, const double right)
+Time Conure::Utility::operator*(const Time& left, const double right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, static_cast<int64_t>(left.ToNanoseconds() * right));
@@ -241,7 +241,7 @@ Time Utility::operator*(const Time& left, const double right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator*(const Time& left, const int64_t right)
+Time Conure::Utility::operator*(const Time& left, const int64_t right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() * right);
@@ -249,7 +249,7 @@ Time Utility::operator*(const Time& left, const int64_t right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator*(const double left, const Time& right)
+Time Conure::Utility::operator*(const double left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, static_cast<int64_t>(left * right.ToNanoseconds()));
@@ -257,7 +257,7 @@ Time Utility::operator*(const double left, const Time& right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator*(const int64_t left, const Time& right)
+Time Conure::Utility::operator*(const int64_t left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, left * right.ToNanoseconds());
@@ -265,7 +265,7 @@ Time Utility::operator*(const int64_t left, const Time& right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator*=(Time& left, const double right)
+Time& Conure::Utility::operator*=(Time& left, const double right)
 {
     left = left * right;
     return left;
@@ -273,7 +273,7 @@ Time& Utility::operator*=(Time& left, const double right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator*=(Time& left, const int64_t right)
+Time& Conure::Utility::operator*=(Time& left, const int64_t right)
 {
     left = left * right;
     return left;
@@ -281,7 +281,7 @@ Time& Utility::operator*=(Time& left, const int64_t right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator/(const Time& left, const double right)
+Time Conure::Utility::operator/(const Time& left, const double right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, static_cast<int64_t>(left.ToNanoseconds() / right));
@@ -289,7 +289,7 @@ Time Utility::operator/(const Time& left, const double right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator/(const Time& left, const int64_t right)
+Time Conure::Utility::operator/(const Time& left, const int64_t right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() / right);
@@ -297,7 +297,7 @@ Time Utility::operator/(const Time& left, const int64_t right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator/=(Time& left, const double right)
+Time& Conure::Utility::operator/=(Time& left, const double right)
 {
     left = left / right;
     return left;
@@ -305,7 +305,7 @@ Time& Utility::operator/=(Time& left, const double right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator/=(Time& left, const int64_t right)
+Time& Conure::Utility::operator/=(Time& left, const int64_t right)
 {
     left = left / right;
     return left;
@@ -313,14 +313,14 @@ Time& Utility::operator/=(Time& left, const int64_t right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-double Utility::operator/(const Time& left, const Time& right)
+double Conure::Utility::operator/(const Time& left, const Time& right)
 {
     return static_cast<double>(left.ToNanoseconds()) / right.ToNanoseconds();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time Utility::operator%(const Time& left, const Time& right)
+Time Conure::Utility::operator%(const Time& left, const Time& right)
 {
     // 0 hours, 0 minutes, 0 seconds, 0 milliseconds, 0 microseconds
     return Time(0ll, 0ll, 0ll, 0ll, 0ll, left.ToNanoseconds() % right.ToNanoseconds());
@@ -328,7 +328,7 @@ Time Utility::operator%(const Time& left, const Time& right)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Time& Utility::operator%=(Time& left, const Time& right)
+Time& Conure::Utility::operator%=(Time& left, const Time& right)
 {
     left = left % right;
     return left;

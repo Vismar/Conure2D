@@ -5,7 +5,7 @@ using namespace Input;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-InputSystem::InputSystem(const Utility::TimeSpan& logicLoopTimeSpan) 
+InputSystem::InputSystem(const Conure::Utility::TimeSpan& logicLoopTimeSpan)
 : _logicLoopTimeSpan(logicLoopTimeSpan)
 , _keyboard(std::make_unique<KeyboardDevice>())
 , _mouse(std::make_unique<MouseDevice>())
@@ -46,7 +46,7 @@ void InputSystem::HandleInputEvent(const sf::Event& inputEvent)
     case sf::Event::EventType::JoystickButtonReleased:
         _joystick[inputEvent.joystickButton.joystickId]->HandleJoystickEvents(inputEvent);
         // Update joystick id which was used and time when it happened
-        _lastTimeJoystickUsed = Utility::Time::CurrentTime();
+        _lastTimeJoystickUsed = Conure::Utility::Time::CurrentTime();
         _lastJoystickId = inputEvent.joystickButton.joystickId;        
         break;
     case sf::Event::EventType::JoystickMoved:
@@ -55,7 +55,7 @@ void InputSystem::HandleInputEvent(const sf::Event& inputEvent)
         {
             _joystick[inputEvent.joystickMove.joystickId]->HandleJoystickEvents(inputEvent);
             // Update joystick id which was used and time when it happened
-            _lastTimeJoystickUsed = Utility::Time::CurrentTime();
+            _lastTimeJoystickUsed = Conure::Utility::Time::CurrentTime();
             _lastJoystickId = inputEvent.joystickButton.joystickId;
         }
         break;

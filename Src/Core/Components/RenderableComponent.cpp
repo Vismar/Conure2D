@@ -133,8 +133,8 @@ void RenderableComponent::Initialize()
 {
     _typeIndex = typeid(RenderableComponent);
 
-    AddEvent("TextureUpdated", new Utility::Dispatcher<void>());
-    AddEvent("LayerUpdated", new Utility::Dispatcher<void>());
+    AddEvent("TextureUpdated", new Conure::Utility::Dispatcher<void>());
+    AddEvent("LayerUpdated", new Conure::Utility::Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

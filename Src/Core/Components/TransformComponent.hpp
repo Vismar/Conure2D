@@ -29,7 +29,7 @@ namespace Core
      * Transform is used to describe position and orientation of an object in a game space.
      * Every piece of data stored as atomic, so all changes to it is thread-safe.
      */
-    class TransformComponent final : public BaseLogicComponent, public Utility::EventManager
+    class TransformComponent final : public BaseLogicComponent, public Conure::Utility::EventManager
     {
     public:
         TransformComponent() = delete;
@@ -46,7 +46,7 @@ namespace Core
          * \brief Returns transform origin.
          * \return Vector2 that contains transform origin.
          */
-        Utility::Vector2F GetOrigin() const;
+        Conure::Utility::Vector2F GetOrigin() const;
 
         /*!
          * \brief Sets transform origin to specified values.
@@ -59,19 +59,19 @@ namespace Core
          * \brief Sets transform origin to specified value.
          * \param newOrigin - const reference to a new transform origin.
          */
-        void SetOrigin(const Utility::Vector2F& newOrigin);
+        void SetOrigin(const Conure::Utility::Vector2F& newOrigin);
 
         /*!
          * \brief Returns global transform position.
          * \return Vector2 that contains global transform position.
          */
-        Utility::Vector2F GetGlobalPosition() const;
+        Conure::Utility::Vector2F GetGlobalPosition() const;
 
         /*!
          * \brief Returns local transform position.
          * \return Vector2 that contains local transform position.
          */
-        Utility::Vector2F GetPosition() const;
+        Conure::Utility::Vector2F GetPosition() const;
 
         /*!
          * \brief Sets local transform position to specified values.
@@ -84,7 +84,7 @@ namespace Core
          * \brief Sets local transform position to specified value.
          * \param newPosition - const reference to a new local transform position.
          */
-        void SetPosition(const Utility::Vector2F& newPosition);
+        void SetPosition(const Conure::Utility::Vector2F& newPosition);
 
         /*!
          * \brief Moves local transform position by specified offset values.
@@ -97,7 +97,7 @@ namespace Core
          * \brief Moves local transform position by specified offset value.
          * \param offset - const reference to an offset vector.
          */
-        void Move(const Utility::Vector2F& offset);
+        void Move(const Conure::Utility::Vector2F& offset);
 
         /*!
          * \brief Returns global transform rotation.
@@ -127,13 +127,13 @@ namespace Core
          * \brief Returns global transform scale.
          * \return Vector2 that contains global transform scale.
          */
-        Utility::Vector2F GetGlobalScale() const;
+        Conure::Utility::Vector2F GetGlobalScale() const;
 
         /*!
          * \brief Returns local transform scale.
          * \return Vector2 that contains local transform scale.
          */
-        Utility::Vector2F GetScale() const;
+        Conure::Utility::Vector2F GetScale() const;
 
         /*!
          * \brief Sets local transform scale to specified values.
@@ -146,7 +146,7 @@ namespace Core
          * \brief Sets local transform scale to specified value.
          * \param newScale - const reference to a new local transform scale.
          */
-        void SetScale(const Utility::Vector2F& newScale);
+        void SetScale(const Conure::Utility::Vector2F& newScale);
 
         /*!
          * \brief Scales(multiply) local transform scale by specified factor values.
@@ -159,7 +159,7 @@ namespace Core
          * \brief Scales(multiply) local transform scale by specified factor value.
          * \param factor - const reference to an factor vector.
          */
-        void Scale(const Utility::Vector2F& factor);
+        void Scale(const Conure::Utility::Vector2F& factor);
 
         /*!
          * \brief Calculates transform matrix of the object and returns it.
@@ -221,18 +221,18 @@ namespace Core
         /*! Simple flag to identify if global transformations need to be updated. */
         mutable std::atomic_bool _globalTransformationsNeedUpdate;
         /*! Transform origin. Stores origin point of an object. */
-        mutable Utility::AtomicVector2F _origin;
+        mutable Conure::Utility::AtomicVector2F _origin;
         /*! Local transform position. Stores local position of an object. */
-        mutable Utility::AtomicVector2F _position;
+        mutable Conure::Utility::AtomicVector2F _position;
         /*! Global transform position. Stores global position of an object. */
-        mutable Utility::AtomicVector2F _globalPosition;
+        mutable Conure::Utility::AtomicVector2F _globalPosition;
         /*! Local transform rotation. Stores local rotation of an object. */
         mutable std::atomic<float> _rotation;
         /*! Global transform rotation. Stores global rotation of an object. */
         mutable std::atomic<float> _globalRotation;
         /*! Local transform scale. Stores local scale of an object. */
-        mutable Utility::AtomicVector2F _scale;
+        mutable Conure::Utility::AtomicVector2F _scale;
         /*! Global transform scale. Stores global scale of an object. */
-        mutable Utility::AtomicVector2F _globalScale;
+        mutable Conure::Utility::AtomicVector2F _globalScale;
     };
 }

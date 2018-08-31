@@ -3,7 +3,7 @@
 #include "Utility/IOSystem/IOSystemInterface.hpp"
 #include "Utility/Exception/ExceptionHandler.hpp"
 
-using namespace Utility;
+using namespace Conure::Utility;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,9 +22,9 @@ LogSystem::LogSystem(const IOSystemInterface& ioSystem)
     AddEvent("NewEntryAdded", new Dispatcher<void>());
 
     // If the exception handler is empty, assign a simple callback that will just write exception error into log
-    if (!Utility::ExceptionHandler)
+    if (!ExceptionHandler)
     {
-        Utility::ExceptionHandler =
+        ExceptionHandler =
             [this] (const std::exception& exception)
             {
                 this->AddEntry(LogLevel::Error, exception.what());

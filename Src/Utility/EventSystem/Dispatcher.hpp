@@ -1,9 +1,10 @@
 #pragma once
 #include "Utility/EventSystem/DispatcherInterface.hpp"
 #include "Utility/Containers/AnyCallable/AnyCallable.hpp"
+#include "Utility/Exception/ExceptionHandler.hpp"
 #include <vector>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Container that stores AnyCallables.

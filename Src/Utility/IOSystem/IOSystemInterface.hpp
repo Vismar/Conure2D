@@ -1,7 +1,7 @@
 #pragma once
 #include <ios>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Public interface for IO system.

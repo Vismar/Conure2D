@@ -6,7 +6,7 @@
 #include <cxxabi.h>
 #endif
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Demangle (makes readable by human) name of a specified type.

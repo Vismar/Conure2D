@@ -76,7 +76,7 @@ CameraComponent::operator sf::View() const
     if (auto transform = _transformComponent.lock())
     {
         const auto pos = transform->GetGlobalPosition();
-        const Utility::Vector2F size = _size;
+        const Conure::Utility::Vector2F size = _size;
         const auto x = pos.x + size.x / 2.0f;
         const auto y = pos.y + size.y / 2.0f;
         view.setCenter(x, y);
@@ -111,14 +111,14 @@ uint8_t CameraComponent::GetPriority() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void CameraComponent::SetSize(const Utility::Vector2F& newSize)
+void CameraComponent::SetSize(const Conure::Utility::Vector2F& newSize)
 {
     _size = newSize;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::Vector2F CameraComponent::GetSize() const
+Conure::Utility::Vector2F CameraComponent::GetSize() const
 {
     return _size;
 }
@@ -146,7 +146,7 @@ void CameraComponent::Initialize()
 {
     _typeIndex = typeid(CameraComponent);
 
-    AddEvent("PriorityUpdated", new Utility::Dispatcher<void>());
+    AddEvent("PriorityUpdated", new Conure::Utility::Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

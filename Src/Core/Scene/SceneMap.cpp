@@ -14,7 +14,7 @@ bool SceneMap::AddScene(std::shared_ptr<BaseScene>&& newScene)
     const auto scene = _scenes.find(newScene->GetName());
     if (scene == _scenes.end())
     {
-        DEV_LOG(Utility::LogLevel::Debug, "New scene was added - " + newScene->GetName());
+        DEV_LOG(Conure::Utility::LogLevel::Debug, "New scene was added - " + newScene->GetName());
 
         _scenes.emplace(newScene->GetName(), newScene);
         added = true;
@@ -52,7 +52,7 @@ bool SceneMap::RemoveScene(const std::string& sceneName)
     const auto scene = _scenes.find(sceneName);
     if (scene != _scenes.end())
     {
-        DEV_LOG(Utility::LogLevel::Debug, sceneName + " scene was marked to be deleted later");
+        DEV_LOG(Conure::Utility::LogLevel::Debug, sceneName + " scene was marked to be deleted later");
 
         // Mark a scene so it will be deleted later
         scene->second->DeleteLater();
@@ -71,7 +71,7 @@ void SceneMap::UpdateScenes()
     {
         if (scene->second->MarkedAsDeleteLater())
         {
-            DEV_LOG(Utility::LogLevel::Debug, scene->first + " scene was deleted");
+            DEV_LOG(Conure::Utility::LogLevel::Debug, scene->first + " scene was deleted");
 
             scene = _scenes.erase(scene);
         }

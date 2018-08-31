@@ -66,25 +66,25 @@ namespace Engine
          * \brief Grabs render loop time span.
          * \return Const reference to the time span of the render loop.
          */
-        const Utility::TimeSpan& GetRenderLoopTimeSpan() const;
+        const Conure::Utility::TimeSpan& GetRenderLoopTimeSpan() const;
 
         /*!
          * \brief Grabs logic loop time span.
          * \return Const reference to the time span of the logic loop.
          */
-        const Utility::TimeSpan& GetLogicLoopTimeSpan() const;
+        const Conure::Utility::TimeSpan& GetLogicLoopTimeSpan() const;
 
         /*!
          * \brief Returns IO system.
          * \return Reference to the IO system.
          */
-        Utility::IOSystem& GetIOSystem() const;
+        Conure::Utility::IOSystem& GetIOSystem() const;
 
         /*!
          * \brief Returns log system.
          * \return Reference to the log system.
          */
-        Utility::LogSystem& GetLogSystem() const;
+        Conure::Utility::LogSystem& GetLogSystem() const;
 
     private:
         /*!
@@ -93,17 +93,17 @@ namespace Engine
         void _LogicLoop();
 
         /*! Unique pointer to the IO system. */
-        std::unique_ptr<Utility::IOSystem> _ioSystem;
+        std::unique_ptr<Conure::Utility::IOSystem> _ioSystem;
         /*! Unique pointer to the log system. */
-        std::unique_ptr<Utility::LogSystem> _logSystem;
+        std::unique_ptr<Conure::Utility::LogSystem> _logSystem;
         /*! Time span of the render loop. */
-        Utility::TimeSpan _renderLoopTimeSpan;
+        Conure::Utility::TimeSpan _renderLoopTimeSpan;
         /*! Unique pointer to the render system. */
         std::unique_ptr<Render::RenderSystem> _renderSystem;
         /*! Atomic flag for logic thread. */
         std::atomic<bool> _logicThreadIsWorking;
         /*! Time span of the logic loop. */
-        Utility::TimeSpan _logicLoopTimeSpan;
+        Conure::Utility::TimeSpan _logicLoopTimeSpan;
         /*! Unique pointer to the scene map system. */
         std::unique_ptr<Core::SceneMap> _sceneMap;
         /*! Unique pointer to the input system.*/

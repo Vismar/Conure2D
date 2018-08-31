@@ -1,7 +1,7 @@
 #pragma once
 #include <random>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Random number generator.
@@ -101,4 +101,4 @@ namespace Utility
 #include "RandomGenerator.inl"
 }
 
-#define RANDOM Utility::RandomGenerator::Instance()
+#define RANDOM Conure::Utility::RandomGenerator::Instance()

@@ -15,7 +15,7 @@ namespace Render
     class RenderSystemInterface;
 }
 
-namespace Utility
+namespace Conure::Utility
 {
     class TimeSpan;
     class IOSystemInterface;
@@ -46,24 +46,24 @@ namespace Engine
      * \brief Grabs render loop time span.
      * \return Const reference to the time span of the render loop.
      */
-    const Utility::TimeSpan& GetRenderLoopTimeSpan();
+    const Conure::Utility::TimeSpan& GetRenderLoopTimeSpan();
 
     /*!
      * \brief Grabs logic loop time span.
      * \return Const reference to the time span of the logic loop.
      */
-    const Utility::TimeSpan& GetLogicLoopTimeSpan();
+    const Conure::Utility::TimeSpan& GetLogicLoopTimeSpan();
 
     /*!
      * \brief Returns IO system.
      * \return Reference to the IO system.
      */
-    Utility::IOSystemInterface& GetIOSystem();
+    Conure::Utility::IOSystemInterface& GetIOSystem();
 
     /*!
      * \brief Returns log system.
      * \return Reference to the log system.
      */
-    Utility::LogSystem& GetLogSystem();
+    Conure::Utility::LogSystem& GetLogSystem();
 }
 #include "EngineInterfaceDefinitions.inl"

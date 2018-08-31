@@ -2,7 +2,7 @@
 #include <cstddef>
 #include "Utility/Containers/AnyCallable/AnyCallableHandler.hpp"
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Interface for a Dispatcher.

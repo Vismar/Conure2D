@@ -26,28 +26,28 @@ Input::InputSystemInterface& Engine::GetInputSystem()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Utility::TimeSpan& Engine::GetRenderLoopTimeSpan()
+const Conure::Utility::TimeSpan& Engine::GetRenderLoopTimeSpan()
 {
     return EngineApp::Instance().GetRenderLoopTimeSpan();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Utility::TimeSpan& Engine::GetLogicLoopTimeSpan()
+const Conure::Utility::TimeSpan& Engine::GetLogicLoopTimeSpan()
 {
     return EngineApp::Instance().GetLogicLoopTimeSpan();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::IOSystemInterface& Engine::GetIOSystem()
+Conure::Utility::IOSystemInterface& Engine::GetIOSystem()
 {
     return EngineApp::Instance().GetIOSystem();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Utility::LogSystem& Engine::GetLogSystem()
+Conure::Utility::LogSystem& Engine::GetLogSystem()
 {
     return EngineApp::Instance().GetLogSystem();
 }

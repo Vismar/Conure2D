@@ -19,6 +19,7 @@ add_library(Utility
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.cpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp
             Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.inl
+            Containers/LockFreeLinkedQueue/LockFreeLinkedQueueReference.inl
             Containers/RingBuffer/RingBuffer.hpp
             Containers/RingBuffer/RingBuffer.inl
             Containers/RingBuffer/RingBufferConstIterator.inl

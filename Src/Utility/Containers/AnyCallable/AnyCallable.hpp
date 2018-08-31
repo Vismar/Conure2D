@@ -5,7 +5,7 @@
 #include <functional>
 #include <typeindex>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Container that provides the ability to store any kind of function despite its signature and then call it.
@@ -105,6 +105,6 @@ namespace Utility
         /*! Container to store any kind of function despite its signature. */
         std::any _function;
     };
-}
 
 #include "AnyCallable.inl"
+}

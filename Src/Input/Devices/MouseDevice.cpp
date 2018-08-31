@@ -16,14 +16,14 @@ MouseDevice::MouseDevice()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ButtonState MouseDevice::GetButtonState(MouseButton button, const Utility::TimeSpan& timeSpan) const
+ButtonState MouseDevice::GetButtonState(MouseButton button, const Conure::Utility::TimeSpan& timeSpan) const
 {
     return _buttons[static_cast<int>(button)].GetState(timeSpan);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float MouseDevice::VerticalWheelDiff(const Utility::TimeSpan& timeSpan) const
+float MouseDevice::VerticalWheelDiff(const Conure::Utility::TimeSpan& timeSpan) const
 {
     float wheelDiff(0.0f);
 
@@ -37,7 +37,7 @@ float MouseDevice::VerticalWheelDiff(const Utility::TimeSpan& timeSpan) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float MouseDevice::HorizontalWheelDiff(const Utility::TimeSpan& timeSpan) const
+float MouseDevice::HorizontalWheelDiff(const Conure::Utility::TimeSpan& timeSpan) const
 {
     float wheelDiff(0.0f);
 
@@ -92,11 +92,11 @@ void MouseDevice::_HandleMouseButtonEvent(const sf::Event& event)
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::MouseButtonPressed)
     {
-        _buttons[event.mouseButton.button].UpdateState(ButtonState::Pressed, Utility::Time::CurrentTime());
+        _buttons[event.mouseButton.button].UpdateState(ButtonState::Pressed, Conure::Utility::Time::CurrentTime());
     }
     else if (event.type == sf::Event::EventType::MouseButtonReleased)
     {
-        _buttons[event.mouseButton.button].UpdateState(ButtonState::Released, Utility::Time::CurrentTime());
+        _buttons[event.mouseButton.button].UpdateState(ButtonState::Released, Conure::Utility::Time::CurrentTime());
     }
 }
 
@@ -107,12 +107,12 @@ void MouseDevice::_HandleMouseWheelEvent(const sf::Event& event)
     if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::VerticalWheel)
     {
         _verticalWheelDiff = event.mouseWheelScroll.delta;
-        _verticalWheelMovedTime = Utility::Time::CurrentTime();
+        _verticalWheelMovedTime = Conure::Utility::Time::CurrentTime();
     }
     else
     {
         _horizontalWheelDiff = event.mouseWheelScroll.delta;
-        _horizontalWheelMovedTime = Utility::Time::CurrentTime();
+        _horizontalWheelMovedTime = Conure::Utility::Time::CurrentTime();
     }
 }
 

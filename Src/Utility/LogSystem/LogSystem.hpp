@@ -6,7 +6,7 @@
 #include <atomic>
 #include <regex>
 
-namespace Utility
+namespace Conure::Utility
 {
     class IOSystemInterface;
     template <class T>

@@ -29,7 +29,7 @@ namespace Input
          * \param timeSpan - time span in which button should be checked.
          * \return ButtonState which defines in what state specified button is.
          */
-        ButtonState GetButtonState(KeyboardButton button, const Utility::TimeSpan& timeSpan) const;
+        ButtonState GetButtonState(KeyboardButton button, const Conure::Utility::TimeSpan& timeSpan) const;
 
         /*!
          * \brief Handles keyboard events.

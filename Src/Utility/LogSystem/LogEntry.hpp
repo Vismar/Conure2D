@@ -2,7 +2,7 @@
 #include "Utility/Time/Time.hpp"
 #include <string>
 
-namespace Utility
+namespace Conure::Utility
 {
     /*!
      * \brief Enumeration of possible log levels.

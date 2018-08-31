@@ -4,7 +4,7 @@ using namespace Input;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ButtonStateHandler::UpdateState(const ButtonState state, const Utility::Time& time)
+void ButtonStateHandler::UpdateState(const ButtonState state, const Conure::Utility::Time& time)
 {
     switch (state)
     {
@@ -22,7 +22,7 @@ void ButtonStateHandler::UpdateState(const ButtonState state, const Utility::Tim
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ButtonState ButtonStateHandler::GetState(const Utility::TimeSpan& timeSpan) const
+ButtonState ButtonStateHandler::GetState(const Conure::Utility::TimeSpan& timeSpan) const
 {
     ButtonState buttonState;
 
@@ -62,7 +62,7 @@ ButtonState ButtonStateHandler::GetState(const Utility::TimeSpan& timeSpan) cons
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool ButtonStateHandler::_IsPressed(const Utility::TimeSpan& timeSpan) const
+bool ButtonStateHandler::_IsPressed(const Conure::Utility::TimeSpan& timeSpan) const
 {
     // Button is pressed when pressed time is IN specified time span
     return (timeSpan.Start() <= _pressTime) && (_pressTime <= timeSpan.End());
@@ -70,7 +70,7 @@ bool ButtonStateHandler::_IsPressed(const Utility::TimeSpan& timeSpan) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool ButtonStateHandler::_IsHeldDown(const Utility::TimeSpan& timeSpan) const
+bool ButtonStateHandler::_IsHeldDown(const Conure::Utility::TimeSpan& timeSpan) const
 {
     // Button is held down when button was not released and start of a time span if bigger than press time
     return  (_releaseTime < _pressTime) && (_pressTime < timeSpan.Start());
@@ -78,7 +78,7 @@ bool ButtonStateHandler::_IsHeldDown(const Utility::TimeSpan& timeSpan) const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool ButtonStateHandler::_IsReleased(const Utility::TimeSpan& timeSpan) const
+bool ButtonStateHandler::_IsReleased(const Conure::Utility::TimeSpan& timeSpan) const
 {
     // Button is released when pressed time is IN specified time span
     return (timeSpan.Start() <= _releaseTime) && (_releaseTime <= timeSpan.End());
