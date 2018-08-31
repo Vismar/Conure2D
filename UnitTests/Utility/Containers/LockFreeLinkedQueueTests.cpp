@@ -1,98 +1,157 @@
-#include "CppUnitTest.h"
 #include "Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp"
 #include <thread>
+#include <gtest/gtest.h>
 
-using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
-namespace Utility
+/*!
+ * \brief Utility function that produces specified number of elements to specific queue.
+ * \param queue - queue to which function should add some elements.
+ * \param numberOfElements - number of lements that will be added to queue.
+ */
+void Producer(Conure::Utility::LockFreeLinkedQueue<int64_t>& queue, const uint64_t numberOfElements)
 {
-    void Producer(LockFreeLinkedQueue<int64_t>& queue, const uint64_t numberOfElements)
+    // Use PushBack function
+    for (uint64_t i = 0; i < numberOfElements; ++i)
     {
-        // Use PushBack function
-        for (uint64_t i = 0; i < numberOfElements; ++i)
-        {
-            queue.PushBack(i);
-        }
+        queue.PushBack(i);
     }
-    
-    void Consumer(LockFreeLinkedQueue<int64_t>& queue, std::atomic_int64_t& sum)
+}
+
+/*!
+ * \brief Utility function that consumes to specified variable all elements from specific queue.
+ * \param queue - queue from which elements will be consumed.
+ * \param sum - variable which will accumulate consumed values form queue.
+ */
+void Consumer(Conure::Utility::LockFreeLinkedQueue<int64_t>& queue, std::atomic_int64_t& sum)
+{
+    // Try to sum all things from queue
+    while (const auto node = queue.PopFront())
     {
-        // Try to sum all things from queue
-        while (const auto node = queue.PopFront())
-        {
-            sum += *node;
-        }
+        sum += *node;
+    }
+}
+
+/*! Number of elements that is used in tests. */
+constexpr uint64_t NumberOfElements = 50;
+
+/*!
+ * Tests PushBack, PopFront and IsEmpty methods.
+ */
+TEST(LockFreeLinkedQueue, PushBack)
+{
+    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+
+    // Use PushBack function
+    for (uint64_t i = 0; i < NumberOfElements; ++i)
+    {
+        queue.PushBack(i);
+    }
+    // Check number of elements
+    EXPECT_EQ(NumberOfElements, queue.GetSize());
+
+    // Use PopFront function
+    for (uint64_t i = 0; i < NumberOfElements; ++i)
+    {
+        (void)queue.PopFront();
+    }
+    // Check number of elements
+    EXPECT_EQ(0, queue.GetSize());
+    EXPECT_TRUE(queue.IsEmpty());
+}
+
+/*!
+ * Tests EmplaceBack, PopFront and IsEmpty methods.
+ */
+TEST(LockFreeLinkedQueue, EmplaceBack)
+{
+    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+
+    // Use PushBack function
+    for (uint64_t i = 0; i < NumberOfElements; ++i)
+    {
+        queue.EmplaceBack(i + NumberOfElements);
+    }
+    // Check number of elements
+    EXPECT_EQ(NumberOfElements, queue.GetSize());
+
+    // Use PopFront function
+    for (uint64_t i = 0; i < NumberOfElements; ++i)
+    {
+        (void)queue.PopFront();
+    }
+    // Check number of elements
+    EXPECT_EQ(0, queue.GetSize());
+    EXPECT_TRUE(queue.IsEmpty());
+}
+
+/*!
+ * Tests PushBack, EmplaceBack, PopFront and IsEmpty methods in single thread.
+ */
+TEST(LockFreeLinkedQueue, ProdAndConsInSingleThread)
+{
+    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+
+    uint64_t expectedSumOfElements(0);
+    // Use PushBack function
+    for (uint64_t i = 0; i < NumberOfElements; ++i)
+    {
+        queue.PushBack(i);
+        expectedSumOfElements += i;
+    }
+    EXPECT_EQ(NumberOfElements, queue.GetSize());
+
+    // Use EmplaceBack function
+    for (uint64_t i = 0; i < NumberOfElements; ++i)
+    {
+        queue.EmplaceBack(expectedSumOfElements + i);
+        expectedSumOfElements += expectedSumOfElements + i;
+    }
+    EXPECT_EQ((NumberOfElements * 2), queue.GetSize());
+
+    // Check that all nodes were added in and popped out
+    int64_t sum(0);
+    while (const auto node = queue.PopFront())
+    {
+        sum += *node;
+    }
+    EXPECT_EQ(0, queue.GetSize());
+    EXPECT_TRUE(queue.IsEmpty());
+    EXPECT_EQ(expectedSumOfElements, sum);
+}
+
+/*!
+ * Tests PushBack, EmplaceBack, PopFront and IsEmpty methods in multiple threads.
+ */
+TEST(LockFreeLinkedQueue, ProdAndConsInMultipleThreads)
+{
+    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+    std::atomic_int64_t sum(0);
+
+    // Producers
+    std::thread threadProducer1(&Producer, std::ref(queue), NumberOfElements);
+    std::thread threadProducer2(&Producer, std::ref(queue), NumberOfElements);
+
+    // Consumers
+    std::thread threadConsumer1(&Consumer, std::ref(queue), std::ref(sum));
+    std::thread threadConsumer2(&Consumer, std::ref(queue), std::ref(sum));
+
+    // Join threads
+    threadProducer1.join();
+    threadProducer2.join();
+    threadConsumer1.join();
+    threadConsumer2.join();
+
+    // Just be sure that everything was consumed from queue
+    Consumer(queue, sum);
+
+    // Calc expected sum ef elements
+    uint64_t expectedSumOfElements(0);
+    for (auto i = 0; i < NumberOfElements; ++i)
+    {
+        expectedSumOfElements += i + i;
     }
 
-    TEST_CLASS(LockFreeLinkedQueueTests)
-    {
-    public:
-        TEST_METHOD(SingleThreadTest)
-        {
-            LockFreeLinkedQueue<int64_t> queue;
-
-            // Use PushBack function
-            for (uint64_t i = 0; i < _halfOfElements; ++i)
-            {
-                queue.PushBack(i);
-            }
-            Assert::IsTrue(queue.GetSize() == _halfOfElements,
-                           _ExpectedAndActual(_halfOfElements, queue.GetSize()).c_str());
-
-            // Use EmplaceBack function
-            for (uint64_t i = 0; i < _halfOfElements; ++i)
-            {
-                queue.EmplaceBack(10);
-            }
-            Assert::IsTrue(queue.GetSize() == (_halfOfElements * 2),
-                           _ExpectedAndActual(_halfOfElements * 2, queue.GetSize()).c_str());
-
-            // Check that all nodes were added in and popped out
-            int64_t sum(0);
-            while (const auto node = queue.PopFront())
-            {
-                sum += *node;
-            }
-            Assert::IsTrue(queue.GetSize() == 0, _ExpectedAndActual(0, queue.GetSize()).c_str());
-            Assert::IsTrue(sum == 1725, _ExpectedAndActual(1725, sum).c_str());
-        }
-
-        TEST_METHOD(MultiThreadedTest)
-        {
-            LockFreeLinkedQueue<int64_t> queue;
-            std::atomic_int64_t sum(0);
-
-            // Producers
-            std::thread threadProducer1(&Producer, std::ref(queue), _halfOfElements);
-            std::thread threadProducer2(&Producer, std::ref(queue), _halfOfElements);
-
-            // Consumers
-            std::thread threadConsumer1(&Consumer, std::ref(queue), std::ref(sum));
-            std::thread threadConsumer2(&Consumer, std::ref(queue), std::ref(sum));
-
-            // Join threads
-            threadProducer1.join();
-            threadProducer2.join();
-            threadConsumer1.join();
-            threadConsumer2.join();
-
-            // Just be sure that everything was consumed from queue
-            Consumer(queue, sum);
-
-            // Check if everything was consumed and produced and summed up
-            Assert::IsTrue(queue.GetSize() == 0, _ExpectedAndActual(0, queue.GetSize()).c_str());
-            Assert::IsTrue(sum == 2450, _ExpectedAndActual(2450, sum).c_str());
-        }
-
-    private:
-        static std::wstring _ExpectedAndActual(const int64_t expected, const int64_t actual)
-        {
-            std::wstringstream stream;
-            stream << L"Expected - " << expected << L". Actual - " << actual << L".";
-
-            return stream.str();
-        }
-
-        const uint64_t _halfOfElements = 50;
-    };
+    // Check if everything was consumed and produced and summed up
+    EXPECT_EQ(0, queue.GetSize());
+    EXPECT_TRUE(queue.IsEmpty());
+    EXPECT_EQ(expectedSumOfElements, sum);
 }
