@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Components/Base/BaseComponent.hpp"
 
-namespace Core
+namespace C2D
 {
     /*!
      * \brief Base class for all components which should store only data and can be attached to SceneObject.

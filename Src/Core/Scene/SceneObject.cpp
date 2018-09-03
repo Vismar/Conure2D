@@ -1,7 +1,7 @@
 #include "SceneObject.hpp"
 #include <algorithm>
 
-using namespace Core;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -157,7 +157,7 @@ void SceneObject::_Initialize()
     // Every scene object ALWAYS must have transform component 
     if (AddComponent<TransformComponent>())
     {
-        AddEvent("ComponentAdded", new Conure::Utility::Dispatcher<void>);
+        AddEvent("ComponentAdded", new Dispatcher<void>);
     }
 }
 

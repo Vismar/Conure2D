@@ -4,7 +4,7 @@
 #include <list>
 #include <memory>
 
-namespace  Core
+namespace  C2D
 {
     /*!
      * \brief Interface for scene map that can be rendered by render system.

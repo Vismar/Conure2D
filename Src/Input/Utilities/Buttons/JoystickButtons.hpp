@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace Input
+namespace C2D
 {
     /*!
      * \brief Special redefinition of joystick buttons from SFML to determine them as enum class.

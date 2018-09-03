@@ -2,7 +2,7 @@
 #include "Input/Utilities/Buttons/JoystickAxes.hpp"
 #include <string>
 
-namespace Input
+namespace C2D
 {
     /*!
      * \brief Joystick device interface that defines required functions for getting data.

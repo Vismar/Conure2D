@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseScene.hpp"
 
-namespace Core
+namespace C2D
 {
     /*!
      * \brief Public interface for scene map system that should be used by game logic.

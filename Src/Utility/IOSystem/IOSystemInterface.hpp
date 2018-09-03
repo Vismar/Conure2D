@@ -1,7 +1,7 @@
 #pragma once
 #include <ios>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Public interface for IO system.

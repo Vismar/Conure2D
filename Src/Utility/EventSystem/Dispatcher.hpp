@@ -4,7 +4,7 @@
 #include "Utility/Exception/ExceptionHandler.hpp"
 #include <vector>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Container that stores AnyCallables.

@@ -4,7 +4,7 @@
 #include <string>
 #include <regex>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Container that stores time as nanoseconds.

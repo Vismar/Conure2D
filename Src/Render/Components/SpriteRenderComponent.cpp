@@ -1,11 +1,11 @@
 #include "SpriteRenderComponent.hpp"
 #include <SFML/Graphics/Texture.hpp>
 
-using namespace Render;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-SpriteRenderComponent::SpriteRenderComponent(std::weak_ptr<Core::SceneObject>&& sceneObject)
+SpriteRenderComponent::SpriteRenderComponent(std::weak_ptr<SceneObject>&& sceneObject)
 : RenderableComponent(std::move(sceneObject))
 {
     _vertices.setPrimitiveType(sf::TrianglesStrip);

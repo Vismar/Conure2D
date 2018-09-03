@@ -1,6 +1,6 @@
 #include "BaseScene.hpp"
 
-using namespace Core;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -198,7 +198,7 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void BaseScene::_OnCameraComponentPriorityChanged(std::weak_ptr<Core::CameraComponent> cameraComponent, int8_t)
+void BaseScene::_OnCameraComponentPriorityChanged(std::weak_ptr<CameraComponent> cameraComponent, int8_t)
 {
     std::lock_guard lock(_cameraArrayMutex);
     _cameraComponentsToAdd.push_back(cameraComponent);

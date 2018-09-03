@@ -6,7 +6,7 @@
 #include "Utility/Time/TimeSpan.hpp"
 #include <mutex>
 
-namespace Render
+namespace C2D
 {
     /*!
      * \brief System that handles render process.
@@ -33,9 +33,9 @@ namespace Render
          * \param inputSystem - reference to input system which will handle input events from the window.
          * \param renderLoopTimeSpan - time span of render loop.
          */
-        void Start(const Core::RenderableSceneMapInterface& sceneMap, 
-                   Input::InputSystemHandlerInterface& inputSystem,
-                   Conure::Utility::TimeSpan& renderLoopTimeSpan);
+        void Start(const RenderableSceneMapInterface& sceneMap,
+                   InputSystemHandlerInterface& inputSystem,
+                   TimeSpan& renderLoopTimeSpan);
 
         /*!
          * \brief Stops render process.

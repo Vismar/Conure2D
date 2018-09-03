@@ -4,7 +4,7 @@
 #include "Utility/EventSystem/Dispatcher.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
-using namespace Core;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -133,8 +133,8 @@ void RenderableComponent::Initialize()
 {
     _typeIndex = typeid(RenderableComponent);
 
-    AddEvent("TextureUpdated", new Conure::Utility::Dispatcher<void>());
-    AddEvent("LayerUpdated", new Conure::Utility::Dispatcher<void>());
+    AddEvent("TextureUpdated", new Dispatcher<void>());
+    AddEvent("LayerUpdated", new Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

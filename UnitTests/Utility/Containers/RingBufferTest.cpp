@@ -6,7 +6,7 @@
  */
 TEST(RingBuffer, Resize)
 {
-    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    C2D::RingBuffer<uint64_t> ringBuffer;
 
     // Default size
     EXPECT_EQ(10ull, ringBuffer.GetSize());
@@ -77,7 +77,7 @@ TEST(RingBuffer, Resize)
  */
 TEST(RingBuffer, PushBack)
 {
-    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    C2D::RingBuffer<uint64_t> ringBuffer;
 
     // Add some values to ring buffer
     for (uint64_t i = 0ull; i < 5ull; ++i)
@@ -117,7 +117,7 @@ TEST(RingBuffer, PushBack)
  */
 TEST(RingBuffer, EmplaceBack)
 {
-    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    C2D::RingBuffer<uint64_t> ringBuffer;
     const uint64_t addition(1000ull);
 
     // Add some values to ring buffer
@@ -158,7 +158,7 @@ TEST(RingBuffer, EmplaceBack)
  */
 TEST(RingBuffer, Iterator)
 {
-    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    C2D::RingBuffer<uint64_t> ringBuffer;
     std::vector<uint64_t> vector;
 
     // Add some entries to ring buffer
@@ -182,7 +182,7 @@ TEST(RingBuffer, Iterator)
 
 TEST(RingBuffer, ConstIterator)
 {
-    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    C2D::RingBuffer<uint64_t> ringBuffer;
     std::vector<uint64_t> vector;
 
     // Add some entries to ring buffer
@@ -194,7 +194,7 @@ TEST(RingBuffer, ConstIterator)
 
     // Check entries in ring buffer with const straight iterator via begin()
     uint64_t count(0ull);
-    for (Conure::Utility::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.begin(); entry != ringBuffer.end(); ++entry)
+    for (C2D::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.begin(); entry != ringBuffer.end(); ++entry)
     {
         EXPECT_EQ(count, *entry);
         EXPECT_EQ(vector[count], *entry);
@@ -205,7 +205,7 @@ TEST(RingBuffer, ConstIterator)
 
     // Check entries in ring buffer with const straight iterator via cbegin()
     count = 0ull;
-    for (Conure::Utility::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.cbegin(); entry != ringBuffer.cend(); ++entry)
+    for (C2D::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.cbegin(); entry != ringBuffer.cend(); ++entry)
     {
         EXPECT_EQ(count, *entry);
         EXPECT_EQ(vector[count], *entry);
@@ -217,7 +217,7 @@ TEST(RingBuffer, ConstIterator)
 
 TEST(RingBuffer, ReverseIterator)
 {
-    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    C2D::RingBuffer<uint64_t> ringBuffer;
     std::vector<uint64_t> vector;
 
     // Add some entries to ring buffer
@@ -241,7 +241,7 @@ TEST(RingBuffer, ReverseIterator)
 
 TEST(RingBuffer, ConstReverseIterator)
 {
-    Conure::Utility::RingBuffer<uint64_t> ringBuffer;
+    C2D::RingBuffer<uint64_t> ringBuffer;
     std::vector<uint64_t> vector;
 
     // Add some entries to ring buffer
@@ -253,7 +253,7 @@ TEST(RingBuffer, ConstReverseIterator)
 
     // Check entries in ring buffer with const straight iterator via begin()
     uint64_t count(9ull);
-    for (Conure::Utility::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.rbegin(); entry != ringBuffer.rend(); ++entry)
+    for (C2D::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.rbegin(); entry != ringBuffer.rend(); ++entry)
     {
         EXPECT_EQ(count, *entry);
         EXPECT_EQ(vector[count], *entry);
@@ -265,7 +265,7 @@ TEST(RingBuffer, ConstReverseIterator)
 
     // Check entries in ring buffer with const straight iterator via cbegin()
     count = 9ull;
-    for (Conure::Utility::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.crbegin(); entry != ringBuffer.crend(); ++entry)
+    for (C2D::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.crbegin(); entry != ringBuffer.crend(); ++entry)
     {
         EXPECT_EQ(count, *entry);
         EXPECT_EQ(vector[count], *entry);

@@ -2,7 +2,7 @@
 #include <memory>
 #include <typeindex>
 
-namespace Core
+namespace C2D
 {
     class SceneObject;
 

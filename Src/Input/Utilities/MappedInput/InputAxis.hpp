@@ -2,7 +2,7 @@
 #include "Input/Utilities/Buttons/JoystickAxes.hpp"
 #include <string>
 
-namespace Input
+namespace C2D
 {
     class InputSystemInterface;
 

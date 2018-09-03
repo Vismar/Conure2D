@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <utility>
 
-using namespace Render;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -149,7 +149,7 @@ bool Window::IsOpen() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Window::PollEvents(Input::InputSystemHandlerInterface& inputSystem) const
+void Window::PollEvents(InputSystemHandlerInterface& inputSystem) const
 {
     sf::Event event{};
 

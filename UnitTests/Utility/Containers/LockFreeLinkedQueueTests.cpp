@@ -7,7 +7,7 @@
  * \param queue - queue to which function should add some elements.
  * \param numberOfElements - number of lements that will be added to queue.
  */
-void Producer(Conure::Utility::LockFreeLinkedQueue<int64_t>& queue, const uint64_t numberOfElements)
+void Producer(C2D::LockFreeLinkedQueue<int64_t>& queue, const uint64_t numberOfElements)
 {
     // Use PushBack function
     for (uint64_t i = 0; i < numberOfElements; ++i)
@@ -21,7 +21,7 @@ void Producer(Conure::Utility::LockFreeLinkedQueue<int64_t>& queue, const uint64
  * \param queue - queue from which elements will be consumed.
  * \param sum - variable which will accumulate consumed values form queue.
  */
-void Consumer(Conure::Utility::LockFreeLinkedQueue<int64_t>& queue, std::atomic_int64_t& sum)
+void Consumer(C2D::LockFreeLinkedQueue<int64_t>& queue, std::atomic_int64_t& sum)
 {
     // Try to sum all things from queue
     while (const auto node = queue.PopFront())
@@ -38,7 +38,7 @@ constexpr uint64_t NumberOfElements = 50;
  */
 TEST(LockFreeLinkedQueue, PushBack)
 {
-    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+    C2D::LockFreeLinkedQueue<int64_t> queue;
 
     // Use PushBack function
     for (uint64_t i = 0; i < NumberOfElements; ++i)
@@ -63,7 +63,7 @@ TEST(LockFreeLinkedQueue, PushBack)
  */
 TEST(LockFreeLinkedQueue, EmplaceBack)
 {
-    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+    C2D::LockFreeLinkedQueue<int64_t> queue;
 
     // Use PushBack function
     for (uint64_t i = 0; i < NumberOfElements; ++i)
@@ -88,7 +88,7 @@ TEST(LockFreeLinkedQueue, EmplaceBack)
  */
 TEST(LockFreeLinkedQueue, ProdAndConsInSingleThread)
 {
-    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+    C2D::LockFreeLinkedQueue<int64_t> queue;
 
     uint64_t expectedSumOfElements(0);
     // Use PushBack function
@@ -123,7 +123,7 @@ TEST(LockFreeLinkedQueue, ProdAndConsInSingleThread)
  */
 TEST(LockFreeLinkedQueue, ProdAndConsInMultipleThreads)
 {
-    Conure::Utility::LockFreeLinkedQueue<int64_t> queue;
+    C2D::LockFreeLinkedQueue<int64_t> queue;
     std::atomic_int64_t sum(0);
 
     // Producers

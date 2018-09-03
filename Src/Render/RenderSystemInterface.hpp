@@ -1,7 +1,7 @@
 #pragma once
 #include "Render/Window/WindowSettings.hpp"
 
-namespace Render
+namespace C2D
 {
     /*!
      * \brief Public interface for render system that should be used by game logic.

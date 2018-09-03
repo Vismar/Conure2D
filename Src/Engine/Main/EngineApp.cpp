@@ -2,17 +2,17 @@
 #include "Engine/EngineInterface.hpp"
 #include <thread>
 
-using namespace Engine;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 EngineApp::EngineApp()
-: _ioSystem(std::make_unique<Conure::Utility::IOSystem>())
-, _logSystem(std::make_unique<Conure::Utility::LogSystem>(*_ioSystem))
-, _renderSystem(std::make_unique<Render::RenderSystem>())
+: _ioSystem(std::make_unique<IOSystem>())
+, _logSystem(std::make_unique<LogSystem>(*_ioSystem))
+, _renderSystem(std::make_unique<RenderSystem>())
 , _logicThreadIsWorking(false)
-, _sceneMap(std::make_unique<Core::SceneMap>())
-, _inputSystem(std::make_unique<Input::InputSystem>(_logicLoopTimeSpan))
+, _sceneMap(std::make_unique<SceneMap>())
+, _inputSystem(std::make_unique<InputSystem>(_logicLoopTimeSpan))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,49 +57,49 @@ void EngineApp::End() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Render::RenderSystem& EngineApp::GetRenderSystem() const
+RenderSystem& EngineApp::GetRenderSystem() const
 {
     return *_renderSystem;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Core::SceneMap& EngineApp::GetSceneMap() const
+SceneMap& EngineApp::GetSceneMap() const
 {
     return *_sceneMap;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Input::InputSystem& EngineApp::GetInputSystem() const
+InputSystem& EngineApp::GetInputSystem() const
 {
     return *_inputSystem;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Conure::Utility::TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
+const TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
 {
     return _renderLoopTimeSpan;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Conure::Utility::TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
+const TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
 {
     return _logicLoopTimeSpan;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Conure::Utility::IOSystem& EngineApp::GetIOSystem() const
+IOSystem& EngineApp::GetIOSystem() const
 {
     return *_ioSystem;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Conure::Utility::LogSystem& EngineApp::GetLogSystem() const
+LogSystem& EngineApp::GetLogSystem() const
 {
     return *_logSystem;
 }
@@ -108,14 +108,14 @@ Conure::Utility::LogSystem& EngineApp::GetLogSystem() const
 
 void EngineApp::_LogicLoop()
 {
-    DEV_LOG(Conure::Utility::LogLevel::Debug, "Logic loop has started");
+    DEV_LOG(LogLevel::Debug, "Logic loop has started");
 
     // Launch logic loop only if it was not started yet
     if (!_logicThreadIsWorking)
     {
         _logicThreadIsWorking = true;
-        _logicLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
-        _logicLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
+        _logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
+        _logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
 
         // If render system works properly, update scenes
         while (_renderSystem->NoErrors())
@@ -124,14 +124,14 @@ void EngineApp::_LogicLoop()
             _sceneMap->UpdateScenes();
 
             // Update time span
-            _logicLoopTimeSpan.SetNewEnd(Conure::Utility::Time::CurrentTime());
+            _logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
         }
 
         // Mark that logic thread finished its work
         _logicThreadIsWorking = false;
     }
 
-    DEV_LOG(Conure::Utility::LogLevel::Debug, "Logic loop has stopped");
+    DEV_LOG(LogLevel::Debug, "Logic loop has stopped");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

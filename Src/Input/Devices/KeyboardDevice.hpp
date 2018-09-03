@@ -4,7 +4,7 @@
 #include <SFML/Window/Event.hpp>
 #include <vector>
 
-namespace Input
+namespace C2D
 {
     /*!
      * \brief Device which handles all keyboard actions.
@@ -29,7 +29,7 @@ namespace Input
          * \param timeSpan - time span in which button should be checked.
          * \return ButtonState which defines in what state specified button is.
          */
-        ButtonState GetButtonState(KeyboardButton button, const Conure::Utility::TimeSpan& timeSpan) const;
+        ButtonState GetButtonState(KeyboardButton button, const TimeSpan& timeSpan) const;
 
         /*!
          * \brief Handles keyboard events.

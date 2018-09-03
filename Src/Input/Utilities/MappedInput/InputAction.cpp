@@ -2,7 +2,7 @@
 #include "Input/Utilities/ButtonStateHandler.hpp"
 #include "Input/InputSystemInterface.hpp"
 
-using namespace Input;
+using namespace C2D;
 
 /*****************************************/
 /*              ButtonUnion              */

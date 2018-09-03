@@ -1,7 +1,7 @@
 #pragma once
 #include "Utility/Time/Time.hpp"
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Simple class that provides functionality to store a time span.

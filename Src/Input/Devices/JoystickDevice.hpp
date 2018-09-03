@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace Input
+namespace C2D
 {
     /*!
      * \brief Device which handles all joystick actions.
@@ -54,7 +54,7 @@ namespace Input
           * \param timeSpan - time span in which button should be checked.
           * \return ButtonState which defines in what state specified button is.
           */
-        ButtonState GetButtonState(JoystickButton button, const Conure::Utility::TimeSpan& timeSpan) const;
+        ButtonState GetButtonState(JoystickButton button, const TimeSpan& timeSpan) const;
 
         /*!
          * \brief Returns position [range: -100.0f .. 100.0f] of specified joystick axis.

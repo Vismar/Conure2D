@@ -4,7 +4,7 @@
 #include <fstream>
 #include <atomic>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief System which works in separate thread and provides functionality

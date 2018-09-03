@@ -1,7 +1,7 @@
 #pragma once
 #include <random>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Random number generator.

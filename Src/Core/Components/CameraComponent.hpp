@@ -8,7 +8,7 @@
 #include <vector>
 #include <set>
 
-namespace Core
+namespace C2D
 {
     class TransformComponent;
 
@@ -18,7 +18,7 @@ namespace Core
      * Simple data component that stores parameters that are required to create sf::View
      * and provides basic functionality to change them. Creates sf::View in depends on data from TransformComponent.
      */
-    class CameraComponent : public BaseDataComponent, public Conure::Utility::EventManager
+    class CameraComponent : public BaseDataComponent, public EventManager
     {
     public:
         CameraComponent() = delete;
@@ -92,13 +92,13 @@ namespace Core
          * \brief Sets new size of a camera view.
          * \param newSize - new size of a camera view.
          */
-        void SetSize(const Conure::Utility::Vector2F& newSize);
+        void SetSize(const Vector2F& newSize);
 
         /*!
          * \brief Gets current size of a camera view.
          * \return Current size of a camera view.
          */
-        Conure::Utility::Vector2F GetSize() const;
+        Vector2F GetSize() const;
 
         /*!
          * \brief Sets new viewport for a camera.
@@ -132,7 +132,7 @@ namespace Core
         /*! Priority of a camera. The lesser the number, the prior the camera. */
         std::atomic_uint8_t _priority;
         /*! Size of a view. */
-        Conure::Utility::AtomicVector2F _size;
+        AtomicVector2F _size;
         /*! Left coordinate of a viewport of a view. */
         std::atomic<float> _viewportLeftCoord;
         /*! Top coordinate of a viewport of a view. */

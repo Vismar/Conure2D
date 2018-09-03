@@ -2,7 +2,7 @@
 #include <memory>
 #include <atomic>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief A lock-free linked queue.

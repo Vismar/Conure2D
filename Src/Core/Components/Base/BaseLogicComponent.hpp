@@ -3,7 +3,7 @@
 #include <atomic>
 #include <memory>
 
-namespace Core
+namespace C2D
 {
     class SceneObject;
 

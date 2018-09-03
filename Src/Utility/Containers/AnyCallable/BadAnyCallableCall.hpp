@@ -4,7 +4,7 @@
 #include <sstream>
 #include <vector>
 
-namespace Conure::Utility
+namespace C2D
 {
     template <class Ret>
     class AnyCallable;

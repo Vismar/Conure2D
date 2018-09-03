@@ -1,53 +1,53 @@
 #include "EngineInterface.hpp"
 #include "Main/EngineApp.hpp"
 
-using namespace Engine;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Render::RenderSystemInterface& Engine::GetRenderSystem()
+RenderSystemInterface& GetRenderSystem()
 {
     return EngineApp::Instance().GetRenderSystem();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Core::SceneMapSystemInterface& Engine::GetSceneMapSystem()
+SceneMapSystemInterface& GetSceneMapSystem()
 {
     return EngineApp::Instance().GetSceneMap();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Input::InputSystemInterface& Engine::GetInputSystem()
+InputSystemInterface& GetInputSystem()
 {
     return EngineApp::Instance().GetInputSystem();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Conure::Utility::TimeSpan& Engine::GetRenderLoopTimeSpan()
+const TimeSpan& GetRenderLoopTimeSpan()
 {
     return EngineApp::Instance().GetRenderLoopTimeSpan();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const Conure::Utility::TimeSpan& Engine::GetLogicLoopTimeSpan()
+const TimeSpan& GetLogicLoopTimeSpan()
 {
     return EngineApp::Instance().GetLogicLoopTimeSpan();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Conure::Utility::IOSystemInterface& Engine::GetIOSystem()
+IOSystemInterface& GetIOSystem()
 {
     return EngineApp::Instance().GetIOSystem();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Conure::Utility::LogSystem& Engine::GetLogSystem()
+LogSystem& GetLogSystem()
 {
     return EngineApp::Instance().GetLogSystem();
 }

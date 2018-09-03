@@ -3,7 +3,7 @@
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Window/ContextSettings.hpp>
 
-using namespace Render;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ sf::VideoMode WindowSettings::GetVideoMode() const
 
 uint32_t WindowSettings::GetSfmlStyle() const
 {
-    uint32_t sfStyle = sf::Style::Close;
+    uint32_t sfStyle(sf::Style::Close);
 
     switch (style)
     {

@@ -5,7 +5,7 @@
 #include <functional>
 #include <typeindex>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Container that provides the ability to store any kind of function despite its signature and then call it.

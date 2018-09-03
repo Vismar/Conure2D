@@ -4,7 +4,7 @@
 #include "Core/Components/TransformComponent.hpp"
 #include <typeindex>
 
-namespace Core
+namespace C2D
 {
     /*!
      * \brief Core scene object.
@@ -16,7 +16,7 @@ namespace Core
      * 
      * Scene object - core and bones to which user supposed to add components that will make an object something unique.
      */
-    class SceneObject final : public std::enable_shared_from_this<SceneObject>, public Conure::Utility::EventManager
+    class SceneObject final : public std::enable_shared_from_this<SceneObject>, public EventManager
     {
     public:
         SceneObject(const SceneObject& other) = delete;

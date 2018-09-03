@@ -7,7 +7,7 @@
 #include <set>
 #include <atomic>
 
-namespace Core
+namespace C2D
 {
     class TransformComponent;
     class CameraComponent;
@@ -20,7 +20,7 @@ namespace Core
      * - Inherited components will have the same characteristics in comparison, 
      *   so scene object will not be able to store more than one renderable component.
      */
-    class RenderableComponent : public BaseDataComponent, public Conure::Utility::EventManager, public sf::Drawable
+    class RenderableComponent : public BaseDataComponent, public EventManager, public sf::Drawable
     {
     public:
         RenderableComponent() = delete;
@@ -149,7 +149,7 @@ namespace Core
         /*! Transform that will be used in render. */
         mutable sf::Transform _transform;
         /*! Handler of TransformUpdated event from transform component. */
-        Conure::Utility::AnyCallableHandler _transformUpdatedHandler;
+        AnyCallableHandler _transformUpdatedHandler;
     };
 
     /*! Simple alias to shorten the name of the vector of weak pointers to renderable components. */

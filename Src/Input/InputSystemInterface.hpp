@@ -6,7 +6,7 @@
 #include "Devices/MouseDeviceInterface.hpp"
 #include "Devices/JoystickDeviceInterface.hpp"
 
-namespace Input
+namespace C2D
 {
     /*!
      * \brief Public interface for input system.

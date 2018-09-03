@@ -3,7 +3,7 @@
 
 namespace sf { template <typename T> class Vector2; }
 
-namespace Conure::Utility
+namespace C2D
 {
     template <typename T>
     class Vector2;

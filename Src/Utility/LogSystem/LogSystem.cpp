@@ -3,7 +3,7 @@
 #include "Utility/IOSystem/IOSystemInterface.hpp"
 #include "Utility/Exception/ExceptionHandler.hpp"
 
-using namespace Conure::Utility;
+using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

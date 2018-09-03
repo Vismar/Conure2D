@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Input
+namespace C2D
 {
     enum class ButtonState;
     enum class KeyboardButton;

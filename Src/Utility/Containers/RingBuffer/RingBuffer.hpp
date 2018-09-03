@@ -3,7 +3,7 @@
 #include <limits>
 #include <algorithm>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Container that uses a single, fixed-size buffer as if it were connected end-to-end.

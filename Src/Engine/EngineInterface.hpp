@@ -1,69 +1,61 @@
 #pragma once
 
-namespace Core
+namespace C2D
 {
+    //Core
     class SceneMapSystemInterface;
-}
 
-namespace Input
-{
+    // Input
     class InputSystemInterface;
-}
 
-namespace Render
-{
+    // Render
     class RenderSystemInterface;
-}
 
-namespace Conure::Utility
-{
+    // Utility
     class TimeSpan;
     class IOSystemInterface;
     class LogSystem;
-}
 
-namespace Engine
-{
     /*!
      * \brief Grabs render system.
      * \return Reference to the render system.
      */
-    Render::RenderSystemInterface& GetRenderSystem();
+    RenderSystemInterface& GetRenderSystem();
 
     /*!
      * \brief Grabs scene map system.
      * \return Reference to the scene map system.
      */
-    Core::SceneMapSystemInterface& GetSceneMapSystem();
+    SceneMapSystemInterface& GetSceneMapSystem();
 
     /*!
      * \brief Grabs input system.
      * \return Reference to the input system.
      */
-    Input::InputSystemInterface& GetInputSystem();
+    InputSystemInterface& GetInputSystem();
 
     /*!
      * \brief Grabs render loop time span.
      * \return Const reference to the time span of the render loop.
      */
-    const Conure::Utility::TimeSpan& GetRenderLoopTimeSpan();
+    const TimeSpan& GetRenderLoopTimeSpan();
 
     /*!
      * \brief Grabs logic loop time span.
      * \return Const reference to the time span of the logic loop.
      */
-    const Conure::Utility::TimeSpan& GetLogicLoopTimeSpan();
+    const TimeSpan& GetLogicLoopTimeSpan();
 
     /*!
      * \brief Returns IO system.
      * \return Reference to the IO system.
      */
-    Conure::Utility::IOSystemInterface& GetIOSystem();
+    IOSystemInterface& GetIOSystem();
 
     /*!
      * \brief Returns log system.
      * \return Reference to the log system.
      */
-    Conure::Utility::LogSystem& GetLogSystem();
+    LogSystem& GetLogSystem();
 }
 #include "EngineInterfaceDefinitions.inl"

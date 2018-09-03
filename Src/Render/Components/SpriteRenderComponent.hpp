@@ -1,21 +1,21 @@
 #pragma once
 #include "Core/Components/RenderableComponent.hpp"
 
-namespace Render
+namespace C2D
 {
     /*!
      * \brief Simple renderable component.
      * 
      * Contains 4 vertices that form square which will use stored texture.
      */
-    class SpriteRenderComponent : public Core::RenderableComponent
+    class SpriteRenderComponent : public RenderableComponent
     {
     public:
         /*!
          * \brief Default constructor.
          * \param sceneObject - shared pointer to the object which contains this component.
          */
-        explicit SpriteRenderComponent(std::weak_ptr<Core::SceneObject>&& sceneObject);
+        explicit SpriteRenderComponent(std::weak_ptr<SceneObject>&& sceneObject);
 
         /*!
          * \brief Sets texture coordinates.

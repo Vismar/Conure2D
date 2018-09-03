@@ -1,7 +1,7 @@
 #pragma once
 #include "Utility/Time/TimeSpan.hpp"
 
-namespace Input
+namespace C2D
 {
     /*!
      * \brief Mouse device interface that defines required functions for getting data.
@@ -20,13 +20,13 @@ namespace Input
          * \brief Returns wheel offset (positive is up, negative is down).
          * \return Abstract value that defines how much vertical wheel was scrolled.
          */
-        virtual float VerticalWheelDiff(const Conure::Utility::TimeSpan& timeSpan) const = 0;
+        virtual float VerticalWheelDiff(const TimeSpan& timeSpan) const = 0;
 
         /*!
          * \brief Returns wheel offset (positive is left, negative is right).
          * \return Abstract value that defines how much horizontal wheel was scrolled.
          */
-        virtual float HorizontalWheelDiff(const Conure::Utility::TimeSpan& timeSpan) const = 0;
+        virtual float HorizontalWheelDiff(const TimeSpan& timeSpan) const = 0;
 
         /*!
          * \brief Returns current x coordinate of the mouse cursor relative to the top left corner of the window.

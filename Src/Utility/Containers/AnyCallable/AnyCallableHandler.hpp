@@ -1,7 +1,7 @@
 #pragma once
 #include <typeinfo>
 
-namespace Conure::Utility
+namespace C2D
 {
     /*!
      * \brief Special handler that was created to make possible to compare AnyCallable instances.

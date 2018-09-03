@@ -6,7 +6,7 @@
 
 namespace sf { class RenderWindow; class Drawable; class Image; }
 
-namespace Render
+namespace C2D
 {
     /*!
      * \brief Window for rendering that contains all basic video settings and handles user input.
@@ -111,7 +111,7 @@ namespace Render
          * \brief Gather all window events and handles it via Input module.
          * \param inputSystem - reference to input system which will handle input events from the window.
          */
-        void PollEvents(Input::InputSystemHandlerInterface& inputSystem) const;
+        void PollEvents(InputSystemHandlerInterface& inputSystem) const;
 
         /*!
          * \brief Initiates drawing process: applies window settings and new icon if it required before rendering new frame.

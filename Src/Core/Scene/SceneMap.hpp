@@ -3,7 +3,7 @@
 #include "Core/Scene/SceneMapSystemInterface.hpp"
 #include "Core/Scene/BaseSceneInterface.hpp"
 
-namespace Core
+namespace C2D
 {
     /*!
      * \brief Scene map contains all scenes and provides functionality to work with them.

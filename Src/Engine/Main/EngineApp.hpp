@@ -6,7 +6,7 @@
 #include "Utility/LogSystem/LogSystem.hpp"
 #include "Utility/IOSystem/IOSystem.hpp"
 
-namespace Engine
+namespace C2D
 {
     /*!
      * \brief Main point of the engine.
@@ -48,43 +48,43 @@ namespace Engine
          * \brief Returns render system.
          * \return Reference to the render system.
          */
-        Render::RenderSystem& GetRenderSystem() const;
+        RenderSystem& GetRenderSystem() const;
 
         /*!
          * \brief Returns scene map.
          * \return Reference to the scene map.
          */
-        Core::SceneMap& GetSceneMap() const;
+        SceneMap& GetSceneMap() const;
 
         /*!
          * \brief Returns input system.
          * \return Reference to the input system.
          */
-        Input::InputSystem& GetInputSystem() const;
+        InputSystem& GetInputSystem() const;
 
         /*!
          * \brief Grabs render loop time span.
          * \return Const reference to the time span of the render loop.
          */
-        const Conure::Utility::TimeSpan& GetRenderLoopTimeSpan() const;
+        const TimeSpan& GetRenderLoopTimeSpan() const;
 
         /*!
          * \brief Grabs logic loop time span.
          * \return Const reference to the time span of the logic loop.
          */
-        const Conure::Utility::TimeSpan& GetLogicLoopTimeSpan() const;
+        const TimeSpan& GetLogicLoopTimeSpan() const;
 
         /*!
          * \brief Returns IO system.
          * \return Reference to the IO system.
          */
-        Conure::Utility::IOSystem& GetIOSystem() const;
+        IOSystem& GetIOSystem() const;
 
         /*!
          * \brief Returns log system.
          * \return Reference to the log system.
          */
-        Conure::Utility::LogSystem& GetLogSystem() const;
+        LogSystem& GetLogSystem() const;
 
     private:
         /*!
@@ -93,20 +93,20 @@ namespace Engine
         void _LogicLoop();
 
         /*! Unique pointer to the IO system. */
-        std::unique_ptr<Conure::Utility::IOSystem> _ioSystem;
+        std::unique_ptr<IOSystem> _ioSystem;
         /*! Unique pointer to the log system. */
-        std::unique_ptr<Conure::Utility::LogSystem> _logSystem;
+        std::unique_ptr<LogSystem> _logSystem;
         /*! Time span of the render loop. */
-        Conure::Utility::TimeSpan _renderLoopTimeSpan;
+        TimeSpan _renderLoopTimeSpan;
         /*! Unique pointer to the render system. */
-        std::unique_ptr<Render::RenderSystem> _renderSystem;
+        std::unique_ptr<RenderSystem> _renderSystem;
         /*! Atomic flag for logic thread. */
         std::atomic<bool> _logicThreadIsWorking;
         /*! Time span of the logic loop. */
-        Conure::Utility::TimeSpan _logicLoopTimeSpan;
+        TimeSpan _logicLoopTimeSpan;
         /*! Unique pointer to the scene map system. */
-        std::unique_ptr<Core::SceneMap> _sceneMap;
+        std::unique_ptr<SceneMap> _sceneMap;
         /*! Unique pointer to the input system.*/
-        std::unique_ptr<Input::InputSystem> _inputSystem;
+        std::unique_ptr<InputSystem> _inputSystem;
     };
 }

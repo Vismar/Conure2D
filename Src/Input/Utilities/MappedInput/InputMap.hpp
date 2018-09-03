@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <memory>
 
-namespace  Input
+namespace  C2D
 {
     class InputSystemInterface;
 

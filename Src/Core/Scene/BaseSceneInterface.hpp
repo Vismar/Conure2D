@@ -3,7 +3,7 @@
 #include <set>
 #include <memory>
 
-namespace Core
+namespace C2D
 {
     class SceneObject;
     class RenderableComponent;

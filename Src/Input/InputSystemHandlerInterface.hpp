@@ -2,10 +2,10 @@
 
 namespace sf { class Event; }
 
-namespace Utility { class Time; }
-
-namespace Input
+namespace C2D
 {
+    class Time;
+
     /*!
      * \brief Public handler interface for input system.
      * 

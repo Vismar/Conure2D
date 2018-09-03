@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 
-namespace Core
+namespace C2D
 {
     class RenderableComponent;
 

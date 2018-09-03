@@ -6,7 +6,7 @@
 #include <memory>
 #include <mutex>
 
-namespace Core
+namespace C2D
 {
     /*!
      * \brief Base class for all scenes.

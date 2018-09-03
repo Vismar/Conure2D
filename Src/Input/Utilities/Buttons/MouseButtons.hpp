@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace Input
+namespace C2D
 {
     /*!
      * \brief Special redefinition of mouse buttons from SFML to determine them as enum class.
