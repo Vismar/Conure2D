@@ -13,6 +13,18 @@
 
 ## WIP
 
+### Added
+- **Overall**
+  - Now everything placed within one namespace "C2D".
+- **Utility**
+  - **RingBuffer iterators** - Now RingBuffer contains every iterator possible.
+- **Tests**
+  - **LockFreeLinkedQueueTests** - Test for LockFreeLinkedQueue.
+  - **RingBufferTest** - Additional tests and fixes
+
+### Removed
+- **VisualStudio project files** were removed because of full support of CMake.
+
 **--------------------------------------------------------------------------------------------------------------------**
 
 ## [0.0.3] - 30th August,2018

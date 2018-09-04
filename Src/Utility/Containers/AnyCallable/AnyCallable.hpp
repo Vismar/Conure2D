@@ -8,7 +8,7 @@
 namespace C2D
 {
     /*!
-     * \brief Container that provides the ability to store any kind of function despite its signature and then call it.
+     * \brief Container that can store any kind of function despite its signature and then call it.
      * \tparam Ret - returning type of a stored function.
      * 
      * Heavy template oriented class that stores gotten function in std::any and then cast it back to make a function call.

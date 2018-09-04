@@ -6,7 +6,7 @@ namespace C2D
     /*!
      * \brief Special handler that was created to make possible to compare AnyCallable instances.
      * 
-     * Works in a tricky way. It have 2 variables: 
+     * Works in a tricky way. It has 2 variables:
      *   - First handler - plain size_t variable. 
      *   - Second handler - pointer to type info. \n
      *   

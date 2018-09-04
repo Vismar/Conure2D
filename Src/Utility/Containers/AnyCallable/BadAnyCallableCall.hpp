@@ -11,6 +11,8 @@ namespace C2D
 
     /*!
      * \brief Exception that will be thrown by AnyCallable upon std::bad_any_cast within the class.
+     *
+     * Contains information of what was stored within the AnyCallable and what arguments were used to call it.
      */
     class BadAnyCallableCall : public std::bad_any_cast
     {
