@@ -67,7 +67,7 @@ namespace C2D
 
         /*!
          * \brief Returns number of stored callables.
-         * \return Number of callables that was stored in dispatcher.
+         * \return Number of callables that were stored in dispatcher.
          */
         size_t GetNumberOfCallables() const final;
 

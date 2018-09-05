@@ -1,4 +1,5 @@
 #pragma once
+/*! \file */
 #include <string>
 #include <typeindex>
 
@@ -8,8 +9,16 @@
 
 namespace C2D
 {
+#define S1(x) #x
+#define S2(x) S1(x)
+
     /*!
-     * \brief Demangle (makes readable by human) name of a specified type.
+     * \brief Simple macro that unifies __FILE__ and __LINE__ preprocessor things in format "FileName:LineNumber".
+     */
+    #define LOCATION __FILE__ ":" S2(__LINE__)
+
+    /*!
+     * \brief Demangles (makes readable by human) name of a specified type.
      * \param typeIndex - type of which name function will return.
      * \return Demangled name of a specified type.
      */
