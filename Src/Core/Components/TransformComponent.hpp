@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Components/Base/BaseLogicComponent.hpp"
 #include "Utility/EventSystem/EventManager.hpp"
-#include "Utility/Math/Vectors.hpp"
+#include "Utility/Math/Vector2.hpp"
 #include <SFML/Graphics/Transform.hpp>
 
 namespace C2D
@@ -46,7 +46,7 @@ namespace C2D
          * \brief Returns transform origin.
          * \return Vector2 that contains transform origin.
          */
-        Vector2F GetOrigin() const;
+        Vector2f GetOrigin() const;
 
         /*!
          * \brief Sets transform origin to specified values.
@@ -59,19 +59,19 @@ namespace C2D
          * \brief Sets transform origin to specified value.
          * \param newOrigin - const reference to a new transform origin.
          */
-        void SetOrigin(const Vector2F& newOrigin);
+        void SetOrigin(const Vector2f& newOrigin);
 
         /*!
          * \brief Returns global transform position.
          * \return Vector2 that contains global transform position.
          */
-        Vector2F GetGlobalPosition() const;
+        Vector2f GetGlobalPosition() const;
 
         /*!
          * \brief Returns local transform position.
          * \return Vector2 that contains local transform position.
          */
-        Vector2F GetPosition() const;
+        Vector2f GetPosition() const;
 
         /*!
          * \brief Sets local transform position to specified values.
@@ -84,7 +84,7 @@ namespace C2D
          * \brief Sets local transform position to specified value.
          * \param newPosition - const reference to a new local transform position.
          */
-        void SetPosition(const Vector2F& newPosition);
+        void SetPosition(const Vector2f& newPosition);
 
         /*!
          * \brief Moves local transform position by specified offset values.
@@ -97,7 +97,7 @@ namespace C2D
          * \brief Moves local transform position by specified offset value.
          * \param offset - const reference to an offset vector.
          */
-        void Move(const Vector2F& offset);
+        void Move(const Vector2f& offset);
 
         /*!
          * \brief Returns global transform rotation.
@@ -127,13 +127,13 @@ namespace C2D
          * \brief Returns global transform scale.
          * \return Vector2 that contains global transform scale.
          */
-        Vector2F GetGlobalScale() const;
+        Vector2f GetGlobalScale() const;
 
         /*!
          * \brief Returns local transform scale.
          * \return Vector2 that contains local transform scale.
          */
-        Vector2F GetScale() const;
+        Vector2f GetScale() const;
 
         /*!
          * \brief Sets local transform scale to specified values.
@@ -146,7 +146,7 @@ namespace C2D
          * \brief Sets local transform scale to specified value.
          * \param newScale - const reference to a new local transform scale.
          */
-        void SetScale(const Vector2F& newScale);
+        void SetScale(const Vector2f& newScale);
 
         /*!
          * \brief Scales(multiply) local transform scale by specified factor values.
@@ -159,7 +159,7 @@ namespace C2D
          * \brief Scales(multiply) local transform scale by specified factor value.
          * \param factor - const reference to an factor vector.
          */
-        void Scale(const Vector2F& factor);
+        void Scale(const Vector2f& factor);
 
         /*!
          * \brief Calculates transform matrix of the object and returns it.
@@ -221,18 +221,18 @@ namespace C2D
         /*! Simple flag to identify if global transformations need to be updated. */
         mutable std::atomic_bool _globalTransformationsNeedUpdate;
         /*! Transform origin. Stores origin point of an object. */
-        mutable AtomicVector2F _origin;
+        mutable Vector2af _origin;
         /*! Local transform position. Stores local position of an object. */
-        mutable AtomicVector2F _position;
+        mutable Vector2af _position;
         /*! Global transform position. Stores global position of an object. */
-        mutable AtomicVector2F _globalPosition;
+        mutable Vector2af _globalPosition;
         /*! Local transform rotation. Stores local rotation of an object. */
         mutable std::atomic<float> _rotation;
         /*! Global transform rotation. Stores global rotation of an object. */
         mutable std::atomic<float> _globalRotation;
         /*! Local transform scale. Stores local scale of an object. */
-        mutable AtomicVector2F _scale;
+        mutable Vector2af _scale;
         /*! Global transform scale. Stores global scale of an object. */
-        mutable AtomicVector2F _globalScale;
+        mutable Vector2af _globalScale;
     };
 }

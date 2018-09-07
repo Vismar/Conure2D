@@ -41,13 +41,10 @@ add_library(Utility
             LogSystem/LogSystem.cpp
             LogSystem/LogSystem.hpp
             LogSystem/LogUtilities.hpp
-            Math/Vector2/AtomicVector2.hpp
-            Math/Vector2/AtomicVector2.inl
-            Math/Vector2/Vector2.hpp
-            Math/Vector2/Vector2.inl
-            Math/Vector2/Vector2PrecompiledTemplates.cpp
+            Math/Vector2.hpp
+            Math/Vector2.inl
+            Math/Vector2PrecompiledTemplates.cpp
             Math/MathConstants.hpp
-            Math/Vectors.hpp
             Random/RandomGenerator.cpp
             Random/RandomGenerator.hpp
             Random/RandomGenerator.inl

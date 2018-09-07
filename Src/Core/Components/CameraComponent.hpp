@@ -2,7 +2,7 @@
 #include "Core/Components/Base/BaseDataComponent.hpp"
 #include "Core/Components/Utility/CamerasCompare.hpp"
 #include "Utility/EventSystem/EventManager.hpp"
-#include "Utility/Math/Vectors.hpp"
+#include "Utility/Math/Vector2.hpp"
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <vector>
@@ -92,13 +92,13 @@ namespace C2D
          * \brief Sets new size of a camera view.
          * \param newSize - new size of a camera view.
          */
-        void SetSize(const Vector2F& newSize);
+        void SetSize(const Vector2f& newSize);
 
         /*!
          * \brief Gets current size of a camera view.
          * \return Current size of a camera view.
          */
-        Vector2F GetSize() const;
+        Vector2f GetSize() const;
 
         /*!
          * \brief Sets new viewport for a camera.
@@ -132,7 +132,7 @@ namespace C2D
         /*! Priority of a camera. The lesser the number, the prior the camera. */
         std::atomic_uint8_t _priority;
         /*! Size of a view. */
-        AtomicVector2F _size;
+        Vector2af _size;
         /*! Left coordinate of a viewport of a view. */
         std::atomic<float> _viewportLeftCoord;
         /*! Top coordinate of a viewport of a view. */

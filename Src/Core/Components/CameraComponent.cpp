@@ -75,10 +75,10 @@ CameraComponent::operator sf::View() const
     sf::View view;
     if (auto transform = _transformComponent.lock())
     {
-        const auto pos = transform->GetGlobalPosition();
-        const Vector2F size = _size;
-        const auto x = pos.x + size.x / 2.0f;
-        const auto y = pos.y + size.y / 2.0f;
+        const auto pos(transform->GetGlobalPosition());
+        const Vector2f size(_size);
+        const auto x(pos.x + size.x / 2.0f);
+        const auto y(pos.y + size.y / 2.0f);
         view.setCenter(x, y);
         view.setSize(size.x, size.y);
         view.setRotation(transform->GetGlobalRotation());
@@ -111,16 +111,16 @@ uint8_t CameraComponent::GetPriority() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void CameraComponent::SetSize(const Vector2F& newSize)
+void CameraComponent::SetSize(const Vector2f& newSize)
 {
     _size = newSize;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Vector2F CameraComponent::GetSize() const
+Vector2f CameraComponent::GetSize() const
 {
-    return _size;
+    return Vector2f(_size);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

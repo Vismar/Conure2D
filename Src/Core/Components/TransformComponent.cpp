@@ -20,9 +20,9 @@ TransformComponent::TransformComponent(const std::shared_ptr<SceneObject>& scene
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Vector2F TransformComponent::GetOrigin() const
+Vector2f TransformComponent::GetOrigin() const
 {
-    return _origin;
+    return Vector2f(_origin);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,25 +37,25 @@ void TransformComponent::SetOrigin(const float newOriginX, const float newOrigin
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::SetOrigin(const Vector2F& newOrigin)
+void TransformComponent::SetOrigin(const Vector2f& newOrigin)
 {
     SetOrigin(newOrigin.x, newOrigin.y);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Vector2F TransformComponent::GetGlobalPosition() const
+Vector2f TransformComponent::GetGlobalPosition() const
 {
     _UpdateGlobalTransformations();
 
-    return _globalPosition;
+    return Vector2f(_globalPosition);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Vector2F TransformComponent::GetPosition() const
+Vector2f TransformComponent::GetPosition() const
 {
-    return _position;
+    return Vector2f(_position);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@ void TransformComponent::SetPosition(const float newPositionX, const float newPo
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::SetPosition(const Vector2F& newPosition)
+void TransformComponent::SetPosition(const Vector2f& newPosition)
 {
     SetPosition(newPosition.x, newPosition.y);
 }
@@ -84,7 +84,7 @@ void TransformComponent::Move(const float offsetX, const float offsetY)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::Move(const Vector2F& offset)
+void TransformComponent::Move(const Vector2f& offset)
 {
     SetPosition(_position.x.load() + offset.x, _position.y.load() + offset.y);
 }
@@ -128,18 +128,18 @@ void TransformComponent::Rotate(const float angle)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Vector2F TransformComponent::GetGlobalScale() const
+Vector2f TransformComponent::GetGlobalScale() const
 {
     _UpdateGlobalTransformations();
 
-    return _globalScale;
+    return Vector2f(_globalScale);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Vector2F TransformComponent::GetScale() const
+Vector2f TransformComponent::GetScale() const
 {
-    return _scale;
+    return Vector2f(_scale);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,7 +154,7 @@ void TransformComponent::SetScale(const float newScaleX, const float newScaleY)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::SetScale(const Vector2F& newScale)
+void TransformComponent::SetScale(const Vector2f& newScale)
 {
     SetScale(newScale.x, newScale.y);
 }
@@ -168,7 +168,7 @@ void TransformComponent::Scale(const float factorX, const float factorY)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void TransformComponent::Scale(const Vector2F& factor)
+void TransformComponent::Scale(const Vector2f& factor)
 {
     SetScale(_scale.x.load() * factor.x, _scale.y = _scale.y.load() * factor.y);
 }
@@ -180,19 +180,19 @@ sf::Transform TransformComponent::GetTransform() const
     const float scaleX(_scale.x.load()), scaleY(_scale.y.load());
     const float originX(_origin.x.load()), originY(_origin.y.load());
 
-    const auto angle = -_rotation.load() * FromDegToRad;
-    const auto cos = std::cos(angle);
-    const auto sin = std::sin(angle);
-    const auto sxc = scaleX * cos;
-    const auto syc = scaleY * cos;
-    const auto sxs = scaleX * sin;
-    const auto sys = scaleY * sin;
-    const auto tx = -originX * sxc - originY * sys + _position.x.load();
-    const auto ty =  originX * sxs - originY * syc + _position.y.load();
+    const auto angle(-_rotation.load() * FromDegToRad);
+    const auto cos(std::cos(angle));
+    const auto sin(std::sin(angle));
+    const auto sxc(scaleX * cos);
+    const auto syc(scaleY * cos);
+    const auto sxs(scaleX * sin);
+    const auto sys(scaleY * sin);
+    const auto tx(-originX * sxc - originY * sys + _position.x.load());
+    const auto ty(originX * sxs - originY * syc + _position.y.load());
 
-    sf::Transform transform = sf::Transform(sxc,  sys,  tx,
-                                            -sxs, syc,  ty,
-                                            0.0f, 0.0f, 1.0f);
+    sf::Transform transform(sf::Transform(sxc,  sys,  tx,
+                                          -sxs, syc,  ty,
+                                          0.0f, 0.0f, 1.0f));
 
     if (const auto object = GetSceneObject().lock())
     {
@@ -235,7 +235,7 @@ Transformations TransformComponent::GetGlobalTransformations() const
     Transformations transformations;
 
     // Position
-    const auto globalPosition = GetGlobalPosition();
+    const auto globalPosition(GetGlobalPosition());
     transformations.position.x = globalPosition.x;
     transformations.position.y = globalPosition.y;
 
@@ -243,7 +243,7 @@ Transformations TransformComponent::GetGlobalTransformations() const
     transformations.rotation = GetGlobalRotation();
 
     // Scale
-    const auto globalScale = GetGlobalScale();
+    const auto globalScale(GetGlobalScale());
     transformations.scale.x = globalScale.x;
     transformations.scale.y = globalScale.y;
 
@@ -255,24 +255,24 @@ Transformations TransformComponent::GetGlobalTransformations() const
 Transformations TransformComponent::GetTransformationsRelativeTo(const std::shared_ptr<TransformComponent>& otherTransform) const
 {
     Transformations relativeTransformations;
-    const auto newTransform = otherTransform->GetTransform().getInverse() * GetTransform();
-    const auto matrix = newTransform.getMatrix();
+    const auto newTransform(otherTransform->GetTransform().getInverse() * GetTransform());
+    const auto matrix(newTransform.getMatrix());
 
     // Rotation
     relativeTransformations.rotation = std::atan2(matrix[1], matrix[0]) * FromRadToDeg;
 
     // Scale
-    const auto angle = -relativeTransformations.rotation * FromDegToRad;
-    const auto cos = std::cos(angle);
+    const auto angle(-relativeTransformations.rotation * FromDegToRad);
+    const auto cos(std::cos(angle));
     relativeTransformations.scale.x = matrix[0] / cos;
     relativeTransformations.scale.y = matrix[5] / cos;
 
     // Position
-    const auto sin = std::sin(angle);
-    const auto sxc = relativeTransformations.scale.x * cos;
-    const auto syc = relativeTransformations.scale.y * cos;
-    const auto sxs = relativeTransformations.scale.x * sin;
-    const auto sys = relativeTransformations.scale.y * sin;
+    const auto sin(std::sin(angle));
+    const auto sxc(relativeTransformations.scale.x * cos);
+    const auto syc(relativeTransformations.scale.y * cos);
+    const auto sxs(relativeTransformations.scale.x * sin);
+    const auto sys(relativeTransformations.scale.y * sin);
     relativeTransformations.position.x = matrix[12] + _origin.x.load() * sxc + _origin.y.load() * sys;
     relativeTransformations.position.y = matrix[13] - _origin.x.load() * sxs + _origin.y.load() * syc;
 
@@ -283,9 +283,9 @@ Transformations TransformComponent::GetTransformationsRelativeTo(const std::shar
 
 void TransformComponent::SetTransformations(const Transformations& transformations)
 {
-    SetPosition(transformations.position);
+    SetPosition(Vector2f(transformations.position));
     SetRotation(transformations.rotation);
-    SetScale(transformations.scale);
+    SetScale(Vector2f(transformations.scale));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -338,23 +338,23 @@ void TransformComponent::_UpdateGlobalTransformations() const
     if (_globalTransformationsNeedUpdate)
     {
         _globalTransformationsNeedUpdate = false;
-        const auto transformMatrix = GetTransform().getMatrix();
+        const auto transformMatrix(GetTransform().getMatrix());
 
         // Rotation
         _globalRotation = std::atan2(transformMatrix[1], transformMatrix[0]) * FromRadToDeg;
 
         // Scale
-        const auto angle = -_globalRotation.load() * FromDegToRad;
-        const auto cos = std::cos(angle);
+        const auto angle(-_globalRotation.load() * FromDegToRad);
+        const auto cos(std::cos(angle));
         _globalScale.x = transformMatrix[0] / cos;
         _globalScale.y = transformMatrix[5] / cos;
 
         // Position
-        const auto sin = std::sin(angle);
-        const auto sxc = _globalScale.x.load() * cos;
-        const auto syc = _globalScale.y.load() * cos;
-        const auto sxs = _globalScale.x.load() * sin;
-        const auto sys = _globalScale.y.load() * sin;
+        const auto sin(std::sin(angle));
+        const auto sxc(_globalScale.x.load() * cos);
+        const auto syc(_globalScale.y.load() * cos);
+        const auto sxs(_globalScale.x.load() * sin);
+        const auto sys(_globalScale.y.load() * sin);
         _globalPosition.x = transformMatrix[12] + _origin.x.load() * sxc + _origin.y.load() * sys;
         _globalPosition.y = transformMatrix[13] - _origin.x.load() * sxs + _origin.y.load() * syc;
     }
