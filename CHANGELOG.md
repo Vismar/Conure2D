@@ -18,12 +18,14 @@
   - Now everything placed within one namespace "C2D".
 - **Utility**
   - **RingBuffer iterators** - Now RingBuffer contains every iterator possible.
+  - **Vector2** - Now it is a single constexpr template class that can store primitive types and their atomic versions.
 - **Tests**
-  - **LockFreeLinkedQueueTests** - Test for LockFreeLinkedQueue.
-  - **RingBufferTest** - Additional tests and fixes
+  - **LockFreeLinkedQueueTests** - Tests for LockFreeLinkedQueue.
+  - **RingBufferTest** - Additional tests and fixes.
+  - **Vector2Test** - Tests for Vector2.
 
 ### Removed
-- **VisualStudio project files** were removed because of full support of CMake.
+- **VisualStudio project files** were removed because of full support of the CMake.
 
 **--------------------------------------------------------------------------------------------------------------------**
 

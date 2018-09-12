@@ -67,20 +67,20 @@ namespace C2D
         /*!
          * \brief Default constructor with default values as zero.
          */
-        Vector2();
+        constexpr Vector2();
 
         /*!
          * \brief Constructor to create a vector from two values.
          * \param xValue Value of x parameter.
          * \param yValue Value of y parameter.
          */
-        Vector2(T xValue, T yValue);
+        constexpr Vector2(T xValue, T yValue);
 
         /*!
          * \brief Copy constructor.
          * \param otherVector Other vector from which values will be copied.
          */
-        Vector2(const Vector2<T, IsAtomic>& otherVector);
+        constexpr Vector2(const Vector2<T, IsAtomic>& otherVector);
 
         /*!
          * \brief Copy constructor.
@@ -88,31 +88,31 @@ namespace C2D
          * \param otherVector Other vector from which values will be copied.
          */
         template <bool OtherVectorIsAtomic>
-        explicit Vector2(const Vector2<T, OtherVectorIsAtomic>& otherVector);
+        constexpr explicit Vector2(const Vector2<T, OtherVectorIsAtomic>& otherVector);
 
         /*!
          * \brief Move constructor.
          * \param nonatomicVector Other vector which values will be used.
          */
-        explicit Vector2(Vector2<T, false>&& nonatomicVector) noexcept;
+        constexpr explicit Vector2(Vector2<T, false>&& nonatomicVector) noexcept;
         /*!
          * \brief Copy constructor.
          * \param sfmlVector sf::Vector2 from which values will be copied.
          */
-        explicit Vector2(const sf::Vector2<T>& sfmlVector);
+        constexpr explicit Vector2(const sf::Vector2<T>& sfmlVector);
 
         /*!
          * \brief Move constructor.
          * \param sfmlVector sf::Vector2 which values will be used.
          */
-        explicit Vector2(sf::Vector2<T>&& sfmlVector);
+        constexpr explicit Vector2(sf::Vector2<T>&& sfmlVector);
 
         /*!
          * \brief Copy assignment operator.
          * \param otherVector Other vector from which values will be copied.
          * \return Reference to vector after assignment.
          */
-        Vector2<T, IsAtomic>& operator=(const Vector2<T, IsAtomic>& otherVector);
+        constexpr Vector2<T, IsAtomic>& operator=(const Vector2<T, IsAtomic>& otherVector);
 
         /*!
          * \brief Copy assignment operator.
@@ -121,28 +121,28 @@ namespace C2D
          * \return Reference to vector after assignment.
          */
         template <bool OtherVectorIsAtomic>
-        Vector2<T, IsAtomic>& operator=(const Vector2<T, OtherVectorIsAtomic>& otherVector);
+        constexpr Vector2<T, IsAtomic>& operator=(const Vector2<T, OtherVectorIsAtomic>& otherVector);
 
         /*!
          * \brief Move assignment operator.
          * \param nonatomicVector Other vector which values will be used.
          * \return Reference to vector after assignment.
          */
-        Vector2<T, IsAtomic>& operator=(Vector2<T, false>&& nonatomicVector);
+        constexpr Vector2<T, IsAtomic>& operator=(Vector2<T, false>&& nonatomicVector);
 
         /*!
          * \brief Copy assignment operator.
          * \param sfmlVector sf::Vector2 from which values will be copied.
          * \return Reference to vector after assignment.
          */
-        Vector2<T, IsAtomic>& operator=(const sf::Vector2<T>& sfmlVector);
+        constexpr Vector2<T, IsAtomic>& operator=(const sf::Vector2<T>& sfmlVector);
 
         /*!
          * \brief Move assignment operator.
          * \param sfmlVector sf::Vector2 which values will be used.
          * \return Reference to vector after assignment.
          */
-        Vector2<T, IsAtomic>& operator=(sf::Vector2<T>&& sfmlVector);
+        constexpr Vector2<T, IsAtomic>& operator=(sf::Vector2<T>&& sfmlVector);
 
         /*!
          * \brief Equality operator.
@@ -151,7 +151,7 @@ namespace C2D
          * \return True if vectors are equal (x == rightVector.x && y == rightVector.y). Otherwise - false.
          */
         template <bool RightVectorIsAtomic>
-        bool operator==(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
+        constexpr bool operator==(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
 
         /*!
          * \brief Inequality operator.
@@ -160,7 +160,7 @@ namespace C2D
          * \return True if vectors are not equal (x != rightVector.x && y != rightVector.y). Otherwise - false.
          */
         template <bool RightVectorIsAtomic>
-        bool operator!=(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
+        constexpr bool operator!=(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
 
         /*!
          * \brief Multiplication operator by another Vector2.
@@ -170,7 +170,7 @@ namespace C2D
          * \return Scalar of the same template type as "left" vector.
          */
         template <bool RightVectorIsAtomic>
-        T operator*(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
+        constexpr T operator*(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
 
         /*!
          * \brief Multiplication operator by scalar.
@@ -179,7 +179,7 @@ namespace C2D
          * \return New vector as result of math operation.
          */
         template <typename U>
-        Vector2<T, false> operator*(U scalar) const;
+        constexpr Vector2<T, false> operator*(U scalar) const;
 
         /*!
          * \brief Division operator by scalar.
@@ -188,7 +188,7 @@ namespace C2D
          * \return New vector as result of math operation.
          */
         template <typename U>
-        Vector2<T, false> operator/(U scalar) const;
+        constexpr Vector2<T, false> operator/(U scalar) const;
 
         /*!
          * \brief Addition operator.
@@ -197,7 +197,7 @@ namespace C2D
          * \return New vector as result of math operation.
          */
         template <bool RightVectorIsAtomic>
-        Vector2<T, false> operator+(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
+        constexpr Vector2<T, false> operator+(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
 
         /*!
          * \brief Subtraction operator.
@@ -206,7 +206,7 @@ namespace C2D
          * \return New vector as result of math operation.
          */
         template <bool RightVectorIsAtomic>
-        Vector2<T, false> operator-(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
+        constexpr Vector2<T, false> operator-(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
 
         /*!
          * \brief Addition and assignment operator.
@@ -215,7 +215,7 @@ namespace C2D
          * \return Reference to vector after math operation and assignment.
          */
         template <bool RightVectorIsAtomic>
-        Vector2& operator+=(const Vector2<T, RightVectorIsAtomic>& rightVector);
+        constexpr Vector2& operator+=(const Vector2<T, RightVectorIsAtomic>& rightVector);
 
         /*!
          * \brief Subtraction and assignment operator.
@@ -224,7 +224,7 @@ namespace C2D
          * \return Reference to vector after math operation and assignment.
          */
         template <bool RightVectorIsAtomic>
-        Vector2& operator-=(const Vector2<T, RightVectorIsAtomic>& rightVector);
+        constexpr Vector2& operator-=(const Vector2<T, RightVectorIsAtomic>& rightVector);
 
         /*!
          * \brief Multiplication and assignment operator by scalar.
@@ -233,7 +233,7 @@ namespace C2D
          * \return Reference to vector after math operation and assignment.
          */
         template <typename U>
-        Vector2& operator*=(U scalar);
+        constexpr Vector2& operator*=(U scalar);
 
         /*!
          * \brief Division and assignment operator by scalar.
@@ -242,12 +242,12 @@ namespace C2D
          * \return Reference to vector after math operation and assignment.
          */
         template <typename U>
-        Vector2& operator/=(U scalar);
+        constexpr Vector2& operator/=(U scalar);
 
         /*!
          * \brief Sets each of vector parameters to zero.
          */
-        void Zero();
+        constexpr void Zero();
 
         /*! X value of vector. */
         Type x;
@@ -263,7 +263,7 @@ namespace C2D
      * \return New vector with same but negative values as result of math operation.
      */
     template <typename T, bool IsAtomic>
-    Vector2<T, false> operator-(const Vector2<T, IsAtomic>& vector);
+    constexpr Vector2<T, false> operator-(const Vector2<T, IsAtomic>& vector);
 
     /*!
      * \brief Multiplication operator.
@@ -275,7 +275,7 @@ namespace C2D
      * \return New vector as result of math operation.
      */
     template <typename U, typename T, bool IsAtomic>
-    Vector2<T, false> operator*(U scalar, const Vector2<T, IsAtomic>& vector);
+    constexpr Vector2<T, false> operator*(U scalar, const Vector2<T, IsAtomic>& vector);
 
 #include <Utility/Math/Vector2.inl>
 

@@ -3,19 +3,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>::Vector2() : x(0), y(0)
+constexpr Vector2<T, IsAtomic>::Vector2() : x(0), y(0)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>::Vector2(const T xValue, const T yValue) : x(xValue), y(yValue)
+constexpr Vector2<T, IsAtomic>::Vector2(const T xValue, const T yValue) : x(xValue), y(yValue)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>::Vector2(const Vector2<T, IsAtomic>& otherVector)
+constexpr Vector2<T, IsAtomic>::Vector2(const Vector2<T, IsAtomic>& otherVector)
 {
     if constexpr (IsAtomic)
     {
@@ -33,7 +33,7 @@ Vector2<T, IsAtomic>::Vector2(const Vector2<T, IsAtomic>& otherVector)
 
 template <typename T, bool IsAtomic>
 template <bool OtherVectorIsAtomic>
-Vector2<T, IsAtomic>::Vector2(const Vector2<T, OtherVectorIsAtomic>& otherVector)
+constexpr Vector2<T, IsAtomic>::Vector2(const Vector2<T, OtherVectorIsAtomic>& otherVector)
 {
     if constexpr (OtherVectorIsAtomic)
     {
@@ -50,7 +50,7 @@ Vector2<T, IsAtomic>::Vector2(const Vector2<T, OtherVectorIsAtomic>& otherVector
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>::Vector2(C2D::Vector2<T, false>&& nonatomicVector) noexcept
+constexpr Vector2<T, IsAtomic>::Vector2(C2D::Vector2<T, false>&& nonatomicVector) noexcept
 : x(std::move(nonatomicVector.x))
 , y(std::move(nonatomicVector.y))
 { }
@@ -58,13 +58,13 @@ Vector2<T, IsAtomic>::Vector2(C2D::Vector2<T, false>&& nonatomicVector) noexcept
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>::Vector2(const sf::Vector2<T>& sfmlVector) : x(sfmlVector.x), y(sfmlVector.y)
+constexpr Vector2<T, IsAtomic>::Vector2(const sf::Vector2<T>& sfmlVector) : x(sfmlVector.x), y(sfmlVector.y)
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>::Vector2(sf::Vector2<T>&& sfmlVector)
+constexpr Vector2<T, IsAtomic>::Vector2(sf::Vector2<T>&& sfmlVector)
 : x(std::move(sfmlVector.x))
 , y(std::move(sfmlVector.y))
 { }
@@ -72,7 +72,7 @@ Vector2<T, IsAtomic>::Vector2(sf::Vector2<T>&& sfmlVector)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vector2<T, IsAtomic>& otherVector)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vector2<T, IsAtomic>& otherVector)
 {
     if constexpr (IsAtomic)
     {
@@ -92,7 +92,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vector2<T, IsAt
 
 template <typename T, bool IsAtomic>
 template <bool OtherVectorIsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vector2<T, OtherVectorIsAtomic>& otherVector)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vector2<T, OtherVectorIsAtomic>& otherVector)
 {
     if constexpr (OtherVectorIsAtomic)
     {
@@ -111,7 +111,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vector2<T, Othe
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(Vector2<T, false>&& nonatomicVector)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(Vector2<T, false>&& nonatomicVector)
 {
     x = nonatomicVector.x;
     y = nonatomicVector.y;
@@ -122,7 +122,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(Vector2<T, false>&& nonato
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const sf::Vector2<T>& sfmlVector)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const sf::Vector2<T>& sfmlVector)
 {
     x = sfmlVector.x;
     y = sfmlVector.y;
@@ -133,7 +133,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const sf::Vector2<T>& sfml
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(sf::Vector2<T>&& sfmlVector)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(sf::Vector2<T>&& sfmlVector)
 {
     x = std::move(sfmlVector.x);
     y = std::move(sfmlVector.y);
@@ -145,7 +145,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(sf::Vector2<T>&& sfmlVecto
 
 template <typename T, bool IsAtomic>
 template <bool RightVectorIsAtomic>
-bool Vector2<T, IsAtomic>::operator==(const Vector2<T, RightVectorIsAtomic>& rightVector) const
+constexpr bool Vector2<T, IsAtomic>::operator==(const Vector2<T, RightVectorIsAtomic>& rightVector) const
 {
     T otherVectorX;
     T otherVectorY;
@@ -182,7 +182,7 @@ bool Vector2<T, IsAtomic>::operator==(const Vector2<T, RightVectorIsAtomic>& rig
 
 template <typename T, bool IsAtomic>
 template <bool RightVectorIsAtomic>
-bool Vector2<T, IsAtomic>::operator!=(const Vector2<T, RightVectorIsAtomic>& rightVector) const
+constexpr bool Vector2<T, IsAtomic>::operator!=(const Vector2<T, RightVectorIsAtomic>& rightVector) const
 {
     return !(*this == rightVector);
 }
@@ -191,7 +191,7 @@ bool Vector2<T, IsAtomic>::operator!=(const Vector2<T, RightVectorIsAtomic>& rig
 
 template <typename T, bool IsAtomic>
 template <bool RightVectorIsAtomic>
-T Vector2<T, IsAtomic>::operator*(const Vector2<T, RightVectorIsAtomic>& rightVector) const
+constexpr T Vector2<T, IsAtomic>::operator*(const Vector2<T, RightVectorIsAtomic>& rightVector) const
 {
     if constexpr (RightVectorIsAtomic)
     {
@@ -221,7 +221,7 @@ T Vector2<T, IsAtomic>::operator*(const Vector2<T, RightVectorIsAtomic>& rightVe
 
 template <typename T, bool IsAtomic>
 template <typename U>
-Vector2<T, false> Vector2<T, IsAtomic>::operator*(const U scalar) const
+constexpr Vector2<T, false> Vector2<T, IsAtomic>::operator*(const U scalar) const
 {
     if constexpr (IsAtomic)
     {
@@ -239,7 +239,7 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator*(const U scalar) const
 
 template <typename T, bool IsAtomic>
 template <typename U>
-Vector2<T, false> Vector2<T, IsAtomic>::operator/(const U scalar) const
+constexpr Vector2<T, false> Vector2<T, IsAtomic>::operator/(const U scalar) const
 {
     const double invertedScalar(1.0 / scalar);
 
@@ -259,7 +259,7 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator/(const U scalar) const
 
 template <typename T, bool IsAtomic>
 template <bool RightVectorIsAtomic>
-Vector2<T, false> Vector2<T, IsAtomic>::operator+(const Vector2<T, RightVectorIsAtomic>& rightVector) const
+constexpr Vector2<T, false> Vector2<T, IsAtomic>::operator+(const Vector2<T, RightVectorIsAtomic>& rightVector) const
 {
     if constexpr (RightVectorIsAtomic)
     {
@@ -293,7 +293,7 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator+(const Vector2<T, RightVectorIs
 
 template <typename T, bool IsAtomic>
 template <bool RightVectorIsAtomic>
-Vector2<T, false> Vector2<T, IsAtomic>::operator-(const Vector2<T, RightVectorIsAtomic>& rightVector) const
+constexpr Vector2<T, false> Vector2<T, IsAtomic>::operator-(const Vector2<T, RightVectorIsAtomic>& rightVector) const
 {
     if constexpr (RightVectorIsAtomic)
     {
@@ -327,7 +327,7 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator-(const Vector2<T, RightVectorIs
 
 template <typename T, bool IsAtomic>
 template <bool RightVectorIsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator+=(const Vector2<T, RightVectorIsAtomic>& rightVector)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator+=(const Vector2<T, RightVectorIsAtomic>& rightVector)
 {
     if constexpr (RightVectorIsAtomic)
     {
@@ -363,7 +363,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator+=(const Vector2<T, RightVec
 
 template <typename T, bool IsAtomic>
 template <bool RightVectorIsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator-=(const Vector2<T, RightVectorIsAtomic>& rightVector)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator-=(const Vector2<T, RightVectorIsAtomic>& rightVector)
 {
     if constexpr (RightVectorIsAtomic)
     {
@@ -399,7 +399,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator-=(const Vector2<T, RightVec
 
 template <typename T, bool IsAtomic>
 template <typename U>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator*=(const U scalar)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator*=(const U scalar)
 {
     if constexpr (IsAtomic)
     {
@@ -419,7 +419,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator*=(const U scalar)
 
 template <typename T, bool IsAtomic>
 template <typename U>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator/=(const U scalar)
+constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator/=(const U scalar)
 {
     const T invertedScalar(1.0 / scalar);
 
@@ -440,7 +440,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator/=(const U scalar)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-void Vector2<T, IsAtomic>::Zero()
+constexpr void Vector2<T, IsAtomic>::Zero()
 {
     x = y = 0;
 }
@@ -448,7 +448,7 @@ void Vector2<T, IsAtomic>::Zero()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-Vector2<T, false> operator-(const Vector2<T, IsAtomic>& vector)
+constexpr Vector2<T, false> operator-(const Vector2<T, IsAtomic>& vector)
 {
     if constexpr (IsAtomic)
     {
@@ -463,7 +463,7 @@ Vector2<T, false> operator-(const Vector2<T, IsAtomic>& vector)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename U, typename T, bool IsAtomic>
-Vector2<T, false> operator*(U scalar, const Vector2<T, IsAtomic>& vector)
+constexpr Vector2<T, false> operator*(U scalar, const Vector2<T, IsAtomic>& vector)
 {
     if constexpr (IsAtomic)
     {
