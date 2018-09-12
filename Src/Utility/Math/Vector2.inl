@@ -15,6 +15,23 @@ Vector2<T, IsAtomic>::Vector2(const T xValue, const T yValue) : x(xValue), y(yVa
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
+Vector2<T, IsAtomic>::Vector2(const Vector2<T, IsAtomic>& otherVector)
+{
+    if constexpr (IsAtomic)
+    {
+        x = otherVector.x.load();
+        y = otherVector.y.load();
+    }
+    else
+    {
+        x = otherVector.x;
+        y = otherVector.y;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename T, bool IsAtomic>
 template <bool OtherVectorIsAtomic>
 Vector2<T, IsAtomic>::Vector2(const Vector2<T, OtherVectorIsAtomic>& otherVector)
 {
@@ -51,6 +68,25 @@ Vector2<T, IsAtomic>::Vector2(sf::Vector2<T>&& sfmlVector)
 : x(std::move(sfmlVector.x))
 , y(std::move(sfmlVector.y))
 { }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename T, bool IsAtomic>
+Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vector2<T, IsAtomic>& otherVector)
+{
+    if constexpr (IsAtomic)
+    {
+        x = otherVector.x.load();
+        y = otherVector.y.load();
+    }
+    else
+    {
+        x = otherVector.x;
+        y = otherVector.y;
+    }
+
+    return *this;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -154,8 +190,8 @@ bool Vector2<T, IsAtomic>::operator!=(const Vector2<T, RightVectorIsAtomic>& rig
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, bool IsAtomic>
-template <typename U, bool RightVectorIsAtomic>
-T Vector2<T, IsAtomic>::operator*(const Vector2<U, RightVectorIsAtomic>& rightVector) const
+template <bool RightVectorIsAtomic>
+T Vector2<T, IsAtomic>::operator*(const Vector2<T, RightVectorIsAtomic>& rightVector) const
 {
     if constexpr (RightVectorIsAtomic)
     {
@@ -190,12 +226,12 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator*(const U scalar) const
     if constexpr (IsAtomic)
     {
         return Vector2<T, false>(static_cast<T>(x.load() * scalar),
-                                    static_cast<T>(y.load() * scalar));
+                                 static_cast<T>(y.load() * scalar));
     }
     else
     {
         return Vector2<T, false>(static_cast<T>(x * scalar),
-                                    static_cast<T>(y * scalar));
+                                 static_cast<T>(y * scalar));
     }
 }
 
@@ -205,17 +241,17 @@ template <typename T, bool IsAtomic>
 template <typename U>
 Vector2<T, false> Vector2<T, IsAtomic>::operator/(const U scalar) const
 {
-    constexpr double invertedScalar(1.0 / scalar);
+    const double invertedScalar(1.0 / scalar);
 
     if constexpr (IsAtomic)
     {
         return Vector2<T, false>(static_cast<T>(x.load() * invertedScalar),
-                                    static_cast<T>(y.load() * invertedScalar));
+                                 static_cast<T>(y.load() * invertedScalar));
     }
     else
     {
         return Vector2<T, false>(static_cast<T>(x * invertedScalar),
-                                    static_cast<T>(y * invertedScalar));
+                                 static_cast<T>(y * invertedScalar));
     }
 }
 
@@ -230,12 +266,12 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator+(const Vector2<T, RightVectorIs
         if constexpr (IsAtomic)
         {
             return Vector2<T, false>(static_cast<T>(x.load() + rightVector.x.load()),
-                                        static_cast<T>(y.load() + rightVector.y.load()));
+                                     static_cast<T>(y.load() + rightVector.y.load()));
         }
         else
         {
             return Vector2<T, false>(static_cast<T>(x + rightVector.x.load()),
-                                        static_cast<T>(y + rightVector.y.load()));
+                                     static_cast<T>(y + rightVector.y.load()));
         }
     }
     else
@@ -243,12 +279,12 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator+(const Vector2<T, RightVectorIs
         if constexpr (IsAtomic)
         {
             return Vector2<T, false>(static_cast<T>(x.load() + rightVector.x),
-                                        static_cast<T>(y.load() + rightVector.y));
+                                     static_cast<T>(y.load() + rightVector.y));
         }
         else
         {
             return Vector2<T, false>(static_cast<T>(x + rightVector.x),
-                                        static_cast<T>(y + rightVector.y));
+                                     static_cast<T>(y + rightVector.y));
         }
     }
 }
@@ -264,12 +300,12 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator-(const Vector2<T, RightVectorIs
         if constexpr (IsAtomic)
         {
             return Vector2<T, false>(static_cast<T>(x.load() - rightVector.x.load()),
-                                        static_cast<T>(y.load() - rightVector.y.load()));
+                                     static_cast<T>(y.load() - rightVector.y.load()));
         }
         else
         {
             return Vector2<T, false>(static_cast<T>(x - rightVector.x.load()),
-                                        static_cast<T>(y - rightVector.y.load()));
+                                     static_cast<T>(y - rightVector.y.load()));
         }
     }
     else
@@ -277,12 +313,12 @@ Vector2<T, false> Vector2<T, IsAtomic>::operator-(const Vector2<T, RightVectorIs
         if constexpr (IsAtomic)
         {
             return Vector2<T, false>(static_cast<T>(x.load() - rightVector.x),
-                                        static_cast<T>(y.load() - rightVector.y));
+                                     static_cast<T>(y.load() - rightVector.y));
         }
         else
         {
             return Vector2<T, false>(static_cast<T>(x - rightVector.x),
-                                        static_cast<T>(y - rightVector.y));
+                                     static_cast<T>(y - rightVector.y));
         }
     }
 }
@@ -334,7 +370,7 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator-=(const Vector2<T, RightVec
         if constexpr (IsAtomic)
         {
             x = x.load() - rightVector.x.load();
-            y = y.load() + rightVector.y.load();
+            y = y.load() - rightVector.y.load();
         }
         else
         {
@@ -353,42 +389,6 @@ Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator-=(const Vector2<T, RightVec
         {
             x = x - rightVector.x;
             y = y - rightVector.y;
-        }
-    }
-
-    return *this;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <typename T, bool IsAtomic>
-template <bool RightVectorIsAtomic>
-Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator/=(const C2D::Vector2<T, RightVectorIsAtomic>& rightVector)
-{
-    if constexpr (RightVectorIsAtomic)
-    {
-        if constexpr (IsAtomic)
-        {
-            x = x.load() / rightVector.x.load();
-            y = y.load() / rightVector.y.load();
-        }
-        else
-        {
-            x = x / rightVector.x.load();
-            y = y / rightVector.y.load();
-        }
-    }
-    else
-    {
-        if constexpr (IsAtomic)
-        {
-            x = x.load() / rightVector.x;
-            y = y.load() / rightVector.y;
-        }
-        else
-        {
-            x = x / rightVector.x;
-            y = y / rightVector.y;
         }
     }
 
@@ -421,7 +421,7 @@ template <typename T, bool IsAtomic>
 template <typename U>
 Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator/=(const U scalar)
 {
-    constexpr T invertedScalar(1.0 / scalar);
+    const T invertedScalar(1.0 / scalar);
 
     if constexpr (IsAtomic)
     {

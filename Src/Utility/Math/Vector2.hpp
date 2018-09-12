@@ -78,6 +78,12 @@ namespace C2D
 
         /*!
          * \brief Copy constructor.
+         * \param otherVector Other vector from which values will be copied.
+         */
+        Vector2(const Vector2<T, IsAtomic>& otherVector);
+
+        /*!
+         * \brief Copy constructor.
          * \tparam OtherVectorIsAtomic Flag that defines if otherVector is atomic or not.
          * \param otherVector Other vector from which values will be copied.
          */
@@ -96,10 +102,17 @@ namespace C2D
         explicit Vector2(const sf::Vector2<T>& sfmlVector);
 
         /*!
-         * \brief Copy constructor.
+         * \brief Move constructor.
          * \param sfmlVector sf::Vector2 which values will be used.
          */
         explicit Vector2(sf::Vector2<T>&& sfmlVector);
+
+        /*!
+         * \brief Copy assignment operator.
+         * \param otherVector Other vector from which values will be copied.
+         * \return Reference to vector after assignment.
+         */
+        Vector2<T, IsAtomic>& operator=(const Vector2<T, IsAtomic>& otherVector);
 
         /*!
          * \brief Copy assignment operator.
@@ -111,7 +124,7 @@ namespace C2D
         Vector2<T, IsAtomic>& operator=(const Vector2<T, OtherVectorIsAtomic>& otherVector);
 
         /*!
-         * \brief Copy assignment operator.
+         * \brief Move assignment operator.
          * \param nonatomicVector Other vector which values will be used.
          * \return Reference to vector after assignment.
          */
@@ -125,7 +138,7 @@ namespace C2D
         Vector2<T, IsAtomic>& operator=(const sf::Vector2<T>& sfmlVector);
 
         /*!
-         * \brief Copy assignment operator.
+         * \brief Move assignment operator.
          * \param sfmlVector sf::Vector2 which values will be used.
          * \return Reference to vector after assignment.
          */
@@ -156,8 +169,8 @@ namespace C2D
          * \param rightVector Const reference to other vector with the same or different template type.
          * \return Scalar of the same template type as "left" vector.
          */
-        template <typename U, bool RightVectorIsAtomic>
-        T operator*(const Vector2<U, RightVectorIsAtomic>& rightVector) const;
+        template <bool RightVectorIsAtomic>
+        T operator*(const Vector2<T, RightVectorIsAtomic>& rightVector) const;
 
         /*!
          * \brief Multiplication operator by scalar.
@@ -214,15 +227,6 @@ namespace C2D
         Vector2& operator-=(const Vector2<T, RightVectorIsAtomic>& rightVector);
 
         /*!
-         * \brief Division and assignment operator by vector.
-         * \tparam RightVectorIsAtomic Flag that defines if rightVector is atomic or not.
-         * \param rightVector Const reference to other vector with the same template type.
-         * \return Reference to vector after math operation and assignment.
-         */
-        template <bool RightVectorIsAtomic>
-        Vector2& operator/=(const Vector2<T, RightVectorIsAtomic>& rightVector);
-
-        /*!
          * \brief Multiplication and assignment operator by scalar.
          * \tparam U Type of a scalar.
          * \param scalar Value of a scalar.
@@ -273,7 +277,7 @@ namespace C2D
     template <typename U, typename T, bool IsAtomic>
     Vector2<T, false> operator*(U scalar, const Vector2<T, IsAtomic>& vector);
 
-#include "Utility/Math/Vector2.inl"
+#include <Utility/Math/Vector2.inl>
 
     /*! Atomic vector with float type. */
     using Vector2af = Vector2<float, true>;

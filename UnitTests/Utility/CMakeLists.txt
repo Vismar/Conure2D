@@ -8,8 +8,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../Lib/Test/"
 #######################################################################################################################
 # Build executable
 add_executable(UtilityTest
-               Containers/LockFreeLinkedQueueTests.cpp
-               Containers/RingBufferTest.cpp)
+               Containers/LockFreeLinkedQueueTest.cpp
+               Containers/RingBufferTest.cpp
+               Math/Vector2Test.cpp)
 
 ## Link libraries
 target_link_libraries(UtilityTest gtest gtest_main pthread)
