@@ -20,6 +20,11 @@ namespace C2D
     {
     public:
         /*!
+         * \brief Default constructor.
+         */
+        AnyCallableHandler() noexcept;
+
+        /*!
          * \brief Equality operator.
          * \param other - const reference to other handler.
          * \return True if both handlers have same handlers that are equals. Otherwise - false.
@@ -44,13 +49,13 @@ namespace C2D
          * 
          * If handler do not handle any AnyCallable, then first handler will be equal to 0.
          */
-        std::size_t _firstHandler = 0;
+        std::size_t _firstHandler;
         /*! 
          * Second handler contains pointer to type info of a function 
          * ONLY when AnyCallable contains a pointer to a class method.
          * Otherwise it will contains nullptr.
          */
-        std::type_info* _secondHandler = nullptr;
+        std::type_info* _secondHandler;
 
         template <class Ret>
         friend class AnyCallable;
