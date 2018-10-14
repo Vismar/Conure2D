@@ -60,6 +60,10 @@ include_directories(./External/src/SFML/include)
 include_directories(./Src)
 include_directories(./)
 
+## Link directories
+link_directories(./External/src/GoogleTest-build/lib)
+link_directories(./External/src/SFML-build/lib)
+
 ## Static libs
 add_subdirectory(Src/Utility)
 add_subdirectory(Src/Input)
