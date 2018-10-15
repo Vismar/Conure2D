@@ -18,14 +18,30 @@ namespace C2D
 
         /*!
          * \brief Constructor from specified time values.
-         * \param start - time value that represent start of the time span.
-         * \param end - time value that represent end of the time span.
+         * \param start Time value that represent start of the time span.
+         * \param end Time value that represent end of the time span.
          */
         TimeSpan(Time start, Time end);
 
         /*!
+         * \brief Sets new start of the time period.
+         * \param newStart New time value which will be used as the start of the time period.
+         *
+         * The new value will be used only if it is lower than the "end" value.
+         */
+        void SetNewStart(const Time& newStart);
+
+        /*!
+         * \brief Sets new start of the time period.
+         * \param newStart New time value which will be used as the start of the time period.
+         *
+         * The new value will be used only if it is lower than the "end" value.
+         */
+        void SetNewStart(Time&& newStart);
+
+        /*!
          * \brief Sets new end of the time period.
-         * \param newEnd - new time value which will be used as the end of the time period.
+         * \param newEnd New time value which will be used as the end of the time period.
          * 
          * Previous "end" value will be used as "start" value.
          */
@@ -33,7 +49,7 @@ namespace C2D
 
         /*!
          * \brief Sets new end of the time period.
-         * \param newEnd - new time value which will be used as the end of the time period.
+         * \param newEnd New time value which will be used as the end of the time period.
          * 
          * Previous "end" value will be used as "start" value.
          */
