@@ -14,7 +14,7 @@ namespace C2D
     // Utility
     class TimeSpan;
     class IOSystemInterface;
-    class LogSystem;
+    //class LogSystem;
 
     /*!
      * \brief Grabs render system.
@@ -56,6 +56,6 @@ namespace C2D
      * \brief Returns log system.
      * \return Reference to the log system.
      */
-    LogSystem& GetLogSystem();
+    //LogSystem& GetLogSystem();
 }
 #include "EngineInterfaceDefinitions.inl"

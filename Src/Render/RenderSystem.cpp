@@ -1,6 +1,5 @@
 #include "RenderSystem.hpp"
 #include "Engine/EngineInterface.hpp"
-#include "Utility/LogSystem/LogSystem.hpp"
 
 using namespace C2D;
 
@@ -20,7 +19,7 @@ void RenderSystem::Start(const RenderableSceneMapInterface& sceneMap,
                          InputSystemHandlerInterface& inputSystem,
                          TimeSpan& renderLoopTimeSpan)
 {
-    DEV_LOG(LogLevel::Debug, "Render loop has started");
+    //DEV_LOG(LogLevel::Debug, "Render loop has started");
 
     if (!_working)
     {
@@ -79,7 +78,7 @@ void RenderSystem::Start(const RenderableSceneMapInterface& sceneMap,
         _noErrors = false;
     }
 
-    DEV_LOG(LogLevel::Debug, "Render loop has stopped");
+    //DEV_LOG(LogLevel::Debug, "Render loop has stopped");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +99,7 @@ bool RenderSystem::NoErrors() const
 
 void RenderSystem::SetNewSettings(WindowSettings windowSettings)
 {
-    DEV_LOG(LogLevel::Debug, "Copying new window settings");
+    //DEV_LOG(LogLevel::Debug, "Copying new window settings");
 
     std::lock_guard lock(_settingsMutex);
 
@@ -254,7 +253,7 @@ void RenderSystem::_UpdateWindow()
 {
     if (_recreateWindow || _updateWindowParameters)
     {
-        DEV_LOG(LogLevel::Debug, "Applying new window settings");
+        //DEV_LOG(LogLevel::Debug, "Applying new window settings");
 
         std::lock_guard lock(_settingsMutex);
 

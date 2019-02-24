@@ -1,6 +1,5 @@
 #include "JoystickDevice.hpp"
 #include "Engine/EngineInterface.hpp"
-#include "Utility/LogSystem/LogSystem.hpp"
 #include <climits>
 
 using namespace C2D;
@@ -46,7 +45,7 @@ void JoystickDevice::SetJoystickConnectionState(const bool connectionState)
     if (connectionState != _isConnected.load())
     {
         _isConnected = connectionState;
-        DEV_LOG(LogLevel::Debug, "Joystick connection stated was changed. id = " + std::to_string(connectionState));
+        //DEV_LOG(LogLevel::Debug, "Joystick connection stated was changed. id = " + std::to_string(connectionState));
     }
 }
 

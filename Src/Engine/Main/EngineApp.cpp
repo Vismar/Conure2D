@@ -8,7 +8,7 @@ using namespace C2D;
 
 EngineApp::EngineApp()
 : _ioSystem(std::make_unique<IOSystem>())
-, _logSystem(std::make_unique<LogSystem>(*_ioSystem))
+//, _logSystem(std::make_unique<LogSystem>(*_ioSystem))
 , _renderSystem(std::make_unique<RenderSystem>())
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<SceneMap>())
@@ -48,7 +48,7 @@ void EngineApp::End() const
     while (_logicThreadIsWorking.load());  // wait until logic thread will end its work
     
     // Finish work of log system
-    _logSystem->Flush();                   // flush all log entries if any still in queue
+    //_logSystem->Flush();                   // flush all log entries if any still in queue
 
     // Finish work of IO system
     _ioSystem->Stop();                     // turn off IO system 
@@ -99,16 +99,16 @@ IOSystem& EngineApp::GetIOSystem() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-LogSystem& EngineApp::GetLogSystem() const
+/*LogSystem& EngineApp::GetLogSystem() const
 {
     return *_logSystem;
-}
+}*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void EngineApp::_LogicLoop()
 {
-    DEV_LOG(LogLevel::Debug, "Logic loop has started");
+    //DEV_LOG(LogLevel::Debug, "Logic loop has started");
 
     // Launch logic loop only if it was not started yet
     if (!_logicThreadIsWorking)
@@ -131,7 +131,7 @@ void EngineApp::_LogicLoop()
         _logicThreadIsWorking = false;
     }
 
-    DEV_LOG(LogLevel::Debug, "Logic loop has stopped");
+    //DEV_LOG(LogLevel::Debug, "Logic loop has stopped");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

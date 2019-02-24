@@ -3,7 +3,6 @@
 #include "Core/Scene/SceneMap.hpp"
 #include "Input/InputSystem.hpp"
 #include "Utility/Time/TimeSpan.hpp"
-#include "Utility/LogSystem/LogSystem.hpp"
 #include "Utility/IOSystem/IOSystem.hpp"
 
 namespace C2D
@@ -84,7 +83,7 @@ namespace C2D
          * \brief Returns log system.
          * \return Reference to the log system.
          */
-        LogSystem& GetLogSystem() const;
+        //LogSystem& GetLogSystem() const;
 
     private:
         /*!
@@ -95,7 +94,7 @@ namespace C2D
         /*! Unique pointer to the IO system. */
         std::unique_ptr<IOSystem> _ioSystem;
         /*! Unique pointer to the log system. */
-        std::unique_ptr<LogSystem> _logSystem;
+        //std::unique_ptr<LogSystem> _logSystem;
         /*! Time span of the render loop. */
         TimeSpan _renderLoopTimeSpan;
         /*! Unique pointer to the render system. */

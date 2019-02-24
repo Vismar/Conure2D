@@ -30,10 +30,6 @@ add_library(Utility
             IOSystem/IOSystem.cpp
             IOSystem/IOSystem.hpp
             IOSystem/IOSystemInterface.hpp
-            LogSystem/LogEntry.cpp
-            LogSystem/LogEntry.hpp
-            LogSystem/LogSystem.cpp
-            LogSystem/LogSystem.hpp
             Math/Vector2.hpp
             Math/Vector2.inl
             Math/Vector2PrecompiledTemplates.cpp
