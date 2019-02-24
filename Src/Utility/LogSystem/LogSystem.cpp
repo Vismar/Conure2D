@@ -1,5 +1,4 @@
 #include "LogSystem.hpp"
-#include "Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp"
 #include "Utility/IOSystem/IOSystemInterface.hpp"
 #include "Utility/Exception/ExceptionHandler.hpp"
 
@@ -17,7 +16,6 @@ LogSystem::LogSystem(const IOSystemInterface& ioSystem)
 , _logEntryTemplate(std::make_shared<std::string>("[%w_time] %log: %msg \n"))
 , _logLevel(LogLevel::Debug)
 , _numberOfEntriesToFlush(10)
-, _msgQueue(std::make_unique<LockFreeLinkedQueue<LogEntry>>())
 {
     AddEvent("NewEntryAdded", new Dispatcher<void>());
 
@@ -80,21 +78,6 @@ void LogSystem::Flush() const
     // Grab current log file name and template
     const auto logFileName = std::atomic_load(&_logFileName);
     const auto logEntryTemplate = std::atomic_load(&_logEntryTemplate);
-
-    // For every stored entry
-    while (const auto logEntry = _msgQueue->PopFront())
-    {
-        // Copy template to a new variable
-        auto logEntryData = *logEntryTemplate;
-
-        // Find places in template where were used text variables
-        logEntryData = std::regex_replace(logEntryData, _timeRegex, (logEntry->timestamp - _creationTime).ToString());
-        logEntryData = std::regex_replace(logEntryData, _logLevelRegex, LogLevelText[static_cast<int>(logEntry->logLevel)]);
-        logEntryData = std::regex_replace(logEntryData, _msgRegex, logEntry->message);
-
-        // Write finished entries to a log file
-        _ioSystem.WriteToTextFile(std::string(*logFileName), std::string(logEntryData), std::ios_base::app);
-    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,12 +86,6 @@ void LogSystem::AddEntry(const LogLevel logLevel, const std::string& message)
 {
     if (logLevel >= _logLevel.load())
     {
-        _msgQueue->EmplaceBack(LogEntry(logLevel, std::string(message)));
-        InvokeEvent<void, LogEntry>("NewEntryAdded", LogEntry(logLevel, std::string(message)));
-        if (_msgQueue->GetSize() >= _numberOfEntriesToFlush.load())
-        {
-            Flush();
-        }
     }
 }
 

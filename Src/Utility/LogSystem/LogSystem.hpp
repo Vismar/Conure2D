@@ -96,7 +96,5 @@ namespace C2D
         std::atomic<LogLevel> _logLevel;
         /*! Number of log entries that will stored before flushing. */
         std::atomic_uint8_t _numberOfEntriesToFlush;
-        /*! Linked queue of log entries. */
-        std::unique_ptr<LockFreeLinkedQueue<LogEntry>> _msgQueue;
     };
 }

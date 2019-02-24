@@ -1,6 +1,5 @@
 #pragma once
 #include "Utility/IOSystem/IOSystemInterface.hpp"
-#include "Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp"
 #include <fstream>
 #include <atomic>
 
@@ -95,7 +94,5 @@ namespace C2D
         std::atomic_bool _isRunning;
         /*! A stream which is used to write data to text files. */
         TextStream _textWriteStream;
-        /*! A queue which contains entries that should be written to text files. */
-        std::unique_ptr<LockFreeLinkedQueue<TextEntry>> _textWriteQueue;
     };
 }

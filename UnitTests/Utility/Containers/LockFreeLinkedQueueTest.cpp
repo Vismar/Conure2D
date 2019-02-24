@@ -1,4 +1,3 @@
-#include "Utility/Containers/LockFreeLinkedQueue/LockFreeLinkedQueue.hpp"
 #include <thread>
 #include <gtest/gtest.h>
 
@@ -7,36 +6,39 @@
  * \param queue - queue to which function should add some elements.
  * \param numberOfElements - number of lements that will be added to queue.
  */
-void Producer(C2D::LockFreeLinkedQueue<int64_t>& queue, const uint64_t numberOfElements)
+// TODO: Reimplement for LockedQueue
+/*void Producer(C2D::LockFreeLinkedQueue<int64_t>& queue, const uint64_t numberOfElements)
 {
     // Use PushBack function
     for (uint64_t i = 0; i < numberOfElements; ++i)
     {
         queue.PushBack(i);
     }
-}
+}*/
 
 /*!
  * \brief Utility function that consumes to specified variable all elements from specific queue.
  * \param queue - queue from which elements will be consumed.
  * \param sum - variable which will accumulate consumed values form queue.
  */
-void Consumer(C2D::LockFreeLinkedQueue<int64_t>& queue, std::atomic_int64_t& sum)
+// TODO: Reimplement for LockedQueue
+/*void Consumer(C2D::LockFreeLinkedQueue<int64_t>& queue, std::atomic_int64_t& sum)
 {
     // Try to sum all things from queue
     while (const auto node = queue.PopFront())
     {
         sum += *node;
     }
-}
+}*/
 
 /*! Number of elements that is used in tests. */
-constexpr uint64_t NumberOfElements = 50;
+//constexpr uint64_t NumberOfElements = 50;
 
 /*!
  * Tests PushBack, PopFront and IsEmpty methods.
  */
-TEST(LockFreeLinkedQueue, PushBack)
+// TODO: Reimplement for LockedQueue
+/*TEST(LockFreeLinkedQueue, PushBack)
 {
     C2D::LockFreeLinkedQueue<int64_t> queue;
 
@@ -56,12 +58,13 @@ TEST(LockFreeLinkedQueue, PushBack)
     // Check number of elements
     EXPECT_EQ(0, queue.GetSize());
     EXPECT_TRUE(queue.IsEmpty());
-}
+}*/
 
 /*!
  * Tests EmplaceBack, PopFront and IsEmpty methods.
  */
-TEST(LockFreeLinkedQueue, EmplaceBack)
+// TODO: Reimplement for LockedQueue
+/*TEST(LockFreeLinkedQueue, EmplaceBack)
 {
     C2D::LockFreeLinkedQueue<int64_t> queue;
 
@@ -81,12 +84,13 @@ TEST(LockFreeLinkedQueue, EmplaceBack)
     // Check number of elements
     EXPECT_EQ(0, queue.GetSize());
     EXPECT_TRUE(queue.IsEmpty());
-}
+}*/
 
 /*!
  * Tests PushBack, EmplaceBack, PopFront and IsEmpty methods in single thread.
  */
-TEST(LockFreeLinkedQueue, ProdAndConsInSingleThread)
+// TODO: Reimplement for LockedQueue
+/*TEST(LockFreeLinkedQueue, ProdAndConsInSingleThread)
 {
     C2D::LockFreeLinkedQueue<int64_t> queue;
 
@@ -116,12 +120,13 @@ TEST(LockFreeLinkedQueue, ProdAndConsInSingleThread)
     EXPECT_EQ(0, queue.GetSize());
     EXPECT_TRUE(queue.IsEmpty());
     EXPECT_EQ(expectedSumOfElements, sum);
-}
+}*/
 
 /*!
  * Tests PushBack, EmplaceBack, PopFront and IsEmpty methods in multiple threads.
  */
-TEST(LockFreeLinkedQueue, ProdAndConsInMultipleThreads)
+// TODO: Reimplement for LockedQueue
+/*TEST(LockFreeLinkedQueue, ProdAndConsInMultipleThreads)
 {
     C2D::LockFreeLinkedQueue<int64_t> queue;
     std::atomic_int64_t sum(0);
@@ -154,4 +159,4 @@ TEST(LockFreeLinkedQueue, ProdAndConsInMultipleThreads)
     EXPECT_EQ(0, queue.GetSize());
     EXPECT_TRUE(queue.IsEmpty());
     EXPECT_EQ(expectedSumOfElements, sum);
-}
+}*/
