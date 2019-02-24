@@ -27,9 +27,6 @@ add_library(Utility
             Helpers/EnumHelpers.hpp
             Helpers/TypeHelpers.hpp
             Helpers/VariantHelpers.hpp
-            IOSystem/IOSystem.cpp
-            IOSystem/IOSystem.hpp
-            IOSystem/IOSystemInterface.hpp
             Math/Vector2.hpp
             Math/Vector2.inl
             Math/Vector2PrecompiledTemplates.cpp

@@ -3,7 +3,6 @@
 #include "Core/Scene/SceneMap.hpp"
 #include "Input/InputSystem.hpp"
 #include "Utility/Time/TimeSpan.hpp"
-#include "Utility/IOSystem/IOSystem.hpp"
 
 namespace C2D
 {
@@ -77,7 +76,7 @@ namespace C2D
          * \brief Returns IO system.
          * \return Reference to the IO system.
          */
-        IOSystem& GetIOSystem() const;
+        //IOSystem& GetIOSystem() const;
 
         /*!
          * \brief Returns log system.
