@@ -13,7 +13,7 @@ namespace C2D
 
     // Utility
     class TimeSpan;
-    class IOSystemInterface;
+    //class IOSystemInterface;
     //class LogSystem;
 
     /*!
@@ -50,7 +50,7 @@ namespace C2D
      * \brief Returns IO system.
      * \return Reference to the IO system.
      */
-    IOSystemInterface& GetIOSystem();
+    //IOSystemInterface& GetIOSystem();
 
     /*!
      * \brief Returns log system.

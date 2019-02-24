@@ -7,9 +7,9 @@ using namespace C2D;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 EngineApp::EngineApp()
-: _ioSystem(std::make_unique<IOSystem>())
+//: _ioSystem(std::make_unique<IOSystem>())
 //, _logSystem(std::make_unique<LogSystem>(*_ioSystem))
-, _renderSystem(std::make_unique<RenderSystem>())
+: _renderSystem(std::make_unique<RenderSystem>())
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<SceneMap>())
 , _inputSystem(std::make_unique<InputSystem>(_logicLoopTimeSpan))
@@ -28,7 +28,7 @@ EngineApp& EngineApp::Instance()
 void EngineApp::Run()
 {
     // Start IO thread
-    _ioSystem->Start();
+    //_ioSystem->Start();
 
     // Start logic thread
     std::thread(&EngineApp::_LogicLoop, this).detach();
@@ -51,8 +51,8 @@ void EngineApp::End() const
     //_logSystem->Flush();                   // flush all log entries if any still in queue
 
     // Finish work of IO system
-    _ioSystem->Stop();                     // turn off IO system 
-    while (_ioSystem->IsRunning());        // wait until IO thread will end its work
+    //_ioSystem->Stop();                     // turn off IO system
+    //while (_ioSystem->IsRunning());        // wait until IO thread will end its work
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

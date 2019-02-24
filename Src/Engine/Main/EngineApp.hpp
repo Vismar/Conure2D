@@ -91,7 +91,7 @@ namespace C2D
         void _LogicLoop();
 
         /*! Unique pointer to the IO system. */
-        std::unique_ptr<IOSystem> _ioSystem;
+        //std::unique_ptr<IOSystem> _ioSystem;
         /*! Unique pointer to the log system. */
         //std::unique_ptr<LogSystem> _logSystem;
         /*! Time span of the render loop. */
