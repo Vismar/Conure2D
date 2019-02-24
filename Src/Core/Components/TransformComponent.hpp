@@ -1,6 +1,5 @@
 #pragma once
 #include "Core/Components/Base/BaseLogicComponent.hpp"
-#include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/Math/Vector2.hpp"
 #include <SFML/Graphics/Transform.hpp>
 
@@ -29,7 +28,7 @@ namespace C2D
      * Transform is used to describe position and orientation of an object in a game space.
      * Every piece of data stored as atomic, so all changes to it is thread-safe.
      */
-    class [[deprecated("Will be reimplemented")]] TransformComponent final : public BaseLogicComponent, public EventManager
+    class [[deprecated("Will be reimplemented")]] TransformComponent final : public BaseLogicComponent
     {
     public:
         TransformComponent() = delete;

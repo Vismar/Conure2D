@@ -98,7 +98,7 @@ void CameraComponent::SetPriority(uint8_t newPriority)
         _priority = newPriority;
 
         const auto thisComponent = std::dynamic_pointer_cast<CameraComponent>(this->shared_from_this());
-        InvokeEvent<void, std::weak_ptr<CameraComponent>, const int8_t>("PriorityUpdated", thisComponent, _priority.load());
+        //InvokeEvent<void, std::weak_ptr<CameraComponent>, const int8_t>("PriorityUpdated", thisComponent, _priority.load());
     }
 }
 
@@ -146,7 +146,7 @@ void CameraComponent::Initialize()
 {
     _typeIndex = typeid(CameraComponent);
 
-    AddEvent("PriorityUpdated", new Dispatcher<void>());
+    //AddEvent("PriorityUpdated", new Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

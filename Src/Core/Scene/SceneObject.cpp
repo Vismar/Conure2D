@@ -157,7 +157,7 @@ void SceneObject::_Initialize()
     // Every scene object ALWAYS must have transform component 
     if (AddComponent<TransformComponent>())
     {
-        AddEvent("ComponentAdded", new Dispatcher<void>);
+        //AddEvent("ComponentAdded", new Dispatcher<void>);
     }
 }
 

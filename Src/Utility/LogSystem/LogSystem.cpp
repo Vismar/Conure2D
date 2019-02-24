@@ -1,6 +1,5 @@
 #include "LogSystem.hpp"
 #include "Utility/IOSystem/IOSystemInterface.hpp"
-#include "Utility/Exception/ExceptionHandler.hpp"
 
 using namespace C2D;
 
@@ -16,19 +15,7 @@ LogSystem::LogSystem(const IOSystemInterface& ioSystem)
 , _logEntryTemplate(std::make_shared<std::string>("[%w_time] %log: %msg \n"))
 , _logLevel(LogLevel::Debug)
 , _numberOfEntriesToFlush(10)
-{
-    AddEvent("NewEntryAdded", new Dispatcher<void>());
-
-    // If the exception handler is empty, assign a simple callback that will just write exception error into log
-    if (!ExceptionHandler)
-    {
-        ExceptionHandler =
-            [this] (const std::exception& exception)
-            {
-                this->AddEntry(LogLevel::Error, exception.what());
-            };
-    }
-}
+{ }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

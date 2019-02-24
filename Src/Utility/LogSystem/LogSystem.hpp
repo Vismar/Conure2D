@@ -1,5 +1,4 @@
 #pragma once
-#include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/LogSystem/LogEntry.hpp"
 #include "Utility/LogSystem/LogUtilities.hpp"
 #include <memory>
@@ -15,7 +14,7 @@ namespace C2D
     /*!
      * \brief Thread-safe log system which handles creating and storing logs of all events that occur.
      */
-    class [[deprecated("Will be reimplemented")]] LogSystem final : public EventManager
+    class [[deprecated("Will be reimplemented")]] LogSystem final
     {
     public:
         LogSystem() = delete;
@@ -23,7 +22,7 @@ namespace C2D
         LogSystem(LogSystem&& other) = delete;
         LogSystem& operator=(const LogSystem& other) = delete;
         LogSystem& operator=(LogSystem&& other) = delete;
-        ~LogSystem() final = default;
+        ~LogSystem() = default;
 
         /*!
          * \brief Default constructor.

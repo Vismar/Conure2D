@@ -1,5 +1,4 @@
 #include "TransformComponent.hpp"
-#include "Utility/EventSystem/Dispatcher.hpp"
 #include "Utility/Math/MathConstants.hpp"
 #include "Core/Scene/SceneObject.hpp"
 #include <cmath>
@@ -292,7 +291,7 @@ void TransformComponent::SetTransformations(const Transformations& transformatio
 
 void TransformComponent::Initialize()
 {
-    AddEvent("TransformUpdated", new Dispatcher<void>());
+    //AddEvent("TransformUpdated", new Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -308,7 +307,7 @@ void TransformComponent::LateUpdate()
     {
         _transformUpdated = false;
         _UpdateGlobalTransformations();
-        InvokeEvent("TransformUpdated");
+        //InvokeEvent("TransformUpdated");
     }
 }
 

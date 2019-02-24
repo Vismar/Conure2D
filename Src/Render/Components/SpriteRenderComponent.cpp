@@ -46,7 +46,7 @@ void SpriteRenderComponent::Initialize()
 {
     RenderableComponent::Initialize();
 
-    BindToEvent("TextureUpdated", this, &SpriteRenderComponent::_OnTextureChanged);
+    //BindToEvent("TextureUpdated", this, &SpriteRenderComponent::_OnTextureChanged);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

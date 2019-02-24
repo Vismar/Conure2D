@@ -19,7 +19,7 @@ bool SceneObject::AddComponent()
             added = true;
 
             // Notify listeners that new component was added
-            InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _dataComponentMap[componentTypeIndex]);
+            //InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _dataComponentMap[componentTypeIndex]);
         }
     }
     else if constexpr (std::is_base_of<BaseLogicComponent, Component>::value)
@@ -33,7 +33,7 @@ bool SceneObject::AddComponent()
             added = true;
 
             // Notify listeners that new component was added
-            InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _logicComponentMap[componentTypeIndex]);
+            //InvokeEvent<void, std::weak_ptr<BaseComponent>>("ComponentAdded", _logicComponentMap[componentTypeIndex]);
         }
     }    
 

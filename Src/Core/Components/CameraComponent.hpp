@@ -1,7 +1,6 @@
 #pragma once
 #include "Core/Components/Base/BaseDataComponent.hpp"
 #include "Core/Components/Utility/CamerasCompare.hpp"
-#include "Utility/EventSystem/EventManager.hpp"
 #include "Utility/Math/Vector2.hpp"
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -18,7 +17,7 @@ namespace C2D
      * Simple data component that stores parameters that are required to create sf::View
      * and provides basic functionality to change them. Creates sf::View in depends on data from TransformComponent.
      */
-    class [[deprecated("Will be reimplemented")]] CameraComponent : public BaseDataComponent, public EventManager
+    class [[deprecated("Will be reimplemented")]] CameraComponent : public BaseDataComponent
     {
     public:
         CameraComponent() = delete;

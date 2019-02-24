@@ -3,6 +3,8 @@
 #include "Core/Components/Base/BaseLogicComponent.hpp"
 #include "Core/Components/TransformComponent.hpp"
 #include <typeindex>
+#include <vector>
+#include <unordered_map>
 
 namespace C2D
 {
@@ -16,14 +18,14 @@ namespace C2D
      * 
      * Scene object - core and bones to which user supposed to add components that will make an object something unique.
      */
-    class [[deprecated("Will be reimplemented")]] SceneObject final : public std::enable_shared_from_this<SceneObject>, public EventManager
+    class [[deprecated("Will be reimplemented")]] SceneObject final : public std::enable_shared_from_this<SceneObject>
     {
     public:
         SceneObject(const SceneObject& other) = delete;
         SceneObject(SceneObject&& other) = delete;
         SceneObject& operator=(const SceneObject& other) = delete;
         SceneObject& operator=(SceneObject&& other) = delete;
-        ~SceneObject() final = default;
+        ~SceneObject() = default;
 
         /*!
          * \brief Default constructor.

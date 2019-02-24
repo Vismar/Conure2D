@@ -1,7 +1,6 @@
 #include "RenderableComponent.hpp"
 #include "Core/Components/TransformComponent.hpp"
 #include "Core/Scene/SceneObject.hpp"
-#include "Utility/EventSystem/Dispatcher.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
 using namespace C2D;
@@ -15,7 +14,7 @@ RenderableComponent::~RenderableComponent()
         _transformComponent = object->GetTransformComponent();
         if (const auto transform = _transformComponent.lock())
         {
-            transform->UnbindFromEvent("TransformUpdated", _transformUpdatedHandler);
+            //transform->UnbindFromEvent("TransformUpdated", _transformUpdatedHandler);
         }
     }
 }
@@ -32,7 +31,7 @@ RenderableComponent::RenderableComponent(std::weak_ptr<SceneObject>&& sceneObjec
         _transformComponent = object->GetTransformComponent();
         if (const auto transform = _transformComponent.lock())
         {
-            _transformUpdatedHandler = transform->BindToEvent("TransformUpdated", this, &RenderableComponent::_OnTransformComponentUpdated);
+            //_transformUpdatedHandler = transform->BindToEvent("TransformUpdated", this, &RenderableComponent::_OnTransformComponentUpdated);
         }
     }
 }
@@ -93,7 +92,7 @@ void RenderableComponent::SetLayerNumber(const int8_t newLayerNumber)
         _layerNumber = newLayerNumber;
 
         const auto thisComponent = std::dynamic_pointer_cast<RenderableComponent>(this->shared_from_this());
-        InvokeEvent<void, std::weak_ptr<RenderableComponent>, const int8_t>("LayerUpdated", thisComponent, _layerNumber.load());
+        //InvokeEvent<void, std::weak_ptr<RenderableComponent>, const int8_t>("LayerUpdated", thisComponent, _layerNumber.load());
     }
 }
 
@@ -117,7 +116,7 @@ void RenderableComponent::SetTexture(const std::shared_ptr<sf::Texture>& texture
 {
     _texture = texture;
 
-    InvokeEvent("TextureUpdated");
+    //InvokeEvent("TextureUpdated");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,8 +132,8 @@ void RenderableComponent::Initialize()
 {
     _typeIndex = typeid(RenderableComponent);
 
-    AddEvent("TextureUpdated", new Dispatcher<void>());
-    AddEvent("LayerUpdated", new Dispatcher<void>());
+    //AddEvent("TextureUpdated", new Dispatcher<void>());
+    //AddEvent("LayerUpdated", new Dispatcher<void>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

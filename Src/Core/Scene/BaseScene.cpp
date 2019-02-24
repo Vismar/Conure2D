@@ -16,7 +16,7 @@ BaseScene::BaseScene(const std::string_view sceneName)
 std::weak_ptr<SceneObject> BaseScene::CreateObject()
 {
     _newSceneObjects.emplace_back(std::make_shared<SceneObject>())->_Initialize();
-    _newSceneObjects.back()->BindToEvent("ComponentAdded", this, &BaseScene::_OnNewComponentAdded);
+    //_newSceneObjects.back()->BindToEvent("ComponentAdded", this, &BaseScene::_OnNewComponentAdded);
 
     return _newSceneObjects.back();
 }
@@ -183,14 +183,14 @@ void BaseScene::_OnNewComponentAdded(std::weak_ptr<BaseComponent> newComponent)
             if (const auto renderableComponent = std::dynamic_pointer_cast<RenderableComponent>(component))
             {
                 _renderableComponentsToAdd.push_back(renderableComponent);
-                renderableComponent->BindToEvent("LayerUpdated", this, &BaseScene::_OnRenderableComponentLayerChanged);
+                //renderableComponent->BindToEvent("LayerUpdated", this, &BaseScene::_OnRenderableComponentLayerChanged);
             }
 
             // Check if added component is camera component
             if (const auto cameraComponent = std::dynamic_pointer_cast<CameraComponent>(component))
             {
                 _cameraComponentsToAdd.push_back(cameraComponent);
-                cameraComponent->BindToEvent("PriorityUpdated", this, &BaseScene::_OnCameraComponentPriorityChanged);
+                //cameraComponent->BindToEvent("PriorityUpdated", this, &BaseScene::_OnCameraComponentPriorityChanged);
             }
         }
     }

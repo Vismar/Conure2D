@@ -24,14 +24,7 @@ add_library(Utility
             Containers/RingBuffer/RingBufferConstReverseIterator.inl
             Containers/RingBuffer/RingBufferIterator.inl
             Containers/RingBuffer/RingBufferReverseIterator.inl
-            EventSystem/Dispatcher.hpp
-            EventSystem/Dispatcher.inl
-            EventSystem/DispatcherInterface.hpp
-            EventSystem/EventManager.cpp
-            EventSystem/EventManager.hpp
-            EventSystem/EventManager.inl
-            Exception/ExceptionHandler.hpp
-            Helpers/EnumHelpers.hpp
+        Helpers/EnumHelpers.hpp
             Helpers/VariantHelpers.hpp
             IOSystem/IOSystem.cpp
             IOSystem/IOSystem.hpp

@@ -1,7 +1,6 @@
 #pragma once
 #include "Core/Components/Base/BaseDataComponent.hpp"
 #include "Utility/RenderablesCompare.hpp"
-#include "Utility/EventSystem/EventManager.hpp"
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <set>
@@ -20,7 +19,7 @@ namespace C2D
      * - Inherited components will have the same characteristics in comparison, 
      *   so scene object will not be able to store more than one renderable component.
      */
-    class [[deprecated("Will be reimplemented")]] RenderableComponent : public BaseDataComponent, public EventManager, public sf::Drawable
+    class [[deprecated("Will be reimplemented")]] RenderableComponent : public BaseDataComponent, public sf::Drawable
     {
     public:
         RenderableComponent() = delete;
@@ -149,7 +148,7 @@ namespace C2D
         /*! Transform that will be used in render. */
         mutable sf::Transform _transform;
         /*! Handler of TransformUpdated event from transform component. */
-        AnyCallableHandler _transformUpdatedHandler;
+        //AnyCallableHandler _transformUpdatedHandler;
     };
 
     /*! Simple alias to shorten the name of the vector of weak pointers to renderable components. */
