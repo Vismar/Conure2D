@@ -113,8 +113,8 @@ constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(const C2D::Vecto
 template <typename T, bool IsAtomic>
 constexpr Vector2<T, IsAtomic>& Vector2<T, IsAtomic>::operator=(Vector2<T, false>&& nonatomicVector)
 {
-    x = nonatomicVector.x;
-    y = nonatomicVector.y;
+    x = std::move(nonatomicVector.x);
+    y = std::move(nonatomicVector.y);
 
     return *this;
 }

@@ -67,8 +67,8 @@ void RingBuffer<T, A>::Resize(size_type newSize)
             // Resize buffer
             _buffer.resize(newSize);
         }
-            // If a new size is bigger than a current one, we should rotate vector in such way
-            // that head of the ring would be at the start of the vector
+        // If a new size is bigger than a current one, we should rotate vector in such way
+        // that head of the ring would be at the start of the vector
         else if (newSize > _buffer.size())
         {
             // If head of the ring is not at the start of the vector, we should rotate vector before resizing it
@@ -79,7 +79,7 @@ void RingBuffer<T, A>::Resize(size_type newSize)
                 {
                     std::rotate(_buffer.begin(), _buffer.begin() + _headIndex, _buffer.end());
                 }
-                    // If head index is closer to the end of vector (or distance is equal), use right rotation
+                // If head index is closer to the end of vector (or distance is equal), use right rotation
                 else
                 {
                     std::rotate(_buffer.rbegin(), _buffer.rbegin() + (_buffer.size() - _headIndex), _buffer.rend());
@@ -117,7 +117,7 @@ void RingBuffer<T, A>::PushBack(const T& entry)
 
         _empty = false;
     }
-        // If tail and head indexes are different then just do a common indexes shifts and other operations
+    // If tail and head indexes are different then just do a common indexes shifts and other operations
     else
     {
         _ChangeIndex(_tailIndex, 1);
@@ -127,7 +127,6 @@ void RingBuffer<T, A>::PushBack(const T& entry)
         if (_tailIndex == _headIndex)
         {
             _ChangeIndex(_headIndex, 1);
-            //_IncreaseIndex(_headIndex);
         }
 
         _buffer[_tailIndex] = entry;
@@ -147,7 +146,7 @@ void RingBuffer<T, A>::EmplaceBack(T&& entry)
 
         _empty = false;
     }
-        // If tail and head indexes are different then just do a common indexes shifts and other operations
+    // If tail and head indexes are different then just do a common indexes shifts and other operations
     else
     {
         _ChangeIndex(_tailIndex, 1);
@@ -157,7 +156,6 @@ void RingBuffer<T, A>::EmplaceBack(T&& entry)
         if (_tailIndex == _headIndex)
         {
             _ChangeIndex(_headIndex, 1);
-            //_IncreaseIndex(_headIndex);
         }
 
         _buffer[_tailIndex] = entry;
@@ -320,9 +318,9 @@ bool RingBuffer<T, A>::_ValidateIndex(const size_type index)
     {
         valid = false;
     }
-        // If tail index is bigger than head index (not cycled yet) and tail index is not reached the end of a buffer,
-        // we should check if specified index is in range between tail index and end of the buffer.
-        // If so - index is not valid.
+    // If tail index is bigger than head index (not cycled yet) and tail index is not reached the end of a buffer,
+    // we should check if specified index is in range between tail index and end of the buffer.
+    // If so - index is not valid.
     else if ((_tailIndex > _headIndex) && (_tailIndex < (_buffer.size() - 1)))
     {
         valid = index <= _tailIndex;

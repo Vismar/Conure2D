@@ -12,9 +12,7 @@ TEST(RingBuffer, Resize)
     EXPECT_EQ(10ull, ringBuffer.GetSize());
 
     // Check size values that are not accepted by ring buffer
-    ringBuffer.Resize(0ull);
-    EXPECT_EQ(10ull, ringBuffer.GetSize());
-    ringBuffer.Resize(-1ull);
+    ringBuffer.Resize(0);
     EXPECT_EQ(10ull, ringBuffer.GetSize());
 
     // Check resize to valid value
