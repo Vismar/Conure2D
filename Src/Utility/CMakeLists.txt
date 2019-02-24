@@ -24,7 +24,8 @@ add_library(Utility
             Containers/RingBuffer/RingBufferConstReverseIterator.inl
             Containers/RingBuffer/RingBufferIterator.inl
             Containers/RingBuffer/RingBufferReverseIterator.inl
-        Helpers/EnumHelpers.hpp
+            Helpers/EnumHelpers.hpp
+            Helpers/TypeHelpers.hpp
             Helpers/VariantHelpers.hpp
             IOSystem/IOSystem.cpp
             IOSystem/IOSystem.hpp
@@ -33,7 +34,6 @@ add_library(Utility
             LogSystem/LogEntry.hpp
             LogSystem/LogSystem.cpp
             LogSystem/LogSystem.hpp
-            LogSystem/LogUtilities.hpp
             Math/Vector2.hpp
             Math/Vector2.inl
             Math/Vector2PrecompiledTemplates.cpp

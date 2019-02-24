@@ -15,7 +15,7 @@ namespace C2D
     /*!
      * \brief Simple macro that unifies __FILE__ and __LINE__ preprocessor things in format "FileName:LineNumber".
      */
-    #define LOCATION __FILE__ ":" S2(__LINE__)
+#define LOCATION __FILE__ ":" S2(__LINE__)
 
     /*!
      * \brief Demangles (makes readable by human) name of a specified type.

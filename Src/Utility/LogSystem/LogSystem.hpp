@@ -1,6 +1,5 @@
 #pragma once
 #include "Utility/LogSystem/LogEntry.hpp"
-#include "Utility/LogSystem/LogUtilities.hpp"
 #include <memory>
 #include <atomic>
 #include <regex>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Utility/LogSystem/LogUtilities.hpp"
+#include "Utility/Helpers/TypeHelpers.hpp"
 #include <any>
 #include <sstream>
 #include <vector>
