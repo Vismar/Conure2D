@@ -11,7 +11,7 @@ namespace C2D
     /*!
      * \brief Simple enumeration of input types.
      */
-    enum class InputType
+    enum class [[deprecated("Will be reimplemented")]] InputType
     {
         Keyboard, /*!< Keyboard device. */
         Mouse,    /*!< Mouse device. */
@@ -21,7 +21,7 @@ namespace C2D
     /*!
      * \brief Simple union to store any possible input button.
      */
-    union ButtonUnion
+    union [[deprecated("Will be reimplemented")]] ButtonUnion
     {
         /*!
          * \brief Constructor to assign keyboard button as value.
@@ -57,7 +57,7 @@ namespace C2D
     /*!
      * \brief Stores input type and button itself.
      */
-    struct ActionButton
+    struct [[deprecated("Will be reimplemented")]] ActionButton
     {
         /*!
          * \brief Constructor to create action button from keyboard button.
@@ -109,7 +109,7 @@ namespace C2D
     /*!
      * \brief Input action that represented as button and its required state which is needed to activate this action.
      */
-    class InputAction
+    class [[deprecated("Will be reimplemented")]] InputAction
     {
     public:
         /*!

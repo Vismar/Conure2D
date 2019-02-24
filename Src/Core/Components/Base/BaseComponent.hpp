@@ -11,7 +11,7 @@ namespace C2D
      * 
      * Provides base functionality to compare components by its type index which is stored as protected member.
      */
-    class BaseComponent : public std::enable_shared_from_this<BaseComponent>
+    class [[deprecated("Will be reimplemented")]] BaseComponent : public std::enable_shared_from_this<BaseComponent>
     {
     public:
         BaseComponent() = delete;

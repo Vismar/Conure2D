@@ -6,7 +6,7 @@ namespace C2D
     /*!
      * \brief Simple class that provides functionality to store a time span.
      */
-    class TimeSpan
+    class [[deprecated("Will be reimplemented")]] TimeSpan
     {
     public:
         TimeSpan(const TimeSpan& other) = default;

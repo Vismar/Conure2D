@@ -15,7 +15,7 @@ namespace C2D
      *   - Invoke them at once (to do so you should implement Invoke() method by yourself in the way you want).
      */
     template <class Ret>
-    class Dispatcher : public DispatcherInterface
+    class [[deprecated("Will be removed")]] Dispatcher : public DispatcherInterface
     {
     public:
         /*!

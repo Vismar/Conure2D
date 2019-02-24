@@ -17,7 +17,7 @@ namespace C2D
      * Used in SceneMap to store all scenes and have access to certain functions 
      * that should not be publicly visible for an end user.
      */
-    class BaseSceneInterface
+    class [[deprecated("Will be reimplemented")]] BaseSceneInterface
     {
     public:
         BaseSceneInterface(const BaseSceneInterface& other) = delete;

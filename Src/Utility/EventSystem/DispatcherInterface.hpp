@@ -11,7 +11,7 @@ namespace C2D
      * exclude AddCallable(), because these functions are template based, so it cannot be 
      * placed here and made as virtual.
      */
-    class DispatcherInterface
+    class [[deprecated("Will be removed")]] DispatcherInterface
     {
     public:
         DispatcherInterface() = default;

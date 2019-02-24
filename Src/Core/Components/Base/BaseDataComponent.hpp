@@ -6,7 +6,7 @@ namespace C2D
     /*!
      * \brief Base class for all components which should store only data and can be attached to SceneObject.
      */
-    class BaseDataComponent : public BaseComponent
+    class [[deprecated("Will be reimplemented")]] BaseDataComponent : public BaseComponent
     {
     public:
         BaseDataComponent() = delete;

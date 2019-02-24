@@ -12,7 +12,7 @@ namespace C2D
      * This container created specifically to gather basic transformations in one place and modify them.
      * It is used to obtain or assign transformations to transform component.
      */
-    struct Transformations
+    struct [[deprecated("Will be reimplemented")]] Transformations
     {
         /*! Position. */
         sf::Vector2f position;
@@ -29,7 +29,7 @@ namespace C2D
      * Transform is used to describe position and orientation of an object in a game space.
      * Every piece of data stored as atomic, so all changes to it is thread-safe.
      */
-    class TransformComponent final : public BaseLogicComponent, public EventManager
+    class [[deprecated("Will be reimplemented")]] TransformComponent final : public BaseLogicComponent, public EventManager
     {
     public:
         TransformComponent() = delete;

@@ -18,7 +18,7 @@ namespace C2D
      *  - Get joystick axes values and vendor information
      *  - Create/edit/delete mapped actions and axes
      */
-    class InputSystem final : public InputSystemInterface, public InputSystemHandlerInterface
+    class [[deprecated("Will be reimplemented")]] InputSystem final : public InputSystemInterface, public InputSystemHandlerInterface
     {
     public:
         InputSystem(const InputSystem& other) = delete;

@@ -12,7 +12,7 @@ namespace C2D
      * 
      * This component contains basic functions that are required by all logic components.
      */
-    class BaseLogicComponent : public BaseComponent
+    class [[deprecated("Will be reimplemented")]] BaseLogicComponent : public BaseComponent
     {
     public:
         BaseLogicComponent() = delete;

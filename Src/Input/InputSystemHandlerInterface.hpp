@@ -11,7 +11,7 @@ namespace C2D
      * 
      * Provides functionality to handle input events. Should be used by entity that poll events.
      */
-    class InputSystemHandlerInterface
+    class [[deprecated("Will be reimplemented")]] InputSystemHandlerInterface
     {
     public:
         InputSystemHandlerInterface(const InputSystemHandlerInterface& other) = delete;

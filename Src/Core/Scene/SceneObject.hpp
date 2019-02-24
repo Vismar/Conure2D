@@ -16,7 +16,7 @@ namespace C2D
      * 
      * Scene object - core and bones to which user supposed to add components that will make an object something unique.
      */
-    class SceneObject final : public std::enable_shared_from_this<SceneObject>, public EventManager
+    class [[deprecated("Will be reimplemented")]] SceneObject final : public std::enable_shared_from_this<SceneObject>, public EventManager
     {
     public:
         SceneObject(const SceneObject& other) = delete;

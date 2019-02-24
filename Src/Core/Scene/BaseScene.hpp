@@ -14,7 +14,7 @@ namespace C2D
      * This base scene contains functionality to create scene objects 
      * and to aggregate renderable components that can be passed to a render system.
      */
-    class BaseScene : public BaseSceneInterface
+    class [[deprecated("Will be reimplemented")]] BaseScene : public BaseSceneInterface
     {
     public:
         BaseScene() = delete;

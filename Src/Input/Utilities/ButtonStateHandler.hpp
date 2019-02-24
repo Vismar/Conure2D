@@ -18,7 +18,7 @@ namespace C2D
     /*!
      * \brief Thread-safe handler which helps to update and check button state.
      */
-    class ButtonStateHandler
+    class [[deprecated("Will be reimplemented")]] ButtonStateHandler
     {
     public:
         ButtonStateHandler& operator=(const ButtonStateHandler& other) = delete;

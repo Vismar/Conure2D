@@ -11,7 +11,7 @@ namespace C2D
     /*!
      * \brief Device which handles all mouse actions.
      */
-    class MouseDevice final : public MouseDeviceInterface
+    class [[deprecated("Will be reimplemented")]] MouseDevice final : public MouseDeviceInterface
     {
     public:
         MouseDevice(const MouseDevice&) = delete;

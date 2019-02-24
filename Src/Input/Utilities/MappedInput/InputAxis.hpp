@@ -9,7 +9,7 @@ namespace C2D
     /*!
      * \brief Axis type that is used in AxisUnion.
      */
-    enum class AxisType
+    enum class [[deprecated("Will be reimplemented")]] AxisType
     {
         Axis,   /*!< Axis itself. */
         Buttons /*!< Any button. */
@@ -18,7 +18,7 @@ namespace C2D
     /*!
      * \brief Input axis that can be represented as actual joystick axis or pair of action buttons.
      */
-    class InputAxis
+    class [[deprecated("Will be reimplemented")]] InputAxis
     {
     public:
         /*!

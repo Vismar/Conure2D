@@ -12,7 +12,7 @@ namespace C2D
     /*!
      * \brief Device which handles all joystick actions.
      */
-    class JoystickDevice : public JoystickDeviceInterface
+    class [[deprecated("Will be reimplemented")]] JoystickDevice : public JoystickDeviceInterface
     {
     public:
         JoystickDevice& operator=(const JoystickDevice&) = delete;

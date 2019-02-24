@@ -20,7 +20,7 @@ namespace C2D
      * - Inherited components will have the same characteristics in comparison, 
      *   so scene object will not be able to store more than one renderable component.
      */
-    class RenderableComponent : public BaseDataComponent, public EventManager, public sf::Drawable
+    class [[deprecated("Will be reimplemented")]] RenderableComponent : public BaseDataComponent, public EventManager, public sf::Drawable
     {
     public:
         RenderableComponent() = delete;

@@ -9,7 +9,7 @@ namespace C2D
     /*!
      * \brief Device which handles all keyboard actions.
      */
-    class KeyboardDevice
+    class [[deprecated("Will be reimplemented")]] KeyboardDevice
     {
     public:
         KeyboardDevice(const KeyboardDevice& other) = delete;

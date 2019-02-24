@@ -23,7 +23,7 @@ namespace C2D
      *   - If a function requires different parameters than used in the dispatcher, 
      *     then it will be removed from the dispatcher upon invoke.
      */
-    class EventManager
+    class [[deprecated("Will be removed")]] EventManager
     {
     public:
         EventManager() = default;

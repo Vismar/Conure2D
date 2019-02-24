@@ -8,7 +8,7 @@ namespace C2D
     /*!
      * \brief Comparator for shared and weak pointers to CameraComponent.
      */
-    struct CamerasCompare
+    struct [[deprecated("Will be reimplemented")]] CamerasCompare
     {
         using is_transparent = void;
 

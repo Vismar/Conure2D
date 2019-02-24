@@ -7,7 +7,7 @@ namespace C2D
     /*!
      * \brief Joystick device interface that defines required functions for getting data.
      */
-    class JoystickDeviceInterface
+    class [[deprecated("Will be reimplemented")]] JoystickDeviceInterface
     {
     public:
         JoystickDeviceInterface & operator=(const JoystickDeviceInterface&) = delete;

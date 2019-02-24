@@ -13,7 +13,7 @@ namespace  C2D
     /*!
      * \brief Manager that handles creating/updating/deleting of mapped input actions and axes.
      */
-    class InputMap final : public InputMapInterface
+    class [[deprecated("Will be reimplemented")]] InputMap final : public InputMapInterface
     {
     public:
         InputMap(const InputMap&) = delete;

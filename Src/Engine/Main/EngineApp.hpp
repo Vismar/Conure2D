@@ -14,7 +14,7 @@ namespace C2D
      * Stores and initializes every single system that presents in the engine. 
      * Provides functionality to work with that systems and engine itself.
      */
-    class EngineApp
+    class [[deprecated("Will be reimplemented")]] EngineApp
     {
     public:
         EngineApp(const EngineApp& other) = delete;

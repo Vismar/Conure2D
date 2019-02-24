@@ -6,7 +6,7 @@ namespace C2D
     /*!
      * \brief Public interface for scene map system that should be used by game logic.
      */
-    class SceneMapSystemInterface
+    class [[deprecated("Will be reimplemented")]] SceneMapSystemInterface
     {
     public:
         SceneMapSystemInterface(const SceneMapSystemInterface& other) = delete;

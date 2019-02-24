@@ -12,7 +12,7 @@ namespace C2D
      * to be executed simultaneously without any synchronization via mutexes or similar things.
      */
     template <class T>
-    class LockFreeLinkedQueue
+    class [[deprecated("Will be removed")]] LockFreeLinkedQueue
     {
         /*!
          * \brief Simple node that contains data and pointers to the next and previous nodes.

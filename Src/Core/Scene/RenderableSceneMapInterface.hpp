@@ -9,7 +9,7 @@ namespace  C2D
     /*!
      * \brief Interface for scene map that can be rendered by render system.
      */
-    class RenderableSceneMapInterface
+    class [[deprecated("Will be reimplemented")]] RenderableSceneMapInterface
     {
     public:
         RenderableSceneMapInterface(const RenderableSceneMapInterface& other) = delete;

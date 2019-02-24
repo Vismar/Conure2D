@@ -8,7 +8,7 @@ namespace C2D
     /*!
      * \brief Scene map contains all scenes and provides functionality to work with them.
      */
-    class SceneMap : public RenderableSceneMapInterface, public SceneMapSystemInterface
+    class [[deprecated("Will be reimplemented")]] SceneMap : public RenderableSceneMapInterface, public SceneMapSystemInterface
     {
     public:
         SceneMap(const SceneMap& other) = delete;

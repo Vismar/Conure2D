@@ -12,7 +12,7 @@ namespace C2D
      * Thread safe container can convert stored time value to any 
      * time precision (weeks/days/hours/minutes/second/millisecond/microseconds/nanoseconds).
      */
-    class Time
+    class [[deprecated("Will be removed")]] Time
     {
     public:
         ~Time() = default;

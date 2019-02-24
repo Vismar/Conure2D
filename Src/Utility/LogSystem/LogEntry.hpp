@@ -21,7 +21,7 @@ namespace C2D
     /*!
      * \brief Stores necessary data of log entry.
      */
-    struct LogEntry
+    struct [[deprecated("Will be reimplemented")]] LogEntry
     {
         LogEntry(const LogEntry& other) = default;
         LogEntry(LogEntry&& other) = default;

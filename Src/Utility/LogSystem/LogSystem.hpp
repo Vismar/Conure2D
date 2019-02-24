@@ -15,7 +15,7 @@ namespace C2D
     /*!
      * \brief Thread-safe log system which handles creating and storing logs of all events that occur.
      */
-    class LogSystem final : public EventManager
+    class [[deprecated("Will be reimplemented")]] LogSystem final : public EventManager
     {
     public:
         LogSystem() = delete;

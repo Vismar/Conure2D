@@ -8,7 +8,7 @@ namespace C2D
     /*!
      * \brief Comparator for shared and weak pointers to RenderableComponent.
      */
-    struct RenderablesCompare
+    struct [[deprecated("Will be reimplemented")]] RenderablesCompare
     {
         using is_transparent = void;
 

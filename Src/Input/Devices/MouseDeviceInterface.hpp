@@ -6,7 +6,7 @@ namespace C2D
     /*!
      * \brief Mouse device interface that defines required functions for getting data.
      */
-    class MouseDeviceInterface
+    class [[deprecated("Will be reimplemented")]] MouseDeviceInterface
     {
     public:
         MouseDeviceInterface(const MouseDeviceInterface&) = delete;

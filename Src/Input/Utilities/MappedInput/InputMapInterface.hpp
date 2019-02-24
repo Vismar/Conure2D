@@ -14,7 +14,7 @@ namespace C2D
     /*!
      * \brief Public interface for input map.
      */
-    class InputMapInterface
+    class [[deprecated("Will be reimplemented")]] InputMapInterface
     {
     public:
         InputMapInterface(const InputMapInterface&) = delete;

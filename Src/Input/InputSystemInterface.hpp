@@ -13,7 +13,7 @@ namespace C2D
      * 
      * Provides functionality to work with input system. Should be used within the game logic.
      */
-    class InputSystemInterface
+    class [[deprecated("Will be reimplemented")]] InputSystemInterface
     {
     public:
         InputSystemInterface(const InputSystemInterface& other) = delete;
