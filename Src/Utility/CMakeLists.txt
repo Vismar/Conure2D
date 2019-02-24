@@ -33,6 +33,7 @@ add_library(Utility
             EventSystem/EventManager.hpp
             EventSystem/EventManager.inl
             Exception/ExceptionHandler.hpp
+            Helpers/EnumHelpers.hpp
             IOSystem/IOSystem.cpp
             IOSystem/IOSystem.hpp
             IOSystem/IOSystemInterface.hpp
