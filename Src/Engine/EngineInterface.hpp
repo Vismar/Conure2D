@@ -38,13 +38,13 @@ namespace C2D
      * \brief Grabs render loop time span.
      * \return Const reference to the time span of the render loop.
      */
-    const TimeSpan& GetRenderLoopTimeSpan();
+    //const TimeSpan& GetRenderLoopTimeSpan();
 
     /*!
      * \brief Grabs logic loop time span.
      * \return Const reference to the time span of the logic loop.
      */
-    const TimeSpan& GetLogicLoopTimeSpan();
+    //const TimeSpan& GetLogicLoopTimeSpan();
 
     /*!
      * \brief Returns IO system.

@@ -25,14 +25,13 @@ namespace C2D
         InputSystem(InputSystem&& other) = delete;
         InputSystem& operator=(const InputSystem& other) = delete;
         InputSystem& operator=(InputSystem&& other) = delete;
-        InputSystem() = delete;
         ~InputSystem() final = default;
 
         /*!
          * \brief Default constructor.
          * \param logicLoopTimeSpan - time span of logic loop that will be used to check input events.
          */
-        explicit InputSystem(const TimeSpan& logicLoopTimeSpan);
+        InputSystem(/*const TimeSpan& logicLoopTimeSpan*/);
 
         /*!
          * \brief Handles input events.
@@ -174,7 +173,7 @@ namespace C2D
         bool _AnyButtonState(ButtonState state) const;
 
         /*! Const reference to the logic loop time span that is used by input system to check button states. */
-        const TimeSpan& _logicLoopTimeSpan;
+        //const TimeSpan& _logicLoopTimeSpan;
         /*! Keyboard device which handles keyboard events. */
         std::unique_ptr<KeyboardDevice> _keyboard;
         /*! Mouse device which handles mouse events. */
@@ -182,7 +181,7 @@ namespace C2D
         /*! Array of joystick devices that handles joystick events. */
         std::vector<std::unique_ptr<JoystickDevice>> _joystick;
         /*! A time when any joystick was used last time. */
-        Time _lastTimeJoystickUsed;
+        //Time _lastTimeJoystickUsed;
         /*! An id of a joystick which was used last time. */
         std::atomic<int32_t> _lastJoystickId;
         /*! Joystick threshold that will be used to filter JoystickMoved events by its value. */

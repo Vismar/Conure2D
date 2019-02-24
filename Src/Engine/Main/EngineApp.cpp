@@ -12,7 +12,7 @@ EngineApp::EngineApp()
 : _renderSystem(std::make_unique<RenderSystem>())
 , _logicThreadIsWorking(false)
 , _sceneMap(std::make_unique<SceneMap>())
-, _inputSystem(std::make_unique<InputSystem>(_logicLoopTimeSpan))
+//, _inputSystem(std::make_unique<InputSystem>(_logicLoopTimeSpan))
 { }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ void EngineApp::Run()
     std::thread(&EngineApp::_LogicLoop, this).detach();
 
     // Start render system
-    _renderSystem->Start(*_sceneMap, *_inputSystem, _renderLoopTimeSpan);
+    //_renderSystem->Start(*_sceneMap, *_inputSystem, _renderLoopTimeSpan);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@ InputSystem& EngineApp::GetInputSystem() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
+/*const TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
 {
     return _renderLoopTimeSpan;
 }
@@ -88,7 +88,7 @@ const TimeSpan& EngineApp::GetRenderLoopTimeSpan() const
 const TimeSpan& EngineApp::GetLogicLoopTimeSpan() const
 {
     return _logicLoopTimeSpan;
-}
+}*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -114,8 +114,8 @@ void EngineApp::_LogicLoop()
     if (!_logicThreadIsWorking)
     {
         _logicThreadIsWorking = true;
-        _logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
-        _logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
+        //_logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
+        //_logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
 
         // If render system works properly, update scenes
         while (_renderSystem->NoErrors())
@@ -124,7 +124,7 @@ void EngineApp::_LogicLoop()
             _sceneMap->UpdateScenes();
 
             // Update time span
-            _logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
+            //_logicLoopTimeSpan.SetNewEnd(Time::CurrentTime());
         }
 
         // Mark that logic thread finished its work

@@ -3,7 +3,6 @@
 #include "Input/InputSystemHandlerInterface.hpp"
 #include "Render/RenderSystemInterface.hpp"
 #include "Render/Window/Window.hpp"
-#include "Utility/Time/TimeSpan.hpp"
 #include <mutex>
 
 namespace C2D
@@ -34,8 +33,8 @@ namespace C2D
          * \param renderLoopTimeSpan - time span of render loop.
          */
         void Start(const RenderableSceneMapInterface& sceneMap,
-                   InputSystemHandlerInterface& inputSystem,
-                   TimeSpan& renderLoopTimeSpan);
+                   InputSystemHandlerInterface& inputSystem
+                   /*TimeSpan& renderLoopTimeSpan*/);
 
         /*!
          * \brief Stops render process.

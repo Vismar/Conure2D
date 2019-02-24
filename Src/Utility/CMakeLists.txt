@@ -34,10 +34,7 @@ add_library(Utility
             Random/RandomGenerator.cpp
             Random/RandomGenerator.hpp
             Random/RandomGenerator.inl
-            Time/Time.cpp
-            Time/Time.hpp
-            Time/TimeSpan.cpp
-            Time/TimeSpan.hpp)
+        )
 
 ## Dependencies
 add_dependencies(Utility SFML)

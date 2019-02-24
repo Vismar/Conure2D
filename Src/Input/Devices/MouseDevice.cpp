@@ -15,7 +15,7 @@ MouseDevice::MouseDevice()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
 ButtonState MouseDevice::GetButtonState(MouseButton button, const TimeSpan& timeSpan) const
 {
     return _buttons[static_cast<int>(button)].GetState(timeSpan);
@@ -48,7 +48,7 @@ float MouseDevice::HorizontalWheelDiff(const TimeSpan& timeSpan) const
 
     return wheelDiff;
 }
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int MouseDevice::PositionX() const
@@ -92,11 +92,11 @@ void MouseDevice::_HandleMouseButtonEvent(const sf::Event& event)
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::MouseButtonPressed)
     {
-        _buttons[event.mouseButton.button].UpdateState(ButtonState::Pressed, Time::CurrentTime());
+        //_buttons[event.mouseButton.button].UpdateState(ButtonState::Pressed, Time::CurrentTime());
     }
     else if (event.type == sf::Event::EventType::MouseButtonReleased)
     {
-        _buttons[event.mouseButton.button].UpdateState(ButtonState::Released, Time::CurrentTime());
+        //_buttons[event.mouseButton.button].UpdateState(ButtonState::Released, Time::CurrentTime());
     }
 }
 
@@ -107,12 +107,12 @@ void MouseDevice::_HandleMouseWheelEvent(const sf::Event& event)
     if (event.mouseWheelScroll.wheel == sf::Mouse::Wheel::VerticalWheel)
     {
         _verticalWheelDiff = event.mouseWheelScroll.delta;
-        _verticalWheelMovedTime = Time::CurrentTime();
+        //_verticalWheelMovedTime = Time::CurrentTime();
     }
     else
     {
         _horizontalWheelDiff = event.mouseWheelScroll.delta;
-        _horizontalWheelMovedTime = Time::CurrentTime();
+        //_horizontalWheelMovedTime = Time::CurrentTime();
     }
 }
 

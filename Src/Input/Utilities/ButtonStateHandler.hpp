@@ -1,6 +1,4 @@
 #pragma once
-#include "Utility/Time/Time.hpp"
-#include "Utility/Time/TimeSpan.hpp"
 
 namespace C2D
 {
@@ -33,14 +31,14 @@ namespace C2D
          * \param state - state for which new time will be assigned.
          * \param time - new time that will be assigned to a specified state.
          */
-        void UpdateState(ButtonState state, const Time& time);
+        void UpdateState(ButtonState state/*, const Time& time*/);
 
         /*!
          * \brief Calculates state of a button in a specified time span.
          * \param timeSpan - time span in which button should be checked.
          * \return State of a button in specified time span.
          */
-        ButtonState GetState(const TimeSpan& timeSpan) const;
+       // ButtonState GetState(const TimeSpan& timeSpan) const;
 
     private:
         /*!
@@ -48,25 +46,25 @@ namespace C2D
          * \param timeSpan - time span in which button should be checked.
          * \return True if button was pressed during a specified time span. Otherwise - false.
          */
-        bool _IsPressed(const TimeSpan& timeSpan) const;
+        //bool _IsPressed(const TimeSpan& timeSpan) const;
         
         /*!
          * \brief Checks if button was held down during a specified time span.
          * \param timeSpan - time span in which button should be checked.
          * \return True if button was held down during a specified time span. Otherwise - false.
          */
-        bool _IsHeldDown(const TimeSpan& timeSpan) const;
+        //bool _IsHeldDown(const TimeSpan& timeSpan) const;
         
         /*!
          * \brief Checks if button was released during a specified time span.
          * \param timeSpan - time span in which button should be checked.
          * \return True if button was released during a specified time span. Otherwise - false.
          */
-        bool _IsReleased(const TimeSpan& timeSpan) const;
+        //bool _IsReleased(const TimeSpan& timeSpan) const;
 
         /*! Timestamp of a moment when button was pressed. */
-        Time _pressTime;
+        //Time _pressTime;
         /*! Timestamp of a moment when button was released. */
-        Time _releaseTime;
+        //Time _releaseTime;
     };
 }

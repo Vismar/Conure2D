@@ -4,15 +4,15 @@ using namespace C2D;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ButtonStateHandler::UpdateState(const ButtonState state, const Time& time)
+void ButtonStateHandler::UpdateState(const ButtonState state/*, const Time& time*/)
 {
     switch (state)
     {
     case ButtonState::Pressed:
-        _pressTime = time;
+        //_pressTime = time;
         break;
     case ButtonState::Released:
-        _releaseTime = time;
+        //_releaseTime = time;
         break;
     default:
         // Do nothing
@@ -21,7 +21,7 @@ void ButtonStateHandler::UpdateState(const ButtonState state, const Time& time)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
 ButtonState ButtonStateHandler::GetState(const TimeSpan& timeSpan) const
 {
     ButtonState buttonState;
@@ -59,9 +59,9 @@ ButtonState ButtonStateHandler::GetState(const TimeSpan& timeSpan) const
 
     return buttonState;
 }
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
 bool ButtonStateHandler::_IsPressed(const TimeSpan& timeSpan) const
 {
     // Button is pressed when pressed time is IN specified time span
@@ -83,5 +83,5 @@ bool ButtonStateHandler::_IsReleased(const TimeSpan& timeSpan) const
     // Button is released when pressed time is IN specified time span
     return (timeSpan.Start() <= _releaseTime) && (_releaseTime <= timeSpan.End());
 }
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

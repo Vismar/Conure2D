@@ -2,7 +2,6 @@
 #include "Render/RenderSystem.hpp"
 #include "Core/Scene/SceneMap.hpp"
 #include "Input/InputSystem.hpp"
-#include "Utility/Time/TimeSpan.hpp"
 
 namespace C2D
 {
@@ -64,13 +63,13 @@ namespace C2D
          * \brief Grabs render loop time span.
          * \return Const reference to the time span of the render loop.
          */
-        const TimeSpan& GetRenderLoopTimeSpan() const;
+        //const TimeSpan& GetRenderLoopTimeSpan() const;
 
         /*!
          * \brief Grabs logic loop time span.
          * \return Const reference to the time span of the logic loop.
          */
-        const TimeSpan& GetLogicLoopTimeSpan() const;
+        //const TimeSpan& GetLogicLoopTimeSpan() const;
 
         /*!
          * \brief Returns IO system.
@@ -95,13 +94,13 @@ namespace C2D
         /*! Unique pointer to the log system. */
         //std::unique_ptr<LogSystem> _logSystem;
         /*! Time span of the render loop. */
-        TimeSpan _renderLoopTimeSpan;
+        //TimeSpan _renderLoopTimeSpan;
         /*! Unique pointer to the render system. */
         std::unique_ptr<RenderSystem> _renderSystem;
         /*! Atomic flag for logic thread. */
         std::atomic<bool> _logicThreadIsWorking;
         /*! Time span of the logic loop. */
-        TimeSpan _logicLoopTimeSpan;
+        //TimeSpan _logicLoopTimeSpan;
         /*! Unique pointer to the scene map system. */
         std::unique_ptr<SceneMap> _sceneMap;
         /*! Unique pointer to the input system.*/

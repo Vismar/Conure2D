@@ -16,16 +16,16 @@ RenderSystem::RenderSystem()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void RenderSystem::Start(const RenderableSceneMapInterface& sceneMap,
-                         InputSystemHandlerInterface& inputSystem,
-                         TimeSpan& renderLoopTimeSpan)
+                         InputSystemHandlerInterface& inputSystem
+                         /*TimeSpan& renderLoopTimeSpan*/)
 {
     //DEV_LOG(LogLevel::Debug, "Render loop has started");
 
     if (!_working)
     {
         _working = true;
-        renderLoopTimeSpan.SetNewEnd(Time::CurrentTime());
-        renderLoopTimeSpan.SetNewEnd(Time::CurrentTime());
+        //renderLoopTimeSpan.SetNewEnd(Time::CurrentTime());
+        //renderLoopTimeSpan.SetNewEnd(Time::CurrentTime());
 
         // If render was started, window is open and scene map is not nullptr, render
         while (_working && _window.IsOpen())
@@ -71,7 +71,7 @@ void RenderSystem::Start(const RenderableSceneMapInterface& sceneMap,
             _window.EndDraw();
 
             // Update time span
-            renderLoopTimeSpan.SetNewEnd(Time::CurrentTime());
+            //renderLoopTimeSpan.SetNewEnd(Time::CurrentTime());
         }
 
         _working = false;

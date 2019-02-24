@@ -31,19 +31,19 @@ namespace C2D
           * \param timeSpan - time span in which button should be checked.
           * \return ButtonState which defines in what state specified button is.
           */
-        ButtonState GetButtonState(MouseButton button, const TimeSpan& timeSpan) const;
+        //ButtonState GetButtonState(MouseButton button, const TimeSpan& timeSpan) const;
 
         /*!
          * \brief Returns wheel offset (positive is up, negative is down).
          * \return Abstract value that defines how much vertical wheel was scrolled.
          */
-        float VerticalWheelDiff(const TimeSpan& timeSpan) const final;
+        //float VerticalWheelDiff(const TimeSpan& timeSpan) const final;
 
         /*!
          * \brief Returns wheel offset (positive is left, negative is right).
          * \return Abstract value that defines how much horizontal wheel was scrolled.
          */
-        float HorizontalWheelDiff(const TimeSpan& timeSpan) const final;
+        //float HorizontalWheelDiff(const TimeSpan& timeSpan) const final;
 
         /*!
          * \brief Returns current x coordinate of the mouse cursor relative to the top left corner of the window.
@@ -85,11 +85,11 @@ namespace C2D
         /*! Buttons states. */
         std::vector<ButtonStateHandler> _buttons;
         /*! Timestamp of a moment when vertical wheel was moved. */
-        Time _verticalWheelMovedTime;
+        //Time _verticalWheelMovedTime;
         /*! Value of vertical wheel scroll. */
         std::atomic<float> _verticalWheelDiff;
         /*! Timestamp of a moment when horizontal wheel was moved. */
-        Time _horizontalWheelMovedTime;
+        //Time _horizontalWheelMovedTime;
         /*! Value of horizontal wheel scroll. */
         std::atomic<float> _horizontalWheelDiff;
         /*! Current x coordinate of the mouse cursor relative to the top left corner of the window. */

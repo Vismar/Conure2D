@@ -50,12 +50,12 @@ void JoystickDevice::SetJoystickConnectionState(const bool connectionState)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
 ButtonState JoystickDevice::GetButtonState(const JoystickButton button, const TimeSpan& timeSpan) const
 {
     return _buttons[static_cast<int>(button)].GetState(timeSpan);
 }
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 float JoystickDevice::JoystickAxisPosition(const JoystickAxis axis) const
@@ -119,11 +119,11 @@ void JoystickDevice::_HandleJoystickButtonEvent(const sf::Event& event)
     // If button was pressed or released, get its code and update state
     if (event.type == sf::Event::EventType::JoystickButtonPressed)
     {
-        _buttons[event.joystickButton.button].UpdateState(ButtonState::Pressed, Time::CurrentTime());
+        //_buttons[event.joystickButton.button].UpdateState(ButtonState::Pressed, Time::CurrentTime());
     }
     else if (event.type == sf::Event::EventType::JoystickButtonReleased)
     {
-        _buttons[event.joystickButton.button].UpdateState(ButtonState::Released, Time::CurrentTime());
+        //_buttons[event.joystickButton.button].UpdateState(ButtonState::Released, Time::CurrentTime());
     }
 }
 
