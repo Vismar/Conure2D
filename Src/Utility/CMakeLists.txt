@@ -34,10 +34,11 @@ add_library(Utility
             Random/RandomGenerator.cpp
             Random/RandomGenerator.hpp
             Random/RandomGenerator.inl
-        )
+            Time/Time.cpp
+            Time/Time.hpp)
 
 ## Dependencies
-add_dependencies(Utility SFML)
+add_dependencies(Utility SFML Date)
 
 ## Prefix
 set_target_properties(Utility PROPERTIES PREFIX "")

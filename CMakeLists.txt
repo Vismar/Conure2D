@@ -31,6 +31,17 @@ message(STATUS "Conure2D build started with ${CONFIGURATION} configuration")
 # Install dependencies
 set(EXTERNAL_INSTALL_DIR ../External/)
 
+## Date
+### Get Date library
+ExternalProject_Add(Date
+                    PREFIX         ${EXTERNAL_INSTALL_DIR}
+                    GIT_REPOSITORY https://github.com/HowardHinnant/date.git
+                    GIT_TAG        v2.4.1
+                    # Build step is not required, so turn off all commands
+                    CONFIGURE_COMMAND ""
+                    BUILD_COMMAND ""
+                    INSTALL_COMMAND "")
+
 ## SFML
 ExternalProject_Add(SFML
                     GIT_REPOSITORY https://github.com/SFML/SFML
@@ -57,6 +68,7 @@ set(VERSION_PATCH 3)
 ## Include directories
 include_directories(./External/src/GoogleTest/googletest/include)
 include_directories(./External/src/SFML/include)
+include_directories(./External/src/Date/include)
 include_directories(./Src)
 include_directories(./)
 
