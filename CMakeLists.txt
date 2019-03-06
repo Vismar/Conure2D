@@ -29,7 +29,7 @@ message(STATUS "Conure2D build started with ${CONFIGURATION} configuration")
 
 #######################################################################################################################
 # Install dependencies
-set(EXTERNAL_INSTALL_DIR ../External/)
+set(EXTERNAL_INSTALL_DIR ../External)
 
 #-------------------------------------------------------------------------------------
 ## Date
@@ -54,12 +54,25 @@ ExternalProject_Add(SFML
                     GIT_REPOSITORY https://github.com/SFML/SFML
                     PREFIX ${EXTERNAL_INSTALL_DIR}
                     GIT_TAG        2.5.1
+                    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF
                     # Install step is not required, so turn it off
                     INSTALL_COMMAND "")
 ### Include SFML dependencies
 include_directories(./External/src/SFML/include)
-### Lib path
-link_directories(./External/src/SFML-build/lib)
+### SFML libs
+set(SFML_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/External/src/SFML-build/lib")
+#### SFML-System
+add_library(SFML-System STATIC IMPORTED)
+set_target_properties(SFML-System PROPERTIES
+                      IMPORTED_LOCATION "${SFML_LIB_PATH}/libsfml-system-s.a")
+#### SFML-Window
+add_library(SFML-Window STATIC IMPORTED)
+set_target_properties(SFML-Window PROPERTIES
+                      IMPORTED_LOCATION "${SFML_LIB_PATH}/libsfml-window-s.a")
+#### SFML-Graphics
+add_library(SFML-Graphics STATIC IMPORTED)
+set_target_properties(SFML-Graphics PROPERTIES
+                      IMPORTED_LOCATION "${SFML_LIB_PATH}/libsfml-graphics-s.a")
 
 #-------------------------------------------------------------------------------------
 ## Google Test
@@ -72,8 +85,16 @@ ExternalProject_Add(GoogleTest
                     INSTALL_COMMAND "")
 ### Include gtest dependencies
 include_directories(./External/src/GoogleTest/googletest/include)
-### Lib path
-link_directories(./External/src/GoogleTest-build/lib)
+### Gtest libs
+set(GTEST_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/External/src/GoogleTest-build/googlemock")
+#### G-Test
+add_library(G-Test STATIC IMPORTED)
+set_target_properties(G-Test PROPERTIES
+                      IMPORTED_LOCATION "${GTEST_LIB_PATH}/gtest/libgtest.a")
+#### G-Test_main
+add_library(G-Test_main STATIC IMPORTED)
+set_target_properties(G-Test_main PROPERTIES
+                      IMPORTED_LOCATION "${GTEST_LIB_PATH}/gtest/libgtest_main.a")
 
 #######################################################################################################################
 # C++17 is required
@@ -91,7 +112,6 @@ set(VERSION_PATCH 0)
 
 ## Include directories
 include_directories(./Src)
-include_directories(./)
 
 ## Static libs
 add_subdirectory(Src/Utility)

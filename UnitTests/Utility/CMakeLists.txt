@@ -13,7 +13,7 @@ add_executable(UtilityTest
                Math/Vector2Test.cpp)
 
 ## Link libraries
-target_link_libraries(UtilityTest gtest gtest_main pthread)
+target_link_libraries(UtilityTest G-Test G-Test_main pthread)
 target_link_libraries(UtilityTest Utility)
 
 ## Prefix
