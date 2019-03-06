@@ -31,7 +31,10 @@ message(STATUS "Conure2D build started with ${CONFIGURATION} configuration")
 # Install dependencies
 set(EXTERNAL_INSTALL_DIR ../External/)
 
+#-------------------------------------------------------------------------------------
 ## Date
+## Note: It is a simple header-only library so we can just download it to use
+
 ### Get Date library
 ExternalProject_Add(Date
                     PREFIX         ${EXTERNAL_INSTALL_DIR}
@@ -41,18 +44,39 @@ ExternalProject_Add(Date
                     CONFIGURE_COMMAND ""
                     BUILD_COMMAND ""
                     INSTALL_COMMAND "")
+### Include Date dependencies
+include_directories(./External/src/Date/include)
 
+#-------------------------------------------------------------------------------------
 ## SFML
+### Get SFML library
 ExternalProject_Add(SFML
                     GIT_REPOSITORY https://github.com/SFML/SFML
-                    PREFIX ${EXTERNAL_INSTALL_DIR})
+                    PREFIX ${EXTERNAL_INSTALL_DIR}
+                    GIT_TAG        2.5.1
+                    # Install step is not required, so turn it off
+                    INSTALL_COMMAND "")
+### Include SFML dependencies
+include_directories(./External/src/SFML/include)
+### Lib path
+link_directories(./External/src/SFML-build/lib)
 
+#-------------------------------------------------------------------------------------
 ## Google Test
+### Get gtest library
 ExternalProject_Add(GoogleTest
                     GIT_REPOSITORY https://github.com/google/googletest
-                    PREFIX ${EXTERNAL_INSTALL_DIR})
+                    PREFIX ${EXTERNAL_INSTALL_DIR}
+                    GIT_TAG        release-1.8.1
+                    # Install step is not required, so turn it off
+                    INSTALL_COMMAND "")
+### Include gtest dependencies
+include_directories(./External/src/GoogleTest/googletest/include)
+### Lib path
+link_directories(./External/src/GoogleTest-build/lib)
 
-## C++17 is required
+#######################################################################################################################
+# C++17 is required
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
@@ -62,19 +86,12 @@ project(Conure2D)
 
 ## Setup version numbers
 set(VERSION_MAJOR 0)
-set(VERSION_MINOR 0)
-set(VERSION_PATCH 3)
+set(VERSION_MINOR 1)
+set(VERSION_PATCH 0)
 
 ## Include directories
-include_directories(./External/src/GoogleTest/googletest/include)
-include_directories(./External/src/SFML/include)
-include_directories(./External/src/Date/include)
 include_directories(./Src)
 include_directories(./)
-
-## Link directories
-link_directories(./External/src/GoogleTest-build/lib)
-link_directories(./External/src/SFML-build/lib)
 
 ## Static libs
 add_subdirectory(Src/Utility)
