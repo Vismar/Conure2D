@@ -133,4 +133,11 @@ matrix:
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
     - os: windows
       env:
-        - MATRIX_EVAL="CC=gcc && CXX=g++"
+        - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
+      script:
+        - eval "${MATRIX_EVAL}"
+        - mkdir Build
+        - cd Build
+        - cmake .. -G "MinGW Makefiles" ${BUILD_TYPE}
+        - make
+        - make test ARGS="-V"
