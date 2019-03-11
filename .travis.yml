@@ -5,7 +5,7 @@ script:
 - mkdir Build
 - cd Build
 - cmake .. ${BUILD_TYPE}
-- sudo make
+- make
 - make test ARGS="-V"
 
 matrix:
@@ -131,3 +131,4 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
+    - os: windows
