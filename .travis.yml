@@ -143,6 +143,6 @@ matrix:
       script:
         - eval "${MATRIX_EVAL}"
         - mkdir Build && cd Build
-        - cmake .. -G "MinGW Makefiles" ${BUILD_TYPE}
+        - cmake .. -G "MinGW Makefiles" ${BUILD_TYPE} -DCMAKE_SH="CMAKE_SH-NOTFOUND"
         - mingw32-make
         - mingw32-make test ARGS="-V"
