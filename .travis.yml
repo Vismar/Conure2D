@@ -5,8 +5,8 @@ script:
 - mkdir Build
 - cd Build
 - cmake .. ${BUILD_TYPE}
-- make
-- make test ARGS="-V"
+- cmake --build . --target all
+- cmake --build . --target test ARGS="-V"
 
 matrix:
   fast_finish: true
@@ -134,10 +134,3 @@ matrix:
     - os: windows
       env:
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
-      script:
-        - eval "${MATRIX_EVAL}"
-        - mkdir Build
-        - cd Build
-        - cmake .. -G "MinGW Makefiles" ${BUILD_TYPE}
-        - make
-        - make test ARGS="-V"
