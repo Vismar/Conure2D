@@ -4,8 +4,8 @@ script:
   - eval "${MATRIX_EVAL}"
   - mkdir Build && cd Build
   - cmake .. ${BUILD_TYPE}
-  - cmake --build . --target all
-  - cmake --build . --target test
+  - sudo make
+  - make test ARGS="-V
 
 matrix:
   fast_finish: true
@@ -135,14 +135,3 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
-
-    - name: "Windows Visual Studio 15 2017 Production"
-      os: windows
-      env:
-        - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
-      script:
-        - eval "${MATRIX_EVAL}"
-        - mkdir Build && cd Build
-        - cmake .. -G "MinGW Makefiles" ${BUILD_TYPE} -DCMAKE_SH="CMAKE_SH-NOTFOUND"
-        - mingw32-make
-        - mingw32-make test ARGS="-V"
