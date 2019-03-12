@@ -5,7 +5,7 @@ script:
   - mkdir Build && cd Build
   - cmake .. ${BUILD_TYPE}
   - sudo make
-  - make test ARGS="-V
+  - make test ARGS="-V"
 
 matrix:
   fast_finish: true
