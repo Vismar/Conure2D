@@ -1,18 +1,17 @@
 language: cpp
 
 script:
-- eval "${MATRIX_EVAL}"
-- mkdir Build
-- cd Build
-- cmake .. ${BUILD_TYPE}
-- cmake --build . --target all
-- cmake --build . --target test ARGS="-V"
+  - eval "${MATRIX_EVAL}"
+  - mkdir Build && cd Build
+  - cmake .. ${BUILD_TYPE}
+  - cmake --build . --target all
+  - cmake --build . --target test
 
 matrix:
   fast_finish: true
   include:
-    # Linux, GCC, Debug
-    - os: linux
+    - name: "Linux gcc Debug"
+      os: linux
       sudo: required
       addons:
         apt:
@@ -30,8 +29,9 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Debug"
-    # Linux, GCC, Release
-    - os: linux
+
+    - name: "Linux gcc Release"
+      os: linux
       sudo: required
       addons:
         apt:
@@ -49,8 +49,9 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Release"
-    # Linux, GCC, Production
-    - os: linux
+
+    - name: "Linux gcc Production"
+      os: linux
       sudo: required
       addons:
         apt:
@@ -68,8 +69,9 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
-    # Linux, Clang, Debug
-    - os: linux
+
+    - name: "Linux clang Debug"
+      os: linux
       sudo: required
       addons:
         apt:
@@ -89,8 +91,9 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Debug"
-    # Linux, Clang, Release
-    - os: linux
+
+    - name: "Linux clang Release"
+      os: linux
       sudo: required
       addons:
         apt:
@@ -110,8 +113,9 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Release"
-    # Linux, Clang, Production
-    - os: linux
+
+    - name: "Linux clang Production"
+      os: linux
       sudo: required
       addons:
         apt:
@@ -131,6 +135,13 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
-    - os: windows
+
+    - name: "Windows Visual Studio 15 2017 Production"
+      os: windows
       env:
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
+      script:
+        - eval "${MATRIX_EVAL}"
+        - mkdir Build && cd Build
+        - cmake .. ${BUILD_TYPE}
+        - cmake --build
