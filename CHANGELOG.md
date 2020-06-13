@@ -1,19 +1,29 @@
 # Changelog
 
 ## Plans
-- **New architecture in version 0.1.0** - current architecture is that great and I need to rethink all of it 
-  and reimplement everything that was written up until now. There will be:
-  - Changes in namespace,
-  - Changes in interfaces and its names,
-  - Overall architecture will be rewritten with job system in mind,
-  - Unit tests for everything,
-  - Etc.
-- **Debug info** - debug information that helps the development.
-- **Editor** - ui toolchain.
+- **GLFW** - for window and input management.
+- **Vulkan** - render API.
+- **Job system** - to support universal multithreading.
 
 ## WIP
+### New changes
+#### Added 
+- **GLFW wrapper**
+  
+  Wrappers for GLFW context, VideoMode, Monitor and Window. Now it can be used as classes that controls the data and 
+  provides C++ like interfaces to control it or obtain data from it.
+- **Vulkan wrapper**
 
-### Added
+  Currently, the main emphasis is put on wrappers for Vulkan that handles memory allocation/deallocation, 
+  streamlines the process.
+  
+#### Removed
+Most of the old code gonna be deleted sooner or later. 
+
+**--------------------------------------------------------------------------------------------------------------------**
+   
+### Old changes
+#### Added
 - **Overall**
   - Now everything placed within one namespace "C2D".
 - **Utility**
@@ -24,7 +34,7 @@
   - **RingBufferTest** - Additional tests and fixes.
   - **Vector2Test** - Tests for Vector2.
 
-### Removed
+#### Removed
 - **VisualStudio project files** were removed because of full support of the CMake.
 
 **--------------------------------------------------------------------------------------------------------------------**

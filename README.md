@@ -1,3 +1,12 @@
+# WARNING
+Currently, this project is under the overhaul, so it can`t be usable for a quit time.
+- **GLFW**
+  
+  Instead of SFML this engine is being rewritten using GLFW for window and input management.
+- **Vulkan**
+
+  As render API was chosen Vulkan.
+
 # Conure2D
 [![Build Status](https://travis-ci.com/Vismar/Conure2D.svg?branch=master)](https://travis-ci.com/Vismar/Conure2D)
 
