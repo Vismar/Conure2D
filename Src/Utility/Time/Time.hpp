@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <chrono>
+#include <cstdint>
 #include <date/date.h>
 
 using namespace std::chrono_literals;
@@ -20,7 +20,7 @@ using YearMonthWeekday = date::year_month_weekday;
 // Duration
 // ---------------------------------------------------------------------------------------------------------------------
 
-template <typename T, std::intmax_t Num = 1, std::intmax_t Denom = 1>
+template <typename T, intmax_t Num = 1, intmax_t Denom = 1>
 using Duration = std::chrono::duration<T, std::ratio<Num, Denom>>;
 
 using SystemDuration = std::chrono::system_clock::duration;

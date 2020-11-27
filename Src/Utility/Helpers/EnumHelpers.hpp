@@ -19,7 +19,7 @@ using EnumNameMap = std::initializer_list<std::pair<Enum, const char*>>;
  * \return String representation of specified enum value if it exists or the empty string.
  */
 template <class Enum>
-constexpr const char* GetEnumName(Enum enumValue, const EnumNameMap<Enum>& map)
+constexpr const char* GetEnumValueName(Enum enumValue, const EnumNameMap<Enum>& map)
 {
     for (const auto& pair : map)
     {
@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream& stream, enumName enumeration)            
     static_assert(std::is_same_v<decltype(enumNameMap), const EnumNameMap<enumName>>,   \
                   "EnumNameMap is of wrong type. "                                      \
                   "Should be std::initializer_list<std::pair<enumName, const char*>>"); \
-    stream << GetEnumName(enumeration, enumNameMap);                                    \
+    stream << GetEnumValueName(enumeration, enumNameMap);                                    \
                                                                                         \
     return stream;                                                                      \
 }
