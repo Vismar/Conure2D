@@ -1,92 +1,171 @@
 cmake_minimum_required(VERSION 3.9)
 include(ExternalProject)
 
-#######################################################################################################################
+########################################################################################################################
 # Setup stuff
 ## Flags
-set(CFLAGS "-Wall")
-set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -DDEV_BUILD")
-set(CMAKE_CXX_FLAGS_PRODUCTION "${CMAKE_CXX_FLAGS_RELEASE} ${CFLAGS}")
-set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_RELEASE} -DDEV_BUILD ${CFLAGS}")
+
+set(CFLAGS "-m64 -Wall")
+set(GCC_COMPILATION_FLAGS "-static")
+set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -DDEV_BUILD ${GCC_COMPILATION_FLAGS}")
+set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_RELEASE} ${CFLAGS} ${GCC_COMPILATION_FLAGS}")
 
 ## Default build type
 if (NOT CMAKE_BUILD_TYPE)
-    message(STATUS "No build type was specified, default to Production")
-    set(CMAKE_BUILD_TYPE "Production")
+    message(STATUS "No build type was specified, default to Release")
+    set(CMAKE_BUILD_TYPE "Release")
 endif ()
+
+set(OUTPUT_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/Output)
 
 ## Configuration
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     set(CONFIGURATION "Debug")
+    set(OUTPUT_BIN ${OUTPUT_FOLDER}/Bin/Debug CACHE INTERNAL "")
 elseif(CMAKE_BUILD_TYPE MATCHES Release)
     set(CONFIGURATION "Release")
-elseif(CMAKE_BUILD_TYPE MATCHES Production)
-    set(CONFIGURATION "Production")
+    set(OUTPUT_BIN ${OUTPUT_FOLDER}/Bin/Release CACHE INTERNAL "")
 endif ()
+
+set(OUTPUT_LIB ${OUTPUT_FOLDER}/Lib CACHE INTERNAL "")
 
 ## Simple notification of chosen configuration
 message(STATUS "Conure2D build started with ${CONFIGURATION} configuration")
 
-#######################################################################################################################
+########################################################################################################################
 # Install dependencies
 set(EXTERNAL_INSTALL_DIR ../External)
 
-#-------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 ## Date
-## Note: It is a simple header-only library so we can just download it to use
+## Note: It is a simple header-only library so just download it
 
 ### Get Date library
 ExternalProject_Add(Date
-                    PREFIX         ${EXTERNAL_INSTALL_DIR}
-                    GIT_REPOSITORY https://github.com/HowardHinnant/date.git
-                    GIT_TAG        v2.4.1
+                    SOURCE_DIR        "${EXTERNAL_INSTALL_DIR}/Date/src"
+                    BINARY_DIR        "${EXTERNAL_INSTALL_DIR}/Date/build"
+                    STAMP_DIR         "${EXTERNAL_INSTALL_DIR}/Date/stamp"
+                    TMP_DIR           "${EXTERNAL_INSTALL_DIR}/Date/tmp"
+                    GIT_REPOSITORY    https://github.com/HowardHinnant/date
+                    GIT_TAG           v2.4.1
                     # Build step is not required, so turn off all commands
+                    UPDATE_COMMAND    ""
                     CONFIGURE_COMMAND ""
-                    BUILD_COMMAND ""
-                    INSTALL_COMMAND "")
+                    BUILD_COMMAND     ""
+                    INSTALL_COMMAND   "")
 ### Include Date dependencies
-include_directories(./External/src/Date/include)
+include_directories(./External/Date/src/include)
 
-#-------------------------------------------------------------------------------------
-## SFML
-### Get SFML library
-ExternalProject_Add(SFML
-                    GIT_REPOSITORY https://github.com/SFML/SFML
-                    PREFIX ${EXTERNAL_INSTALL_DIR}
-                    GIT_TAG        2.5.1
-                    CMAKE_ARGS -DBUILD_SHARED_LIBS=OFF
+#-----------------------------------------------------------------------------------------------------------------------
+## GLM
+## Note: It is a simple header-only library so just download it
+
+### Get GLM library
+ExternalProject_add(GLM
+                    SOURCE_DIR        "${EXTERNAL_INSTALL_DIR}/GLM/src"
+                    BINARY_DIR        "${EXTERNAL_INSTALL_DIR}/GLM/build"
+                    STAMP_DIR         "${EXTERNAL_INSTALL_DIR}/GLM/stamp"
+                    TMP_DIR           "${EXTERNAL_INSTALL_DIR}/GLM/tmp"
+                    GIT_REPOSITORY    https://github.com/g-truc/glm
+                    GIT_TAG           0.9.9.8
+                    # Build step is not required, so turn off all commands
+                    UPDATE_COMMAND    ""
+                    CONFIGURE_COMMAND ""
+                    BUILD_COMMAND     ""
+                    INSTALL_COMMAND   "")
+### Include GLM dependencies
+include_directories(./External/GLM/src)
+
+#-----------------------------------------------------------------------------------------------------------------------
+## GLFW
+### Get glfw library
+ExternalProject_Add(GLFW
+                    GIT_REPOSITORY  https://github.com/glfw/glfw
+                    SOURCE_DIR      "${EXTERNAL_INSTALL_DIR}/GLFW/src"
+                    BINARY_DIR      "${EXTERNAL_INSTALL_DIR}/GLFW/build"
+                    STAMP_DIR       "${EXTERNAL_INSTALL_DIR}/GLFW/stamp"
+                    TMP_DIR         "${EXTERNAL_INSTALL_DIR}/GLFW/tmp"
+                    GIT_TAG         3.3.2
                     # Install step is not required, so turn it off
+                    UPDATE_COMMAND  ""
                     INSTALL_COMMAND "")
-### Include SFML dependencies
-include_directories(./External/src/SFML/include)
-### SFML libs
-set(SFML_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/External/src/SFML-build/lib")
-#### SFML-System
-add_library(SFML-System STATIC IMPORTED)
-set_target_properties(SFML-System PROPERTIES
-                      IMPORTED_LOCATION "${SFML_LIB_PATH}/libsfml-system-s.a")
-#### SFML-Window
-add_library(SFML-Window STATIC IMPORTED)
-set_target_properties(SFML-Window PROPERTIES
-                      IMPORTED_LOCATION "${SFML_LIB_PATH}/libsfml-window-s.a")
-#### SFML-Graphics
-add_library(SFML-Graphics STATIC IMPORTED)
-set_target_properties(SFML-Graphics PROPERTIES
-                      IMPORTED_LOCATION "${SFML_LIB_PATH}/libsfml-graphics-s.a")
+### Include GLFW dependencies
+include_directories(./External/GLFW/src/include)
+### GLFW lib
+set(GLFW_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/External/GLFW/build/src/libglfw3.a")
+add_library(GLFW-Lib STATIC IMPORTED)
+set_target_properties(GLFW-Lib PROPERTIES
+                      IMPORTED_LOCATION "${GLFW_LIB_PATH}"
+                      GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE
+                      GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE
+                      GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-#-------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
+## Vulkan
+### Set variables for search
+if (NOT CMAKE_FIND_LIBRARY_PREFIXES)
+    message("CMAKE_FIND_LIBRARY_PREFIXES was not set, setting it to default value...")
+    set(CMAKE_FIND_LIBRARY_PREFIXES "")
+endif()
+if (NOT CMAKE_FIND_LIBRARY_SUFFIXES)
+    message("CMAKE_FIND_LIBRARY_SUFFIXES was not set, setting it to default value...")
+    set(CMAKE_FIND_LIBRARY_SUFFIXES ".lib")
+endif()
+
+### Try to find Vulkan via find_package
+unset(Vulkan_LIBRARY CACHE)
+find_package(Vulkan)
+
+### If Vulkan was not found then try to find it via env variables
+if (NOT Vulkan_FOUND)
+    message("Vulkan lib was not found, searching for env variables...")
+    if (DEFINED ENV{VK_SDK_PATH})
+        message("Found env variable for Vulkan SDK: $ENV{VK_SDK_PATH}")
+        find_library(Vulkan_LIBRARY NAME vulkan-1 PATHS "$ENV{VK_SDK_PATH}/Lib" REQUIRED)
+        if (NOT DEFINED Vulkan_INCLUDE_DIR)
+            message("Vulkan include path was not found, using found env variable...")
+            set(Vulkan_INCLUDE_DIR "$ENV{VK_SDK_PATH}/Include")
+        endif()
+        set(Vulkan_FOUND ON)
+        message("Vulkan lib -> ${Vulkan_LIBRARY}")
+        message("Vulkan inc -> ${Vulkan_INCLUDE_DIR}")
+    else(DEFINED ENV{VULKAN_SDK})
+        message("Found env variable for Vulkan SDK: $ENV{VULKAN_SDK}")
+        find_library(Vulkan_LIBRARY NAME vulkan-1 PATHS "$ENV{VULKAN_SDK}/Lib" REQUIRED)
+        if (NOT DEFINED Vulkan_INCLUDE_DIR)
+            message("Vulkan include path was not found, using found env variable...")
+            set(Vulkan_INCLUDE_DIR "$ENV{VK_SDK_PATH}/Include")
+        endif()
+        set(Vulkan_FOUND ON)
+        message("Vulkan lib -> ${Vulkan_LIBRARY}")
+        message("Vulkan inc -> ${Vulkan_INCLUDE_DIR}")
+    endif()
+endif()
+
+### Include Vulkan dependencies
+if (NOT Vulkan_FOUND)
+    message(FATAL_ERROR "Vulkan was not found")
+else()
+    include_directories(${Vulkan_INCLUDE_DIR})
+endif()
+
+#-----------------------------------------------------------------------------------------------------------------------
 ## Google Test
 ### Get gtest library
 ExternalProject_Add(GoogleTest
-                    GIT_REPOSITORY https://github.com/google/googletest
-                    PREFIX ${EXTERNAL_INSTALL_DIR}
-                    GIT_TAG        release-1.8.1
+                    GIT_REPOSITORY  https://github.com/google/googletest
+                    SOURCE_DIR      "${EXTERNAL_INSTALL_DIR}/GoogleTest/src"
+                    BINARY_DIR      "${EXTERNAL_INSTALL_DIR}/GoogleTest/build"
+                    STAMP_DIR       "${EXTERNAL_INSTALL_DIR}/GoogleTest/stamp"
+                    TMP_DIR         "${EXTERNAL_INSTALL_DIR}/GoogleTest/tmp"
+                    GIT_TAG         release-1.8.1
                     # Install step is not required, so turn it off
+                    UPDATE_COMMAND  ""
                     INSTALL_COMMAND "")
 ### Include gtest dependencies
-include_directories(./External/src/GoogleTest/googletest/include)
+include_directories(./External/GoogleTest/src/googletest/include)
 ### Gtest libs
-set(GTEST_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/External/src/GoogleTest-build/googlemock")
+set(GTEST_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/External/GoogleTest/build/googlemock")
 #### G-Test
 add_library(G-Test STATIC IMPORTED)
 set_target_properties(G-Test PROPERTIES
@@ -96,12 +175,13 @@ add_library(G-Test_main STATIC IMPORTED)
 set_target_properties(G-Test_main PROPERTIES
                       IMPORTED_LOCATION "${GTEST_LIB_PATH}/gtest/libgtest_main.a")
 
-#######################################################################################################################
-# C++17 is required
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
-#######################################################################################################################
+########################################################################################################################
+# C++17 is required
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED 20)
+
+########################################################################################################################
 # Project settings
 project(Conure2D)
 
@@ -113,15 +193,25 @@ set(VERSION_PATCH 0)
 ## Include directories
 include_directories(./Src)
 
+#link_libraries(${Vulkan_LIBRARY})
+
 ## Static libs
 add_subdirectory(Src/Utility)
-add_subdirectory(Src/Input)
-add_subdirectory(Src/Core)
-add_subdirectory(Src/Render)
-add_subdirectory(Src/Engine)
+add_subdirectory(Src/Logger)
+add_subdirectory(Src/Tracer)
+add_subdirectory(Src/GLFWWrapper)
+add_subdirectory(Src/VkWrapper)
+
+add_subdirectory(Src/TestApp)
+
+#add_subdirectory(Src/Input)
+#add_subdirectory(Src/Core)
+#add_subdirectory(Src/Render)
+#add_subdirectory(Src/Engine)
+
 
 #######################################################################################################################
 # Tests
-enable_testing ()
-add_subdirectory(UnitTests/Utility)
+#enable_testing ()
+#add_subdirectory(UnitTests/Utility)
 #######################################################################################################################

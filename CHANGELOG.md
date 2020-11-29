@@ -1,7 +1,6 @@
 # Changelog
 
 ## Plans
-- **GLFW** - for window and input management.
 - **Vulkan** - render API.
 - **Job system** - to support universal multithreading.
 

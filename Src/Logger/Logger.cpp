@@ -113,6 +113,8 @@ void Logger::PostLogEntry(std::string_view level,
            << location.file_name() << ':' << location.line() << "\n"
            << (functionName.empty() ? location.function_name() : functionName) << "\n\t"
            << message << "\n\n";
+
+    output.flush();
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
