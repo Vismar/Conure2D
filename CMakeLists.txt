@@ -9,7 +9,7 @@ set(CFLAGS "-m64 -Wall")
 if (WIN32)
     set(GCC_COMPILATION_FLAGS "-static")
 else()
-    set(GCC_COMPILATION_FLAGS "-ldl")
+    set(GCC_COMPILATION_FLAGS "")
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -DDEV_BUILD ${GCC_COMPILATION_FLAGS}")
