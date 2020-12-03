@@ -24,7 +24,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r/ppa
+            - ubuntu-toolchain-r-ppa
             - ubuntu-toolchain-r-test
           packages:
             # C++20
@@ -39,7 +39,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r/ppa
+            - ubuntu-toolchain-r-ppa
             - ubuntu-toolchain-r-test
           packages:
             # C++20
@@ -54,7 +54,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r/ppa
+            - ubuntu-toolchain-r-ppa
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-8.0
           packages:
@@ -71,7 +71,7 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r/ppa
+            - ubuntu-toolchain-r-ppa
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-8.0
           packages:
