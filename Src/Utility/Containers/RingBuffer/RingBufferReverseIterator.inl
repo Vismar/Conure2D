@@ -38,7 +38,7 @@ typename RingBuffer<T, A>::ReverseIterator& RingBuffer<T, A>::ReverseIterator::o
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::ReverseIterator::operator++(int)
+const typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::ReverseIterator::operator++(int)
 {
     ReverseIterator newIter = *this;
     ++(*this);

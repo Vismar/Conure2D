@@ -1,12 +1,9 @@
-#include <iostream>
-
 #include <GLFWWrapper/Window.hpp>
 #include <GLFWWrapper/Monitor.hpp>
 #include <GLFWWrapper/Context.hpp>
 
 #include <VkWrapper/Application.hpp>
 #include <Logger/Logger.hpp>
-
 
 int main()
 {

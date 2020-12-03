@@ -9,7 +9,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${OUTPUT_LIB}")
 ########################################################################################################################
 # Build executable
 add_executable(TestApp
-        main.cpp)
+               main.cpp)
 
 ## Add dependencies
 add_dependencies(TestApp GLFWWrapper VkWrapper GLFW-Lib Utility Tracer)

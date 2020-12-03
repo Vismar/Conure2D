@@ -39,7 +39,7 @@ typename RingBuffer<T, A>::Iterator& RingBuffer<T, A>::Iterator::operator++()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::Iterator::operator++(int)
+const typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::Iterator::operator++(int)
 {
     Iterator newIter = *this;
     ++(*this);

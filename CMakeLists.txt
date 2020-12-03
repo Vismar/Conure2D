@@ -6,7 +6,7 @@ include(ExternalProject)
 ## Flags
 
 set(CFLAGS "-m64 -Wall")
-set(GCC_COMPILATION_FLAGS "-static")
+set(GCC_COMPILATION_FLAGS "-static -fcoroutines")
 set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -DDEV_BUILD ${GCC_COMPILATION_FLAGS}")
 set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_RELEASE} ${CFLAGS} ${GCC_COMPILATION_FLAGS}")
 
@@ -177,7 +177,7 @@ set_target_properties(G-Test_main PROPERTIES
 
 
 ########################################################################################################################
-# C++17 is required
+# C++20 is required
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED 20)
 
@@ -212,6 +212,6 @@ add_subdirectory(Src/TestApp)
 
 #######################################################################################################################
 # Tests
-#enable_testing ()
-#add_subdirectory(UnitTests/Utility)
+enable_testing ()
+add_subdirectory(UnitTests/Utility)
 #######################################################################################################################

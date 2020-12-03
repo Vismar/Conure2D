@@ -9,19 +9,12 @@ namespace C2D
      * \brief Container that uses a single, fixed-size buffer as if it were connected end-to-end.
      * \tparam T - type of used data.
      */
-    template <class T, class A = std::allocator<T> >
+    template <class T, class A = std::allocator<T>>
     class RingBuffer
     {
     public:
-        using allocator_type = A;
         using value_type  = typename A::value_type;
-        using reference = typename A::reference;
-        using const_reference = typename A::const_reference;
-        using difference_type = typename A::difference_type;
         using size_type = typename A::size_type;
-
-        class ConstIterator;
-        class ConstReverseIterator;
 
         /*!
          * \brief Iterator for RingBuffer.
@@ -33,11 +26,9 @@ namespace C2D
             Iterator(const Iterator&) = default;
             ~Iterator() = default;
 
-            using difference_type = T;
             using value_type = T;
             using pointer = const T*;
             using reference = const T&;
-            using iterator_category = std::forward_iterator_tag;
 
             /*!
              * \brief Constructor.
@@ -56,7 +47,7 @@ namespace C2D
              * \brief The postfix increment operator
              * \return Iterator without incrementation.
              */
-            Iterator operator++(int);
+            const Iterator operator++(int);
 
             /*!
              * \brief Comparison of two iterators.
@@ -89,85 +80,8 @@ namespace C2D
             size_type _index;
             /*! Pointer to the ring buffer to which entries iterator is pointing. */
             RingBuffer<T, A>* _ringBuffer;
-
-            friend ConstIterator;
         };
         using iterator = Iterator;
-
-        /*!
-         * \brief Const iterator for RingBuffer.
-         */
-        class ConstIterator
-        {
-        public:
-            ConstIterator() = delete;
-            ConstIterator(const ConstIterator&) = default;
-            ~ConstIterator() = default;
-
-            using difference_type = T;
-            using value_type = T;
-            using pointer = const T*;
-            using reference = const T&;
-            using iterator_category = std::forward_iterator_tag;
-
-            /*!
-             * \brief Constructor.
-             * \param index - index of an entry.
-             * \param ringBuffer - pointer to the ring buffer.
-             */
-            explicit ConstIterator(size_type index, const RingBuffer<T, A> *ringBuffer);
-
-            /*!
-             * \brief Copy constructor creates const iterator from non const iterator.
-             * \param iterator - non const iterator.
-             */
-            ConstIterator(const Iterator& iterator);
-
-            /*!
-             * \brief The prefix increment operator.
-             * \return Reference to updated iterator.
-             */
-            ConstIterator &operator++();
-
-            /*!
-             * \brief The postfix increment operator
-             * \return Iterator without incrementation.
-             */
-            ConstIterator operator++(int);
-
-            /*!
-             * \brief Comparison of two iterators.
-             * \param other - other iterator.
-             * \return True if iterators are equal. Otherwise - false.
-             */
-            bool operator==(const ConstIterator& other) const;
-
-            /*!
-             * \brief Comparison of two iterators.
-             * \param other - other iterator.
-             * \return True if iterators are not equal. Otherwise - false.
-             */
-            bool operator!=(const ConstIterator& other) const;
-
-            /*!
-             * \brief The member access operator.
-             * \return Pointer to the value on which iterator is pointing.
-             */
-            reference operator*() const;
-
-            /*!
-             * \brief The member access operator.
-             * \return Pointer to the value on which iterator is pointing.
-             */
-            pointer operator->() const;
-
-        private:
-            /*! Index of an entry two which iterator is pointing. */
-            size_type _index;
-            /*! Pointer to the ring buffer to which entries iterator is pointing. */
-            const RingBuffer<T, A>* _ringBuffer;
-        };
-        using const_iterator = ConstIterator;
 
         /*!
          * \brief Reverse iterator for RingBuffer.
@@ -179,11 +93,9 @@ namespace C2D
             ReverseIterator(const ReverseIterator&) = default;
             ~ReverseIterator() = default;
 
-            using difference_type = T;
             using value_type = T;
             using pointer = const T *;
             using reference = const T &;
-            using iterator_category = std::forward_iterator_tag;
 
             /*!
              * \brief Constructor.
@@ -196,13 +108,13 @@ namespace C2D
              * \brief The prefix increment operator.
              * \return Reference to updated iterator.
              */
-            ReverseIterator &operator++();
+            ReverseIterator& operator++();
 
             /*!
              * \brief The postfix increment operator
              * \return Iterator without incrementation.
              */
-            ReverseIterator operator++(int);
+            const ReverseIterator operator++(int);
 
             /*!
              * \brief Comparison of two iterators.
@@ -235,85 +147,7 @@ namespace C2D
             size_type _index;
             /*! Pointer to the ring buffer to which entries iterator is pointing. */
             RingBuffer<T, A> *_ringBuffer;
-
-            friend ConstReverseIterator;
         };
-        using reverse_iterator = ReverseIterator;
-
-        /*!
-         * \brief Const reverse iterator for RingBuffer.
-         */
-        class ConstReverseIterator
-        {
-        public:
-            ConstReverseIterator() = delete;
-            ConstReverseIterator(const ConstReverseIterator&) = default;
-            ~ConstReverseIterator() = default;
-
-            using difference_type = T;
-            using value_type = T;
-            using pointer = const T *;
-            using reference = const T &;
-            using iterator_category = std::forward_iterator_tag;
-
-            /*!
-             * \brief Constructor.
-             * \param index - index of an entry.
-             * \param ringBuffer - pointer to the ring buffer.
-             */
-            explicit ConstReverseIterator(size_type index, const RingBuffer<T, A> *ringBuffer);
-
-            /*!
-             * \brief Copy constructor creates const reverse iterator from non const reverse iterator.
-             * \param iterator - non const reverse iterator.
-             */
-            ConstReverseIterator(const ReverseIterator& iterator);
-
-            /*!
-             * \brief The prefix increment operator.
-             * \return Reference to updated iterator.
-             */
-            ConstReverseIterator &operator++();
-
-            /*!
-             * \brief The postfix increment operator
-             * \return Iterator without incrementation.
-             */
-            ConstReverseIterator operator++(int);
-
-            /*!
-             * \brief Comparison of two iterators.
-             * \param other - other iterator.
-             * \return True if iterators are equal. Otherwise - false.
-             */
-            bool operator==(const ConstReverseIterator& other) const;
-
-            /*!
-             * \brief Comparison of two iterators.
-             * \param other - other iterator.
-             * \return True if iterators are not equal. Otherwise - false.
-             */
-            bool operator!=(const ConstReverseIterator& other) const;
-
-            /*!
-             * \brief The member access operator.
-             * \return Pointer to the value on which iterator is pointing.
-             */
-            reference operator*() const;
-
-            /*!
-             * \brief The member access operator.
-             * \return Pointer to the value on which iterator is pointing.
-             */
-            pointer operator->() const;
-
-        private:
-            /*! Index of an entry two which iterator is pointing. */
-            size_type _index;
-            /*! Pointer to the ring buffer to which entries iterator is pointing. */
-            const RingBuffer<T, A> *_ringBuffer;
-        };
-        using const_reverse_iterator = ConstReverseIterator;
 
         RingBuffer(const RingBuffer& other) = default;
         RingBuffer(RingBuffer&& other) noexcept = default;
@@ -365,34 +199,10 @@ namespace C2D
         Iterator begin();
 
         /*!
-         * \brief Returns a const iterator to the beginning of the ring buffer.
-         * \return A const iterator to the beginning of the ring buffer.
-         */
-        ConstIterator begin() const;
-
-        /*!
-         * \brief Returns a const iterator to the beginning of the ring buffer.
-         * \return A const iterator to the beginning of the ring buffer.
-         */
-        ConstIterator cbegin() const;
-
-        /*!
          * \brief Returns a reverse iterator to the beginning (actual end) of the ring buffer.
          * \return A reverse iterator to the beginning (actual end) of the ring buffer.
          */
         ReverseIterator rbegin();
-
-        /*!
-         * \brief Returns a const reverse iterator to the beginning (actual end) of the ring buffer.
-         * \return A const reverse iterator to the beginning (actual end) of the ring buffer.
-         */
-        ConstReverseIterator rbegin() const;
-
-        /*!
-         * \brief Returns a const reverse iterator to the beginning (actual end) of the ring buffer.
-         * \return A const reverse iterator to the beginning (actual end) of the ring buffer.
-         */
-        ConstReverseIterator crbegin() const;
 
         /*!
          * \brief Returns an iterator to the beginning of the ring buffer.
@@ -401,34 +211,10 @@ namespace C2D
         Iterator end();
 
         /*!
-         * \brief Returns a const iterator to the beginning of the ring buffer.
-         * \return A const iterator to the beginning of the ring buffer.
-         */
-        ConstIterator end() const;
-
-        /*!
-         * \brief Returns a const iterator to the beginning of the ring buffer.
-         * \return A const iterator to the beginning of the ring buffer.
-         */
-        ConstIterator cend() const;
-
-        /*!
          * \brief Returns a reverse iterator to the end (actual beginning) of the ring buffer.
          * \return A reverse iterator to the end (actual beginning) of the ring buffer.
          */
         ReverseIterator rend();
-
-        /*!
-         * \brief Returns a const reverse iterator to the end (actual beginning) of the ring buffer.
-         * \return A const reverse iterator to the end (actual beginning) of the ring buffer.
-         */
-        ConstReverseIterator rend() const;
-
-        /*!
-         * \brief Returns a const reverse iterator to the end (actual beginning) of the ring buffer.
-         * \return A const reverse iterator to the end (actual beginning) of the ring buffer.
-         */
-        ConstReverseIterator crend() const;
 
     private:
         /*!
@@ -460,7 +246,5 @@ namespace C2D
 
 #include "RingBuffer.inl"
 #include "RingBufferIterator.inl"
-#include "RingBufferConstIterator.inl"
 #include "RingBufferReverseIterator.inl"
-#include "RingBufferConstReverseIterator.inl"
 }

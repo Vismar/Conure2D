@@ -1,5 +1,13 @@
 language: cpp
 
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libassimp-dev libglm-dev graphviz libxcb-dri3-0 libxcb-present0 libpciaccess0 cmake libpng-dev libxcb-dri3-dev libx11-dev libx11-xcb-dev libmirclient-dev libwayland-dev libxrandr-dev
+  - export VK_VERSION=1.2.135.0
+  - wget -O vulkansdk-linux-x86_64-$VK_VERSION.tar.gz https://sdk.lunarg.com/sdk/download/$VK_VERSION/linux/vulkansdk-linux-x86_64-$VK_VERSION.tar.gz
+  - tar zxf vulkansdk-linux-x86_64-$VK_VERSION.tar.gz
+  - export VULKAN_SDK=$TRAVIS_BUILD_DIR/$VK_VERSION/x86_64
+
 script:
   - eval "${MATRIX_EVAL}"
   - mkdir Build && cd Build
@@ -18,16 +26,10 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            # Required by SFML
-            - libxrandr-dev
-            - libudev-dev
-            - libopenal-dev
-            - libvorbis-dev
-            - libflac-dev
-            # C++17
-            - g++-8
+            # C++20
+            - g++-10
       env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - MATRIX_EVAL="CC=gcc-10 && CXX=g++-10"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Debug"
 
     - name: "Linux gcc Release"
@@ -38,37 +40,11 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            # Required by SFML
-            - libxrandr-dev
-            - libudev-dev
-            - libopenal-dev
-            - libvorbis-dev
-            - libflac-dev
-            # C++17
-            - g++-8
+            # C++20
+            - g++-10
       env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+        - MATRIX_EVAL="CC=gcc-10 && CXX=g++-10"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Release"
-
-    - name: "Linux gcc Production"
-      os: linux
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            # Required by SFML
-            - libxrandr-dev
-            - libudev-dev
-            - libopenal-dev
-            - libvorbis-dev
-            - libflac-dev
-            # C++17
-            - g++-8
-      env:
-        - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
-        - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"
 
     - name: "Linux clang Debug"
       os: linux
@@ -77,19 +53,13 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-6.0
+            - llvm-toolchain-trusty-8.0
           packages:
-            # Required by SFML
-            - libxrandr-dev
-            - libudev-dev
-            - libopenal-dev
-            - libvorbis-dev
-            - libflac-dev
-            # C++17
-            - g++-8
-            - clang-6.0
+            # C++20
+            - g++-10
+            - clang-8.0
       env:
-        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+        - MATRIX_EVAL="CC=clang-8.0 && CXX=clang++-8.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Debug"
 
     - name: "Linux clang Release"
@@ -99,39 +69,11 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-6.0
+            - llvm-toolchain-trusty-8.0
           packages:
-            # Required by SFML
-            - libxrandr-dev
-            - libudev-dev
-            - libopenal-dev
-            - libvorbis-dev
-            - libflac-dev
             # C++17
-            - g++-8
-            - clang-6.0
+            - g++-10
+            - clang-8.0
       env:
-        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+        - MATRIX_EVAL="CC=clang-8.0 && CXX=clang++-8.0"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Release"
-
-    - name: "Linux clang Production"
-      os: linux
-      sudo: required
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-6.0
-          packages:
-            # Required by SFML
-            - libxrandr-dev
-            - libudev-dev
-            - libopenal-dev
-            - libvorbis-dev
-            - libflac-dev
-            # C++17
-            - g++-8
-            - clang-6.0
-      env:
-        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
-        - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Production"

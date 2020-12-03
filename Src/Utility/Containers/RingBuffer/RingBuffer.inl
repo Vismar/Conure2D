@@ -181,38 +181,6 @@ typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::begin()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::begin() const
-{
-    size_type requiredIndex = _headIndex;
-
-    // If buffer is still empty, we should return "end" iterator
-    if (_empty)
-    {
-        requiredIndex = EndIndex;
-    }
-
-    return ConstIterator(requiredIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
-typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::cbegin() const
-{
-    size_type requiredIndex = _headIndex;
-
-    // If buffer is still empty, we should return "end" iterator
-    if (_empty)
-    {
-        requiredIndex = EndIndex;
-    }
-
-    return ConstIterator(requiredIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
 typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::rbegin()
 {
     size_type requiredIndex = _tailIndex;
@@ -229,38 +197,6 @@ typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::rbegin()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::rbegin() const
-{
-    size_type requiredIndex = _tailIndex;
-
-    // If buffer is still empty, we should return "end" iterator
-    if (_empty)
-    {
-        requiredIndex = EndIndex;
-    }
-
-    return ConstReverseIterator(requiredIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
-typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::crbegin() const
-{
-    size_type requiredIndex = _tailIndex;
-
-    // If buffer is still empty, we should return "end" iterator
-    if (_empty)
-    {
-        requiredIndex = EndIndex;
-    }
-
-    return ConstReverseIterator(requiredIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
 typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::end()
 {
     return Iterator(EndIndex, this);
@@ -269,41 +205,9 @@ typename RingBuffer<T, A>::Iterator RingBuffer<T, A>::end()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T, class A>
-typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::end() const
-{
-    return ConstIterator(EndIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
-typename RingBuffer<T, A>::ConstIterator RingBuffer<T, A>::cend() const
-{
-    return ConstIterator(EndIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
 typename RingBuffer<T, A>::ReverseIterator RingBuffer<T, A>::rend()
 {
     return ReverseIterator(EndIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
-typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::rend() const
-{
-    return ConstReverseIterator(EndIndex, this);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <class T, class A>
-typename RingBuffer<T, A>::ConstReverseIterator RingBuffer<T, A>::crend() const
-{
-    return ConstReverseIterator(EndIndex, this);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

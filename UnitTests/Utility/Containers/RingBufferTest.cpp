@@ -178,41 +178,6 @@ TEST(RingBuffer, Iterator)
     EXPECT_EQ(10ull, count);
 }
 
-TEST(RingBuffer, ConstIterator)
-{
-    C2D::RingBuffer<uint64_t> ringBuffer;
-    std::vector<uint64_t> vector;
-
-    // Add some entries to ring buffer
-    for (uint64_t i = 0ull; i < 10ull; ++i)
-    {
-        ringBuffer.PushBack(i);
-        vector.push_back(i);
-    }
-
-    // Check entries in ring buffer with const straight iterator via begin()
-    uint64_t count(0ull);
-    for (C2D::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.begin(); entry != ringBuffer.end(); ++entry)
-    {
-        EXPECT_EQ(count, *entry);
-        EXPECT_EQ(vector[count], *entry);
-        ++count;
-    }
-    // Check number of entries in ring buffer
-    EXPECT_EQ(10ull, count);
-
-    // Check entries in ring buffer with const straight iterator via cbegin()
-    count = 0ull;
-    for (C2D::RingBuffer<uint64_t>::ConstIterator entry = ringBuffer.cbegin(); entry != ringBuffer.cend(); ++entry)
-    {
-        EXPECT_EQ(count, *entry);
-        EXPECT_EQ(vector[count], *entry);
-        ++count;
-    }
-    // Check number of entries in ring buffer
-    EXPECT_EQ(10ull, count);
-}
-
 TEST(RingBuffer, ReverseIterator)
 {
     C2D::RingBuffer<uint64_t> ringBuffer;
@@ -235,41 +200,4 @@ TEST(RingBuffer, ReverseIterator)
     }
     // Check number of entries in ring buffer
     EXPECT_EQ(0ull, ++count);
-}
-
-TEST(RingBuffer, ConstReverseIterator)
-{
-    C2D::RingBuffer<uint64_t> ringBuffer;
-    std::vector<uint64_t> vector;
-
-    // Add some entries to ring buffer
-    for (uint64_t i = 0ull; i < 10ull; ++i)
-    {
-        ringBuffer.PushBack(i);
-        vector.push_back(i);
-    }
-
-    // Check entries in ring buffer with const straight iterator via begin()
-    uint64_t count(9ull);
-    for (C2D::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.rbegin(); entry != ringBuffer.rend(); ++entry)
-    {
-        EXPECT_EQ(count, *entry);
-        EXPECT_EQ(vector[count], *entry);
-        --count;
-    }
-    ++count;
-    // Check number of entries in ring buffer
-    EXPECT_EQ(0ull, count);
-
-    // Check entries in ring buffer with const straight iterator via cbegin()
-    count = 9ull;
-    for (C2D::RingBuffer<uint64_t>::ConstReverseIterator entry = ringBuffer.crbegin(); entry != ringBuffer.crend(); ++entry)
-    {
-        EXPECT_EQ(count, *entry);
-        EXPECT_EQ(vector[count], *entry);
-        --count;
-    }
-    ++count;
-    // Check number of entries in ring buffer
-    EXPECT_EQ(0ull, count);
 }

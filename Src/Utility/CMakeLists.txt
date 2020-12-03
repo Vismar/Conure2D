@@ -22,12 +22,10 @@ add_library(Utility STATIC
             #Containers/AnyCallable/BadAnyCallableCall.hpp
             #Containers/LockedQueue/LockedQueue.hpp
             #Containers/LockedQueue/LockedQueue.inl
-            #Containers/RingBuffer/RingBuffer.hpp
-            #Containers/RingBuffer/RingBuffer.inl
-            #Containers/RingBuffer/RingBufferConstIterator.inl
-            #Containers/RingBuffer/RingBufferConstReverseIterator.inl
-            #Containers/RingBuffer/RingBufferIterator.inl
-            #Containers/RingBuffer/RingBufferReverseIterator.inl
+            Containers/RingBuffer/RingBuffer.hpp
+            Containers/RingBuffer/RingBuffer.inl
+            Containers/RingBuffer/RingBufferIterator.inl
+            Containers/RingBuffer/RingBufferReverseIterator.inl
             #Helpers/EnumHelpers.hpp
             #Helpers/TypeHelpers.hpp
             #Helpers/VariantHelpers.hpp
