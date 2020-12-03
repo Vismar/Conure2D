@@ -6,7 +6,12 @@ include(ExternalProject)
 ## Flags
 
 set(CFLAGS "-m64 -Wall")
-set(GCC_COMPILATION_FLAGS "-static")
+if (WIN32)
+    set(GCC_COMPILATION_FLAGS "-static")
+else()
+    set(GCC_COMPILATION_FLAGS "")
+endif()
+
 set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -DDEV_BUILD ${GCC_COMPILATION_FLAGS}")
 set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_RELEASE} ${CFLAGS} ${GCC_COMPILATION_FLAGS}")
 
