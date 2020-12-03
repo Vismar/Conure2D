@@ -29,6 +29,7 @@ matrix:
           packages:
             # C++20
             - g++-9
+            - xorg-dev
       env:
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Debug"
@@ -43,6 +44,7 @@ matrix:
           packages:
             # C++20
             - g++-9
+            - xorg-dev
       env:
         - MATRIX_EVAL="CC=gcc-9 && CXX=g++-9"
         - BUILD_TYPE="-DCMAKE_BUILD_TYPE=Release"
