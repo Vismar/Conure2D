@@ -24,8 +24,8 @@ matrix:
       addons:
         apt:
           sources:
-            - ubuntu-toolchain-r-ppa
             - ubuntu-toolchain-r-test
+            sourceline: 'ppa:ubuntu-toolchain-r/ppa'
           packages:
             # C++20
             - g++-10
