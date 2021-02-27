@@ -9,8 +9,8 @@ class Logger final
 public:
     enum class Level
     {
+        Verbose,
         Info,
-        Trace,
         Warning,
         Error,
         Critical
@@ -18,12 +18,12 @@ public:
 
     static void ChangeLevel(Level newLevel);
 
+    static void LogVerbose(std::string_view message,
+                           std::string_view functionName,
+                           const SourceLocation& location = SourceLocation::current());
     static void LogInfo(std::string_view message,
                         std::string_view functionName,
                         const SourceLocation& location = SourceLocation::current());
-    static void LogTrace(std::string_view message,
-                         std::string_view functionName,
-                         const SourceLocation& location = SourceLocation::current());
     static void LogWarning(std::string_view message,
                            std::string_view functionName,
                            const SourceLocation& location = SourceLocation::current());
@@ -33,6 +33,11 @@ public:
     static void LogCritical(std::string_view message,
                             std::string_view functionName,
                             const SourceLocation& location = SourceLocation::current());
+    static void Log(Level level,
+                    std::string_view message,
+                    std::string_view functionName,
+                    const SourceLocation& location = SourceLocation::current());
+
 private:
     static void PostLogEntry(std::string_view level,
                              std::string_view message,

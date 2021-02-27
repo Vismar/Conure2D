@@ -21,6 +21,9 @@ namespace VkWrapper
         const VkPhysicalDeviceProperties& GetProperties() const;
 
         [[nodiscard]]
+        const VkPhysicalDeviceMemoryProperties& GetMemoryProperties() const;
+
+        [[nodiscard]]
         const VkPhysicalDeviceFeatures& GetFeatures() const;
 
         [[nodiscard]]
@@ -36,6 +39,7 @@ namespace VkWrapper
 
         VkPhysicalDevice _device = VK_NULL_HANDLE;
         VkPhysicalDeviceProperties _properties{};
+        VkPhysicalDeviceMemoryProperties _memoryProperties{};
         VkPhysicalDeviceFeatures _features{};
         std::vector<VkExtensionProperties> _extensions;
         uint32_t _score{};

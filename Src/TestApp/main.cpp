@@ -12,7 +12,7 @@ int main()
     GLFWWrapper::Context glfwContext;
 
     GLFWWrapper::Monitor primMonitor(glfwGetPrimaryMonitor());
-    primMonitor.SelectVideoMode(primMonitor.GetVideoModes().size() - 3);
+    primMonitor.SelectVideoMode(primMonitor.GetVideoModes().size() - 1);
 
     GLFWWrapper::Window window;
     window.Create();//.SetTitle("Conure2D").SetSize(800, 600);

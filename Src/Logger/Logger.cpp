@@ -4,8 +4,8 @@
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+constexpr std::string_view verboseLevel = "Verbose";
 constexpr std::string_view infoLevel = "Info";
-constexpr std::string_view traceLevel = "Trace";
 constexpr std::string_view warningLevel = "Warning";
 constexpr std::string_view errorLevel = "Error";
 constexpr std::string_view criticalLevel = "Critical";
@@ -17,10 +17,10 @@ constexpr std::string_view GetLoggerLevelAsString(Logger::Level level)
 {
     switch (level)
     {
+        case Logger::Level::Verbose:
+            return verboseLevel;
         case Logger::Level::Info:
             return infoLevel;
-        case Logger::Level::Trace:
-            return traceLevel;
         case Logger::Level::Warning:
             return warningLevel;
         case Logger::Level::Error:
@@ -46,57 +46,61 @@ void Logger::ChangeLevel(Level newLevel)
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Logger::LogInfo(std::string_view message, std::string_view functionName, const SourceLocation& location)
+void Logger::LogVerbose(std::string_view message, std::string_view functionName, const SourceLocation& location)
 {
-    if (_level > Level::Info)
-    {
-        return;
-    }
-    PostLogEntry(GetLoggerLevelAsString(Level::Info), message, functionName, location, std::cout);
+    Log(Level::Verbose, message, functionName, location);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Logger::LogTrace(std::string_view message, std::string_view functionName, const SourceLocation& location)
+void Logger::LogInfo(std::string_view message, std::string_view functionName, const SourceLocation& location)
 {
-    if (_level > Level::Trace)
-    {
-        return;
-    }
-    PostLogEntry(GetLoggerLevelAsString(Level::Trace), message, functionName, location, std::cout);
+    Log(Level::Info, message, functionName, location);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 void Logger::LogWarning(std::string_view message, std::string_view functionName, const SourceLocation& location)
 {
-    if (_level > Level::Warning)
-    {
-        return;
-    }
-    PostLogEntry(GetLoggerLevelAsString(Level::Warning), message, functionName, location, std::cerr);
+    Log(Level::Warning, message, functionName, location);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 void Logger::LogError(std::string_view message, std::string_view functionName, const SourceLocation& location)
 {
-    if (_level > Level::Error)
-    {
-        return;
-    }
-    PostLogEntry(GetLoggerLevelAsString(Level::Error), message, functionName, location, std::cerr);
+    Log(Level::Error, message, functionName, location);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 void Logger::LogCritical(std::string_view message, std::string_view functionName, const SourceLocation& location)
 {
-    if (_level > Level::Critical)
+    Log(Level::Critical, message, functionName, location);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+void Logger::Log(Level level, std::string_view message, std::string_view functionName, const SourceLocation& location)
+{
+    if (_level <= level)
     {
-        return;
+        std::basic_ostream<char>* output = &std::cout;
+        switch (level)
+        {
+            case Level::Verbose:
+            case Level::Info:
+                output = &std::cout;
+                break;
+            case Level::Warning:
+            case Level::Error:
+            case Level::Critical:
+                output = &std::cerr;
+                break;
+        }
+
+        PostLogEntry(GetLoggerLevelAsString(level), message, functionName, location, *output);
     }
-    PostLogEntry(GetLoggerLevelAsString(Level::Critical), message, functionName, location, std::cerr);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

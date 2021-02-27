@@ -7,6 +7,36 @@ using namespace VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+namespace
+{
+    Logger::Level GetLogLevelForMessage(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity)
+    {
+        if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT)
+        {
+            return Logger::Level::Verbose;
+        }
+
+        if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT)
+        {
+            return Logger::Level::Info;
+        }
+
+        if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
+        {
+            return Logger::Level::Warning;
+        }
+
+        if (messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)
+        {
+            return Logger::Level::Error;
+        }
+
+        return Logger::Level::Critical;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
 VkDebugUtilsMessengerCreateInfoEXT DebugMessenger::_createInfo{};
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -66,12 +96,11 @@ const VkDebugUtilsMessengerCreateInfoEXT& DebugMessenger::GetCreateInfo()
 // ---------------------------------------------------------------------------------------------------------------------
 
 VKAPI_ATTR VkBool32 VKAPI_CALL DebugMessenger::DebugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
-                                                                        VkDebugUtilsMessageTypeFlagsEXT messageType,
-                                                                        const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
-                                                                        void* userData)
+                                                             VkDebugUtilsMessageTypeFlagsEXT messageType,
+                                                             const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
+                                                             void* userData)
 {
-    // TODO: Temporary code
-    Logger::LogError(callbackData->pMessage, "Vulkan debug messenger");
+    Logger::Log(GetLogLevelForMessage(messageSeverity), callbackData->pMessage, "Vulkan debug messenger");
     return VK_FALSE;
 }
 

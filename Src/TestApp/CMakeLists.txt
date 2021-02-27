@@ -14,9 +14,6 @@ add_executable(TestApp
 ## Add dependencies
 add_dependencies(TestApp GLFWWrapper VkWrapper GLFW-Lib Utility Tracer)
 target_link_libraries(TestApp Utility Logger Tracer GLFW-Lib GLFWWrapper VkWrapper ${Vulkan_LIBRARY})
-if (UNIX)
-    target_link_libraries(TestApp ${CMAKE_DL_LIBS})
-endif()
 
 ## Prefix
 set_target_properties(TestApp PROPERTIES PREFIX "")

@@ -11,6 +11,7 @@ PDevice::PDevice(VkPhysicalDevice device)
     TraceIt;
 
     vkGetPhysicalDeviceProperties(device, &_properties);
+    vkGetPhysicalDeviceMemoryProperties(device, &_memoryProperties);
     vkGetPhysicalDeviceFeatures(device, &_features);
 
     // Get extensions
@@ -31,6 +32,7 @@ PDevice::PDevice(const PDevice& other) = default;
 PDevice::PDevice(PDevice&& other) noexcept
 : _device(other._device)
 , _properties(other._properties)
+, _memoryProperties(other._memoryProperties)
 , _features(other._features)
 , _extensions(std::move(other._extensions))
 , _score(other._score)
@@ -44,6 +46,7 @@ PDevice& PDevice::operator=(const PDevice& other)
     {
         _device = other._device;
         _properties = other._properties;
+        _memoryProperties = other._memoryProperties;
         _features = other._features;
         _extensions = other._extensions;
         _score = other._score;
@@ -58,6 +61,7 @@ PDevice& PDevice::operator=(PDevice&& other) noexcept
 {
     _device = other._device;
     _properties = other._properties;
+    _memoryProperties = other._memoryProperties;
     _features = other._features;
     _extensions = std::move(other._extensions);
     _score = other._score;
@@ -77,6 +81,13 @@ VkPhysicalDevice PDevice::GetHandle() const
 const VkPhysicalDeviceProperties& PDevice::GetProperties() const
 {
     return _properties;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+const VkPhysicalDeviceMemoryProperties& PDevice::GetMemoryProperties() const
+{
+    return _memoryProperties;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

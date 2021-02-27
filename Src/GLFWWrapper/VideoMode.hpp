@@ -1,5 +1,6 @@
 #pragma once
 #include <GLFW/glfw3.h>
+#include <string>
 
 namespace GLFWWrapper
 {
@@ -75,6 +76,9 @@ namespace GLFWWrapper
          */
         [[nodiscard]]
         int32_t GetRefreshRate() const;
+
+        [[nodiscard]]
+        std::string AsString() const;
 
         /*!
          * Compares this video mode and specified.

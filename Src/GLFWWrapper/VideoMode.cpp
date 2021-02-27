@@ -1,4 +1,5 @@
 #include "VideoMode.hpp"
+#include <sstream>
 
 using namespace GLFWWrapper;
 
@@ -48,6 +49,18 @@ int32_t VideoMode::GetBlueBits() const
 int32_t VideoMode::GetRefreshRate() const
 {
     return _videoMode.refreshRate;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+std::string VideoMode::AsString() const
+{
+    std::stringstream stringStream;
+    stringStream << "Res: " << GetWidth() << 'x' << GetHeight()
+                 << "; Bits: R(" << GetRedBits() << ")G(" << GetGreenBits() << ")B(" << GetBlueBits()
+                 << "); RefreshRate: " << GetRefreshRate() << ';';
+
+    return stringStream.str();
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
