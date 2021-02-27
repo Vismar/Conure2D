@@ -8,6 +8,7 @@
 #include <VkWrapper/GraphicsPipeline.hpp>
 #include <VkWrapper/Framebuffers.hpp>
 #include <VkWrapper/CommandPool.hpp>
+#include <VkWrapper/Vertex/VertexBufferArray.hpp>
 #include <VkWrapper/CommandBuffers.hpp>
 #include <VkWrapper/Semaphore.hpp>
 #include <VkWrapper/Fence.hpp>
@@ -20,6 +21,7 @@ namespace VkWrapper
         RenderPipeline(const std::unique_ptr<LDevice>& lDevice,
                        const SuitablePDevice& suitablePDevice,
                        const PipelineShader& pipelineShader,
+                       const VertexBufferArray& vertexBufferArray,
                        std::reference_wrapper<std::unique_ptr<SwapChain>> swapChain,
                        std::reference_wrapper<std::unique_ptr<SwapChainImageViews>> swapChainImageViews);
 
@@ -36,6 +38,7 @@ namespace VkWrapper
         const std::unique_ptr<LDevice>& _lDevice;
         const SuitablePDevice& _suitablePDevice;
         const PipelineShader& _pipelineShader;
+        const VertexBufferArray& _vertexBufferArray;
         std::reference_wrapper<std::unique_ptr<SwapChain>> _swapChain;
         std::reference_wrapper<std::unique_ptr<SwapChainImageViews>> _swapChainImageViews;
 

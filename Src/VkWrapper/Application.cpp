@@ -75,11 +75,15 @@ Application::Application(const ApplicationConfiguration& configuration)
 {
     _configuration.GetWindow().AddFramebufferResizedCallback([this] { OnFrameBufferResized(); });
 
-    const auto& pipelineShader = _shaderManager.GetPipelineShader("./shader");
 
     CreateNewLogicalDevice();
+    CreateVertexManager();
     CreateNewSwapChain();
-    CreateRenderPipeline(pipelineShader);
+
+    const auto& pipelineShader = _shaderManager.GetPipelineShader("./shader");
+    const VertexBufferArray& vertexBuffers = _vertexManager->GetVertexBuffers("./shader");
+
+    CreateRenderPipeline(pipelineShader, vertexBuffers);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -130,6 +134,14 @@ void Application::CreateNewLogicalDevice()
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+void Application::CreateVertexManager()
+{
+    _vertexManager = std::make_unique<VertexManager>(_lDevice->GetHandle(),
+                                                     _suitableDevices[_selectedSuitableDevice]);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
 void Application::CreateNewSwapChain()
 {
     _swapChain = std::make_unique<SwapChain>(_lDevice->GetHandle(),
@@ -157,11 +169,13 @@ void Application::RecreateSwapChain()
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Application::CreateRenderPipeline(const PipelineShader& pipeLineShader)
+void Application::CreateRenderPipeline(const PipelineShader& pipeLineShader,
+                                       const VertexBufferArray& vertexBuffers)
 {
     _renderPipeline = std::make_unique<RenderPipeline>(_lDevice,
                                                        _suitableDevices[_selectedSuitableDevice],
                                                        pipeLineShader,
+                                                       vertexBuffers,
                                                        std::ref(_swapChain),
                                                        std::ref(_swapChainImageViews));
 }

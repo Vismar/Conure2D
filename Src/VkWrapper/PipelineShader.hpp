@@ -1,5 +1,5 @@
 #pragma once
-#include <VkWrapper/Shader.hpp>
+#include <VkWrapper/Shader/Shader.hpp>
 
 namespace VkWrapper
 {

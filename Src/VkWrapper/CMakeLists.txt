@@ -31,12 +31,20 @@ add_library(VkWrapper STATIC
             SuitablePDevice.cpp
             LDevice.hpp
             LDevice.cpp
-            Shader.hpp
-            Shader.cpp
+            Vertex/Vertex.hpp
+            Vertex/Vertex.cpp
+            Vertex/VertexBuffer.hpp
+            Vertex/VertexBuffer.cpp
+            Vertex/VertexBufferArray.hpp
+            Vertex/VertexBufferArray.cpp
+            Vertex/VertexManager.hpp
+            Vertex/VertexManager.cpp
+            Shader/Shader.hpp
+            Shader/Shader.cpp
+            Shader/ShaderManager.hpp
+            Shader/ShaderManager.cpp
             PipelineShader.hpp
             PipelineShader.cpp
-            ShaderManager.hpp
-            ShaderManager.cpp
             SwapChain.hpp
             SwapChain.cpp
             SwapChainImageViews.hpp

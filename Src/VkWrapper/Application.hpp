@@ -11,7 +11,8 @@
 #endif
 #include <VkWrapper/Surface.hpp>
 #include <VkWrapper/SuitablePDevice.hpp>
-#include <VkWrapper/ShaderManager.hpp>
+#include <VkWrapper/Shader/ShaderManager.hpp>
+#include <VkWrapper/Vertex/VertexManager.hpp>
 #include <VkWrapper/LDevice.hpp>
 #include <VkWrapper/SwapChain.hpp>
 #include <VkWrapper/SwapChainImageViews.hpp>
@@ -53,9 +54,10 @@ namespace VkWrapper
         void OnFrameBufferResized();
 
         void CreateNewLogicalDevice();
+        void CreateVertexManager();
         void CreateNewSwapChain();
         void RecreateSwapChain();
-        void CreateRenderPipeline(const PipelineShader& pipeLineShader);
+        void CreateRenderPipeline(const PipelineShader& pipeLineShader, const VertexBufferArray& vertexBuffers);
 
         const ApplicationConfiguration& _configuration;
 
@@ -66,10 +68,11 @@ namespace VkWrapper
         DebugMessenger _debugMessenger;
 #endif
         Surface _surface;
-        std::vector<SuitablePDevice> _suitableDevices;
         ShaderManager _shaderManager;
+        std::vector<SuitablePDevice> _suitableDevices;
         size_t _selectedSuitableDevice;
         std::unique_ptr<LDevice> _lDevice;
+        std::unique_ptr<VertexManager> _vertexManager;
 
         bool _mustRecreateSwapChain = false;
 

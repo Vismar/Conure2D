@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <vulkan/vulkan.h>
+#include <VkWrapper/Vertex/VertexBufferArray.hpp>
 
 namespace VkWrapper
 {
@@ -18,8 +19,11 @@ namespace VkWrapper
                        VkCommandPool commandPool,
                        VkRenderPass renderPass,
                        const std::vector<VkFramebuffer>& frameBuffers,
+                       const VertexBufferArray& vertexBufferArray,
                        VkExtent2D swapChainExtent,
                        VkPipeline pipeline);
+
+
 
         [[nodiscard]]
         const std::vector<VkCommandBuffer>& GetCommandBuffers() const;

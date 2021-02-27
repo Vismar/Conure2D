@@ -15,11 +15,13 @@ namespace
 RenderPipeline::RenderPipeline(const std::unique_ptr<LDevice>& lDevice,
                                const SuitablePDevice& suitablePDevice,
                                const PipelineShader& pipelineShader,
+                               const VertexBufferArray& vertexBufferArray,
                                std::reference_wrapper<std::unique_ptr<SwapChain>> swapChain,
                                std::reference_wrapper<std::unique_ptr<SwapChainImageViews>> swapChainImageViews)
 : _lDevice(lDevice)
 , _suitablePDevice(suitablePDevice)
 , _pipelineShader(pipelineShader)
+, _vertexBufferArray(vertexBufferArray)
 , _swapChain(swapChain)
 , _swapChainImageViews(swapChainImageViews)
 {
@@ -30,7 +32,6 @@ RenderPipeline::RenderPipeline(const std::unique_ptr<LDevice>& lDevice,
 
 void RenderPipeline::Clean()
 {
-    _commandBuffers.reset();
     _framebuffers.reset();
     _graphicsPipeline.reset();
     _renderPass.reset();
@@ -42,7 +43,7 @@ void RenderPipeline::Recreate(std::reference_wrapper<std::unique_ptr<SwapChain>>
                               std::reference_wrapper<std::unique_ptr<SwapChainImageViews>> swapChainImageViews)
 {
     _swapChain = swapChain;
-    _swapChainImageViews = _swapChainImageViews;
+    _swapChainImageViews = swapChainImageViews;
 
     CreateNewRenderPipeline();
 }
@@ -146,6 +147,7 @@ void RenderPipeline::CreateNewRenderPipeline()
                                                        _commandPool->GetHandle(),
                                                        renderPassHandle,
                                                        _framebuffers->GetFramebuffers(),
+                                                       _vertexBufferArray,
                                                        swapChainExtent,
                                                        _graphicsPipeline->GetHandle());
 

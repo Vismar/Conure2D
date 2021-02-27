@@ -11,6 +11,7 @@ CommandBuffers::CommandBuffers(VkDevice lDevice,
                                VkCommandPool commandPool,
                                VkRenderPass renderPass,
                                const std::vector<VkFramebuffer>& frameBuffers,
+                               const VertexBufferArray& vertexBufferArray,
                                VkExtent2D swapChainExtent,
                                VkPipeline pipeline)
 : _lDevice(lDevice)
@@ -59,7 +60,19 @@ CommandBuffers::CommandBuffers(VkDevice lDevice,
 
         vkCmdBeginRenderPass(_commandBuffers[i], &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
             vkCmdBindPipeline(_commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
-            vkCmdDraw(_commandBuffers[i], 3, 1, 0, 0);
+
+            VkDeviceSize offsets[] = {0, 1};
+            vkCmdBindVertexBuffers(_commandBuffers[i],
+                                   0,
+                                   vertexBufferArray.GetNumberOfBuffers(),
+                                   vertexBufferArray.GetPtrToBuffers(),
+                                   offsets);
+
+            vkCmdDraw(_commandBuffers[i],
+                      vertexBufferArray.GetVertexCount(),
+                      1,
+                      0,
+                      0);
         vkCmdEndRenderPass(_commandBuffers[i]);
 
         Assert(vkEndCommandBuffer(_commandBuffers[i]) == VK_SUCCESS, "Failed to record command buffer");

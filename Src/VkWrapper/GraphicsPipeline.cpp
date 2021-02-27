@@ -1,4 +1,5 @@
 #include "GraphicsPipeline.hpp"
+#include "VkWrapper/Vertex/Vertex.hpp"
 #include <Utility/Assert.hpp>
 #include <Tracer/TraceScopeTimer.hpp>
 
@@ -100,13 +101,16 @@ void GraphicsPipeline::CreatePipelineLayout()
 
 VkPipelineVertexInputStateCreateInfo GraphicsPipeline::CreateVertexInputStateInfo()
 {
+    const auto& bindingDescription = Vertex::GetBindingDescription();
+    const auto& attributeDescriptions = Vertex::GetAttributeDescriptions();
+
     VkPipelineVertexInputStateCreateInfo createInfo =
     {
         .sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
-        .vertexBindingDescriptionCount = 0,
-        .pVertexBindingDescriptions = nullptr,
-        .vertexAttributeDescriptionCount = 0,
-        .pVertexAttributeDescriptions = nullptr
+        .vertexBindingDescriptionCount = 1,
+        .pVertexBindingDescriptions = &bindingDescription,
+        .vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size()),
+        .pVertexAttributeDescriptions = attributeDescriptions.data()
     };
 
     return createInfo;
