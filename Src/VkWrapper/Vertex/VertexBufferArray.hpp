@@ -1,7 +1,7 @@
 #pragma once
 #include <VkWrapper/Vertex/VertexBuffer.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class VertexBufferArray final
     {

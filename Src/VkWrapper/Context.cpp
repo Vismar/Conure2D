@@ -3,7 +3,7 @@
 #include <Tracer/TraceScopeTimer.hpp>
 #include <VkWrapper/DebugMessenger.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 

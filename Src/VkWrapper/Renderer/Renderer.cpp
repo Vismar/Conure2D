@@ -1,40 +1,8 @@
-#include "Application.hpp"
+#include "Renderer.hpp"
 #include <Utility/Assert.hpp>
-#include <Tracer/TraceScopeTimer.hpp>
 #include <Logger/Logger.hpp>
 
 using namespace C2D::VkWrapper;
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-ApplicationConfiguration::ApplicationConfiguration(GLFWWrapper::Window& window,
-                                                   std::string pDeviceName,
-                                                   std::vector<std::string>&& shadersList)
-: _window(window)
-, _pDeviceName(std::move(pDeviceName))
-, _shadersList(std::move(shadersList))
-{ }
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-GLFWWrapper::Window& ApplicationConfiguration::GetWindow() const
-{
-    return _window;
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-std::string_view ApplicationConfiguration::GetPDeviceName() const
-{
-    return _pDeviceName;
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-const std::vector<std::string>& ApplicationConfiguration::GetShadersList() const
-{
-    return _shadersList;
-}
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -61,46 +29,64 @@ namespace
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-Application::Application(const ApplicationConfiguration& configuration)
-: _configuration(configuration)
+Renderer::Renderer(std::reference_wrapper<std::unique_ptr<GLFWWrapper::Window>> window,
+                   std::reference_wrapper<std::unique_ptr<ShaderManager>> shaderManager,
+                   std::string_view pDeviceName)
+: _window(window)
 , _context(_validationLayers, _extensions)
 #ifndef NDEBUG
 , _debugMessenger(_context)
 #endif
-, _surface(_context, _configuration.GetWindow())
+, _surface(_context, *_window.get())
+, _shaderManager(shaderManager)
 , _suitableDevices(GetSuitablePDevicesForSurface(_context.GetPhysicalDevices(), _surface))
-, _selectedSuitableDevice(SelectSuitableDevice(_configuration.GetPDeviceName(), _suitableDevices))
+, _selectedSuitableDevice(SelectSuitableDevice(pDeviceName, _suitableDevices))
 {
-    _configuration.GetWindow().AddFramebufferResizedCallback([this] { OnFrameBufferResized(); });
-
+    _window.get()->AddFramebufferResizedCallback([this] { OnFrameBufferResized(); });
 
     CreateNewLogicalDevice();
-    CreateVertexManager();
     CreateNewSwapChain();
 
-    CreateRenderPipeline("./shader");
+    CreateRenderPipeline();
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-Application::~Application()
+Renderer::~Renderer()
 {
     vkDeviceWaitIdle(_lDevice->GetHandle());
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Application::DrawFrame()
+void Renderer::WaitForCommandBuffersAndResetThem()
+{
+    vkDeviceWaitIdle(_lDevice->GetHandle());
+    //_renderPipeline->ResetCommandPool();
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+VertexBuffer Renderer::CreateVertexBuffer(std::vector<Vertex>&& vertices)
+{
+    return VertexBuffer{_lDevice->GetHandle(),
+                        std::ref(_suitableDevices[_selectedSuitableDevice]),
+                        std::move(vertices)};
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+void Renderer::DrawFrame()
 {
     auto result = _renderPipeline->DrawFrame();
     if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || _mustRecreateSwapChain)
     {
         // In case if the window was minimized we should wait until it will be restored
-        auto [width, height] = _configuration.GetWindow().GetFrameBufferSize();
+        auto [width, height] = _window.get()->GetFrameBufferSize();
         while (width == 0 || height == 0)
         {
             glfwWaitEvents();
-            auto [newWidth, newHeight] = _configuration.GetWindow().GetFrameBufferSize();
+            auto [newWidth, newHeight] = _window.get()->GetFrameBufferSize();
             width = newWidth;
             height = newHeight;
         }
@@ -115,42 +101,34 @@ void Application::DrawFrame()
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Application::OnFrameBufferResized()
+void Renderer::OnFrameBufferResized()
 {
     _mustRecreateSwapChain = true;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Application::CreateNewLogicalDevice()
+void Renderer::CreateNewLogicalDevice()
 {
     _lDevice = std::make_unique<LDevice>(_suitableDevices[_selectedSuitableDevice], _validationLayers);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Application::CreateVertexManager()
-{
-    _vertexManager = std::make_unique<VertexManager>(_lDevice->GetHandle(),
-                                                     _suitableDevices[_selectedSuitableDevice]);
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-void Application::CreateNewSwapChain()
+void Renderer::CreateNewSwapChain()
 {
     _swapChain = std::make_unique<SwapChain>(_lDevice->GetHandle(),
                                              _surface.GetHandle(),
                                              _suitableDevices[_selectedSuitableDevice],
-                                             _configuration.GetWindow());
+                                             *_window.get());
     _swapChainImageViews = std::make_unique<SwapChainImageViews>(_lDevice->GetHandle(), *_swapChain);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Application::RecreateSwapChain()
+void Renderer::RecreateSwapChain()
 {
-    Logger::LogInfo("Start of the swap chain recreation", __PRETTY_FUNCTION__);
+    LOG_INFO("Start of the swap chain recreation");
 
     _mustRecreateSwapChain = false;
     _swapChain.reset();
@@ -159,25 +137,18 @@ void Application::RecreateSwapChain()
     _renderPipeline->Clean();
     _renderPipeline->Recreate(std::ref(_swapChain), std::ref(_swapChainImageViews));
 
-    Logger::LogInfo("End of the swap chain recreation", __PRETTY_FUNCTION__);
+    LOG_INFO("End of the swap chain recreation");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-void Application::CreateRenderPipeline(const std::string& shaderName)
+void Renderer::CreateRenderPipeline()
 {
-    auto& pipelineShader = _shaderManager.GetPipelineShader(shaderName);
-    _triangleRenderer = std::make_shared<TriangleRenderer>(_vertexManager->GetVertexBuffers(shaderName));
-    _secondTriangleRenderer = std::make_shared<TriangleRenderer>(_vertexManager->GetVertexBuffers("test"));
-    pipelineShader.AddRenderMediator(_triangleRenderer);
-    pipelineShader.AddRenderMediator(_secondTriangleRenderer);
-
     _renderPipeline = std::make_unique<RenderPipeline>(_lDevice,
                                                        _suitableDevices[_selectedSuitableDevice],
-                                                       pipelineShader,
+                                                       _shaderManager,
                                                        std::ref(_swapChain),
                                                        std::ref(_swapChainImageViews));
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-

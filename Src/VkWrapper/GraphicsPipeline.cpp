@@ -3,7 +3,7 @@
 #include <Utility/Assert.hpp>
 #include <Tracer/TraceScopeTimer.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -12,6 +12,7 @@ GraphicsPipeline::GraphicsPipeline(VkDevice lDevice,
                                    VkExtent2D swapChainExtent,
                                    VkRenderPass renderPass)
 : _lDevice(lDevice)
+, _name(pipelineShader.Name())
 {
     TraceIt;
 
@@ -71,6 +72,13 @@ GraphicsPipeline::~GraphicsPipeline()
 {
     vkDestroyPipeline(_lDevice, _pipeline, nullptr);
     vkDestroyPipelineLayout(_lDevice, _pipelineLayout, nullptr);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+const std::string& GraphicsPipeline::Name() const
+{
+    return _name;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

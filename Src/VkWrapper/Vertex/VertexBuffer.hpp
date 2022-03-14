@@ -4,7 +4,7 @@
 #include <VkWrapper/Vertex/Vertex.hpp>
 #include <vector>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class VertexBuffer final
     {

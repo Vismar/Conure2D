@@ -2,7 +2,7 @@
 #include <vector>
 #include <vulkan/vulkan.h>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class SwapChainDetails final
     {

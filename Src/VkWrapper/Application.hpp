@@ -18,7 +18,21 @@
 #include <VkWrapper/SwapChainImageViews.hpp>
 #include <VkWrapper/RenderPipeline.hpp>
 
-namespace VkWrapper
+
+
+
+
+
+
+
+
+
+#include <VkWrapper/Renderer/TriangleRenderer.hpp>
+
+
+
+
+namespace C2D::VkWrapper
 {
     struct ApplicationConfiguration
     {
@@ -57,7 +71,7 @@ namespace VkWrapper
         void CreateVertexManager();
         void CreateNewSwapChain();
         void RecreateSwapChain();
-        void CreateRenderPipeline(const PipelineShader& pipeLineShader, const VertexBufferArray& vertexBuffers);
+        void CreateRenderPipeline(const std::string& shaderName);
 
         const ApplicationConfiguration& _configuration;
 
@@ -80,5 +94,11 @@ namespace VkWrapper
         std::unique_ptr<SwapChainImageViews> _swapChainImageViews;
 
         std::unique_ptr<RenderPipeline> _renderPipeline;
+
+
+
+
+        std::shared_ptr<TriangleRenderer> _triangleRenderer;
+        std::shared_ptr<TriangleRenderer> _secondTriangleRenderer;
     };
 }

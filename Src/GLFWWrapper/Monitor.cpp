@@ -1,7 +1,7 @@
 #include "Monitor.hpp"
 #include <Utility/Assert.hpp>
 
-using namespace GLFWWrapper;
+using namespace C2D::GLFWWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 

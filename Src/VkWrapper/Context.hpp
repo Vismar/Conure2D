@@ -3,7 +3,7 @@
 #include <VkWrapper/Extensions.hpp>
 #include <VkWrapper/PDevice.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class Context final
     {

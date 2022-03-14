@@ -1,8 +1,8 @@
 #pragma once
-#include <VkWrapper/PipelineShader.hpp>
+#include <VkWrapper/Shader/PipelineShader.hpp>
 #include <VkWrapper/SwapChain.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class GraphicsPipeline final
     {
@@ -12,6 +12,9 @@ namespace VkWrapper
                          VkExtent2D swapChainExtent,
                          VkRenderPass renderPass);
         ~GraphicsPipeline();
+
+        [[nodiscard]]
+        const std::string& Name() const;
 
         [[nodiscard]]
         VkPipeline GetHandle() const;
@@ -32,6 +35,7 @@ namespace VkWrapper
                 const VkPipelineColorBlendAttachmentState& colorBlendAttachment);
         static VkPipelineDynamicStateCreateInfo CreateDynamicStateInfo(VkDynamicState* dynamicStates, uint32_t size);
 
+        std::string _name;
         VkDevice _lDevice;
         VkPipelineLayout _pipelineLayout{};
         VkPipeline _pipeline{};

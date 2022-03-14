@@ -3,7 +3,7 @@
 #include <Logger/Logger.hpp>
 #include <GLFWWrapper/Monitor.hpp>
 
-using namespace GLFWWrapper;
+using namespace C2D::GLFWWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ Window& Window::Create(int width, int height, std::string_view title)
 
     Assert(_window != nullptr, "Windows was not created");
     _state = State::Normal;
-    Logger::LogInfo("Window was created", __PRETTY_FUNCTION__);
+    LOG_INFO("Window was created");
 
     // Set OnSizeChanged callback
     glfwSetWindowUserPointer(_window, this);
@@ -40,13 +40,13 @@ void Window::Destroy()
 {
     if (_window == nullptr)
     {
-        Logger::LogWarning("This window is not existent so it can't be destroyed", __PRETTY_FUNCTION__);
+        LOG_WRN("This window is not existent so it can't be destroyed");
         return;
     }
 
     glfwDestroyWindow(_window);
     _window = nullptr;
-    Logger::LogInfo("Window was destroyed", __PRETTY_FUNCTION__);
+    LOG_INFO("Window was destroyed");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ Window& Window::Minimize()
 
     if (_state == State::Fullscreen)
     {
-        Logger::LogWarning("This window is fullscreen, can't minimize it", __PRETTY_FUNCTION__);
+        LOG_WRN("This window is fullscreen, can't minimize it");
         return *this;
     }
 
@@ -262,7 +262,7 @@ Window& Window::Maximize()
 
     if (_state == State::Fullscreen)
     {
-        Logger::LogWarning("This window is fullscreen, can't maximize it", __PRETTY_FUNCTION__);
+        LOG_WRN("This window is fullscreen, can't maximize it");
         return *this;
     }
 
@@ -280,7 +280,7 @@ Window& Window::Hide()
 
     if (_state == State::Fullscreen)
     {
-        Logger::LogWarning("This window is fullscreen, can't hide it", __PRETTY_FUNCTION__);
+        LOG_WRN("This window is fullscreen, can't hide it");
         return *this;
     }
 
@@ -315,7 +315,7 @@ Window& Window::Show()
         return *this;
     }
 
-    Logger::LogWarning("This window is not hidden so there is no reason to even try to show it", __PRETTY_FUNCTION__);
+    LOG_WRN("This window is not hidden so there is no reason to even try to show it");
     return *this;
 }
 
@@ -327,7 +327,7 @@ Window& Window::Focus()
 
     if (_state == State::Hidden || _state == State::Minimized)
     {
-        Logger::LogWarning("This window is hidden/minimized so it can't be focused", __PRETTY_FUNCTION__);
+        LOG_WRN("This window is hidden/minimized so it can't be focused");
         return *this;
     }
 
@@ -370,7 +370,7 @@ Window& Window::SetWindowed()
         return *this;
     }
 
-    Logger::LogWarning("This window is not fullscreen or borderless windowed so it is already windowed", __PRETTY_FUNCTION__);
+    LOG_WRN("This window is not fullscreen or borderless windowed so it is already windowed");
     return *this;
 }
 
@@ -395,7 +395,7 @@ Window& Window::SetBorderlessWindowedOnMonitor(const Monitor& monitor)
     _state = State::Borderless;
 
     Assert(_window != nullptr, "Windows was not recreated");
-    Logger::LogInfo("Window was recreated", __PRETTY_FUNCTION__);
+    LOG_INFO("Window was recreated");
 
     return *this;
 }

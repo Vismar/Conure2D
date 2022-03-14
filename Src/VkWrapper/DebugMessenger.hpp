@@ -2,7 +2,7 @@
 #include <vulkan/vulkan.h>
 #include <VkWrapper/Context.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class DebugMessenger final
     {

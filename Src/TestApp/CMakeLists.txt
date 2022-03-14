@@ -12,8 +12,8 @@ add_executable(TestApp
                main.cpp)
 
 ## Add dependencies
-add_dependencies(TestApp GLFWWrapper VkWrapper GLFW-Lib Utility Tracer)
-target_link_libraries(TestApp Utility Logger Tracer GLFW-Lib GLFWWrapper VkWrapper ${Vulkan_LIBRARY})
+add_dependencies(TestApp GLFWWrapper VkWrapper GLFW-Lib Utility Tracer Render)
+target_link_libraries(TestApp Utility Logger Tracer GLFW-Lib GLFWWrapper VkWrapper ${Vulkan_LIBRARY} Render)
 
 ## Prefix
 set_target_properties(TestApp PROPERTIES PREFIX "")

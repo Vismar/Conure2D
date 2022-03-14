@@ -1,6 +1,6 @@
 #include "VertexBufferArray.hpp"
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 

@@ -3,7 +3,7 @@
 #include <Logger/Logger.hpp>
 #include <Utility/Assert.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -72,7 +72,7 @@ namespace
             {
                 std::string errorMessage = "- NOT PRESENT - ";
                 errorMessage += requiredExtension;
-                Logger::LogCritical(errorMessage, __PRETTY_FUNCTION__);
+                LOG_CRITICAL(errorMessage);
                 allPresent = false;
             }
         }
@@ -83,7 +83,7 @@ namespace
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-std::vector<SuitablePDevice> VkWrapper::GetSuitablePDevicesForSurface(const std::vector<PDevice>& pDevices,
+std::vector<SuitablePDevice> C2D::VkWrapper::GetSuitablePDevicesForSurface(const std::vector<PDevice>& pDevices,
                                                                       const Surface& surface)
 {
     std::vector<SuitablePDevice> suitableDevices;

@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
-namespace GLFWWrapper
+namespace C2D::GLFWWrapper
 {
     /*!
      * A wrapper class for GLFWvidmode.

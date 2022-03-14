@@ -5,7 +5,7 @@
 #include <Utility/Assert.hpp>
 #include <Tracer/TraceScopeTimer.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ bool ValidationLayers::CheckSupport() const
         {
             std::string errorMessage = "- NOT PRESENT - ";
             errorMessage += layerName;
-            Logger::LogCritical(errorMessage, __PRETTY_FUNCTION__);
+            LOG_CRITICAL(errorMessage);
             allPresent = false;
         }
     }

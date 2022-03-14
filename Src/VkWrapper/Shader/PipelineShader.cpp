@@ -1,6 +1,7 @@
 #include "PipelineShader.hpp"
+#include <VkWrapper/Renderer/RenderMediator.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -18,9 +19,17 @@ PipelineShader::PipelineShaderCreationInfo::~PipelineShaderCreationInfo()
 // ---------------------------------------------------------------------------------------------------------------------
 
 PipelineShader::PipelineShader(std::string_view shaderName)
-: _vertexShader(Shader(Shader::Type::Vertex, shaderName))
+: _shaderName(shaderName)
+, _vertexShader(Shader(Shader::Type::Vertex, shaderName))
 , _fragmentShader(Shader(Shader::Type::Fragment, shaderName))
 { }
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+const std::string& PipelineShader::Name() const
+{
+    return _shaderName;
+}
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -54,6 +63,39 @@ PipelineShader::PipelineShaderCreationInfo PipelineShader::GetFragmentShaderCrea
     };
 
     return creationInfo;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+RenderMediatorHandle PipelineShader::AddRenderMediator(const std::shared_ptr<RenderMediator>& renderer)
+{
+    _renderMediators.push_back(renderer);
+    return std::prev(_renderMediators.end());
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+void PipelineShader::RemoveRenderMediator(const RenderMediatorHandle& handle)
+{
+    _renderMediators.erase(handle);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+
+void PipelineShader::RemoveAllRenderMediators()
+{
+    _renderMediators.clear();
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+void PipelineShader::SubmitUserCommands(const VkCommandBuffer& commandBuffer) const
+{
+    for (const auto& user : _renderMediators)
+    {
+        user->SubmitRenderCommands(commandBuffer);
+    }
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

@@ -48,3 +48,9 @@ private:
     static std::atomic_size_t _logMessageNumber;
     static Level _level;
 };
+
+#define LOG_VERBOSE(message) Logger::LogVerbose(message, __PRETTY_FUNCTION__)
+#define LOG_INFO(message) Logger::LogInfo(message, __PRETTY_FUNCTION__)
+#define LOG_WRN(message) Logger::LogWarning(message, __PRETTY_FUNCTION__)
+#define LOG_ERROR(message) Logger::LogError(message, __PRETTY_FUNCTION__)
+#define LOG_CRITICAL(message) Logger::LogCritical(message, __PRETTY_FUNCTION__)

@@ -4,14 +4,14 @@
 #include <Utility/Assert.hpp>
 #include <Logger/Logger.hpp>
 
-using namespace GLFWWrapper;
+using namespace C2D::GLFWWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 Context::Context()
 {
     Assert(glfwInit() == GLFW_TRUE, "Failed to initialize GLFW");
-    Logger::LogInfo("GLFW context was initialized", __PRETTY_FUNCTION__);
+    LOG_INFO("GLFW context was initialized");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ Context::Context()
 Context::~Context()
 {
     glfwTerminate();
-    Logger::LogInfo("GLFW context was terminated", __PRETTY_FUNCTION__);
+    LOG_INFO("GLFW context was terminated");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

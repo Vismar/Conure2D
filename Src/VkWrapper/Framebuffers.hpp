@@ -1,7 +1,7 @@
 #pragma once
 #include <VkWrapper/SwapChainImageViews.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class Framebuffers final
     {

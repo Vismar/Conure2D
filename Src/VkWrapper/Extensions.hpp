@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class Extensions final
     {

@@ -2,7 +2,7 @@
 #include <VkWrapper/Context.hpp>
 #include <GLFWWrapper/Window.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class Surface final
     {

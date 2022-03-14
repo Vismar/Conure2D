@@ -5,7 +5,7 @@
 
 #include <Logger/Logger.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -57,10 +57,10 @@ VertexBuffer::~VertexBuffer()
 {
     if (!_moved)
     {
-        Logger::LogInfo("Vertex buffer destroyed", __PRETTY_FUNCTION__);
-
         vkDestroyBuffer(_lDevice, _vertexBuffer, nullptr);
         vkFreeMemory(_lDevice, _vertexBufferMemory, nullptr);
+
+        LOG_INFO("Vertex buffer destroyed");
     }
 }
 
@@ -75,8 +75,7 @@ VertexBuffer::VertexBuffer(VertexBuffer&& other) noexcept
 {
     if (other._moved)
     {
-        Logger::LogError("This VertexBuffer was already copy-moved by someone else so it can't be used",
-                         __PRETTY_FUNCTION__ );
+        LOG_ERROR("This VertexBuffer was already copy-moved by someone else so it can't be used");
     }
 
     other._moved = true;
@@ -90,8 +89,7 @@ VertexBuffer& VertexBuffer::operator=(VertexBuffer&& other) noexcept
     if (other._moved)
     {
         _moved = true;
-        Logger::LogError("This VertexBuffer was already copy-moved by someone else so it can't be used",
-                         __PRETTY_FUNCTION__ );
+        LOG_ERROR("This VertexBuffer was already copy-moved by someone else so it can't be used");
 
         return * this;
     }

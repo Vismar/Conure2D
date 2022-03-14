@@ -2,7 +2,7 @@
 #include <VkWrapper/QueueFamilyIndices.hpp>
 #include <VkWrapper/SwapChainDetails.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class SuitablePDevice final
     {

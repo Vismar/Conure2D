@@ -13,7 +13,7 @@ TraceScopeTimer::TraceScopeTimer(std::string name)
 TraceScopeTimer::~TraceScopeTimer()
 {
     auto end = std::chrono::steady_clock::now();
-    std::cout << _name << " : " << (end - _start).count() << "ns" << std::endl;
+    std::cout << _name << " : " << (end - _start).count() << "ns\n" << std::flush;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

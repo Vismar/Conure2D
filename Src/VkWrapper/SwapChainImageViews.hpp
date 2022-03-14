@@ -1,7 +1,7 @@
 #pragma once
 #include <VkWrapper/SwapChain.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class SwapChainImageViews final
     {

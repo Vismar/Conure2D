@@ -2,7 +2,7 @@
 #include <VkWrapper/SuitablePDevice.hpp>
 #include <VkWrapper/ValidationLayers.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class LDevice final
     {

@@ -1,7 +1,7 @@
 #include "RenderPass.hpp"
 #include <Utility/Assert.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 

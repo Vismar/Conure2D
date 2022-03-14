@@ -1,9 +1,12 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <vulkan/vulkan.h>
 #include <VkWrapper/Vertex/VertexBufferArray.hpp>
+#include <VkWrapper/GraphicsPipeline.hpp>
+#include <VkWrapper/Shader/ShaderManager.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     /*!
      *
@@ -14,22 +17,23 @@ namespace VkWrapper
     class CommandBuffers final
     {
     public:
-        CommandBuffers(VkDevice lDevice,
-                       size_t size,
-                       VkCommandPool commandPool,
-                       VkRenderPass renderPass,
-                       const std::vector<VkFramebuffer>& frameBuffers,
-                       const VertexBufferArray& vertexBufferArray,
-                       VkExtent2D swapChainExtent,
-                       VkPipeline pipeline);
+        CommandBuffers(VkDevice lDevice, size_t size, VkCommandPool commandPool);
+        ~CommandBuffers();
 
-
+        void RecordCommandBuffer(uint32_t commandBufferIndex,
+                                 VkRenderPass renderPass,
+                                 const VkFramebuffer& frameBuffer,
+                                 VkExtent2D swapChainExtent,
+                                 const std::vector<std::unique_ptr<GraphicsPipeline>>& graphicsPipelines,
+                                 std::reference_wrapper<std::unique_ptr<ShaderManager>> shaderManager,
+                                 VkClearValue* clearValue);
 
         [[nodiscard]]
         const std::vector<VkCommandBuffer>& GetCommandBuffers() const;
 
     private:
         VkDevice _lDevice;
+        VkCommandPool _commandPool;
         std::vector<VkCommandBuffer> _commandBuffers;
     };
 }

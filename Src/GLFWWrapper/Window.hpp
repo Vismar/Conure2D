@@ -4,7 +4,7 @@
 #include <functional>
 #include <GLFW/glfw3.h>
 
-namespace GLFWWrapper
+namespace C2D::GLFWWrapper
 {
     class Monitor;
 

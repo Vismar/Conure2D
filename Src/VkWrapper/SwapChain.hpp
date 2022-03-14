@@ -2,7 +2,7 @@
 #include <VkWrapper/SuitablePDevice.hpp>
 #include <GLFWWrapper/Window.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class SwapChain final
     {

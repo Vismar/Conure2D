@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include <array>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class Vertex final
     {

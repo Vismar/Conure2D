@@ -1,7 +1,7 @@
 #include "QueueFamilyIndices.hpp"
 #include <Tracer/TraceScopeTimer.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 

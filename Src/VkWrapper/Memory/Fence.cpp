@@ -1,38 +1,39 @@
-#include "Semaphore.hpp"
+#include "Fence.hpp"
 #include <Utility/Assert.hpp>
 #include <Tracer/TraceScopeTimer.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-Semaphore::Semaphore(VkDevice lDevice)
+Fence::Fence(VkDevice lDevice)
 : _lDevice(lDevice)
-, _semaphore(nullptr)
+, _fence(nullptr)
 {
     TraceIt;
 
-    VkSemaphoreCreateInfo createInfo =
+    VkFenceCreateInfo createInfo =
     {
-        .sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO
+        .sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
+        .flags = VK_FENCE_CREATE_SIGNALED_BIT
     };
 
-    Assert(vkCreateSemaphore(_lDevice, &createInfo, nullptr, &_semaphore) == VK_SUCCESS,
-           "Failed to create semaphore");
+    Assert(vkCreateFence(_lDevice, &createInfo, nullptr, &_fence) == VK_SUCCESS,
+           "Failed to create fence");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-Semaphore::~Semaphore()
+Fence::~Fence()
 {
-    vkDestroySemaphore(_lDevice, _semaphore, nullptr);
+    vkDestroyFence(_lDevice, _fence, nullptr);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-VkSemaphore Semaphore::GetHandle() const
+const VkFence& Fence::GetHandle() const
 {
-    return _semaphore;
+    return _fence;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------

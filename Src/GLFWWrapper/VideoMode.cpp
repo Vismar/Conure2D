@@ -1,7 +1,7 @@
 #include "VideoMode.hpp"
 #include <sstream>
 
-using namespace GLFWWrapper;
+using namespace C2D::GLFWWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 

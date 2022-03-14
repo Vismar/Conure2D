@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <GLFWWrapper/VideoMode.hpp>
 
-namespace GLFWWrapper
+namespace C2D::GLFWWrapper
 {
     /*!
      * A wrapper class for the GLFWmonitor.

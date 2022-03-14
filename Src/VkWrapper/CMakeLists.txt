@@ -9,8 +9,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${OUTPUT_LIB}")
 ########################################################################################################################
 # Build static library
 add_library(VkWrapper STATIC
-            Application.hpp
-            Application.cpp
             ValidationLayers.hpp
             ValidationLayers.cpp
             Extensions.hpp
@@ -31,20 +29,6 @@ add_library(VkWrapper STATIC
             SuitablePDevice.cpp
             LDevice.hpp
             LDevice.cpp
-            Vertex/Vertex.hpp
-            Vertex/Vertex.cpp
-            Vertex/VertexBuffer.hpp
-            Vertex/VertexBuffer.cpp
-            Vertex/VertexBufferArray.hpp
-            Vertex/VertexBufferArray.cpp
-            Vertex/VertexManager.hpp
-            Vertex/VertexManager.cpp
-            Shader/Shader.hpp
-            Shader/Shader.cpp
-            Shader/ShaderManager.hpp
-            Shader/ShaderManager.cpp
-            PipelineShader.hpp
-            PipelineShader.cpp
             SwapChain.hpp
             SwapChain.cpp
             SwapChainImageViews.hpp
@@ -59,12 +43,29 @@ add_library(VkWrapper STATIC
             CommandPool.cpp
             CommandBuffers.hpp
             CommandBuffers.cpp
-            Semaphore.hpp
-            Semaphore.cpp
-            Fence.hpp
-            Fence.cpp
             RenderPipeline.hpp
-            RenderPipeline.cpp)
+            RenderPipeline.cpp
+            Memory/Fence.hpp
+            Memory/Fence.cpp
+            Memory/Semaphore.hpp
+            Memory/Semaphore.cpp
+            Renderer/Renderer.hpp
+            Renderer/Renderer.cpp
+            Renderer/IRenderMediator.hpp
+            Renderer/RenderMediator.hpp
+            Renderer/RenderMediator.cpp
+            Shader/Shader.hpp
+            Shader/Shader.cpp
+            Shader/ShaderManager.hpp
+            Shader/ShaderManager.cpp
+            Shader/PipelineShader.hpp
+            Shader/PipelineShader.cpp
+            Vertex/Vertex.hpp
+            Vertex/Vertex.cpp
+            Vertex/VertexBuffer.hpp
+            Vertex/VertexBuffer.cpp
+            Vertex/VertexBufferArray.hpp
+            Vertex/VertexBufferArray.cpp )
 
 ## Dependencies
 add_dependencies(VkWrapper Utility Logger Tracer GLFWWrapper GLM)

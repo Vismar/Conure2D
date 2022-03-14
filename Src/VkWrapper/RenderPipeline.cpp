@@ -1,7 +1,7 @@
 #include "RenderPipeline.hpp"
 #include <Utility/Assert.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -14,14 +14,12 @@ namespace
 
 RenderPipeline::RenderPipeline(const std::unique_ptr<LDevice>& lDevice,
                                const SuitablePDevice& suitablePDevice,
-                               const PipelineShader& pipelineShader,
-                               const VertexBufferArray& vertexBufferArray,
+                               std::reference_wrapper<std::unique_ptr<ShaderManager>> shaderManager,
                                std::reference_wrapper<std::unique_ptr<SwapChain>> swapChain,
                                std::reference_wrapper<std::unique_ptr<SwapChainImageViews>> swapChainImageViews)
 : _lDevice(lDevice)
 , _suitablePDevice(suitablePDevice)
-, _pipelineShader(pipelineShader)
-, _vertexBufferArray(vertexBufferArray)
+, _shaderManager(shaderManager)
 , _swapChain(swapChain)
 , _swapChainImageViews(swapChainImageViews)
 {
@@ -30,10 +28,17 @@ RenderPipeline::RenderPipeline(const std::unique_ptr<LDevice>& lDevice,
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+void RenderPipeline::ResetCommandPool()
+{
+    _commandPool->Reset();
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
 void RenderPipeline::Clean()
 {
     _framebuffers.reset();
-    _graphicsPipeline.reset();
+    _graphicsPipelines.clear();
     _renderPass.reset();
 }
 
@@ -76,7 +81,16 @@ VkResult RenderPipeline::DrawFrame()
     }
     _imageInFlight[imageIndex] = _inFlightFences[_currentFrame]->GetHandle();
 
-    // Submitting the command buffer
+    // Create and record the command buffer
+    VkClearValue clearValue = {{{0.0f, 0.0f, 0.0f, 1.0f}}};
+    _commandBuffers->RecordCommandBuffer(imageIndex,
+                                         _renderPass->GetHandle(),
+                                         _framebuffers->GetFramebuffers()[imageIndex],
+                                         _swapChain.get()->GetExtent(),
+                                         _graphicsPipelines,
+                                         _shaderManager,
+                                         &clearValue);
+
     VkSemaphore waitSemaphores[] = { _imageAvailableSemaphores[_currentFrame]->GetHandle() };
     VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
     VkSemaphore signalSemaphores[] = { _renderFinishedSemaphores[_currentFrame]->GetHandle() };
@@ -126,10 +140,14 @@ void RenderPipeline::CreateNewRenderPipeline()
     // Graphics
     _renderPass = std::make_unique<RenderPass>(lDeviceHandle, _swapChain.get()->GetImageFormat());
     auto renderPassHandle = _renderPass->GetHandle();
-    _graphicsPipeline = std::make_unique<GraphicsPipeline>(lDeviceHandle,
-                                                           _pipelineShader,
-                                                           swapChainExtent,
-                                                           renderPassHandle);
+    // Create graphics pipeline for every pipeline shader
+    for (auto& shaderName : _shaderManager.get()->GetShaderNames())
+    {
+        _graphicsPipelines.push_back(std::make_unique<GraphicsPipeline>(lDeviceHandle,
+                                                                        _shaderManager.get()->GetPipelineShader(shaderName),
+                                                                        swapChainExtent,
+                                                                        renderPassHandle));
+    }
     _framebuffers = std::make_unique<Framebuffers>(lDeviceHandle,
                                                    *(_swapChainImageViews.get()),
                                                    renderPassHandle,
@@ -144,12 +162,7 @@ void RenderPipeline::CreateNewRenderPipeline()
     }
     _commandBuffers = std::make_unique<CommandBuffers>(lDeviceHandle,
                                                        _framebuffers->GetFramebuffers().size(),
-                                                       _commandPool->GetHandle(),
-                                                       renderPassHandle,
-                                                       _framebuffers->GetFramebuffers(),
-                                                       _vertexBufferArray,
-                                                       swapChainExtent,
-                                                       _graphicsPipeline->GetHandle());
+                                                       _commandPool->GetHandle());
 
     // Clean synchronization stuff
     _imageAvailableSemaphores.clear();

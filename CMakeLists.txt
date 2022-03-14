@@ -214,12 +214,12 @@ add_subdirectory(Src/Logger)
 add_subdirectory(Src/Tracer)
 add_subdirectory(Src/GLFWWrapper)
 add_subdirectory(Src/VkWrapper)
+add_subdirectory(Src/Render)
 
 add_subdirectory(Src/TestApp)
 
 #add_subdirectory(Src/Input)
 #add_subdirectory(Src/Core)
-#add_subdirectory(Src/Render)
 #add_subdirectory(Src/Engine)
 
 

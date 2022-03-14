@@ -1,7 +1,7 @@
 #pragma once
 #include <vulkan/vulkan.h>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class RenderPass final
     {

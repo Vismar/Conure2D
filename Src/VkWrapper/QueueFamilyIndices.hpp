@@ -3,7 +3,7 @@
 #include <VkWrapper/PDevice.hpp>
 #include <VkWrapper/Surface.hpp>
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class QueueFamilyIndices final
     {

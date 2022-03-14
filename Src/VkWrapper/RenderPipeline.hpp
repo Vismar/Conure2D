@@ -10,20 +10,22 @@
 #include <VkWrapper/CommandPool.hpp>
 #include <VkWrapper/Vertex/VertexBufferArray.hpp>
 #include <VkWrapper/CommandBuffers.hpp>
-#include <VkWrapper/Semaphore.hpp>
-#include <VkWrapper/Fence.hpp>
+#include <VkWrapper/Memory/Semaphore.hpp>
+#include <VkWrapper/Memory/Fence.hpp>
+#include "VkWrapper/Shader/ShaderManager.hpp"
 
-namespace VkWrapper
+namespace C2D::VkWrapper
 {
     class RenderPipeline final
     {
     public:
         RenderPipeline(const std::unique_ptr<LDevice>& lDevice,
                        const SuitablePDevice& suitablePDevice,
-                       const PipelineShader& pipelineShader,
-                       const VertexBufferArray& vertexBufferArray,
+                       std::reference_wrapper<std::unique_ptr<ShaderManager>> shaderManager,
                        std::reference_wrapper<std::unique_ptr<SwapChain>> swapChain,
                        std::reference_wrapper<std::unique_ptr<SwapChainImageViews>> swapChainImageViews);
+
+        void ResetCommandPool();
 
         void Clean();
 
@@ -37,16 +39,15 @@ namespace VkWrapper
 
         const std::unique_ptr<LDevice>& _lDevice;
         const SuitablePDevice& _suitablePDevice;
-        const PipelineShader& _pipelineShader;
-        const VertexBufferArray& _vertexBufferArray;
+        std::reference_wrapper<std::unique_ptr<ShaderManager>> _shaderManager;
         std::reference_wrapper<std::unique_ptr<SwapChain>> _swapChain;
         std::reference_wrapper<std::unique_ptr<SwapChainImageViews>> _swapChainImageViews;
 
         std::unique_ptr<RenderPass> _renderPass;
-        std::unique_ptr<GraphicsPipeline> _graphicsPipeline;
-        std::unique_ptr<Framebuffers> _framebuffers;
+        std::vector<std::unique_ptr<GraphicsPipeline>> _graphicsPipelines;
         std::unique_ptr<CommandPool> _commandPool;
         std::unique_ptr<CommandBuffers> _commandBuffers;
+        std::unique_ptr<Framebuffers> _framebuffers;
         std::vector<std::unique_ptr<Semaphore>> _imageAvailableSemaphores;
         std::vector<std::unique_ptr<Semaphore>> _renderFinishedSemaphores;
         std::vector<std::unique_ptr<Fence>> _inFlightFences;

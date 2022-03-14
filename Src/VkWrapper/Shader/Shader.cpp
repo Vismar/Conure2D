@@ -5,7 +5,7 @@
 #include <Utility/Assert.hpp>
 #include <Tracer/TraceScopeTimer.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -33,7 +33,10 @@ Shader::Shader(Type type, std::string_view shaderName)
     }
 
     std::filesystem::path shaderSrc = _pathToShaderSrc;
-    Assert(std::filesystem::exists(shaderSrc), "Specified shader does not exist");
+    std::string errorMessage = "Specified shader (";
+    errorMessage.append(_pathToShaderSrc);
+    errorMessage.append(") does not exist");
+    Assert(std::filesystem::exists(shaderSrc), errorMessage.c_str());
 
     Compile();
     Load();

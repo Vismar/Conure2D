@@ -2,19 +2,13 @@
 #include <Utility/Assert.hpp>
 #include <Tracer/TraceScopeTimer.hpp>
 
-using namespace VkWrapper;
+using namespace C2D::VkWrapper;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-CommandBuffers::CommandBuffers(VkDevice lDevice,
-                               size_t size,
-                               VkCommandPool commandPool,
-                               VkRenderPass renderPass,
-                               const std::vector<VkFramebuffer>& frameBuffers,
-                               const VertexBufferArray& vertexBufferArray,
-                               VkExtent2D swapChainExtent,
-                               VkPipeline pipeline)
+CommandBuffers::CommandBuffers(VkDevice lDevice, size_t size, VkCommandPool commandPool)
 : _lDevice(lDevice)
+, _commandPool(commandPool)
 {
     TraceIt;
 
@@ -30,53 +24,64 @@ CommandBuffers::CommandBuffers(VkDevice lDevice,
 
     Assert(vkAllocateCommandBuffers(_lDevice, &createInfo, _commandBuffers.data()) == VK_SUCCESS,
            "Failed to allocate command buffers");
+}
 
-    for (size_t i = 0; i < size; ++i)
+// ---------------------------------------------------------------------------------------------------------------------
+
+CommandBuffers::~CommandBuffers()
+{
+    vkFreeCommandBuffers(_lDevice,
+                         _commandPool,
+                         static_cast<uint32_t>(_commandBuffers.size()),
+                         _commandBuffers.data());
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+void CommandBuffers::RecordCommandBuffer(uint32_t commandBufferIndex,
+                                         VkRenderPass renderPass,
+                                         const VkFramebuffer& frameBuffer,
+                                         VkExtent2D swapChainExtent,
+                                         const std::vector<std::unique_ptr<GraphicsPipeline>>& graphicsPipelines,
+                                         std::reference_wrapper<std::unique_ptr<ShaderManager>> shaderManager,
+                                         VkClearValue* clearValue)
+{
+    VkCommandBufferBeginInfo beginInfo =
     {
-        VkCommandBufferBeginInfo beginInfo =
+        .sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
+        .flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
+        .pInheritanceInfo = nullptr
+    };
+
+    Assert(vkBeginCommandBuffer(_commandBuffers[commandBufferIndex], &beginInfo) == VK_SUCCESS,
+           "Failed to begin recording command buffer");
+
+    VkRenderPassBeginInfo renderPassBeginInfo =
+    {
+        .sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
+        .renderPass = renderPass,
+        .framebuffer = frameBuffer,
+        .renderArea =
         {
-            .sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
-            .flags = 0,
-            .pInheritanceInfo = nullptr
-        };
+            .offset = {0, 0},
+            .extent = swapChainExtent,
+        },
+        .clearValueCount = clearValue == nullptr ? 0u : 1u,
+        .pClearValues = clearValue
+    };
 
-        Assert(vkBeginCommandBuffer(_commandBuffers[i], &beginInfo) == VK_SUCCESS,
-               "Failed to begin recording command buffer");
+    vkCmdBeginRenderPass(_commandBuffers[commandBufferIndex], &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
 
-        VkClearValue clearValue = {{{0.0f, 0.0f, 0.0f, 1.0f}}};
-        VkRenderPassBeginInfo renderPassBeginInfo =
-        {
-            .sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
-            .renderPass = renderPass,
-            .framebuffer = frameBuffers[i],
-            .renderArea =
-            {
-                .offset = {0, 0},
-                .extent = swapChainExtent,
-            },
-            .clearValueCount = 1,
-            .pClearValues = &clearValue
-        };
-
-        vkCmdBeginRenderPass(_commandBuffers[i], &renderPassBeginInfo, VK_SUBPASS_CONTENTS_INLINE);
-            vkCmdBindPipeline(_commandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
-
-            VkDeviceSize offsets[] = {0, 1};
-            vkCmdBindVertexBuffers(_commandBuffers[i],
-                                   0,
-                                   vertexBufferArray.GetNumberOfBuffers(),
-                                   vertexBufferArray.GetPtrToBuffers(),
-                                   offsets);
-
-            vkCmdDraw(_commandBuffers[i],
-                      vertexBufferArray.GetVertexCount(),
-                      1,
-                      0,
-                      0);
-        vkCmdEndRenderPass(_commandBuffers[i]);
-
-        Assert(vkEndCommandBuffer(_commandBuffers[i]) == VK_SUCCESS, "Failed to record command buffer");
+    for (auto& graphicsPipeline : graphicsPipelines)
+    {
+        vkCmdBindPipeline(_commandBuffers[commandBufferIndex], VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline->GetHandle());
+        shaderManager.get()->GetPipelineShader(graphicsPipeline->Name()).SubmitUserCommands(_commandBuffers[commandBufferIndex]);
     }
+
+    vkCmdEndRenderPass(_commandBuffers[commandBufferIndex]);
+
+    Assert(vkEndCommandBuffer(_commandBuffers[commandBufferIndex]) == VK_SUCCESS,
+           "Failed to record command buffer");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
